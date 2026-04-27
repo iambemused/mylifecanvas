@@ -1,0 +1,6 @@
+# Pretty URLs for sub-apps
+/quickcapture     /quickcapture/index.html   200
+/export-helper    /export-helper/index.html  200
+
+# Catch any old paths if you ever migrate
+/lifecanvas       /                          301
