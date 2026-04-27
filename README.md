@@ -31,7 +31,7 @@ step. To update, edit the HTML file directly and push.
 
 ## Deployment
 
-This repo deploys automatically to Netlify (`mylifecanvas.netlify.app`) on push
+This repo deploys automatically to Netlify (`my-lifecanvas.netlify.app`) on push
 to `main`.
 
 ## Licensing
