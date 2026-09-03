@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 20260903 MyLifeCanvas v 02.09-a -->
+<!-- 20260903 MyLifeCanvas v 02.16-a -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -424,7 +424,7 @@
             border-radius: 8px;
             padding: 15px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            max-height: 250px;
+            max-height: 170px;
             overflow-y: auto;
         }
 
@@ -1481,6 +1481,989 @@
             background: #e74c3c;
         }
 
+
+        /* ==============================================
+           EXPORT CHOOSER - v2.11
+           ============================================== */
+
+        .export-option {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .export-option:hover {
+            border-color: #bdc3c7;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transform: translateY(-1px);
+        }
+
+        .export-option-primary {
+            border-color: #27ae60;
+            background: #f6fdf8;
+        }
+
+        .export-option-primary:hover {
+            border-color: #1e8449;
+            box-shadow: 0 3px 12px rgba(39,174,96,0.25);
+        }
+
+        .export-option-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .export-option-flag {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: #27ae60;
+            color: white;
+            padding: 3px 7px;
+            border-radius: 3px;
+        }
+
+        .export-option-desc {
+            font-size: 12px;
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+
+        .export-backup-status {
+            margin-top: 15px;
+            padding: 10px 14px;
+            border-left: 4px solid #27ae60;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            background: #e8f5e9;
+            color: #1e8449;
+        }
+
+
+        /* ==============================================
+           BACKUP REMINDER - v2.12
+           ============================================== */
+
+        .backup-reminder-headline {
+            font-size: 17px;
+            font-weight: 700;
+            color: #c0392b;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .backup-reminder-detail {
+            font-size: 13px;
+            color: #34495e;
+            line-height: 1.7;
+            margin: 0 0 20px 0;
+        }
+
+        .backup-reminder-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .backup-reminder-primary {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 13px 22px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: background 0.2s;
+        }
+
+        .backup-reminder-primary:hover {
+            background: #1e8449;
+        }
+
+        .backup-reminder-secondary {
+            background: #ecf0f1;
+            color: #7f8c8d;
+            border: none;
+            padding: 13px 18px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .backup-reminder-secondary:hover {
+            background: #d6dbdd;
+        }
+
+        /* Export button carries a flag while a backup is overdue */
+        .header-btn.backup-overdue {
+            background: #c0392b !important;
+            box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.4);
+        }
+
+        .header-btn.backup-overdue::after {
+            content: ' !';
+            font-weight: 700;
+        }
+
+
+        /* ==============================================
+           QUICK LIST + COLLAPSIBLE SIDEBAR - v2.13
+           ============================================== */
+
+        .quicklist-section {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .quicklist-header {
+            font-weight: 600;
+            font-size: 14px;
+            color: #8e44ad;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quicklist-title {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .quicklist-overdue {
+            background: #e74c3c;
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 10px;
+            white-space: nowrap;
+        }
+
+        .quicklist-sort-btn {
+            background: #ecf0f1;
+            color: #7f8c8d;
+            border: none;
+            border-radius: 4px;
+            padding: 3px 8px;
+            font-size: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+
+        .quicklist-sort-btn:hover {
+            background: #d6dbdd;
+        }
+
+        .quicklist-items {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            max-height: 260px;
+            overflow-y: auto;
+        }
+
+        .quicklist-item {
+            background: #faf7fd;
+            border-left: 3px solid #8e44ad;
+            border-radius: 4px;
+            padding: 7px 9px;
+            font-size: 12px;
+            color: #2c3e50;
+        }
+
+        .quicklist-item.is-overdue {
+            background: #fdecea;
+            border-left-color: #e74c3c;
+        }
+
+        .quicklist-item.is-soon {
+            background: #fef6e7;
+            border-left-color: #f39c12;
+        }
+
+        .quicklist-item.ql-dragging {
+            opacity: 0.4;
+        }
+
+        .quicklist-item.ql-over-top {
+            box-shadow: inset 0 3px 0 #3498db;
+        }
+
+        .quicklist-item.ql-over-bottom {
+            box-shadow: inset 0 -3px 0 #3498db;
+        }
+
+        .quicklist-item-top {
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+        }
+
+        .quicklist-grip {
+            color: #bdc3c7;
+            font-size: 12px;
+            cursor: grab;
+            user-select: none;
+            line-height: 1.4;
+        }
+
+        .quicklist-item-title {
+            flex: 1;
+            min-width: 0;
+            font-weight: 600;
+            line-height: 1.35;
+            word-wrap: break-word;
+            cursor: pointer;
+        }
+
+        .quicklist-actions {
+            display: flex;
+            gap: 3px;
+            flex-shrink: 0;
+        }
+
+        .quicklist-btn {
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 12px;
+            line-height: 1;
+            padding: 2px 3px;
+            border-radius: 3px;
+            color: #95a5a6;
+            font-family: inherit;
+        }
+
+        .quicklist-btn:hover {
+            background: #ecf0f1;
+            color: #2c3e50;
+        }
+
+        .quicklist-btn.ql-done:hover {
+            color: #27ae60;
+        }
+
+        .quicklist-btn.ql-delete:hover {
+            color: #e74c3c;
+        }
+
+        .quicklist-meta {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: 4px;
+            margin-left: 18px;
+        }
+
+        .quicklist-date {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 3px;
+            background: #ecf0f1;
+            color: #7f8c8d;
+            white-space: nowrap;
+        }
+
+        .quicklist-date.due-overdue {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .quicklist-date.due-soon {
+            background: #f39c12;
+            color: white;
+        }
+
+        .quicklist-note {
+            font-size: 11px;
+            color: #7f8c8d;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+
+        .quicklist-empty {
+            font-size: 11px;
+            color: #b2bec3;
+            text-align: center;
+            padding: 12px 6px;
+            line-height: 1.5;
+        }
+
+        .quicklist-add {
+            margin-top: 8px;
+        }
+
+        .quicklist-add-toggle {
+            width: 100%;
+            background: #f4ecf7;
+            color: #8e44ad;
+            border: 1px dashed #d7bde2;
+            border-radius: 5px;
+            padding: 7px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .quicklist-add-toggle:hover {
+            background: #ebdef0;
+        }
+
+        .quicklist-form input {
+            width: 100%;
+            padding: 6px 8px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 11px;
+            font-family: inherit;
+            margin-bottom: 5px;
+        }
+
+        .quicklist-form input:focus {
+            outline: none;
+            border-color: #8e44ad;
+        }
+
+        .quicklist-form-row {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 5px;
+        }
+
+        .quicklist-form-row input {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        .quicklist-save-btn,
+        .quicklist-cancel-btn {
+            border: none;
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+
+        .quicklist-save-btn {
+            background: #8e44ad;
+            color: white;
+        }
+
+        .quicklist-save-btn:hover {
+            background: #7d3c98;
+        }
+
+        .quicklist-cancel-btn {
+            background: #ecf0f1;
+            color: #7f8c8d;
+        }
+
+        /* Collapsible sidebar panels */
+        .panel-toggle {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 11px;
+            color: #95a5a6;
+            padding: 0 2px;
+            line-height: 1;
+            font-family: inherit;
+            flex-shrink: 0;
+            order: -1;
+        }
+
+        .panel-toggle:hover {
+            color: #2c3e50;
+        }
+
+        .panel-collapsed > *:not(.priority-header):not(.victory-header):not(.quicklist-header):not(.notes-header) {
+            display: none !important;
+        }
+
+        .priority-radar.panel-collapsed {
+            min-height: 0;
+        }
+
+        .priority-radar.panel-collapsed .priority-header,
+        .victory-log.panel-collapsed .victory-header,
+        .quicklist-section.panel-collapsed .quicklist-header,
+        .notes-section.panel-collapsed .notes-header {
+            margin-bottom: 0;
+        }
+
+        .notes-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+
+        /* ==============================================
+           TASK MOMENTUM - v2.14
+           ============================================== */
+
+        .task-momentum {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #ecf0f1;
+        }
+
+        .task-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .task-chip {
+            font-size: 9px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 3px;
+            background: #ecf0f1;
+            color: #7f8c8d;
+            white-space: nowrap;
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .task-chip-follow.due-overdue {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .task-chip-follow.due-soon {
+            background: #f39c12;
+            color: white;
+        }
+
+        .task-chip-waiting {
+            background: #eaf2fb;
+            color: #21618c;
+        }
+
+        .task-chip-log {
+            background: #f4ecf7;
+            color: #8e44ad;
+        }
+
+        .task-nextstep {
+            font-size: 11px;
+            color: #34495e;
+            line-height: 1.4;
+            margin-top: 5px;
+        }
+
+        .task-item.task-parked {
+            border-style: dashed;
+        }
+
+        .task-item.task-parked:hover {
+            opacity: 1 !important;
+        }
+
+        /* ----- Task detail modal ----- */
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .detail-field-wide {
+            grid-column: 1 / -1;
+        }
+
+        .detail-label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            letter-spacing: 0.3px;
+        }
+
+        .detail-hint {
+            font-weight: 400;
+            color: #95a5a6;
+            letter-spacing: 0;
+        }
+
+        .detail-input {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 13px;
+            font-family: inherit;
+            color: #2c3e50;
+        }
+
+        .detail-input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .detail-textarea {
+            resize: vertical;
+            line-height: 1.5;
+        }
+
+        .detail-followup-row {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .detail-followup-row .detail-input {
+            width: auto;
+            flex: 1;
+            min-width: 140px;
+        }
+
+        .detail-nudge {
+            background: #ecf0f1;
+            color: #2c3e50;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+
+        .detail-nudge:hover {
+            background: #d6dbdd;
+        }
+
+        .detail-log-section {
+            margin-top: 22px;
+            padding-top: 18px;
+            border-top: 2px solid #ecf0f1;
+        }
+
+        .detail-log-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .detail-log-add {
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+            margin-bottom: 14px;
+        }
+
+        .detail-log-add .detail-input {
+            flex: 1;
+        }
+
+        .detail-log-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+
+        .detail-log-btn:hover {
+            background: #1e8449;
+        }
+
+        .detail-log-list {
+            max-height: 260px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .detail-log-entry {
+            background: #f8f9fa;
+            border-left: 3px solid #bdc3c7;
+            border-radius: 4px;
+            padding: 9px 12px;
+        }
+
+        .detail-log-entry:first-child {
+            border-left-color: #27ae60;
+            background: #f6fdf8;
+        }
+
+        .detail-log-entry.is-activity {
+            border-left-color: #16a085;
+            background: #f2fbfa;
+        }
+
+        .detail-log-source {
+            font-size: 10px;
+            font-weight: 700;
+            color: #16a085;
+            background: #d5f0eb;
+            padding: 2px 7px;
+            border-radius: 3px;
+        }
+
+        .detail-log-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .detail-time-chip {
+            font-size: 11px;
+            font-weight: 700;
+            color: #16a085;
+            background: #d5f0eb;
+            padding: 3px 9px;
+            border-radius: 4px;
+        }
+
+        .detail-time-btn {
+            margin-left: auto;
+            background: #16a085;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 7px 13px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .detail-time-btn:hover {
+            background: #128f76;
+        }
+
+        .task-chip-time {
+            background: #d5f0eb;
+            color: #0e6655;
+        }
+
+        .task-chip-contact {
+            background: #f4ecf7;
+            color: #6c3483;
+        }
+
+        .detail-contact-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 8px;
+            min-height: 24px;
+            align-items: center;
+        }
+
+        .detail-contact-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #f4ecf7;
+            color: #6c3483;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 9px;
+            border-radius: 12px;
+        }
+
+        .detail-contact-chip button {
+            background: transparent;
+            border: none;
+            color: #8e44ad;
+            cursor: pointer;
+            font-size: 14px;
+            line-height: 1;
+            padding: 0;
+        }
+
+        .detail-contact-chip button:hover {
+            color: #e74c3c;
+        }
+
+        .detail-contact-none {
+            font-size: 12px;
+            color: #b2bec3;
+        }
+
+        .focus-contact {
+            font-size: 10px;
+            font-weight: 700;
+            background: #f4ecf7;
+            color: #6c3483;
+            padding: 2px 7px;
+            border-radius: 3px;
+        }
+
+        .detail-log-date {
+            font-size: 10px;
+            font-weight: 700;
+            color: #7f8c8d;
+            letter-spacing: 0.3px;
+            margin-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .detail-log-delete {
+            background: transparent;
+            border: none;
+            color: #bdc3c7;
+            cursor: pointer;
+            font-size: 14px;
+            line-height: 1;
+            padding: 0 3px;
+        }
+
+        .detail-log-delete:hover {
+            color: #e74c3c;
+        }
+
+        .detail-log-text {
+            font-size: 12px;
+            color: #2c3e50;
+            line-height: 1.55;
+            white-space: pre-wrap;
+        }
+
+        .detail-log-empty {
+            font-size: 12px;
+            color: #95a5a6;
+            text-align: center;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .detail-footer {
+            padding: 14px 20px;
+            border-top: 1px solid #ecf0f1;
+            background: #fbfbfc;
+            border-radius: 0 0 12px 12px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .detail-save-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .detail-save-btn:hover {
+            background: #1e8449;
+        }
+
+        .detail-cancel-btn {
+            background: #ecf0f1;
+            color: #7f8c8d;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 16px;
+            font-size: 13px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .detail-footer-note {
+            font-size: 11px;
+            color: #95a5a6;
+            margin-left: auto;
+        }
+
+        /* ----- Today's Focus ----- */
+
+        .focus-count {
+            background: white;
+            color: #c0392b;
+            border-radius: 10px;
+            padding: 1px 6px;
+            font-size: 10px;
+            font-weight: 700;
+            margin-left: 4px;
+        }
+
+        .header-btn.focus-open-btn {
+            background: rgba(231, 76, 60, 0.9);
+        }
+
+        .focus-group {
+            margin-bottom: 22px;
+        }
+
+        .focus-group-title {
+            font-size: 13px;
+            font-weight: 700;
+            padding: 9px 12px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+            color: #2c3e50;
+        }
+
+        .focus-group-title.focus-due {
+            background: #fdecea;
+            color: #922b21;
+        }
+
+        .focus-group-title.focus-drift {
+            background: #eaf2fb;
+            color: #21618c;
+        }
+
+        .focus-group-title.focus-list {
+            background: #f4ecf7;
+            color: #6c3483;
+        }
+
+        .focus-group-title.focus-parked {
+            background: #f8f9fa;
+            color: #7f8c8d;
+        }
+
+        .focus-row {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            background: white;
+            border: 1px solid #e8e8e8;
+            border-radius: 6px;
+            padding: 11px 13px;
+            margin-bottom: 7px;
+        }
+
+        .focus-row-main {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .focus-row-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #2c3e50;
+            line-height: 1.35;
+        }
+
+        .focus-row-meta {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 4px;
+        }
+
+        .focus-ws {
+            font-size: 10px;
+            font-weight: 700;
+            color: #7f8c8d;
+            background: #ecf0f1;
+            padding: 2px 7px;
+            border-radius: 3px;
+        }
+
+        .focus-tag {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 3px;
+            color: white;
+        }
+
+        .focus-tag.overdue { background: #e74c3c; }
+        .focus-tag.drift   { background: #3498db; }
+        .focus-tag.parked  { background: #95a5a6; }
+
+        .focus-next {
+            font-size: 11px;
+            color: #7f8c8d;
+            margin-top: 4px;
+            line-height: 1.45;
+        }
+
+        .focus-row-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex-shrink: 0;
+        }
+
+        .focus-btn {
+            border: none;
+            border-radius: 4px;
+            padding: 6px 11px;
+            font-size: 11px;
+            cursor: pointer;
+            background: #ecf0f1;
+            color: #2c3e50;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+
+        .focus-btn:hover {
+            background: #d6dbdd;
+        }
+
+        .focus-btn.focus-btn-log {
+            background: #27ae60;
+            color: white;
+        }
+
+        .focus-btn.focus-btn-log:hover {
+            background: #1e8449;
+        }
+
+        .focus-empty {
+            text-align: center;
+            color: #95a5a6;
+            font-size: 13px;
+            padding: 50px 20px;
+            line-height: 1.7;
+        }
+
     </style>
 </head>
 <body>
@@ -1539,7 +2522,7 @@
                         <span>Personal Hidden</span>
                     </button>
                     <button class="header-btn" onclick="openMasterTasks('main')">&#128203; Master Tasks</button>
-                    <button class="header-btn" onclick="exportToPDF('main')">&#128202; Export</button>
+                    <button class="header-btn" onclick="openExportChooser('main')">&#128202; Export</button>
                     <button class="header-btn" onclick="openSettings()">&#9881; Settings</button>
                     <button class="header-btn" onclick="openActivityLog()">&#128221; Log Activity</button>
                     <button class="header-btn" onclick="openActivityHistory()">&#128200; What Have I Done?</button>
@@ -1584,6 +2567,27 @@
                         <!-- Victory items will appear here -->
                     </div>
 
+                    <div class="quicklist-section">
+                        <div class="quicklist-header">
+                            <span class="quicklist-title">&#128204; Quick List</span>
+                            <span class="quicklist-overdue" style="display: none;"></span>
+                            <button class="quicklist-sort-btn" type="button" title="Switch between date order and your own order">By date</button>
+                        </div>
+                        <div class="quicklist-items"><!-- items render here --></div>
+                        <div class="quicklist-add">
+                            <button class="quicklist-add-toggle" type="button">+ Add item</button>
+                            <div class="quicklist-form" style="display: none;">
+                                <input type="text" class="quicklist-input-title" placeholder="What is it?">
+                                <div class="quicklist-form-row">
+                                    <input type="date" class="quicklist-input-date" title="Due date (optional)">
+                                    <button class="quicklist-save-btn" type="button">Add</button>
+                                    <button class="quicklist-cancel-btn" type="button">Cancel</button>
+                                </div>
+                                <input type="text" class="quicklist-input-note" placeholder="Note (optional)">
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="notes-section">
                         <div class="notes-header">&#128221; Quick Notes</div>
                         <textarea class="notes-textarea" placeholder="Jot down quick thoughts..."></textarea>
@@ -1603,7 +2607,7 @@
                 </div>
                 <div class="header-controls">
                     <button class="header-btn" onclick="openMasterTasks('ideas')">&#128203; Master Tasks</button>
-                    <button class="header-btn" onclick="exportToPDF('ideas')">&#128202; Export</button>
+                    <button class="header-btn" onclick="openExportChooser('ideas')">&#128202; Export</button>
                 </div>
             </div>
 
@@ -1643,6 +2647,27 @@
                         <!-- Victory items will appear here -->
                     </div>
 
+                    <div class="quicklist-section">
+                        <div class="quicklist-header">
+                            <span class="quicklist-title">&#128204; Quick List</span>
+                            <span class="quicklist-overdue" style="display: none;"></span>
+                            <button class="quicklist-sort-btn" type="button" title="Switch between date order and your own order">By date</button>
+                        </div>
+                        <div class="quicklist-items"><!-- items render here --></div>
+                        <div class="quicklist-add">
+                            <button class="quicklist-add-toggle" type="button">+ Add item</button>
+                            <div class="quicklist-form" style="display: none;">
+                                <input type="text" class="quicklist-input-title" placeholder="What is it?">
+                                <div class="quicklist-form-row">
+                                    <input type="date" class="quicklist-input-date" title="Due date (optional)">
+                                    <button class="quicklist-save-btn" type="button">Add</button>
+                                    <button class="quicklist-cancel-btn" type="button">Cancel</button>
+                                </div>
+                                <input type="text" class="quicklist-input-note" placeholder="Note (optional)">
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="notes-section">
                         <div class="notes-header">&#128221; Quick Notes</div>
                         <textarea class="notes-textarea" placeholder="Capture creative ideas..."></textarea>
@@ -1662,7 +2687,7 @@
                 </div>
                 <div class="header-controls">
                     <button class="header-btn" onclick="openMasterTasks('philosophy')">&#128203; Master Tasks</button>
-                    <button class="header-btn" onclick="exportToPDF('philosophy')">&#128202; Export</button>
+                    <button class="header-btn" onclick="openExportChooser('philosophy')">&#128202; Export</button>
                 </div>
             </div>
 
@@ -1702,6 +2727,27 @@
                         <!-- Victory items will appear here -->
                     </div>
 
+                    <div class="quicklist-section">
+                        <div class="quicklist-header">
+                            <span class="quicklist-title">&#128204; Quick List</span>
+                            <span class="quicklist-overdue" style="display: none;"></span>
+                            <button class="quicklist-sort-btn" type="button" title="Switch between date order and your own order">By date</button>
+                        </div>
+                        <div class="quicklist-items"><!-- items render here --></div>
+                        <div class="quicklist-add">
+                            <button class="quicklist-add-toggle" type="button">+ Add item</button>
+                            <div class="quicklist-form" style="display: none;">
+                                <input type="text" class="quicklist-input-title" placeholder="What is it?">
+                                <div class="quicklist-form-row">
+                                    <input type="date" class="quicklist-input-date" title="Due date (optional)">
+                                    <button class="quicklist-save-btn" type="button">Add</button>
+                                    <button class="quicklist-cancel-btn" type="button">Cancel</button>
+                                </div>
+                                <input type="text" class="quicklist-input-note" placeholder="Note (optional)">
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="notes-section">
                         <div class="notes-header">&#128221; Philosophical Notes</div>
                         <textarea class="notes-textarea" placeholder="Reflections and insights..."></textarea>
@@ -1721,7 +2767,7 @@
                 </div>
                 <div class="header-controls">
                     <button class="header-btn" onclick="openMasterTasks('family')">&#128203; Master Tasks</button>
-                    <button class="header-btn" onclick="exportToPDF('family')">&#128202; Export</button>
+                    <button class="header-btn" onclick="openExportChooser('family')">&#128202; Export</button>
                 </div>
             </div>
 
@@ -1761,6 +2807,27 @@
                         <!-- Victory items will appear here -->
                     </div>
 
+                    <div class="quicklist-section">
+                        <div class="quicklist-header">
+                            <span class="quicklist-title">&#128204; Quick List</span>
+                            <span class="quicklist-overdue" style="display: none;"></span>
+                            <button class="quicklist-sort-btn" type="button" title="Switch between date order and your own order">By date</button>
+                        </div>
+                        <div class="quicklist-items"><!-- items render here --></div>
+                        <div class="quicklist-add">
+                            <button class="quicklist-add-toggle" type="button">+ Add item</button>
+                            <div class="quicklist-form" style="display: none;">
+                                <input type="text" class="quicklist-input-title" placeholder="What is it?">
+                                <div class="quicklist-form-row">
+                                    <input type="date" class="quicklist-input-date" title="Due date (optional)">
+                                    <button class="quicklist-save-btn" type="button">Add</button>
+                                    <button class="quicklist-cancel-btn" type="button">Cancel</button>
+                                </div>
+                                <input type="text" class="quicklist-input-note" placeholder="Note (optional)">
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="notes-section">
                         <div class="notes-header">&#128221; Family Notes</div>
                         <textarea class="notes-textarea" placeholder="Family coordination notes..."></textarea>
@@ -1780,7 +2847,7 @@
                 </div>
                 <div class="header-controls">
                     <button class="header-btn" onclick="openMasterTasks('child1')">&#128203; Master Tasks</button>
-                    <button class="header-btn" onclick="exportToPDF('child1')">&#128202; Export</button>
+                    <button class="header-btn" onclick="openExportChooser('child1')">&#128202; Export</button>
                 </div>
             </div>
 
@@ -1820,6 +2887,27 @@
                         <!-- Victory items will appear here -->
                     </div>
 
+                    <div class="quicklist-section">
+                        <div class="quicklist-header">
+                            <span class="quicklist-title">&#128204; Quick List</span>
+                            <span class="quicklist-overdue" style="display: none;"></span>
+                            <button class="quicklist-sort-btn" type="button" title="Switch between date order and your own order">By date</button>
+                        </div>
+                        <div class="quicklist-items"><!-- items render here --></div>
+                        <div class="quicklist-add">
+                            <button class="quicklist-add-toggle" type="button">+ Add item</button>
+                            <div class="quicklist-form" style="display: none;">
+                                <input type="text" class="quicklist-input-title" placeholder="What is it?">
+                                <div class="quicklist-form-row">
+                                    <input type="date" class="quicklist-input-date" title="Due date (optional)">
+                                    <button class="quicklist-save-btn" type="button">Add</button>
+                                    <button class="quicklist-cancel-btn" type="button">Cancel</button>
+                                </div>
+                                <input type="text" class="quicklist-input-note" placeholder="Note (optional)">
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="notes-section">
                         <div class="notes-header">&#128221; Coordination Notes</div>
                         <textarea class="notes-textarea" placeholder="School coordination notes..."></textarea>
@@ -1839,7 +2927,7 @@
                 </div>
                 <div class="header-controls">
                     <button class="header-btn" onclick="openMasterTasks('child2')">&#128203; Master Tasks</button>
-                    <button class="header-btn" onclick="exportToPDF('child2')">&#128202; Export</button>
+                    <button class="header-btn" onclick="openExportChooser('child2')">&#128202; Export</button>
                 </div>
             </div>
 
@@ -1879,6 +2967,27 @@
                         <!-- Victory items will appear here -->
                     </div>
 
+                    <div class="quicklist-section">
+                        <div class="quicklist-header">
+                            <span class="quicklist-title">&#128204; Quick List</span>
+                            <span class="quicklist-overdue" style="display: none;"></span>
+                            <button class="quicklist-sort-btn" type="button" title="Switch between date order and your own order">By date</button>
+                        </div>
+                        <div class="quicklist-items"><!-- items render here --></div>
+                        <div class="quicklist-add">
+                            <button class="quicklist-add-toggle" type="button">+ Add item</button>
+                            <div class="quicklist-form" style="display: none;">
+                                <input type="text" class="quicklist-input-title" placeholder="What is it?">
+                                <div class="quicklist-form-row">
+                                    <input type="date" class="quicklist-input-date" title="Due date (optional)">
+                                    <button class="quicklist-save-btn" type="button">Add</button>
+                                    <button class="quicklist-cancel-btn" type="button">Cancel</button>
+                                </div>
+                                <input type="text" class="quicklist-input-note" placeholder="Note (optional)">
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="notes-section">
                         <div class="notes-header">&#128221; Coordination Notes</div>
                         <textarea class="notes-textarea" placeholder="School coordination notes..."></textarea>
@@ -1900,7 +3009,7 @@
                     <button class="header-btn" onclick="openClientModal()">&#10133; Add Contact</button>
                     <button class="header-btn" onclick="toggleClientView()">&#128197; Timeline View</button>
                     <button class="header-btn" onclick="printClientList()">&#128424; Print</button>
-                    <button class="header-btn" onclick="exportClientData()">&#128228; Export</button>
+                    <button class="header-btn" onclick="openExportChooser('clients')">&#128228; Export</button>
                     <button class="header-btn" onclick="triggerImportClientData()">&#128293; Import</button>
                     <button class="header-btn" onclick="openSettings()">&#9881; Settings</button>
                 </div>
@@ -2025,6 +3134,159 @@
         </div>
     </div>
 
+
+    <!-- Export Chooser Modal - v2.11 -->
+    <div id="exportChooserModal" class="modal">
+        <div class="modal-content" style="max-width: 640px;">
+            <div class="modal-header" style="background: #2c3e50;">
+                <h2 class="modal-title">&#128202; Export</h2>
+                <button class="modal-close" onclick="closeExportChooser()">Close</button>
+            </div>
+            <div class="modal-body">
+                <p style="margin: 0 0 15px 0; color: #7f8c8d; font-size: 13px; line-height: 1.6;">
+                    These two files are not the same thing. Only one of them can bring your work back.
+                </p>
+
+                <div class="export-option" onclick="runPartialExport()">
+                    <div class="export-option-title" id="exportPartialTitle">Readable report</div>
+                    <div class="export-option-desc" id="exportPartialDesc"></div>
+                </div>
+
+                <div class="export-option export-option-primary" onclick="runFullBackup()">
+                    <div class="export-option-title">
+                        &#128190; Full backup &mdash; everything
+                        <span class="export-option-flag">RESTORABLE</span>
+                    </div>
+                    <div class="export-option-desc">
+                        Every workspace, with tasks, Master Task lists, Priority Radar, Priority Order rankings,
+                        victories, notes, contacts and settings. <strong>This is the file to keep.</strong>
+                        Restore it any time from Settings &rarr; Backup &amp; Restore.
+                    </div>
+                </div>
+
+                <div class="export-backup-status" id="exportBackupStatus"></div>
+
+                <p style="margin: 15px 0 0 0; color: #95a5a6; font-size: 12px; line-height: 1.6;">
+                    MyLifeCanvas keeps your data in this browser only, which is what keeps it private.
+                    It also means clearing your browser data will erase it. A full backup is the only copy
+                    that survives that.
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Backup Reminder Modal - v2.12 -->
+    <div id="backupReminderModal" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header" style="background: #c0392b;">
+                <h2 class="modal-title">&#9888; Time to back up</h2>
+            </div>
+            <div class="modal-body">
+                <div class="backup-reminder-headline" id="backupReminderHeadline"></div>
+                <p class="backup-reminder-detail" id="backupReminderDetail"></p>
+                <div class="backup-reminder-actions">
+                    <button class="backup-reminder-primary" onclick="backupFromReminder()">
+                        &#128190; Back up everything now
+                    </button>
+                    <button class="backup-reminder-secondary" onclick="snoozeBackupReminder()">
+                        Remind me in 7 days
+                    </button>
+                </div>
+                <p style="margin: 16px 0 0 0; font-size: 11px; color: #95a5a6; line-height: 1.6;">
+                    You can turn these reminders off in Settings &rarr; Backup &amp; Restore.
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Task Detail Modal - v2.14 -->
+    <div id="taskDetailModal" class="modal">
+        <div class="modal-content" style="max-width: 720px;">
+            <div class="modal-header" style="background: #2c3e50;">
+                <h2 class="modal-title">&#128221; Task</h2>
+                <button class="modal-close" onclick="closeTaskDetail()">Close</button>
+            </div>
+            <div class="modal-body">
+                <div class="detail-grid">
+                    <div class="detail-field detail-field-wide">
+                        <label class="detail-label">Title</label>
+                        <input type="text" id="detailTitle" class="detail-input">
+                    </div>
+                    <div class="detail-field detail-field-wide">
+                        <label class="detail-label">Description</label>
+                        <textarea id="detailDesc" class="detail-input detail-textarea" rows="2"></textarea>
+                    </div>
+                    <div class="detail-field">
+                        <label class="detail-label">Status</label>
+                        <select id="detailStatus" class="detail-input"></select>
+                    </div>
+                    <div class="detail-field">
+                        <label class="detail-label">Waiting on <span class="detail-hint">who or what is holding it up</span></label>
+                        <input type="text" id="detailWaitingOn" class="detail-input" placeholder="e.g. Kerry, client signature, fund transfer">
+                    </div>
+                    <div class="detail-field detail-field-wide">
+                        <label class="detail-label">Relates to
+                            <span class="detail-hint">optional &mdash; link this task to people in your Contacts</span></label>
+                        <div id="detailContactChips" class="detail-contact-chips"></div>
+                        <select id="detailContactPicker" class="detail-input"
+                                onchange="addDetailContact(this.value)"></select>
+                    </div>
+
+                    <div class="detail-field detail-field-wide">
+                        <label class="detail-label">Next step <span class="detail-hint">shown on the task card</span></label>
+                        <input type="text" id="detailNextStep" class="detail-input" placeholder="The one thing that moves this along">
+                    </div>
+                    <div class="detail-field detail-field-wide">
+                        <label class="detail-label">Look at this again on <span class="detail-hint">the card fades until then, and reappears in Today's Focus</span></label>
+                        <div class="detail-followup-row">
+                            <input type="date" id="detailFollowUp" class="detail-input">
+                            <button type="button" class="detail-nudge" onclick="nudgeFollowUp(7)">+1 week</button>
+                            <button type="button" class="detail-nudge" onclick="nudgeFollowUp(30)">+1 month</button>
+                            <button type="button" class="detail-nudge" onclick="clearFollowUp()">Clear</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-log-section">
+                    <div class="detail-log-title">
+                        Timeline
+                        <span id="detailTimeSummary"></span>
+                        <button type="button" class="detail-time-btn"
+                                onclick="logActivityForTask(detailTaskId, detailWorkspace)">
+                            &#9201; Log time against this task
+                        </button>
+                    </div>
+                    <div class="detail-log-add">
+                        <textarea id="detailLogEntry" class="detail-input detail-textarea" rows="2"
+                                  placeholder="What happened this time? Ctrl+Enter to add."></textarea>
+                        <button type="button" class="detail-log-btn" onclick="addLogEntry()">Add entry</button>
+                    </div>
+                    <div id="detailLogList" class="detail-log-list"></div>
+                </div>
+            </div>
+            <div class="detail-footer">
+                <button class="detail-save-btn" onclick="saveTaskDetailModal()">Save task</button>
+                <button class="detail-cancel-btn" onclick="closeTaskDetail()">Cancel</button>
+                <span class="detail-footer-note">Log entries save as you add them.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Today's Focus Modal - v2.14 -->
+    <div id="todaysFocusModal" class="modal">
+        <div class="modal-content" style="max-width: 780px;">
+            <div class="modal-header" style="background: #c0392b;">
+                <h2 class="modal-title">&#127919; Today's Focus</h2>
+                <button class="modal-close" onclick="closeTodaysFocus()">Close</button>
+            </div>
+            <div class="modal-body" id="focusBody">
+                <!-- generated -->
+            </div>
+        </div>
+    </div>
+
     <!-- Settings Modal -->
     <div id="settingsModal" class="modal">
         <div class="modal-content">
@@ -2073,6 +3335,16 @@
                     <input type="file" id="fullDataImportInput" accept=".json" style="display: none;" onchange="importAllData(event)">
                     <div style="font-size: 10px; color: #95a5a6; margin-top: 10px;">
                         ⚠️ Importing will replace ALL existing data. Export first if you want to keep current data.
+                    </div>
+                    <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #ecf0f1;">
+                        <label style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: #34495e; cursor: pointer;">
+                            <input type="checkbox" id="backupReminderToggle">
+                            <span>Remind me if I have not backed up in 30 days</span>
+                        </label>
+                        <div style="font-size: 10px; color: #95a5a6; margin-top: 6px; line-height: 1.5;">
+                            Your data is held in this browser only. If you turn this off, nothing will prompt you
+                            and keeping a backup is entirely down to you.
+                        </div>
                     </div>
                 </div>
 
@@ -2275,15 +3547,124 @@
                         
                         <div style="background: #ecf0f1; padding: 15px; margin: 0 0 15px 0; border-left: 4px solid #3498db; border-radius: 4px;">
                             <p style="line-height: 1.6; margin: 0; color: #34495e;">
-                                <strong>Version 2.9</strong><br>
-                                File: 20260903 MyLifeCanvas v 02.09-a<br>
+                                <strong>Version 2.16</strong><br>
+                                File: 20260903 MyLifeCanvas v 02.16-a<br>
                                 Released: September 2026<br>
                                 Created by MoMo Creative<br>
                                 Perth, Western Australia
                             </p>
                         </div>
 
-                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">What's New in Version 2.9</h4>
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">What's New in Version 2.16</h4>
+                        <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
+                            <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
+                                <strong>Tasks can name the people they concern</strong>
+                            </p>
+                            <p style="line-height: 1.8; margin: 0; color: #555; font-size: 12px;">
+                                &#8226; <strong>Relates to</strong> &mdash; Link a task to one contact, several, or none at all<br>
+                                &#8226; <strong>Always optional</strong> &mdash; A task never has to name anyone, and contacts never need a task<br>
+                                &#8226; <strong>Contact cards show their work</strong> &mdash; Linked tasks, next steps, follow-up dates and time logged<br>
+                                &#8226; <strong>Names on the cards</strong> &mdash; Task cards and Today's Focus show who a task concerns<br>
+                                &#8226; <strong>Time adds up per person</strong> &mdash; Hours logged against a contact's tasks total on their card<br>
+                                &#8226; <strong>Contacts still stand alone</strong> &mdash; Birthdays, events and scheduled items work exactly as before
+                            </p>
+                        </div>
+
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Previously, in Version 2.15</h4>
+                        <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
+                            <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
+                                <strong>Logged time and task history are now the same record</strong>
+                            </p>
+                            <p style="line-height: 1.8; margin: 0; color: #555; font-size: 12px;">
+                                &#8226; <strong>Log Activity can name a task</strong> &mdash; Ticking "pre-existing task" now offers the open tasks in that workspace<br>
+                                &#8226; <strong>One merged timeline</strong> &mdash; A task shows its progress notes and its logged time together, in date order<br>
+                                &#8226; <strong>No double entry</strong> &mdash; Work is stored once; a plain note stays a note, timed work lives in the Activity Log<br>
+                                &#8226; <strong>Time per task</strong> &mdash; Hours logged against a task show on the card and in the panel<br>
+                                &#8226; <strong>Log time from the task</strong> &mdash; A button in the task panel opens Log Activity already pointed at it<br>
+                                &#8226; <strong>Logging keeps a task alive</strong> &mdash; Time booked against a task counts as touching it, so it stops drifting<br>
+                                &#8226; <strong>What Have I Done? untouched</strong> &mdash; The existing time reporting works exactly as before
+                            </p>
+                        </div>
+
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Previously, in Version 2.14</h4>
+                        <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
+                            <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
+                                <strong>Tasks that get pushed along rather than finished</strong>
+                            </p>
+                            <p style="line-height: 1.8; margin: 0; color: #555; font-size: 12px;">
+                                &#8226; <strong>Progress log</strong> &mdash; Add a dated entry each time you move a task on; nothing is overwritten<br>
+                                &#8226; <strong>Next step and Waiting on</strong> &mdash; Recorded per task and shown on the card<br>
+                                &#8226; <strong>Follow-up dates</strong> &mdash; Park a task and its card fades until the date arrives<br>
+                                &#8226; <strong>&#127919; Today's Focus</strong> &mdash; One list across every workspace: due for a push, drifting, and Quick List items due<br>
+                                &#8226; <strong>Drift detection</strong> &mdash; Anything untouched for 14 days surfaces on its own<br>
+                                &#8226; <strong>Push a week</strong> &mdash; Move a follow-up on without opening anything<br>
+                                &#8226; <strong>Edit became a proper panel</strong> &mdash; Title, description, status and momentum in one form instead of a chain of prompts<br>
+                                &#8226; <strong>Logs print and back up</strong> &mdash; The history of a long job travels with your data
+                            </p>
+                        </div>
+
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Previously, in Version 2.13</h4>
+                        <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
+                            <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
+                                <strong>Quick List, and a sidebar you control</strong>
+                            </p>
+                            <p style="line-height: 1.8; margin: 0; color: #555; font-size: 12px;">
+                                &#8226; <strong>&#128204; Quick List</strong> &mdash; An always-visible register of things with due dates, sitting above Quick Notes<br>
+                                &#8226; <strong>Dates that speak</strong> &mdash; Overdue items turn red, anything due within a week turns amber<br>
+                                &#8226; <strong>Overdue count</strong> &mdash; Shown in the panel header so it is visible at a glance<br>
+                                &#8226; <strong>Two orders</strong> &mdash; Sorted by date, or switch to your own order and drag items around<br>
+                                &#8226; <strong>Ticking one off logs a victory</strong> &mdash; Progress is still worth marking<br>
+                                &#8226; <strong>Collapsible panels</strong> &mdash; Priority Radar, Victories, Quick List and Quick Notes each fold away, remembered per workspace<br>
+                                &#8226; <strong>Victories take less room</strong> &mdash; The panel is capped lower so it no longer crowds the sidebar<br>
+                                &#8226; <strong>Included in reports and backups</strong> &mdash; The Quick List prints with the workspace and travels with your data
+                            </p>
+                        </div>
+
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Previously, in Version 2.12</h4>
+                        <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
+                            <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
+                                <strong>A 30-day backup reminder</strong>
+                            </p>
+                            <p style="line-height: 1.8; margin: 0; color: #555; font-size: 12px;">
+                                &#8226; <strong>Spoken plainly</strong> &mdash; If no full backup has been taken in 30 days, the app says so on opening<br>
+                                &#8226; <strong>Names what is at stake</strong> &mdash; Counts your actual tasks, Master Tasks and contacts rather than warning in the abstract<br>
+                                &#8226; <strong>Stays flagged</strong> &mdash; The Export button turns red until a real backup is taken<br>
+                                &#8226; <strong>Snooze, not dismiss</strong> &mdash; Seven days, then it asks again<br>
+                                &#8226; <strong>Quiet when there is nothing to lose</strong> &mdash; A near-empty install is not nagged<br>
+                                &#8226; <strong>Yours to switch off</strong> &mdash; A toggle in Settings &rarr; Backup &amp; Restore, honestly labelled
+                            </p>
+                        </div>
+
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Previously, in Version 2.11</h4>
+                        <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
+                            <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
+                                <strong>The Export button can no longer be mistaken for a backup</strong>
+                            </p>
+                            <p style="line-height: 1.8; margin: 0; color: #555; font-size: 12px;">
+                                &#8226; <strong>Export now asks</strong> &mdash; A readable report for this workspace, or a full restorable backup<br>
+                                &#8226; <strong>Plain wording</strong> &mdash; The chooser states which file can actually bring your work back<br>
+                                &#8226; <strong>Reports say so themselves</strong> &mdash; Exported reports carry a warning that they cannot be restored<br>
+                                &#8226; <strong>Backup age shown</strong> &mdash; The chooser tells you when you last took a real backup, in red if never or over a month<br>
+                                &#8226; <strong>One button, no hunting</strong> &mdash; A full backup no longer requires knowing to look in Settings
+                            </p>
+                        </div>
+
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Previously, in Version 2.10</h4>
+                        <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
+                            <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
+                                <strong>Every export now names itself properly</strong>
+                            </p>
+                            <p style="line-height: 1.8; margin: 0; color: #555; font-size: 12px;">
+                                &#8226; <strong>Dated, versioned filenames</strong> &mdash; Exports are saved as <em>YYYYMMDD Label v NN.NN-a</em><br>
+                                &#8226; <strong>No more collisions</strong> &mdash; The sequence climbs with every export, so two on the same day never overwrite each other<br>
+                                &#8226; <strong>Self-identifying files</strong> &mdash; The same version string is written inside each file, so it can be identified even if renamed<br>
+                                &#8226; <strong>Applies to all four exports</strong> &mdash; Workspace HTML, comprehensive JSON, full backup, and contact data<br>
+                                &#8226; <strong>Safe filenames</strong> &mdash; Characters that Windows and macOS reject are replaced automatically<br>
+                                &#8226; <strong>Sequence travels with your backups</strong> &mdash; Restoring on a new machine will not restart the numbering
+                            </p>
+                        </div>
+
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Previously, in Version 2.9</h4>
                         <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
                             <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
                                 <strong>Priority Order &mdash; a forced ranking for each workspace</strong>
@@ -2487,6 +3868,13 @@
 
                         <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Version History</h4>
                         <p style="line-height: 1.6; color: #555; font-size: 12px;">
+                            <strong>v2.16</strong> &mdash; Optional contact links on tasks, contact cards showing linked work and time<br>
+                            <strong>v2.15</strong> &mdash; Activity Log entries can be linked to a task, merged task timeline, time logged per task<br>
+                            <strong>v2.14</strong> &mdash; Task progress logs, next step and waiting-on, follow-up dates with fading, Today's Focus<br>
+                            <strong>v2.13</strong> &mdash; Quick List register with due dates, collapsible sidebar panels<br>
+                            <strong>v2.12</strong> &mdash; 30-day backup reminder, overdue flag on the Export button<br>
+                            <strong>v2.11</strong> &mdash; Export chooser separating readable reports from restorable backups, backup age warning<br>
+                            <strong>v2.10</strong> &mdash; Dated and versioned export filenames, self-identifying export files<br>
                             <strong>v2.9</strong> &mdash; Priority Order ranking per workspace, rank badges on canvas cards, rankings included in backups<br>
                             <strong>v2.8</strong> &mdash; Renamed to MyLifeCanvas, MoMo branding, full data backup/restore, Settings reorganised, safe task demotion<br>
                             <strong>v2.72</strong> &mdash; Master Task Repository improvements, delete buttons, generic examples<br>
@@ -2746,6 +4134,17 @@
                     <div class="activity-checkbox-group">
                         <input type="checkbox" id="activityIsTask">
                         <label for="activityIsTask">This was a pre-existing task from a workspace</label>
+                    </div>
+                </div>
+
+                <div class="activity-form-group" id="activityTaskRow" style="display: none;">
+                    <label class="activity-form-label">Which task?</label>
+                    <select class="activity-form-select" id="activityTaskId">
+                        <option value="">(not linked to a task)</option>
+                    </select>
+                    <div style="font-size: 11px; color: #95a5a6; margin-top: 6px; line-height: 1.5;">
+                        Linking it means this shows up in that task's timeline as well as in
+                        What Have I Done? &mdash; recorded once, visible in both.
                     </div>
                 </div>
                 
@@ -3315,7 +4714,7 @@
                     <div class="task-controls-right">
                         <button class="prioritise-btn" onclick="prioritiseTask('${taskData.id}')">Priority</button>
                         <button class="demote-master-btn" onclick="demoteToMaster('${taskData.id}')">&#8595; Master</button>
-                        <button class="edit-task-btn" onclick="editWorkspaceTask(this.closest('.task-item'))">Edit</button>
+                        <button class="edit-task-btn" onclick="openTaskDetail(this.closest('.task-item'))">Edit</button>
                         <button class="complete-btn" onclick="completeTask(this)">Done</button>
                     </div>
                 </div>
@@ -3582,7 +4981,7 @@
                     <div class="task-controls-right">
                         <button class="prioritise-btn" onclick="prioritiseTask('${taskId}')">Priority</button>
                         <button class="demote-master-btn" onclick="demoteToMaster('${taskId}')">&#8595; Master</button>
-                        <button class="edit-task-btn" onclick="editWorkspaceTask(this.closest('.task-item'))">Edit</button>
+                        <button class="edit-task-btn" onclick="openTaskDetail(this.closest('.task-item'))">Edit</button>
                         <button class="complete-btn" onclick="completeTask(this)">Done</button>
                     </div>
                 </div>
@@ -4164,9 +5563,60 @@
         function exportToPDF(workspace) {
             try {
                 const workspaceData = gatherWorkspaceData(workspace);
-                const pdfContent = generatePDFContent(workspaceData);
-                downloadAsFile(`${workspaceNames[workspace]}_Export_${new Date().toISOString().split('T')[0]}.html`, pdfContent, 'text/html');
-                showNotification(`${workspaceNames[workspace]} exported successfully!`, 'success');
+                const name = buildExportName(workspaceNames[workspace] + ' Export', 'html');
+                let pdfContent = generatePDFContent(workspaceData);
+                const detailHtml = (function () {
+                    const rows = [];
+                    document.querySelectorAll('#workspace-' + workspace + ' .workspace-canvas .task-item').forEach(function (el) {
+                        const d = getTaskDetail(el.id);
+                        if (!d.nextStep && !d.waitingOn && !d.followUpDate && !d.log.length) return;
+                        const title = (el.querySelector('.task-title') || {}).textContent || 'Untitled';
+                        let block = '    <div class="task"><div class="task-title">' + title + '</div>';
+                        if (d.nextStep)  block += '<div class="task-desc"><strong>Next step:</strong> ' + d.nextStep + '</div>';
+                        if (d.waitingOn) block += '<div class="task-desc"><strong>Waiting on:</strong> ' + d.waitingOn + '</div>';
+                        if (d.followUpDate) block += '<div class="task-desc"><strong>Follow up:</strong> ' + formatQuickListDate(d.followUpDate) + '</div>';
+                        d.log.slice().reverse().forEach(function (e) {
+                            const when = new Date(e.ts);
+                            const label = isNaN(when.getTime()) ? '' : when.toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' });
+                            block += '<div class="notes" style="margin:6px 0 0 0;"><strong>' + label + '</strong><br>' + e.text + '</div>';
+                        });
+                        rows.push(block + '</div>');
+                    });
+                    return rows.length ? '    <h2>&#128221; Progress Logs (' + rows.length + ')</h2>\n' + rows.join('\n') + '\n\n' : '';
+                })();
+
+                const qlItems = sortedQuickList(workspace);
+                const qlHtml = qlItems.length === 0 ? '' :
+                    '    <h2>&#128204; Quick List (' + qlItems.length + ')</h2>\n' +
+                    qlItems.map(function (i) {
+                        const due = formatQuickListDate(i.date);
+                        const overdue = quickListDueClass(i.date) === 'due-overdue';
+                        return '    <div class="task">' +
+                               '<div class="task-title">' + i.title + '</div>' +
+                               (due ? '<div class="task-desc"><strong>Due:</strong> ' + due +
+                                      (overdue ? ' &mdash; OVERDUE' : '') + '</div>' : '') +
+                               (i.note ? '<div class="task-desc">' + i.note + '</div>' : '') +
+                               '</div>';
+                    }).join('\n') + '\n\n';
+
+                const notBackupBanner =
+                    '    <div style="background: #fdecea; border-left: 5px solid #e74c3c; padding: 14px 16px; ' +
+                    'border-radius: 5px; margin: 20px 0; color: #922b21; font-size: 13px; line-height: 1.6;">' +
+                    '<strong>This is a report, not a backup.</strong> It cannot be loaded back into MyLifeCanvas, ' +
+                    'and it covers this workspace only. For a restorable copy of everything, use ' +
+                    'Settings &rarr; Backup &amp; Restore, or choose "Full backup" from the Export button.' +
+                    '</div>\n';
+                pdfContent = pdfContent
+                    .replace('<!DOCTYPE html>', '<!DOCTYPE html>\n<!-- ' + name.stem + ' -->')
+                    .replace('<!-- ' + name.stem + ' -->',
+                             '<!-- ' + name.stem + ' -->\n<!-- NOT A BACKUP: this file cannot be restored into MyLifeCanvas -->')
+                    .replace('    <div class="metadata">', notBackupBanner + '    <div class="metadata">')
+                    .replace('    <h2>&#128203; Active Tasks', qlHtml + '    <h2>&#128203; Active Tasks')
+                    .replace('    <h2>&#127942;', detailHtml + '    <h2>&#127942;')
+                    .replace('<strong>Exported:</strong>',
+                             '<strong>File:</strong> ' + name.stem + '<br>\n        <strong>Exported:</strong>');
+                downloadAsFile(name.filename, pdfContent, 'text/html');
+                showNotification(`${workspaceNames[workspace]} report saved (not a backup)`, 'success');
             } catch (error) {
                 console.error('Export error:', error);
                 showNotification('Export failed. Please try again.', 'error');
@@ -4176,8 +5626,10 @@
         function exportComprehensive(workspace) {
             try {
                 const workspaceData = gatherWorkspaceData(workspace);
+                const name = buildExportName(workspaceNames[workspace] + ' Comprehensive', 'json');
                 const comprehensiveData = generateComprehensiveData(workspaceData);
-                downloadAsFile(`${workspaceNames[workspace]}_Comprehensive_${new Date().toISOString().split('T')[0]}.json`, 
+                comprehensiveData.fileVersion = name.stem;
+                downloadAsFile(name.filename,
                               JSON.stringify(comprehensiveData, null, 2), 'application/json');
                 showNotification(`Comprehensive ${workspaceNames[workspace]} data exported!`, 'success');
             } catch (error) {
@@ -4299,6 +5751,1544 @@
             };
         }
 
+        // ==============================================
+        // TASK <-> CONTACT LINKING - v2.16
+        // Contacts stand on their own. Plenty of people in the list will
+        // never have a task against them, and a birthday is reason enough
+        // to keep them. So the link is optional in one direction only:
+        // a task may name the people it concerns, and never has to.
+        //
+        // Same shape as the activity link: one pointer, two views.
+        // ==============================================
+
+        function allContacts() {
+            return (typeof clientData !== 'undefined' && Array.isArray(clientData)) ? clientData : [];
+        }
+
+        function contactById(id) {
+            return allContacts().find(c => c.id === id) || null;
+        }
+
+        function contactDisplayName(id) {
+            const c = contactById(id);
+            if (!c) return 'Unknown contact';
+            return c.clientName || c.contact1Name || 'Unnamed';
+        }
+
+        function taskContactIds(taskId) {
+            const d = getTaskDetail(taskId);
+            return Array.isArray(d.contactIds) ? d.contactIds.filter(id => !!contactById(id)) : [];
+        }
+
+        function tasksForContact(contactId) {
+            const rows = [];
+            RANK_WORKSPACES.forEach(ws => {
+                document.querySelectorAll('#workspace-' + ws + ' .workspace-canvas .task-item').forEach(el => {
+                    if (taskContactIds(el.id).indexOf(contactId) === -1) return;
+                    const d = getTaskDetail(el.id);
+                    rows.push({
+                        id: el.id,
+                        workspace: ws,
+                        workspaceName: workspaceNames[ws] || ws,
+                        title: (el.querySelector('.task-title') || {}).textContent || 'Untitled',
+                        status: (el.querySelector('.task-status') || {}).textContent || '',
+                        nextStep: d.nextStep,
+                        waitingOn: d.waitingOn,
+                        followUpDate: d.followUpDate,
+                        minutes: taskLoggedMinutes(el.id),
+                        entries: d.log.length + activitiesForTask(el.id).length
+                    });
+                });
+            });
+            return rows;
+        }
+
+        // ----- the picker inside the task panel -----
+
+        let detailContactIds = [];
+
+        function renderDetailContacts() {
+            const chips = document.getElementById('detailContactChips');
+            const picker = document.getElementById('detailContactPicker');
+            if (!chips || !picker) return;
+
+            const contacts = allContacts();
+
+            if (contacts.length === 0) {
+                chips.innerHTML = '<span class="detail-contact-none">No contacts yet. ' +
+                    'Add people in the Contacts workspace and they will appear here.</span>';
+                picker.style.display = 'none';
+                return;
+            }
+
+            picker.style.display = '';
+            chips.innerHTML = detailContactIds.length === 0
+                ? '<span class="detail-contact-none">Not linked to anyone. That is perfectly normal.</span>'
+                : detailContactIds.map(id =>
+                    '<span class="detail-contact-chip">&#128100; ' + rankEscape(contactDisplayName(id)) +
+                    '<button type="button" onclick="removeDetailContact(\'' + id + '\')" ' +
+                    'title="Unlink">&#215;</button></span>').join('');
+
+            picker.innerHTML = '<option value="">+ Link a contact...</option>';
+            contacts
+                .filter(c => detailContactIds.indexOf(c.id) === -1)
+                .sort((a, b) => (a.clientName || '').localeCompare(b.clientName || ''))
+                .forEach(c => {
+                    const opt = document.createElement('option');
+                    opt.value = c.id;
+                    opt.textContent = c.clientName + (c.contact1Name && c.contact1Name !== c.clientName
+                        ? ' (' + c.contact1Name + ')' : '');
+                    picker.appendChild(opt);
+                });
+            picker.value = '';
+        }
+
+        function addDetailContact(id) {
+            if (!id || detailContactIds.indexOf(id) !== -1) return;
+            detailContactIds.push(id);
+            renderDetailContacts();
+        }
+
+        function removeDetailContact(id) {
+            detailContactIds = detailContactIds.filter(x => x !== id);
+            renderDetailContacts();
+        }
+
+        // ----- contact card: the work attached to a person -----
+
+        function contactWorkPanel(contactId) {
+            const rows = tasksForContact(contactId);
+            if (rows.length === 0) return '';
+
+            const totalMinutes = rows.reduce((s, r) => s + r.minutes, 0);
+            const timeLabel = totalMinutes > 0
+                ? (totalMinutes >= 60 ? (totalMinutes / 60).toFixed(1) + ' hours' : totalMinutes + ' mins')
+                : '';
+
+            return '<div style="padding: 10px 15px; border-top: 1px solid #f0f0f0; background: #fbfaff;">' +
+                '<div style="font-size: 11px; font-weight: 600; color: #8e44ad; margin-bottom: 8px;">' +
+                    'LINKED TASKS (' + rows.length + ')' +
+                    (timeLabel ? ' &middot; ' + timeLabel + ' logged' : '') +
+                '</div>' +
+                rows.map(r => {
+                    const due = r.followUpDate ? formatQuickListDate(r.followUpDate) : '';
+                    const dueCls = quickListDueClass(r.followUpDate);
+                    return '<div style="display: flex; justify-content: space-between; align-items: flex-start; ' +
+                           'gap: 10px; padding: 6px 0; border-bottom: 1px solid #f5f5f5;">' +
+                           '<div style="min-width: 0;">' +
+                               '<div style="color: #2c3e50; font-size: 12px; font-weight: 600;">' + rankEscape(r.title) + '</div>' +
+                               '<div style="font-size: 11px; color: #95a5a6; margin-top: 2px;">' +
+                                   rankEscape(r.workspaceName) +
+                                   (r.entries ? ' &middot; ' + r.entries + ' entries' : '') +
+                                   (due ? ' &middot; <span style="color:' +
+                                       (dueCls === 'due-overdue' ? '#e74c3c' : dueCls === 'due-soon' ? '#f39c12' : '#95a5a6') +
+                                       ';">' + rankEscape(due) + '</span>' : '') +
+                               '</div>' +
+                               (r.nextStep ? '<div style="font-size: 11px; color: #7f8c8d; margin-top: 2px;">Next: ' +
+                                   rankEscape(r.nextStep) + '</div>' : '') +
+                           '</div>' +
+                           '<button onclick="openContactTask(\'' + r.id + '\', \'' + r.workspace + '\')" ' +
+                           'style="background: #8e44ad; color: white; border: none; padding: 4px 9px; ' +
+                           'border-radius: 3px; cursor: pointer; font-size: 10px; white-space: nowrap;">Open</button>' +
+                           '</div>';
+                }).join('') +
+                '</div>';
+        }
+
+        function openContactTask(taskId, workspace) {
+            if (workspace && workspace !== currentWorkspace) switchWorkspace(workspace);
+            const el = document.getElementById(taskId);
+            if (el) openTaskDetail(el);
+        }
+
+        // ==============================================
+        // ACTIVITY <-> TASK LINKING - v2.15
+        // The Activity Log records work along a time axis. The progress
+        // log records it along a task axis. The content is the same
+        // work. Rather than keeping two records that drift apart, an
+        // activity can now name the task it belongs to, and the task
+        // shows one merged timeline.
+        //
+        // Nothing is written twice: a piece of work is either a plain
+        // progress note, or an activity entry that a task can claim.
+        // ==============================================
+
+        // Fill the task picker with everything currently open in a workspace
+        function populateActivityTaskPicker(workspace, selectedId) {
+            const picker = document.getElementById('activityTaskId');
+            if (!picker) return;
+
+            const ws = workspace || document.getElementById('activityWorkspace').value || 'main';
+            picker.innerHTML = '<option value="">(not linked to a task)</option>';
+
+            document.querySelectorAll('#workspace-' + ws + ' .workspace-canvas .task-item').forEach(el => {
+                const opt = document.createElement('option');
+                opt.value = el.id;
+                opt.textContent = (el.querySelector('.task-title') || {}).textContent || 'Untitled';
+                picker.appendChild(opt);
+            });
+
+            // A task from another workspace, or one since closed, still needs to show
+            if (selectedId && !picker.querySelector('option[value="' + selectedId + '"]')) {
+                const opt = document.createElement('option');
+                opt.value = selectedId;
+                opt.textContent = activityTaskTitle(selectedId) + ' (not on this canvas)';
+                picker.appendChild(opt);
+            }
+            picker.value = selectedId || '';
+            syncActivityTaskRow();
+        }
+
+        function activityTaskTitle(taskId) {
+            const el = document.getElementById(taskId);
+            if (el) return (el.querySelector('.task-title') || {}).textContent || 'Untitled';
+            const found = (activityLog || []).find(a => a.taskId === taskId && a.taskTitle);
+            return found ? found.taskTitle : 'Task';
+        }
+
+        // The checkbox and the picker are two halves of the same question
+        function syncActivityTaskRow() {
+            const box = document.getElementById('activityIsTask');
+            const row = document.getElementById('activityTaskRow');
+            const picker = document.getElementById('activityTaskId');
+            if (!box || !row || !picker) return;
+            if (picker.value) box.checked = true;
+            row.style.display = box.checked ? '' : 'none';
+        }
+
+        function onActivityIsTaskChanged() {
+            const box = document.getElementById('activityIsTask');
+            const picker = document.getElementById('activityTaskId');
+            if (!box.checked && picker) picker.value = '';
+            syncActivityTaskRow();
+        }
+
+        function onActivityTaskPicked() {
+            const picker = document.getElementById('activityTaskId');
+            const desc = document.getElementById('activityDescription');
+            // A blank description is almost always the task name
+            if (picker.value && desc && !desc.value.trim()) {
+                desc.value = activityTaskTitle(picker.value);
+            }
+            syncActivityTaskRow();
+        }
+
+        // Open the activity form already pointed at a task
+        function logActivityForTask(taskId, workspace) {
+            closeTaskDetail();
+            openActivityLog();
+            document.getElementById('activityWorkspace').value = workspace || currentWorkspace;
+            document.getElementById('activityIsTask').checked = true;
+            populateActivityTaskPicker(workspace || currentWorkspace, taskId);
+            document.getElementById('activityDescription').value = activityTaskTitle(taskId);
+            document.getElementById('activityNotes').focus();
+        }
+
+        // ----- the merged timeline -----
+
+        function activitiesForTask(taskId) {
+            return (activityLog || [])
+                .filter(a => a.taskId === taskId)
+                .map(a => {
+                    // Sort by the moment it was recorded when that falls on the
+                    // date given, so same-day entries interleave correctly with
+                    // notes. A deliberately backdated entry sits at midday.
+                    let ts = a.loggedAt || '';
+                    const loggedDay = ts ? ts.slice(0, 10) : '';
+                    if (!a.date) ts = a.loggedAt;
+                    else if (a.date !== loggedDay) ts = a.date + 'T12:00:00';
+                    return {
+                        kind: 'activity',
+                        id: a.id,
+                        ts: ts || new Date().toISOString(),
+                        text: a.notes && a.notes.trim() ? a.notes : a.description,
+                        duration: a.duration,
+                        type: a.type
+                    };
+                });
+        }
+
+        function taskTimeline(taskId) {
+            const detail = getTaskDetail(taskId);
+            const notes = detail.log.map((e, i) => ({
+                kind: 'note', index: i, ts: e.ts, text: e.text
+            }));
+            return notes.concat(activitiesForTask(taskId))
+                        .sort((a, b) => new Date(a.ts) - new Date(b.ts));
+        }
+
+        function taskLoggedMinutes(taskId) {
+            return activitiesForTask(taskId)
+                .reduce((sum, a) => sum + (getDurationMinutes(a.duration) || 0), 0);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const wsSelect = document.getElementById('activityWorkspace');
+            if (wsSelect) {
+                wsSelect.addEventListener('change', function() {
+                    populateActivityTaskPicker(this.value, '');
+                });
+            }
+            const box = document.getElementById('activityIsTask');
+            if (box) box.addEventListener('change', onActivityIsTaskChanged);
+            const picker = document.getElementById('activityTaskId');
+            if (picker) picker.addEventListener('change', onActivityTaskPicked);
+        });
+
+        // ==============================================
+        // TASK MOMENTUM - v2.14
+        // Not every task ends. Long client work gets pushed along
+        // rather than opened and closed. Each task can now carry a
+        // running progress log, a next step, who it is waiting on,
+        // and a date to look at it again.
+        //
+        // Held separately from workspaceTasks, which is rebuilt from
+        // the DOM on every save and would otherwise discard all of it.
+        // ==============================================
+
+        const TASK_DETAILS_KEY = 'taskDetails';
+        const DRIFT_DAYS = 14;
+
+        function loadTaskDetails() {
+            try {
+                return JSON.parse(localStorage.getItem(TASK_DETAILS_KEY) || '{}');
+            } catch (e) {
+                return {};
+            }
+        }
+
+        function saveTaskDetails(all) {
+            localStorage.setItem(TASK_DETAILS_KEY, JSON.stringify(all));
+        }
+
+        function getTaskDetail(taskId) {
+            const all = loadTaskDetails();
+            const d = all[taskId] || {};
+            return {
+                nextStep: d.nextStep || '',
+                waitingOn: d.waitingOn || '',
+                followUpDate: d.followUpDate || '',
+                log: Array.isArray(d.log) ? d.log : [],
+                contactIds: Array.isArray(d.contactIds) ? d.contactIds : [],
+                lastTouched: d.lastTouched || '',
+                firstSeen: d.firstSeen || ''
+            };
+        }
+
+        function setTaskDetail(taskId, detail) {
+            const all = loadTaskDetails();
+            all[taskId] = detail;
+            saveTaskDetails(all);
+        }
+
+        function taskIsParked(detail) {
+            const days = quickListDaysUntil(detail.followUpDate);
+            return days !== null && days > 0;
+        }
+
+        function taskDaysSinceTouched(detail) {
+            const stamp = detail.lastTouched || detail.firstSeen;
+            if (!stamp) return null;
+            const d = new Date(stamp);
+            if (isNaN(d.getTime())) return null;
+            return Math.floor((Date.now() - d.getTime()) / 86400000);
+        }
+
+        // ----- card indicators -----
+
+        function refreshTaskMomentum(workspace) {
+            const list = workspace ? [workspace] : RANK_WORKSPACES;
+            const all = loadTaskDetails();
+            let dirty = false;
+
+            list.forEach(ws => {
+                document.querySelectorAll('#workspace-' + ws + ' .workspace-canvas .task-item').forEach(el => {
+                    if (!all[el.id]) {
+                        all[el.id] = { nextStep: '', waitingOn: '', followUpDate: '', log: [],
+                                       contactIds: [],
+                                       lastTouched: '', firstSeen: new Date().toISOString() };
+                        dirty = true;
+                    } else if (!all[el.id].firstSeen) {
+                        all[el.id].firstSeen = new Date().toISOString();
+                        dirty = true;
+                    }
+
+                    const d = getTaskDetail(el.id);
+                    let strip = el.querySelector('.task-momentum');
+                    const bits = [];
+
+                    if (d.followUpDate) {
+                        const cls = quickListDueClass(d.followUpDate);
+                        bits.push('<span class="task-chip task-chip-follow ' + cls + '">&#8635; ' +
+                                  rankEscape(formatQuickListDate(d.followUpDate)) + '</span>');
+                    }
+                    if (d.waitingOn) {
+                        bits.push('<span class="task-chip task-chip-waiting">&#9203; ' +
+                                  rankEscape(d.waitingOn) + '</span>');
+                    }
+                    const entryCount = d.log.length + activitiesForTask(el.id).length;
+                    if (entryCount) {
+                        bits.push('<span class="task-chip task-chip-log" title="' + entryCount +
+                                  ' timeline entries">&#128221; ' + entryCount + '</span>');
+                    }
+                    taskContactIds(el.id).forEach(function (cid) {
+                        bits.push('<span class="task-chip task-chip-contact">&#128100; ' +
+                                  rankEscape(contactDisplayName(cid)) + '</span>');
+                    });
+                    const mins = taskLoggedMinutes(el.id);
+                    if (mins > 0) {
+                        bits.push('<span class="task-chip task-chip-time" title="Time logged against this task">&#9201; ' +
+                                  (mins >= 60 ? (mins / 60).toFixed(1) + 'h' : mins + 'm') + '</span>');
+                    }
+
+                    const nextLine = d.nextStep
+                        ? '<div class="task-nextstep"><strong>Next:</strong> ' + rankEscape(d.nextStep) + '</div>'
+                        : '';
+
+                    if (!bits.length && !nextLine) {
+                        if (strip) strip.remove();
+                    } else {
+                        if (!strip) {
+                            strip = document.createElement('div');
+                            strip.className = 'task-momentum';
+                            el.appendChild(strip);
+                        }
+                        strip.innerHTML = (bits.length ? '<div class="task-chips">' + bits.join('') + '</div>' : '') + nextLine;
+                    }
+
+                    el.classList.toggle('task-parked', taskIsParked(d));
+                });
+            });
+
+            if (dirty) saveTaskDetails(all);
+            applyParkedStyling(workspace);
+        }
+
+        // Capacity filtering sets inline opacity, so parked fading has to
+        // be layered on top of whatever it decided rather than fight it.
+        function applyParkedStyling(workspace) {
+            const list = workspace ? [workspace] : RANK_WORKSPACES;
+            list.forEach(ws => {
+                document.querySelectorAll('#workspace-' + ws + ' .workspace-canvas .task-item').forEach(el => {
+                    if (el.classList.contains('task-parked')) {
+                        const current = parseFloat(el.style.opacity || '1');
+                        el.style.opacity = Math.min(isNaN(current) ? 1 : current, 0.45);
+                    }
+                });
+            });
+        }
+
+        // ----- detail modal -----
+
+        let detailTaskId = null;
+        let detailWorkspace = null;
+
+        function openTaskDetail(taskElement) {
+            if (!taskElement) return;
+            detailTaskId = taskElement.id;
+            const wsEl = taskElement.closest('[id^="workspace-"]');
+            detailWorkspace = wsEl ? wsEl.id.replace('workspace-', '') : currentWorkspace;
+
+            const modal = document.getElementById('taskDetailModal');
+            const colours = {
+                main: '#2c3e50', ideas: '#8e44ad', philosophy: '#d35400',
+                family: '#27ae60', child1: '#2980b9', child2: '#e91e63', clients: '#16a085'
+            };
+            modal.querySelector('.modal-header').style.background = colours[detailWorkspace] || '#2c3e50';
+
+            document.getElementById('detailTitle').value =
+                (taskElement.querySelector('.task-title') || {}).textContent || '';
+            document.getElementById('detailDesc').value =
+                (taskElement.querySelector('.task-description') || {}).textContent || '';
+
+            // status options for this workspace
+            const statusSelect = document.getElementById('detailStatus');
+            const currentLabel = (taskElement.querySelector('.task-status') || {}).textContent || '';
+            statusSelect.innerHTML = '';
+            Object.keys(statusLabels[detailWorkspace] || {}).forEach(key => {
+                const opt = document.createElement('option');
+                opt.value = key;
+                opt.textContent = statusLabels[detailWorkspace][key].label;
+                if (statusLabels[detailWorkspace][key].label === currentLabel) opt.selected = true;
+                statusSelect.appendChild(opt);
+            });
+
+            const d = getTaskDetail(detailTaskId);
+            detailContactIds = taskContactIds(detailTaskId);
+            renderDetailContacts();
+            document.getElementById('detailNextStep').value = d.nextStep;
+            document.getElementById('detailWaitingOn').value = d.waitingOn;
+            document.getElementById('detailFollowUp').value = d.followUpDate;
+            document.getElementById('detailLogEntry').value = '';
+
+            renderTaskLog();
+            modal.style.display = 'block';
+        }
+
+        function closeTaskDetail() {
+            document.getElementById('taskDetailModal').style.display = 'none';
+            detailTaskId = null;
+            detailWorkspace = null;
+        }
+
+        function renderTaskLog() {
+            const container = document.getElementById('detailLogList');
+            container.innerHTML = '';
+
+            const timeline = taskTimeline(detailTaskId).reverse();
+            const minutes = taskLoggedMinutes(detailTaskId);
+
+            const summary = document.getElementById('detailTimeSummary');
+            if (summary) {
+                summary.innerHTML = minutes > 0
+                    ? '<span class="detail-time-chip">&#9201; ' + (minutes >= 60
+                        ? (minutes / 60).toFixed(1) + ' hours logged'
+                        : minutes + ' minutes logged') + '</span>'
+                    : '';
+            }
+
+            if (timeline.length === 0) {
+                container.innerHTML = '<div class="detail-log-empty">No progress logged yet. ' +
+                    'Each entry is kept with its date, so the history of a long job stays readable.<br><br>' +
+                    'Time you log against this task in Log Activity appears here too.</div>';
+                return;
+            }
+
+            timeline.forEach(entry => {
+                const when = new Date(entry.ts);
+                const label = isNaN(when.getTime()) ? '' :
+                    when.toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' });
+                const row = document.createElement('div');
+                row.className = 'detail-log-entry' + (entry.kind === 'activity' ? ' is-activity' : '');
+
+                const right = entry.kind === 'activity'
+                    ? '<span class="detail-log-source" title="Recorded in the Activity Log">&#9201; ' +
+                          rankEscape(getDurationLabel(entry.duration)) + '</span>'
+                    : '<button class="detail-log-delete" title="Remove this entry" ' +
+                          'onclick="deleteLogEntry(' + entry.index + ')">&#215;</button>';
+
+                row.innerHTML =
+                    '<div class="detail-log-date">' + rankEscape(label) + right + '</div>' +
+                    '<div class="detail-log-text">' + rankEscape(entry.text) + '</div>';
+                container.appendChild(row);
+            });
+        }
+
+        function addLogEntry() {
+            const box = document.getElementById('detailLogEntry');
+            const text = box.value.trim();
+            if (!text) {
+                showNotification('Write something to log first', 'error');
+                box.focus();
+                return;
+            }
+            const d = getTaskDetail(detailTaskId);
+            d.log.push({ ts: new Date().toISOString(), text: text });
+            d.lastTouched = new Date().toISOString();
+            setTaskDetail(detailTaskId, d);
+            box.value = '';
+            renderTaskLog();
+            refreshTaskMomentum(detailWorkspace);
+            showNotification('Progress logged', 'success');
+        }
+
+        function deleteLogEntry(index) {
+            const d = getTaskDetail(detailTaskId);
+            d.log.splice(index, 1);
+            setTaskDetail(detailTaskId, d);
+            renderTaskLog();
+            refreshTaskMomentum(detailWorkspace);
+        }
+
+        function nudgeFollowUp(days) {
+            const field = document.getElementById('detailFollowUp');
+            const base = parseQuickListDate(field.value) || quickListToday();
+            const from = days === 0 ? quickListToday() : base;
+            const next = new Date(from.getTime() + days * 86400000);
+            field.value = next.getFullYear() + '-' +
+                String(next.getMonth() + 1).padStart(2, '0') + '-' +
+                String(next.getDate()).padStart(2, '0');
+        }
+
+        function clearFollowUp() {
+            document.getElementById('detailFollowUp').value = '';
+        }
+
+        function saveTaskDetailModal() {
+            const el = document.getElementById(detailTaskId);
+            if (!el) { closeTaskDetail(); return; }
+
+            const newTitle = document.getElementById('detailTitle').value.trim();
+            if (!newTitle) {
+                showNotification('A task needs a title', 'error');
+                return;
+            }
+
+            el.querySelector('.task-title').textContent = newTitle;
+            el.querySelector('.task-description').textContent = document.getElementById('detailDesc').value;
+
+            const statusKey = document.getElementById('detailStatus').value;
+            const config = (statusLabels[detailWorkspace] || {})[statusKey];
+            const statusEl = el.querySelector('.task-status');
+            if (config && statusEl) {
+                statusEl.textContent = config.label;
+                statusEl.style.background = config.color;
+            }
+
+            const d = getTaskDetail(detailTaskId);
+            d.nextStep = document.getElementById('detailNextStep').value.trim();
+            d.waitingOn = document.getElementById('detailWaitingOn').value.trim();
+            d.followUpDate = document.getElementById('detailFollowUp').value || '';
+            d.contactIds = detailContactIds.slice();
+            setTaskDetail(detailTaskId, d);
+            try { if (typeof renderClientList === 'function') renderClientList(); } catch (e) {}
+
+            const ws = detailWorkspace;
+            saveWorkspaceTasks();
+            applyCapacityFilter(ws);
+            refreshTaskMomentum(ws);
+            closeTaskDetail();
+            showNotification('Task updated', 'success');
+        }
+
+        // ==============================================
+        // TODAY'S FOCUS - v2.14
+        // What needs a push today, drawn from tasks that are still
+        // open across every workspace, plus dated Quick List items.
+        // ==============================================
+
+        function gatherTodaysFocus() {
+            const due = [], drifting = [], waiting = [], listItems = [];
+
+            RANK_WORKSPACES.forEach(ws => {
+                document.querySelectorAll('#workspace-' + ws + ' .workspace-canvas .task-item').forEach(el => {
+                    const d = getTaskDetail(el.id);
+                    const row = {
+                        id: el.id,
+                        workspace: ws,
+                        workspaceName: workspaceNames[ws] || ws,
+                        title: (el.querySelector('.task-title') || {}).textContent || 'Untitled',
+                        nextStep: d.nextStep,
+                        waitingOn: d.waitingOn,
+                        followUpDate: d.followUpDate,
+                        days: quickListDaysUntil(d.followUpDate),
+                        idle: taskDaysSinceTouched(d)
+                    };
+
+                    if (row.days !== null && row.days <= 0) due.push(row);
+                    else if (row.days !== null && row.days > 0) waiting.push(row);
+                    else if (row.idle !== null && row.idle >= DRIFT_DAYS) drifting.push(row);
+                });
+
+                getQuickList(ws).forEach(item => {
+                    const days = quickListDaysUntil(item.date);
+                    if (days !== null && days <= 0) {
+                        listItems.push({
+                            workspaceName: workspaceNames[ws] || ws,
+                            title: item.title,
+                            note: item.note,
+                            days: days
+                        });
+                    }
+                });
+            });
+
+            due.sort((a, b) => a.days - b.days);
+            drifting.sort((a, b) => b.idle - a.idle);
+            waiting.sort((a, b) => a.days - b.days);
+            listItems.sort((a, b) => a.days - b.days);
+            return { due: due, drifting: drifting, waiting: waiting, listItems: listItems };
+        }
+
+        function openTodaysFocus() {
+            const focus = gatherTodaysFocus();
+            const container = document.getElementById('focusBody');
+            let html = '';
+
+            const taskRow = (r, meta) =>
+                '<div class="focus-row">' +
+                    '<div class="focus-row-main">' +
+                        '<div class="focus-row-title">' + rankEscape(r.title) + '</div>' +
+                        '<div class="focus-row-meta"><span class="focus-ws">' + rankEscape(r.workspaceName) + '</span>' +
+                            meta +
+                            taskContactIds(r.id).map(function (cid) {
+                                return '<span class="focus-contact">&#128100; ' + rankEscape(contactDisplayName(cid)) + '</span>';
+                            }).join('') + '</div>' +
+                        (r.nextStep ? '<div class="focus-next"><strong>Next:</strong> ' + rankEscape(r.nextStep) + '</div>' : '') +
+                        (r.waitingOn ? '<div class="focus-next">&#9203; Waiting on ' + rankEscape(r.waitingOn) + '</div>' : '') +
+                    '</div>' +
+                    '<div class="focus-row-actions">' +
+                        '<button class="focus-btn focus-btn-log" onclick="focusOpenTask(\'' + r.id + '\', \'' + r.workspace + '\')">Log progress</button>' +
+                        '<button class="focus-btn" onclick="focusPush(\'' + r.id + '\', 7, \'' + r.workspace + '\')" title="Move the follow-up on a week">Push a week</button>' +
+                    '</div>' +
+                '</div>';
+
+            if (focus.due.length) {
+                html += '<div class="focus-group"><div class="focus-group-title focus-due">' +
+                        '&#128308; Due for a push (' + focus.due.length + ')</div>' +
+                        focus.due.map(r => taskRow(r, '<span class="focus-tag overdue">' +
+                            (r.days === 0 ? 'today' : Math.abs(r.days) + ' days ago') + '</span>')).join('') +
+                        '</div>';
+            }
+
+            if (focus.drifting.length) {
+                html += '<div class="focus-group"><div class="focus-group-title focus-drift">' +
+                        '&#128309; Drifting &mdash; untouched for ' + DRIFT_DAYS + '+ days (' + focus.drifting.length + ')</div>' +
+                        focus.drifting.map(r => taskRow(r, '<span class="focus-tag drift">' +
+                            r.idle + ' days</span>')).join('') +
+                        '</div>';
+            }
+
+            if (focus.listItems.length) {
+                html += '<div class="focus-group"><div class="focus-group-title focus-list">' +
+                        '&#128204; Quick List items due (' + focus.listItems.length + ')</div>' +
+                        focus.listItems.map(i =>
+                            '<div class="focus-row"><div class="focus-row-main">' +
+                            '<div class="focus-row-title">' + rankEscape(i.title) + '</div>' +
+                            '<div class="focus-row-meta"><span class="focus-ws">' + rankEscape(i.workspaceName) + '</span>' +
+                            '<span class="focus-tag overdue">' + (i.days === 0 ? 'today' : Math.abs(i.days) + ' days ago') + '</span></div>' +
+                            (i.note ? '<div class="focus-next">' + rankEscape(i.note) + '</div>' : '') +
+                            '</div></div>').join('') +
+                        '</div>';
+            }
+
+            if (focus.waiting.length) {
+                html += '<div class="focus-group"><div class="focus-group-title focus-parked">' +
+                        '&#9203; Parked until later (' + focus.waiting.length + ')</div>' +
+                        focus.waiting.map(r => taskRow(r, '<span class="focus-tag parked">in ' +
+                            r.days + ' days</span>')).join('') +
+                        '</div>';
+            }
+
+            if (!html) {
+                html = '<div class="focus-empty">Nothing is asking for attention today.<br><br>' +
+                       'Set a follow-up date on a task and it will appear here when that date arrives. ' +
+                       'Anything untouched for ' + DRIFT_DAYS + ' days turns up on its own.</div>';
+            }
+
+            container.innerHTML = html;
+            document.getElementById('todaysFocusModal').style.display = 'block';
+        }
+
+        function closeTodaysFocus() {
+            document.getElementById('todaysFocusModal').style.display = 'none';
+        }
+
+        function focusOpenTask(taskId, workspace) {
+            const el = document.getElementById(taskId);
+            if (!el) return;
+            closeTodaysFocus();
+            if (workspace && workspace !== currentWorkspace) switchWorkspace(workspace);
+            openTaskDetail(el);
+            document.getElementById('detailLogEntry').focus();
+        }
+
+        function focusPush(taskId, days, workspace) {
+            const d = getTaskDetail(taskId);
+            const base = parseQuickListDate(d.followUpDate);
+            const from = (base && base.getTime() > quickListToday().getTime()) ? base : quickListToday();
+            const next = new Date(from.getTime() + days * 86400000);
+            d.followUpDate = next.getFullYear() + '-' +
+                String(next.getMonth() + 1).padStart(2, '0') + '-' +
+                String(next.getDate()).padStart(2, '0');
+            d.lastTouched = new Date().toISOString();
+            setTaskDetail(taskId, d);
+            refreshTaskMomentum(workspace);
+            openTodaysFocus();
+            showNotification('Pushed on to ' + formatQuickListDate(d.followUpDate), 'success');
+        }
+
+        function focusCount() {
+            const f = gatherTodaysFocus();
+            return f.due.length + f.drifting.length + f.listItems.length;
+        }
+
+        function refreshFocusButtons() {
+            const n = focusCount();
+            document.querySelectorAll('.focus-open-btn').forEach(btn => {
+                btn.innerHTML = '&#127919; Today\'s Focus' + (n > 0 ? ' <span class="focus-count">' + n + '</span>' : '');
+            });
+        }
+
+        function injectFocusButtons() {
+            RANK_WORKSPACES.forEach(ws => {
+                const controls = document.querySelector('#workspace-' + ws + ' .header-controls');
+                if (!controls || controls.querySelector('.focus-open-btn')) return;
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'header-btn focus-open-btn';
+                btn.addEventListener('click', openTodaysFocus);
+                controls.insertBefore(btn, controls.firstChild);
+            });
+            refreshFocusButtons();
+        }
+
+        // Keep indicators honest without editing the original functions
+        (function wrapForMomentum() {
+            if (typeof saveWorkspaceTasks === 'function') {
+                const original = saveWorkspaceTasks;
+                saveWorkspaceTasks = function() {
+                    const r = original.apply(this, arguments);
+                    try { refreshTaskMomentum(); refreshFocusButtons(); } catch (e) {}
+                    return r;
+                };
+            }
+            if (typeof applyCapacityFilter === 'function') {
+                const original = applyCapacityFilter;
+                applyCapacityFilter = function(ws) {
+                    const r = original.apply(this, arguments);
+                    try { applyParkedStyling(ws); } catch (e) {}
+                    return r;
+                };
+            }
+            if (typeof switchWorkspace === 'function') {
+                const original = switchWorkspace;
+                switchWorkspace = function(ws) {
+                    const r = original.apply(this, arguments);
+                    try { refreshTaskMomentum(ws); } catch (e) {}
+                    return r;
+                };
+            }
+        })();
+
+        document.addEventListener('DOMContentLoaded', function() {
+            injectFocusButtons();
+            refreshTaskMomentum();
+            refreshFocusButtons();
+
+            // The activity log loads in its own DOMContentLoaded handler further
+            // down the file, so anything reading it has to wait for the current
+            // batch of handlers to finish.
+            setTimeout(function() {
+                try { refreshTaskMomentum(); refreshFocusButtons(); } catch (e) {}
+                // Contact cards total up time logged against each person, so they
+                // have to be drawn after the activity log is in memory too.
+                try { if (typeof renderClientList === 'function') renderClientList(); } catch (e) {}
+            }, 0);
+
+            const entry = document.getElementById('detailLogEntry');
+            if (entry) {
+                entry.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+                        e.preventDefault();
+                        addLogEntry();
+                    }
+                });
+            }
+
+            window.addEventListener('click', function(e) {
+                if (e.target && e.target.id === 'taskDetailModal') closeTaskDetail();
+                if (e.target && e.target.id === 'todaysFocusModal') closeTodaysFocus();
+            });
+        });
+
+        // ==============================================
+        // QUICK LIST - v2.13
+        // A small always-visible register of things with dates.
+        // Built because the Quick Notes box was being used as one.
+        // Deliberately lighter than a task: no canvas, no status,
+        // no capacity filtering. Just what it is and when it is due.
+        // ==============================================
+
+        const QUICKLIST_KEY = 'quickList';
+        const QUICKLIST_SORT_KEY = 'quickListSort';
+        const QUICKLIST_SOON_DAYS = 7;
+
+        function loadQuickLists() {
+            try {
+                return JSON.parse(localStorage.getItem(QUICKLIST_KEY) || '{}');
+            } catch (e) {
+                return {};
+            }
+        }
+
+        function getQuickList(workspace) {
+            const all = loadQuickLists();
+            return Array.isArray(all[workspace]) ? all[workspace] : [];
+        }
+
+        function setQuickList(workspace, items) {
+            const all = loadQuickLists();
+            all[workspace] = items;
+            localStorage.setItem(QUICKLIST_KEY, JSON.stringify(all));
+        }
+
+        function getQuickListSort(workspace) {
+            let all = {};
+            try {
+                all = JSON.parse(localStorage.getItem(QUICKLIST_SORT_KEY) || '{}');
+            } catch (e) { all = {}; }
+            return all[workspace] === 'manual' ? 'manual' : 'date';
+        }
+
+        function setQuickListSort(workspace, mode) {
+            let all = {};
+            try {
+                all = JSON.parse(localStorage.getItem(QUICKLIST_SORT_KEY) || '{}');
+            } catch (e) { all = {}; }
+            all[workspace] = mode;
+            localStorage.setItem(QUICKLIST_SORT_KEY, JSON.stringify(all));
+        }
+
+        // ----- dates -----
+
+        function quickListToday() {
+            const d = new Date();
+            d.setHours(0, 0, 0, 0);
+            return d;
+        }
+
+        // Parse YYYY-MM-DD as a local date, not UTC, so the day never slips
+        function parseQuickListDate(value) {
+            if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
+            const bits = value.split('-');
+            const d = new Date(Number(bits[0]), Number(bits[1]) - 1, Number(bits[2]));
+            d.setHours(0, 0, 0, 0);
+            return isNaN(d.getTime()) ? null : d;
+        }
+
+        function quickListDaysUntil(value) {
+            const d = parseQuickListDate(value);
+            if (!d) return null;
+            return Math.round((d.getTime() - quickListToday().getTime()) / 86400000);
+        }
+
+        function formatQuickListDate(value) {
+            const d = parseQuickListDate(value);
+            if (!d) return '';
+            const days = quickListDaysUntil(value);
+            if (days === 0) return 'Today';
+            if (days === 1) return 'Tomorrow';
+            if (days === -1) return 'Yesterday';
+            const opts = { day: 'numeric', month: 'short' };
+            if (d.getFullYear() !== new Date().getFullYear()) opts.year = 'numeric';
+            let label = d.toLocaleDateString('en-AU', opts);
+            if (days < -1) label += ' (' + Math.abs(days) + 'd late)';
+            return label;
+        }
+
+        function quickListDueClass(value) {
+            const days = quickListDaysUntil(value);
+            if (days === null) return '';
+            if (days < 0) return 'due-overdue';
+            if (days <= QUICKLIST_SOON_DAYS) return 'due-soon';
+            return '';
+        }
+
+        function sortedQuickList(workspace) {
+            const items = getQuickList(workspace).slice();
+            if (getQuickListSort(workspace) !== 'date') return items;
+            // Dated items first, earliest first; undated keep their order at the end
+            const dated = items.filter(i => parseQuickListDate(i.date));
+            const undated = items.filter(i => !parseQuickListDate(i.date));
+            dated.sort((a, b) => parseQuickListDate(a.date) - parseQuickListDate(b.date));
+            return dated.concat(undated);
+        }
+
+        // ----- rendering -----
+
+        function quickListSection(workspace) {
+            return document.querySelector('#workspace-' + workspace + ' .quicklist-section');
+        }
+
+        function renderQuickList(workspace) {
+            const section = quickListSection(workspace);
+            if (!section) return;
+
+            const container = section.querySelector('.quicklist-items');
+            const items = sortedQuickList(workspace);
+            const manual = getQuickListSort(workspace) === 'manual';
+            container.innerHTML = '';
+
+            if (items.length === 0) {
+                container.innerHTML = '<div class="quicklist-empty">Nothing listed yet.<br>' +
+                    'Good for bids, deadlines, renewals &mdash; anything with a date.</div>';
+            }
+
+            items.forEach(item => {
+                const row = document.createElement('div');
+                const dueClass = quickListDueClass(item.date);
+                row.className = 'quicklist-item' +
+                    (dueClass === 'due-overdue' ? ' is-overdue' : dueClass === 'due-soon' ? ' is-soon' : '');
+                row.dataset.qlId = item.id;
+                row.draggable = manual;
+
+                const dateLabel = formatQuickListDate(item.date);
+                const meta = (dateLabel || item.note)
+                    ? '<div class="quicklist-meta">' +
+                          (dateLabel ? '<span class="quicklist-date ' + dueClass + '">' + rankEscape(dateLabel) + '</span>' : '') +
+                          (item.note ? '<span class="quicklist-note">' + rankEscape(item.note) + '</span>' : '') +
+                      '</div>'
+                    : '';
+
+                row.innerHTML =
+                    '<div class="quicklist-item-top">' +
+                        (manual ? '<span class="quicklist-grip" title="Drag to reorder">&#10303;</span>'
+                                : '<span class="quicklist-grip" style="visibility:hidden;">&#10303;</span>') +
+                        '<div class="quicklist-item-title" data-ql-action="edit" title="Click to edit">' +
+                            rankEscape(item.title) + '</div>' +
+                        '<div class="quicklist-actions">' +
+                            '<button class="quicklist-btn ql-done" data-ql-action="done" title="Done &mdash; logs a victory">&#10003;</button>' +
+                            '<button class="quicklist-btn ql-delete" data-ql-action="delete" title="Remove without logging">&#215;</button>' +
+                        '</div>' +
+                    '</div>' + meta;
+
+                container.appendChild(row);
+            });
+
+            // header badge + sort label
+            const overdue = getQuickList(workspace).filter(i => quickListDueClass(i.date) === 'due-overdue').length;
+            const badge = section.querySelector('.quicklist-overdue');
+            badge.textContent = overdue + ' overdue';
+            badge.style.display = overdue > 0 ? '' : 'none';
+
+            section.querySelector('.quicklist-sort-btn').textContent = manual ? 'My order' : 'By date';
+        }
+
+        function renderAllQuickLists() {
+            ['main', 'ideas', 'philosophy', 'family', 'child1', 'child2'].forEach(renderQuickList);
+        }
+
+        // ----- actions -----
+
+        function quickListAdd(workspace) {
+            const section = quickListSection(workspace);
+            const titleEl = section.querySelector('.quicklist-input-title');
+            const dateEl = section.querySelector('.quicklist-input-date');
+            const noteEl = section.querySelector('.quicklist-input-note');
+
+            const title = titleEl.value.trim();
+            if (!title) {
+                showNotification('Give the item a name first', 'error');
+                titleEl.focus();
+                return;
+            }
+
+            const items = getQuickList(workspace);
+            items.push({
+                id: 'ql-' + Date.now() + '-' + Math.random().toString(36).substr(2, 6),
+                title: title,
+                date: dateEl.value || '',
+                note: noteEl.value.trim(),
+                created: new Date().toISOString()
+            });
+            setQuickList(workspace, items);
+
+            titleEl.value = '';
+            dateEl.value = '';
+            noteEl.value = '';
+            titleEl.focus();
+            renderQuickList(workspace);
+        }
+
+        function quickListDelete(workspace, id) {
+            setQuickList(workspace, getQuickList(workspace).filter(i => i.id !== id));
+            renderQuickList(workspace);
+        }
+
+        function quickListComplete(workspace, id) {
+            const item = getQuickList(workspace).find(i => i.id === id);
+            if (!item) return;
+            logVictory(item.title, workspace, true);
+            setQuickList(workspace, getQuickList(workspace).filter(i => i.id !== id));
+            renderQuickList(workspace);
+            showNotification('\u2713 "' + item.title + '" done', 'success');
+        }
+
+        function quickListStartEdit(workspace, id) {
+            const item = getQuickList(workspace).find(i => i.id === id);
+            const section = quickListSection(workspace);
+            if (!item || !section) return;
+
+            section.querySelector('.quicklist-form').style.display = '';
+            section.querySelector('.quicklist-add-toggle').style.display = 'none';
+            section.querySelector('.quicklist-input-title').value = item.title;
+            section.querySelector('.quicklist-input-date').value = item.date || '';
+            section.querySelector('.quicklist-input-note').value = item.note || '';
+            section.querySelector('.quicklist-save-btn').textContent = 'Save';
+            section.dataset.editingId = id;
+            section.querySelector('.quicklist-input-title').focus();
+        }
+
+        function quickListSave(workspace) {
+            const section = quickListSection(workspace);
+            const editingId = section.dataset.editingId;
+            if (!editingId) {
+                quickListAdd(workspace);
+                return;
+            }
+            const items = getQuickList(workspace);
+            const item = items.find(i => i.id === editingId);
+            if (item) {
+                const title = section.querySelector('.quicklist-input-title').value.trim();
+                if (!title) {
+                    showNotification('Give the item a name first', 'error');
+                    return;
+                }
+                item.title = title;
+                item.date = section.querySelector('.quicklist-input-date').value || '';
+                item.note = section.querySelector('.quicklist-input-note').value.trim();
+                setQuickList(workspace, items);
+            }
+            quickListCancel(workspace);
+            renderQuickList(workspace);
+        }
+
+        function quickListCancel(workspace) {
+            const section = quickListSection(workspace);
+            if (!section) return;
+            delete section.dataset.editingId;
+            section.querySelector('.quicklist-input-title').value = '';
+            section.querySelector('.quicklist-input-date').value = '';
+            section.querySelector('.quicklist-input-note').value = '';
+            section.querySelector('.quicklist-save-btn').textContent = 'Add';
+            section.querySelector('.quicklist-form').style.display = 'none';
+            section.querySelector('.quicklist-add-toggle').style.display = '';
+        }
+
+        function quickListToggleSort(workspace) {
+            const next = getQuickListSort(workspace) === 'date' ? 'manual' : 'date';
+            if (next === 'manual') {
+                // Freeze the order currently on screen so nothing jumps
+                setQuickList(workspace, sortedQuickList(workspace));
+            }
+            setQuickListSort(workspace, next);
+            renderQuickList(workspace);
+            showNotification(next === 'manual'
+                ? 'Quick List: drag to set your own order'
+                : 'Quick List: sorted by date', 'success');
+        }
+
+        // ----- wiring -----
+
+        function setupQuickList(workspace) {
+            const section = quickListSection(workspace);
+            if (!section || section.dataset.wired === 'yes') return;
+            section.dataset.wired = 'yes';
+
+            section.querySelector('.quicklist-add-toggle').addEventListener('click', function() {
+                section.querySelector('.quicklist-form').style.display = '';
+                this.style.display = 'none';
+                section.querySelector('.quicklist-input-title').focus();
+            });
+            section.querySelector('.quicklist-save-btn').addEventListener('click', function() {
+                quickListSave(workspace);
+            });
+            section.querySelector('.quicklist-cancel-btn').addEventListener('click', function() {
+                quickListCancel(workspace);
+            });
+            section.querySelector('.quicklist-sort-btn').addEventListener('click', function() {
+                quickListToggleSort(workspace);
+            });
+            section.querySelectorAll('.quicklist-form input').forEach(input => {
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') { e.preventDefault(); quickListSave(workspace); }
+                    if (e.key === 'Escape') { e.preventDefault(); quickListCancel(workspace); }
+                });
+            });
+
+            const items = section.querySelector('.quicklist-items');
+
+            items.addEventListener('click', function(e) {
+                const target = e.target.closest('[data-ql-action]');
+                if (!target) return;
+                const row = target.closest('.quicklist-item');
+                if (!row) return;
+                const id = row.dataset.qlId;
+                const action = target.dataset.qlAction;
+                if (action === 'done') quickListComplete(workspace, id);
+                else if (action === 'delete') quickListDelete(workspace, id);
+                else if (action === 'edit') quickListStartEdit(workspace, id);
+            });
+
+            // drag to reorder, only meaningful in manual order
+            let dragId = null;
+            const clearMarks = () => items.querySelectorAll('.quicklist-item')
+                .forEach(r => r.classList.remove('ql-over-top', 'ql-over-bottom'));
+
+            items.addEventListener('dragstart', function(e) {
+                const row = e.target.closest ? e.target.closest('.quicklist-item') : null;
+                if (!row || getQuickListSort(workspace) !== 'manual') return;
+                e.stopPropagation();
+                dragId = row.dataset.qlId;
+                row.classList.add('ql-dragging');
+                try { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', dragId); } catch (err) {}
+            });
+
+            items.addEventListener('dragend', function(e) {
+                const row = e.target.closest ? e.target.closest('.quicklist-item') : null;
+                if (row) row.classList.remove('ql-dragging');
+                clearMarks();
+                dragId = null;
+            });
+
+            items.addEventListener('dragover', function(e) {
+                if (!dragId) return;
+                e.preventDefault();
+                e.stopPropagation();
+                const row = e.target.closest ? e.target.closest('.quicklist-item') : null;
+                clearMarks();
+                if (!row || row.dataset.qlId === dragId) return;
+                const rect = row.getBoundingClientRect();
+                row.classList.add((e.clientY - rect.top) < rect.height / 2 ? 'ql-over-top' : 'ql-over-bottom');
+            });
+
+            items.addEventListener('drop', function(e) {
+                if (!dragId) return;
+                e.preventDefault();
+                e.stopPropagation();
+                const row = e.target.closest ? e.target.closest('.quicklist-item') : null;
+                if (row && row.dataset.qlId !== dragId) {
+                    const rect = row.getBoundingClientRect();
+                    const before = (e.clientY - rect.top) < rect.height / 2;
+                    const list = getQuickList(workspace);
+                    const from = list.findIndex(i => i.id === dragId);
+                    if (from !== -1) {
+                        const moved = list.splice(from, 1)[0];
+                        let to = list.findIndex(i => i.id === row.dataset.qlId);
+                        if (to === -1) to = list.length;
+                        else if (!before) to += 1;
+                        list.splice(to, 0, moved);
+                        setQuickList(workspace, list);
+                    }
+                }
+                clearMarks();
+                dragId = null;
+                renderQuickList(workspace);
+            });
+        }
+
+        // ==============================================
+        // COLLAPSIBLE SIDEBAR PANELS - v2.13
+        // The sidebar is finite. Let people decide what earns the space.
+        // ==============================================
+
+        function panelCollapseKey(workspace, panel) {
+            return 'panelCollapsed_' + workspace + '_' + panel;
+        }
+
+        function applyPanelState(section, workspace, panel) {
+            const collapsed = localStorage.getItem(panelCollapseKey(workspace, panel)) === 'yes';
+            section.classList.toggle('panel-collapsed', collapsed);
+            const toggle = section.querySelector('.panel-toggle');
+            if (toggle) {
+                toggle.innerHTML = collapsed ? '&#9656;' : '&#9662;';
+                toggle.title = collapsed ? 'Expand' : 'Collapse';
+            }
+        }
+
+        function setupCollapsiblePanels() {
+            const panels = [
+                { selector: '.priority-radar', header: '.priority-header', name: 'priority' },
+                { selector: '.victory-log', header: '.victory-header', name: 'victories' },
+                { selector: '.quicklist-section', header: '.quicklist-header', name: 'quicklist' },
+                { selector: '.notes-section', header: '.notes-header', name: 'notes' }
+            ];
+
+            document.querySelectorAll('.workspace-content').forEach(content => {
+                const workspace = content.id.replace('workspace-', '');
+
+                panels.forEach(p => {
+                    const section = content.querySelector(p.selector);
+                    if (!section) return;
+                    const header = section.querySelector(p.header);
+                    if (!header || header.querySelector('.panel-toggle')) return;
+
+                    const toggle = document.createElement('button');
+                    toggle.type = 'button';
+                    toggle.className = 'panel-toggle';
+                    toggle.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const now = section.classList.contains('panel-collapsed');
+                        localStorage.setItem(panelCollapseKey(workspace, p.name), now ? 'no' : 'yes');
+                        applyPanelState(section, workspace, p.name);
+                    });
+                    header.insertBefore(toggle, header.firstChild);
+                    applyPanelState(section, workspace, p.name);
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            ['main', 'ideas', 'philosophy', 'family', 'child1', 'child2'].forEach(setupQuickList);
+            setupCollapsiblePanels();
+            renderAllQuickLists();
+        });
+
+        // ==============================================
+        // BACKUP REMINDER - v2.12
+        // Your data lives in this browser and nowhere else. If a real
+        // backup has not been taken in 30 days, say so plainly on load,
+        // and keep the Export button flagged until one is taken.
+        // ==============================================
+
+        const BACKUP_INTERVAL_DAYS = 30;
+        const BACKUP_SNOOZE_DAYS = 7;
+        const BACKUP_REMINDER_ON_KEY = 'backupReminderEnabled';
+        const BACKUP_SNOOZE_KEY = 'backupReminderSnoozedUntil';
+
+        function backupReminderEnabled() {
+            return localStorage.getItem(BACKUP_REMINDER_ON_KEY) !== 'off';
+        }
+
+        // Roughly how much is actually at stake, so a brand new user
+        // with an empty canvas is not nagged about nothing.
+        function countDataAtRisk() {
+            let tasks = 0, masters = 0;
+            try {
+                const ws = JSON.parse(localStorage.getItem('workspaceTasks') || '{}');
+                Object.keys(ws).forEach(k => { tasks += (ws[k] || []).length; });
+            } catch (e) { /* ignore */ }
+            try {
+                const mt = JSON.parse(localStorage.getItem('masterTasks') || '{}');
+                Object.keys(mt).forEach(k => {
+                    (mt[k] || []).forEach(g => { masters += (g.tasks || []).length; });
+                });
+            } catch (e) { /* ignore */ }
+            let contacts = 0;
+            try {
+                contacts = (JSON.parse(localStorage.getItem('clientData') || '[]')).length;
+            } catch (e) { /* ignore */ }
+            return { tasks: tasks, masters: masters, contacts: contacts, total: tasks + masters + contacts };
+        }
+
+        function backupIsOverdue() {
+            const info = lastFullBackupInfo();
+            return info.never || info.days >= BACKUP_INTERVAL_DAYS;
+        }
+
+        function backupSnoozeActive() {
+            const until = localStorage.getItem(BACKUP_SNOOZE_KEY);
+            if (!until) return false;
+            const d = new Date(until);
+            return !isNaN(d.getTime()) && d.getTime() > Date.now();
+        }
+
+        function snoozeBackupReminder() {
+            const until = new Date(Date.now() + BACKUP_SNOOZE_DAYS * 86400000);
+            localStorage.setItem(BACKUP_SNOOZE_KEY, until.toISOString());
+            closeBackupReminder();
+            showNotification('Reminder paused for ' + BACKUP_SNOOZE_DAYS + ' days', 'success');
+        }
+
+        function closeBackupReminder() {
+            const m = document.getElementById('backupReminderModal');
+            if (m) m.style.display = 'none';
+        }
+
+        function backupFromReminder() {
+            closeBackupReminder();
+            exportAllData();
+        }
+
+        // A quiet flag on every Export button while a backup is overdue
+        function refreshBackupFlags() {
+            const overdue = backupReminderEnabled() && backupIsOverdue() && countDataAtRisk().total >= 3;
+            document.querySelectorAll('.header-btn').forEach(btn => {
+                if (!/openExportChooser/.test(btn.getAttribute('onclick') || '')) return;
+                btn.classList.toggle('backup-overdue', overdue);
+                btn.title = overdue
+                    ? 'No full backup in the last ' + BACKUP_INTERVAL_DAYS + ' days'
+                    : '';
+            });
+        }
+
+        function maybeShowBackupReminder() {
+            if (!backupReminderEnabled()) return;
+            if (backupSnoozeActive()) return;
+            if (!backupIsOverdue()) return;
+
+            const at = countDataAtRisk();
+            if (at.total < 3) return;   // nothing meaningful to lose yet
+
+            const info = lastFullBackupInfo();
+            const headline = document.getElementById('backupReminderHeadline');
+            const detail = document.getElementById('backupReminderDetail');
+
+            headline.textContent = info.never
+                ? 'You have never taken a full backup'
+                : 'Your last full backup was ' + info.days + ' days ago';
+
+            const bits = [];
+            if (at.tasks) bits.push(at.tasks + (at.tasks === 1 ? ' active task' : ' active tasks'));
+            if (at.masters) bits.push(at.masters + (at.masters === 1 ? ' Master Task' : ' Master Tasks'));
+            if (at.contacts) bits.push(at.contacts + (at.contacts === 1 ? ' contact' : ' contacts'));
+
+            detail.innerHTML =
+                'You currently have <strong>' + bits.join(', ') + '</strong> held in this browser and nowhere else. ' +
+                'Clearing your browser data, reinstalling it, or losing this device would erase all of it. ' +
+                'A full backup takes a moment and is the only copy that survives any of those.';
+
+            document.getElementById('backupReminderModal').style.display = 'block';
+        }
+
+        function setBackupReminderEnabled(on) {
+            localStorage.setItem(BACKUP_REMINDER_ON_KEY, on ? 'on' : 'off');
+            if (on) localStorage.removeItem(BACKUP_SNOOZE_KEY);
+            refreshBackupFlags();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggle = document.getElementById('backupReminderToggle');
+            if (toggle) {
+                toggle.checked = backupReminderEnabled();
+                toggle.addEventListener('change', function() {
+                    setBackupReminderEnabled(this.checked);
+                    showNotification(this.checked
+                        ? 'Backup reminders on'
+                        : 'Backup reminders off \u2014 remember to back up yourself', 'success');
+                });
+            }
+            refreshBackupFlags();
+            // Let the rest of the app settle before interrupting
+            setTimeout(maybeShowBackupReminder, 1200);
+        });
+
+        // ==============================================
+        // EXPORT CHOOSER - v2.11
+        // The header "Export" button used to hand over a readable
+        // report that cannot be restored. That is a quiet way to lose
+        // everything. It now asks which kind of file you want, and
+        // states plainly which one is a real backup.
+        // ==============================================
+
+        let exportChooserWorkspace = null;
+
+        function lastFullBackupInfo() {
+            const stamp = localStorage.getItem('lastFullBackup');
+            if (!stamp) {
+                return { never: true, days: null, text: 'You have never taken a full backup on this device.' };
+            }
+            const then = new Date(stamp);
+            if (isNaN(then.getTime())) {
+                return { never: true, days: null, text: 'You have never taken a full backup on this device.' };
+            }
+            const days = Math.floor((Date.now() - then.getTime()) / 86400000);
+            const when = then.toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' });
+            let phrase;
+            if (days <= 0) phrase = 'earlier today';
+            else if (days === 1) phrase = 'yesterday';
+            else phrase = days + ' days ago';
+            return { never: false, days: days, text: 'Last full backup: ' + when + ' (' + phrase + ').' };
+        }
+
+        function openExportChooser(workspace) {
+            exportChooserWorkspace = workspace || currentWorkspace;
+
+            const modal = document.getElementById('exportChooserModal');
+            const colours = {
+                main: '#2c3e50', ideas: '#8e44ad', philosophy: '#d35400',
+                family: '#27ae60', child1: '#2980b9', child2: '#e91e63', clients: '#16a085'
+            };
+            modal.querySelector('.modal-header').style.background = colours[exportChooserWorkspace] || '#2c3e50';
+
+            const wsName = workspaceNames[exportChooserWorkspace] || exportChooserWorkspace;
+            const isContacts = exportChooserWorkspace === 'clients';
+
+            document.getElementById('exportPartialTitle').textContent = isContacts
+                ? 'Contact data file'
+                : 'Readable report \u2014 ' + wsName;
+
+            document.getElementById('exportPartialDesc').innerHTML = isContacts
+                ? 'Your contacts and scheduled events as a data file. This one <strong>can</strong> be read back in, ' +
+                  'but it holds contacts only &mdash; no tasks, victories, notes or settings.'
+                : 'A printable summary of <strong>this workspace only</strong>, for sharing, filing or printing. ' +
+                  '<strong>It cannot be loaded back into MyLifeCanvas.</strong> It is a report, not a backup.';
+
+            const info = lastFullBackupInfo();
+            const statusEl = document.getElementById('exportBackupStatus');
+            statusEl.textContent = info.text;
+            const stale = info.never || info.days > 30;
+            statusEl.style.background = stale ? '#fdecea' : '#e8f5e9';
+            statusEl.style.borderLeftColor = stale ? '#e74c3c' : '#27ae60';
+            statusEl.style.color = stale ? '#922b21' : '#1e8449';
+
+            modal.style.display = 'block';
+        }
+
+        function closeExportChooser() {
+            document.getElementById('exportChooserModal').style.display = 'none';
+            exportChooserWorkspace = null;
+        }
+
+        function runPartialExport() {
+            const ws = exportChooserWorkspace;
+            closeExportChooser();
+            if (ws === 'clients') {
+                exportClientData();
+            } else {
+                exportToPDF(ws);
+            }
+        }
+
+        function runFullBackup() {
+            closeExportChooser();
+            exportAllData();
+        }
+
+        // ==============================================
+        // EXPORT FILE NAMING - v2.10
+        // Every downloaded file is named:
+        //     YYYYMMDD <Label> v NN.NN-a.<ext>
+        // The sequence climbs with each export of that type and never
+        // repeats, so two exports on the same day can never collide or
+        // get silently overwritten. The same string is written inside
+        // the file, so it still identifies itself if the name is lost.
+        // ==============================================
+
+        const EXPORT_SEQUENCE_KEY = 'exportSequences';
+
+        function exportPad2(n) {
+            return (n < 10 ? '0' : '') + n;
+        }
+
+        function exportDateStamp(date) {
+            const d = date || new Date();
+            return '' + d.getFullYear() + exportPad2(d.getMonth() + 1) + exportPad2(d.getDate());
+        }
+
+        // Strip characters that are illegal in filenames on Windows/macOS
+        function sanitiseForFilename(text) {
+            return String(text == null ? '' : text)
+                .replace(/[\\\/:*?"<>|]/g, '-')
+                .replace(/\s+/g, ' ')
+                .trim() || 'Export';
+        }
+
+        function nextExportVersion(label) {
+            let all = {};
+            try {
+                all = JSON.parse(localStorage.getItem(EXPORT_SEQUENCE_KEY) || '{}');
+            } catch (e) {
+                all = {};
+            }
+            const seq = all[label] && typeof all[label].major === 'number'
+                ? all[label]
+                : { major: 1, minor: 0 };
+
+            seq.minor += 1;
+            if (seq.minor > 99) {
+                seq.major += 1;
+                seq.minor = 1;
+            }
+            all[label] = seq;
+            localStorage.setItem(EXPORT_SEQUENCE_KEY, JSON.stringify(all));
+
+            return 'v ' + exportPad2(seq.major) + '.' + exportPad2(seq.minor) + '-a';
+        }
+
+        function buildExportName(label, extension) {
+            const clean = sanitiseForFilename(label);
+            const version = nextExportVersion(clean);
+            const stem = exportDateStamp() + ' ' + clean + ' ' + version;
+            return {
+                label: clean,
+                version: version,
+                stem: stem,
+                filename: stem + '.' + extension
+            };
+        }
+
         function downloadAsFile(filename, content, type) {
             const blob = new Blob([content], { type: type });
             const url = window.URL.createObjectURL(blob);
@@ -4320,7 +7310,7 @@
                 const workspaces = ['main', 'ideas', 'philosophy', 'family', 'child1', 'child2'];
                 
                 const allData = {
-                    exportVersion: '2.9',
+                    exportVersion: '2.16',
                     exportDate: new Date().toISOString(),
                     exportType: 'MyLifeCanvas_Full_Backup',
                     
@@ -4329,6 +7319,12 @@
                     priorityRadar: JSON.parse(localStorage.getItem('priorityRadar') || '{}'),
                     masterTasks: JSON.parse(localStorage.getItem('masterTasks') || '{}'),
                     priorityRanking: JSON.parse(localStorage.getItem('priorityRanking') || '{}'),
+                    exportSequences: JSON.parse(localStorage.getItem('exportSequences') || '{}'),
+                    quickList: JSON.parse(localStorage.getItem('quickList') || '{}'),
+                    taskDetails: JSON.parse(localStorage.getItem('taskDetails') || '{}'),
+                    quickListSort: JSON.parse(localStorage.getItem('quickListSort') || '{}'),
+                    lastFullBackup: localStorage.getItem('lastFullBackup') || null,
+                    backupReminderEnabled: localStorage.getItem('backupReminderEnabled') || 'on',
                     
                     // Settings
                     workspaceNames: JSON.parse(localStorage.getItem('workspaceNames') || '{}'),
@@ -4366,9 +7362,15 @@
                     if (note) allData.notes[ws] = note;
                 });
                 
-                const filename = `MyLifeCanvas_Backup_${new Date().toISOString().split('T')[0]}.json`;
-                downloadAsFile(filename, JSON.stringify(allData, null, 2), 'application/json');
-                showNotification('Full backup exported successfully!', 'success');
+                const name = buildExportName('MyLifeCanvas Full Backup', 'json');
+                const backupStamp = new Date().toISOString();
+                allData.fileVersion = name.stem;
+                allData.lastFullBackup = backupStamp;
+                downloadAsFile(name.filename, JSON.stringify(allData, null, 2), 'application/json');
+                localStorage.setItem('lastFullBackup', backupStamp);
+                localStorage.removeItem('backupReminderSnoozedUntil');
+                try { refreshBackupFlags(); } catch (e) { /* not yet defined */ }
+                showNotification('Full backup saved \u2014 keep this file safe', 'success');
                 
             } catch (error) {
                 console.error('Export error:', error);
@@ -4406,6 +7408,12 @@
                     if (data.priorityRadar) localStorage.setItem('priorityRadar', JSON.stringify(data.priorityRadar));
                     if (data.masterTasks) localStorage.setItem('masterTasks', JSON.stringify(data.masterTasks));
                     if (data.priorityRanking) localStorage.setItem('priorityRanking', JSON.stringify(data.priorityRanking));
+                    if (data.exportSequences) localStorage.setItem('exportSequences', JSON.stringify(data.exportSequences));
+                    if (data.quickList) localStorage.setItem('quickList', JSON.stringify(data.quickList));
+                    if (data.taskDetails) localStorage.setItem('taskDetails', JSON.stringify(data.taskDetails));
+                    if (data.quickListSort) localStorage.setItem('quickListSort', JSON.stringify(data.quickListSort));
+                    if (data.lastFullBackup) localStorage.setItem('lastFullBackup', data.lastFullBackup);
+                    if (data.backupReminderEnabled) localStorage.setItem('backupReminderEnabled', data.backupReminderEnabled);
                     
                     // Restore settings
                     if (data.workspaceNames) localStorage.setItem('workspaceNames', JSON.stringify(data.workspaceNames));
@@ -5173,8 +8181,10 @@
                 customFieldLabels: clientCustomFieldLabels,
                 clients: clientData
             };
+            const name = buildExportName('Contact Data Export', 'json');
+            exportData.fileVersion = name.stem;
             downloadAsFile(
-                `Client_Data_Export_${new Date().toISOString().split('T')[0]}.json`,
+                name.filename,
                 JSON.stringify(exportData, null, 2),
                 'application/json'
             );
@@ -5473,6 +8483,7 @@
                             </div>
                         </div>
                         ${detailsRow}
+                        ${contactWorkPanel(client.id)}
                         ${displayItems.length > 0 ? `
                             <div style="padding: 10px 15px; border-top: 1px solid #f0f0f0;">
                                 <div style="font-size: 11px; font-weight: 600; color: #7f8c8d; margin-bottom: 8px;">SCHEDULED ITEMS</div>
@@ -5830,6 +8841,7 @@
             document.getElementById('activityType').value = 'planned';
             document.getElementById('activityIsTask').checked = false;
             document.getElementById('activityNotes').value = '';
+            populateActivityTaskPicker(currentWorkspace || 'main', '');
         }
         
         // Close Activity Log modal
@@ -5862,6 +8874,9 @@
                 duration = 'custom-' + customMinutes;
             }
             
+            const linkedTaskEl = document.getElementById('activityTaskId');
+            const linkedTaskId = (isTask && linkedTaskEl) ? (linkedTaskEl.value || '') : '';
+
             const activity = {
                 id: 'activity-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9),
                 date: date,
@@ -5871,13 +8886,24 @@
                 duration: duration,
                 type: type,
                 isTask: isTask,
+                taskId: linkedTaskId,
+                taskTitle: linkedTaskId ? activityTaskTitle(linkedTaskId) : '',
                 notes: notes
             };
             
             activityLog.push(activity);
             saveActivityLog();
-            
-            showNotification('Activity logged successfully!', 'success');
+
+            if (linkedTaskId) {
+                const d = getTaskDetail(linkedTaskId);
+                d.lastTouched = new Date().toISOString();
+                setTaskDetail(linkedTaskId, d);
+                try { refreshTaskMomentum(); refreshFocusButtons(); } catch (e) {}
+            }
+
+            showNotification(linkedTaskId
+                ? 'Activity logged against "' + activityTaskTitle(linkedTaskId) + '"'
+                : 'Activity logged successfully!', 'success');
             closeActivityLog();
         }
         
@@ -6858,6 +9884,7 @@
 
             window.addEventListener('click', function(e) {
                 if (e.target && e.target.id === 'rankingModal') closeRanking();
+                if (e.target && e.target.id === 'exportChooserModal') closeExportChooser();
             });
 
             try { refreshRankBadges(); } catch (e) { console.warn('Rank badge refresh failed', e); }
