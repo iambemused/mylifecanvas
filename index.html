@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 20260903 MyLifeCanvas v 02.16-a -->
+<!-- 20260903 MyLifeCanvas v 02.19-a -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -809,6 +809,27 @@
             height: 28px;
             width: auto;
             border-radius: 4px;
+        }
+
+        .version-badge {
+            display: inline-block;
+            margin-left: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.4px;
+            cursor: pointer;
+            vertical-align: middle;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .version-badge:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.9);
         }
 
         /* Add task button */
@@ -2464,6 +2485,249 @@
             line-height: 1.7;
         }
 
+
+        /* ==============================================
+           REPORTS - v2.18
+           ============================================== */
+
+        .report-presets {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            align-items: center;
+            padding: 12px;
+            background: #eafaf1;
+            border-radius: 6px;
+            margin-bottom: 18px;
+        }
+
+        .report-preset-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #16a085;
+        }
+
+        .report-preset {
+            background: #16a085;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 7px 13px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .report-preset:hover { background: #128f76; }
+
+        .report-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .report-label {
+            width: 110px;
+            flex-shrink: 0;
+            font-size: 12px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .report-input {
+            flex: 1;
+            padding: 8px 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 13px;
+            font-family: inherit;
+            color: #2c3e50;
+        }
+
+        .report-input:focus { outline: none; border-color: #16a085; }
+
+        .report-options {
+            margin-top: 18px;
+            padding-top: 14px;
+            border-top: 1px solid #ecf0f1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 18px;
+            align-items: center;
+        }
+
+        .report-options-title {
+            width: 100%;
+            font-size: 12px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 2px;
+        }
+
+        .report-check {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #34495e;
+            cursor: pointer;
+        }
+
+        .report-note {
+            margin: 16px 0 0 0;
+            font-size: 11px;
+            color: #95a5a6;
+            line-height: 1.6;
+            background: #fbfbfc;
+            padding: 10px 12px;
+            border-radius: 5px;
+        }
+
+        .report-footer {
+            padding: 14px 20px;
+            border-top: 1px solid #ecf0f1;
+            background: #fbfbfc;
+            border-radius: 0 0 12px 12px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .report-go, .report-save, .report-cancel {
+            border: none;
+            border-radius: 5px;
+            padding: 10px 18px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .report-go { background: #16a085; color: white; }
+        .report-go:hover { background: #128f76; }
+        .report-save { background: #27ae60; color: white; }
+        .report-save:hover { background: #1e8449; }
+        .report-cancel { background: #ecf0f1; color: #7f8c8d; }
+
+    
+        /* ==============================================
+           CSV IMPORT - v2.19
+           ============================================== */
+
+        .csv-settings {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 20px;
+            align-items: center;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            margin-bottom: 16px;
+        }
+
+        .csv-setting {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 12px;
+            color: #34495e;
+            cursor: pointer;
+        }
+
+        .csv-setting-input {
+            padding: 5px 8px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 12px;
+            font-family: inherit;
+        }
+
+        .csv-map-head {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #7f8c8d;
+            letter-spacing: 0.4px;
+            padding: 0 4px 6px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        .csv-map-rows {
+            max-height: 280px;
+            overflow-y: auto;
+            padding: 8px 4px;
+        }
+
+        .csv-map-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            align-items: center;
+            padding: 7px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .csv-col-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .csv-col-sample {
+            font-size: 11px;
+            color: #b2bec3;
+            margin-top: 2px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .csv-map-select {
+            padding: 6px 8px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 12px;
+            font-family: inherit;
+            color: #2c3e50;
+        }
+
+        .csv-preview {
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 2px solid #ecf0f1;
+        }
+
+        .csv-preview-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: #16a085;
+            letter-spacing: 0.4px;
+            margin-bottom: 8px;
+        }
+
+        .csv-preview-row {
+            font-size: 12px;
+            color: #34495e;
+            padding: 5px 10px;
+            background: #f2fbfa;
+            border-radius: 4px;
+            margin-bottom: 5px;
+        }
+
+        .csv-warn {
+            font-size: 12px;
+            color: #922b21;
+            background: #fdecea;
+            border-left: 4px solid #e74c3c;
+            padding: 10px 12px;
+            border-radius: 4px;
+            line-height: 1.5;
+        }
+
     </style>
 </head>
 <body>
@@ -2472,6 +2736,8 @@
             <img src="data:image/jpeg;base64,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" alt="MoMo Creative">
             <span id="systemHeader"><span class="my-style">My</span>LifeCanvas by MoMo Creative</span>
         </a>
+        <span class="version-badge" id="versionBadge" onclick="openAbout()"
+              role="button" tabindex="0">v?</span>
     </div>
     <!-- Workspace Navigation -->
     <div class="workspace-nav">
@@ -3009,11 +3275,13 @@
                     <button class="header-btn" onclick="openClientModal()">&#10133; Add Contact</button>
                     <button class="header-btn" onclick="toggleClientView()">&#128197; Timeline View</button>
                     <button class="header-btn" onclick="printClientList()">&#128424; Print</button>
+                    <button class="header-btn" onclick="openReports('contact')">&#128424; Reports</button>
                     <button class="header-btn" onclick="openExportChooser('clients')">&#128228; Export</button>
-                    <button class="header-btn" onclick="triggerImportClientData()">&#128293; Import</button>
+                    <button class="header-btn" onclick="triggerImportClientData()"
+                            title="Import contacts from a MyLifeCanvas backup or a spreadsheet (CSV)">&#128293; Import</button>
                     <button class="header-btn" onclick="openSettings()">&#9881; Settings</button>
                 </div>
-                <input type="file" id="clientImportInput" accept=".json" style="display: none;" onchange="importClientData(event)">
+                <input type="file" id="clientImportInput" accept=".json,.csv,.tsv,.txt" style="display: none;" onchange="importClientData(event)">
             </div>
 
             <div class="workspace-grid" style="grid-template-columns: 1fr;">
@@ -3164,6 +3432,14 @@
                     </div>
                 </div>
 
+                <div class="export-option" onclick="closeExportChooser(); openReports();">
+                    <div class="export-option-title">&#128424; Reports &mdash; print or save</div>
+                    <div class="export-option-desc">
+                        Work done grouped by contact with time tallies, a full contact file, or a snapshot
+                        of where tasks sit. Built for reading into a timesheet or another system.
+                    </div>
+                </div>
+
                 <div class="export-backup-status" id="exportBackupStatus"></div>
 
                 <p style="margin: 15px 0 0 0; color: #95a5a6; font-size: 12px; line-height: 1.6;">
@@ -3283,6 +3559,147 @@
             </div>
             <div class="modal-body" id="focusBody">
                 <!-- generated -->
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Reports Modal - v2.18 -->
+    <div id="reportsModal" class="modal">
+        <div class="modal-content" style="max-width: 680px;">
+            <div class="modal-header" style="background: #16a085;">
+                <h2 class="modal-title">&#128424; Reports</h2>
+                <button class="modal-close" onclick="closeReports()">Close</button>
+            </div>
+            <div class="modal-body">
+                <div class="report-presets">
+                    <span class="report-preset-label">Quick:</span>
+                    <button type="button" class="report-preset" onclick="applyReportPreset('endofday')">End of day</button>
+                    <button type="button" class="report-preset" onclick="applyReportPreset('clientfile')">Client file</button>
+                    <button type="button" class="report-preset" onclick="applyReportPreset('timeonly')">Time only</button>
+                    <button type="button" class="report-preset" onclick="applyReportPreset('wherethingssit')">Where things sit</button>
+                </div>
+
+                <div class="report-row">
+                    <label class="report-label">Report</label>
+                    <select id="reportType" class="report-input">
+                        <option value="day">Work done &mdash; grouped by contact, with time</option>
+                        <option value="contact">Contact file &mdash; details, tasks and history</option>
+                        <option value="workspace">Where things sit &mdash; a workspace snapshot</option>
+                    </select>
+                </div>
+
+                <div class="report-row" id="reportRangeRow">
+                    <label class="report-label">Period</label>
+                    <select id="reportRange" class="report-input">
+                        <option value="today">Today</option>
+                        <option value="yesterday">Yesterday</option>
+                        <option value="week">Last 7 days</option>
+                        <option value="month">Last 30 days</option>
+                        <option value="custom">Custom range</option>
+                    </select>
+                </div>
+
+                <div class="report-row" id="reportCustomRange" style="display: none;">
+                    <label class="report-label">From / to</label>
+                    <div style="display: flex; gap: 8px; flex: 1;">
+                        <input type="date" id="reportFrom" class="report-input">
+                        <input type="date" id="reportTo" class="report-input">
+                    </div>
+                </div>
+
+                <div class="report-row" id="reportContactRow" style="display: none;">
+                    <label class="report-label">Contact</label>
+                    <select id="reportContact" class="report-input"></select>
+                </div>
+
+                <div class="report-row" id="reportWorkspaceRow" style="display: none;">
+                    <label class="report-label">Workspace</label>
+                    <select id="reportWorkspace" class="report-input"></select>
+                </div>
+
+                <div class="report-options">
+                    <div class="report-options-title">Include</div>
+                    <label class="report-check" id="optContactDetailsWrap">
+                        <input type="checkbox" id="optContactDetails" checked> Contact details
+                    </label>
+                    <label class="report-check">
+                        <input type="checkbox" id="optTasks" checked> Tasks
+                    </label>
+                    <label class="report-check">
+                        <input type="checkbox" id="optTimeline" checked> Timeline entries
+                    </label>
+                    <label class="report-check">
+                        <input type="checkbox" id="optTimes" checked> <strong>Time tallies</strong>
+                    </label>
+                    <label class="report-check" id="optScheduledWrap">
+                        <input type="checkbox" id="optScheduled" checked> Scheduled items
+                    </label>
+                    <label class="report-check" id="optQuickListWrap">
+                        <input type="checkbox" id="optQuickList" checked> Quick List
+                    </label>
+                    <label class="report-check" id="optVictoriesWrap">
+                        <input type="checkbox" id="optVictories" checked> Completed items
+                    </label>
+                </div>
+
+                <p class="report-note">
+                    Time is shown as hours and minutes with the decimal equivalent beside it
+                    &mdash; 1h 30m (1.50h) &mdash; since most systems want one or the other.
+                    Tallies run per task, per contact, and in total.
+                </p>
+            </div>
+            <div class="report-footer">
+                <button class="report-go" onclick="printReport()">&#128424; Print</button>
+                <button class="report-save" onclick="saveReport()">&#128190; Save as file</button>
+                <button class="report-cancel" onclick="closeReports()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- CSV Import Modal - v2.19 -->
+    <div id="csvImportModal" class="modal">
+        <div class="modal-content" style="max-width: 720px;">
+            <div class="modal-header" style="background: #16a085;">
+                <h2 class="modal-title">&#128228; Import contacts from a spreadsheet</h2>
+                <button class="modal-close" onclick="closeCsvImport()">Close</button>
+            </div>
+            <div class="modal-body">
+                <p style="margin: 0 0 14px 0; font-size: 13px; color: #7f8c8d; line-height: 1.6;">
+                    <span id="csvRowCount"></span>. Check that each column is going to the right place.
+                    Anything you leave as <em>ignore</em> is simply not imported.
+                </p>
+
+                <div class="csv-settings">
+                    <label class="csv-setting">
+                        Dates in this file are
+                        <select id="csvDateOrder" class="csv-setting-input" onchange="updateCsvPreview()">
+                            <option value="dayfirst">day first &mdash; 03/09/2026</option>
+                            <option value="monthfirst">month first &mdash; 09/03/2026</option>
+                        </select>
+                    </label>
+                    <label class="csv-setting">
+                        <input type="checkbox" id="csvSkipDupes" checked onchange="updateCsvPreview()">
+                        Skip names already in my list
+                    </label>
+                    <label class="csv-setting">
+                        <input type="checkbox" id="csvReplace" onchange="updateCsvPreview()">
+                        Replace my contacts entirely
+                    </label>
+                </div>
+
+                <div class="csv-map-head">
+                    <span>Column in your file</span>
+                    <span>Import as</span>
+                </div>
+                <div id="csvMapRows" class="csv-map-rows"></div>
+
+                <div id="csvPreview" class="csv-preview"></div>
+            </div>
+            <div class="report-footer">
+                <button class="report-save" onclick="runCsvImport()">Import contacts</button>
+                <button class="report-cancel" onclick="closeCsvImport()">Cancel</button>
             </div>
         </div>
     </div>
@@ -3547,15 +3964,61 @@
                         
                         <div style="background: #ecf0f1; padding: 15px; margin: 0 0 15px 0; border-left: 4px solid #3498db; border-radius: 4px;">
                             <p style="line-height: 1.6; margin: 0; color: #34495e;">
-                                <strong>Version 2.16</strong><br>
-                                File: 20260903 MyLifeCanvas v 02.16-a<br>
-                                Released: September 2026<br>
+                                <strong id="aboutVersionNumber">Version</strong><br>
+                                File: <span id="aboutVersionFile"></span><br>
+                                Released: <span id="aboutVersionReleased"></span><br>
                                 Created by MoMo Creative<br>
                                 Perth, Western Australia
                             </p>
                         </div>
 
-                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">What's New in Version 2.16</h4>
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">What's New in Version 2.19</h4>
+                        <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
+                            <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
+                                <strong>Contacts can be imported from a spreadsheet</strong>
+                            </p>
+                            <p style="line-height: 1.8; margin: 0; color: #555; font-size: 12px;">
+                                &#8226; <strong>CSV and tab-separated files</strong> &mdash; Anything Excel, Google Sheets, Outlook or another address book can export<br>
+                                &#8226; <strong>Columns are guessed, then confirmed</strong> &mdash; Common headings are mapped automatically and you adjust before anything is written<br>
+                                &#8226; <strong>Preview first</strong> &mdash; See the first few contacts exactly as they will be created<br>
+                                &#8226; <strong>Given and family names joined</strong> &mdash; Handles exports that split the name across two columns<br>
+                                &#8226; <strong>Day-first dates by default</strong> &mdash; With a switch for month-first files, so birthdays do not land in the wrong month<br>
+                                &#8226; <strong>Adds rather than replaces</strong> &mdash; Existing contacts are kept and duplicates skipped, unless you ask otherwise<br>
+                                &#8226; <strong>Handles awkward files</strong> &mdash; Quoted fields, commas inside values, semicolons and tabs
+                            </p>
+                        </div>
+
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Previously, in Version 2.18</h4>
+                        <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
+                            <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
+                                <strong>A report suite built for reading into other systems</strong>
+                            </p>
+                            <p style="line-height: 1.8; margin: 0; color: #555; font-size: 12px;">
+                                &#8226; <strong>Work done</strong> &mdash; Everything recorded in a period, grouped by contact then task<br>
+                                &#8226; <strong>Contact file</strong> &mdash; One client's details, linked tasks and full history, or every contact at once<br>
+                                &#8226; <strong>Where things sit</strong> &mdash; A workspace snapshot in priority order with next steps and follow-ups<br>
+                                &#8226; <strong>Time tallies at every level</strong> &mdash; Per task, per contact, and in total<br>
+                                &#8226; <strong>Both time formats</strong> &mdash; 1h 30m (1.50h), because systems differ on which they want<br>
+                                &#8226; <strong>Four one-click presets</strong> &mdash; End of day, Client file, Time only, Where things sit<br>
+                                &#8226; <strong>Print or save</strong> &mdash; Straight to the printer, or a dated and versioned file<br>
+                                &#8226; <strong>What Have I Done? untouched</strong> &mdash; The nuanced filtering still lives there
+                            </p>
+                        </div>
+
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Previously, in Version 2.17</h4>
+                        <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
+                            <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
+                                <strong>You can now see which version you are looking at</strong>
+                            </p>
+                            <p style="line-height: 1.8; margin: 0; color: #555; font-size: 12px;">
+                                &#8226; <strong>Version badge in the header</strong> &mdash; Quiet grey, beside the title, brighter on hover<br>
+                                &#8226; <strong>Hover for the full filename</strong> &mdash; The complete dated version string, for matching against a downloaded file<br>
+                                &#8226; <strong>Click to open the release notes</strong> &mdash; Straight to About, so you can check what changed<br>
+                                &#8226; <strong>One version number, not five</strong> &mdash; The badge, the About panel and every export now read from a single declaration, so they cannot drift apart
+                            </p>
+                        </div>
+
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Previously, in Version 2.16</h4>
                         <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
                             <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
                                 <strong>Tasks can name the people they concern</strong>
@@ -3868,6 +4331,9 @@
 
                         <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Version History</h4>
                         <p style="line-height: 1.6; color: #555; font-size: 12px;">
+                            <strong>v2.19</strong> &mdash; Contact import from CSV spreadsheets with column mapping<br>
+                            <strong>v2.18</strong> &mdash; Report suite with time tallies per task, per contact and in total<br>
+                            <strong>v2.17</strong> &mdash; Version badge in the header, single source of truth for the version number<br>
                             <strong>v2.16</strong> &mdash; Optional contact links on tasks, contact cards showing linked work and time<br>
                             <strong>v2.15</strong> &mdash; Activity Log entries can be linked to a task, merged task timeline, time logged per task<br>
                             <strong>v2.14</strong> &mdash; Task progress logs, next step and waiting-on, follow-up dates with fading, Today's Focus<br>
@@ -4330,6 +4796,34 @@
 
     <script>
         // Global variables
+        // ==============================================
+        // VERSION - v2.17
+        // Declared once. The header badge, the About panel and the
+        // stamp inside every export all read from here, so there is
+        // no longer a set of version numbers that can drift apart.
+        // ==============================================
+        const APP_VERSION = {
+            number: '2.19',
+            file: '20260903 MyLifeCanvas v 02.19-a',
+            released: 'September 2026'
+        };
+
+        function applyVersionStamps() {
+            const badge = document.getElementById('versionBadge');
+            if (badge) {
+                badge.textContent = 'v' + APP_VERSION.number;
+                badge.title = APP_VERSION.file + ' \u2014 click for release notes';
+            }
+            const num = document.getElementById('aboutVersionNumber');
+            if (num) num.textContent = 'Version ' + APP_VERSION.number;
+            const file = document.getElementById('aboutVersionFile');
+            if (file) file.textContent = APP_VERSION.file;
+            const rel = document.getElementById('aboutVersionReleased');
+            if (rel) rel.textContent = APP_VERSION.released;
+        }
+
+        document.addEventListener('DOMContentLoaded', applyVersionStamps);
+
         let currentWorkspace = 'main';
         let currentModal = null;
         let draggedTask = null;
@@ -5750,6 +6244,870 @@
                 masterTasks: data.masterTasks
             };
         }
+
+        // ==============================================
+        // CONTACT IMPORT FROM CSV - v2.19
+        // Most people's lists already live in a spreadsheet or come out
+        // of another address book, and every one of them names its
+        // columns differently. So the file is parsed, the columns are
+        // guessed, and then you confirm the mapping before anything is
+        // written. Importing adds to your list rather than replacing it.
+        // ==============================================
+
+        let csvRows = [];
+        let csvHeaders = [];
+
+        // A proper parser: quoted fields, commas and newlines inside quotes,
+        // doubled quotes as escapes, CRLF, and a leading byte order mark.
+        function parseCSV(text) {
+            if (text.charCodeAt(0) === 0xFEFF) text = text.slice(1);
+
+            // Sniff the delimiter on the first line
+            const firstLine = text.split(/\r?\n/)[0] || '';
+            const counts = { ',': 0, ';': 0, '\t': 0 };
+            let inQ = false;
+            for (let i = 0; i < firstLine.length; i++) {
+                const ch = firstLine[i];
+                if (ch === '"') inQ = !inQ;
+                else if (!inQ && counts.hasOwnProperty(ch)) counts[ch]++;
+            }
+            const delim = Object.keys(counts).reduce((a, b) => counts[a] >= counts[b] ? a : b, ',');
+
+            const rows = [];
+            let row = [], field = '', quoted = false;
+
+            for (let i = 0; i < text.length; i++) {
+                const ch = text[i], next = text[i + 1];
+
+                if (quoted) {
+                    if (ch === '"' && next === '"') { field += '"'; i++; }
+                    else if (ch === '"') quoted = false;
+                    else field += ch;
+                    continue;
+                }
+                if (ch === '"') { quoted = true; continue; }
+                if (ch === delim) { row.push(field); field = ''; continue; }
+                if (ch === '\r') continue;
+                if (ch === '\n') { row.push(field); rows.push(row); row = []; field = ''; continue; }
+                field += ch;
+            }
+            if (field.length || row.length) { row.push(field); rows.push(row); }
+
+            return rows
+                .map(r => r.map(c => c.trim()))
+                .filter(r => r.some(c => c !== ''));
+        }
+
+        function parseImportedDate(value, order) {
+            if (!value) return null;
+            const v = String(value).trim();
+            if (!v) return null;
+
+            const pad = n => (n < 10 ? '0' : '') + n;
+            const build = (y, m, d) => {
+                if (y < 100) y += (y > 30 ? 1900 : 2000);
+                if (m < 1 || m > 12 || d < 1 || d > 31) return null;
+                return y + '-' + pad(m) + '-' + pad(d);
+            };
+
+            let m = v.match(/^(\d{4})[-\/](\d{1,2})[-\/](\d{1,2})$/);
+            if (m) return build(+m[1], +m[2], +m[3]);
+
+            m = v.match(/^(\d{1,2})[-\/.](\d{1,2})[-\/.](\d{2,4})$/);
+            if (m) {
+                return order === 'monthfirst'
+                    ? build(+m[3], +m[1], +m[2])
+                    : build(+m[3], +m[2], +m[1]);
+            }
+
+            const parsed = new Date(v);
+            if (!isNaN(parsed.getTime())) {
+                return parsed.getFullYear() + '-' + pad(parsed.getMonth() + 1) + '-' + pad(parsed.getDate());
+            }
+            return null;
+        }
+
+        const CSV_TARGETS = [
+            { key: 'skip', label: '(ignore this column)' },
+            { key: 'clientName', label: 'Contact / household name' },
+            { key: 'contact1Name', label: 'First person' },
+            { key: 'contact1Birthday', label: 'First person birthday' },
+            { key: 'contact2Name', label: 'Second person' },
+            { key: 'contact2Birthday', label: 'Second person birthday' },
+            { key: 'notes', label: 'Notes' },
+            { key: 'assetsUnderManagement', label: 'Assets / amount' },
+            { key: 'custom1', label: 'Custom field 1' },
+            { key: 'custom2', label: 'Custom field 2' },
+            { key: 'custom3', label: 'Custom field 3' },
+            { key: 'custom4', label: 'Custom field 4' },
+            { key: 'firstName', label: 'Given name (to be joined)' },
+            { key: 'lastName', label: 'Surname (to be joined)' }
+        ];
+
+        function guessCsvTarget(header) {
+            const h = String(header || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+            if (!h) return 'skip';
+            if (/^(firstname|givenname|forename|first)$/.test(h)) return 'firstName';
+            if (/^(lastname|surname|familyname|last)$/.test(h)) return 'lastName';
+            if (/(household|clientname|companyname|organisation|organization|displayname|fullname|^name$|^client$|^contact$|^company$|^group$)/.test(h)) return 'clientName';
+            if (/(birthday|birthdate|dateofbirth|^dob$)/.test(h)) return 'contact1Birthday';
+            if (/(partner|spouse|secondcontact|contact2)/.test(h)) return 'contact2Name';
+            if (/(note|comment|memo|remark)/.test(h)) return 'notes';
+            if (/(aum|assets|balance|portfolio|amount|value)/.test(h)) return 'assetsUnderManagement';
+            if (/(email|phone|mobile|address|suburb|postcode|state)/.test(h)) return 'custom1';
+            return 'skip';
+        }
+
+        function startContactCsvImport(text) {
+            const rows = parseCSV(text);
+            if (rows.length < 2) {
+                showNotification('That file has no readable rows', 'error');
+                return;
+            }
+
+            csvHeaders = rows[0];
+            csvRows = rows.slice(1);
+
+            const container = document.getElementById('csvMapRows');
+            container.innerHTML = '';
+            const used = {};
+
+            csvHeaders.forEach((header, i) => {
+                let guess = guessCsvTarget(header);
+                // Do not map two columns to the same single-value field
+                if (guess !== 'skip' && guess !== 'custom1' && used[guess]) guess = 'skip';
+                if (guess === 'custom1') {
+                    let n = 1;
+                    while (n <= 4 && used['custom' + n]) n++;
+                    guess = n <= 4 ? 'custom' + n : 'skip';
+                }
+                used[guess] = true;
+
+                const sample = csvRows.slice(0, 3).map(r => r[i]).filter(v => v).join(' / ');
+                const row = document.createElement('div');
+                row.className = 'csv-map-row';
+                row.innerHTML =
+                    '<div class="csv-col">' +
+                        '<div class="csv-col-name">' + rankEscape(header || '(no heading)') + '</div>' +
+                        '<div class="csv-col-sample">' + rankEscape(sample.slice(0, 60)) + '</div>' +
+                    '</div>' +
+                    '<select class="csv-map-select" data-index="' + i + '">' +
+                        CSV_TARGETS.map(t => '<option value="' + t.key + '"' +
+                            (t.key === guess ? ' selected' : '') + '>' + t.label + '</option>').join('') +
+                    '</select>';
+                container.appendChild(row);
+            });
+
+            document.getElementById('csvRowCount').textContent =
+                csvRows.length + (csvRows.length === 1 ? ' row found' : ' rows found');
+            document.getElementById('csvImportModal').style.display = 'block';
+            updateCsvPreview();
+            container.querySelectorAll('.csv-map-select').forEach(s =>
+                s.addEventListener('change', updateCsvPreview));
+        }
+
+        function closeCsvImport() {
+            document.getElementById('csvImportModal').style.display = 'none';
+            csvRows = [];
+            csvHeaders = [];
+        }
+
+        function currentCsvMapping() {
+            const map = {};
+            document.querySelectorAll('#csvMapRows .csv-map-select').forEach(s => {
+                const key = s.value;
+                if (key === 'skip') return;
+                map[key] = parseInt(s.dataset.index, 10);
+            });
+            return map;
+        }
+
+        function buildContactFromRow(row, map, dateOrder) {
+            const get = key => (map[key] === undefined ? '' : (row[map[key]] || '').trim());
+
+            let name = get('clientName');
+            const first = get('firstName'), last = get('lastName');
+            if (!name) name = [first, last].filter(Boolean).join(' ').trim();
+            if (!name) return null;
+
+            const person = get('contact1Name') || [first, last].filter(Boolean).join(' ').trim() || name;
+            const aum = parseFloat(String(get('assetsUnderManagement')).replace(/[^0-9.\-]/g, ''));
+
+            return {
+                id: generateClientId(),
+                clientName: name,
+                contact1Name: person,
+                contact1Birthday: parseImportedDate(get('contact1Birthday'), dateOrder),
+                contact2Name: get('contact2Name') || null,
+                contact2Birthday: parseImportedDate(get('contact2Birthday'), dateOrder),
+                feeType: 'percentage',
+                feePercentage: null,
+                feeFixed: null,
+                assetsUnderManagement: isNaN(aum) ? null : aum,
+                customFields: [1, 2, 3, 4].map(n => ({
+                    label: clientCustomFieldLabels[n - 1] || ('Custom Field ' + n),
+                    value: get('custom' + n)
+                })),
+                notes: get('notes'),
+                scheduledItems: [],
+                created: new Date().toISOString(),
+                modified: new Date().toISOString()
+            };
+        }
+
+        function updateCsvPreview() {
+            const map = currentCsvMapping();
+            const order = document.getElementById('csvDateOrder').value;
+            const preview = document.getElementById('csvPreview');
+
+            if (map.clientName === undefined && map.firstName === undefined && map.lastName === undefined) {
+                preview.innerHTML = '<div class="csv-warn">Map at least one column to a name ' +
+                    'before importing &mdash; a contact with no name cannot be created.</div>';
+                return;
+            }
+
+            const rows = csvRows.slice(0, 3)
+                .map(r => buildContactFromRow(r, map, order))
+                .filter(Boolean);
+
+            if (!rows.length) {
+                preview.innerHTML = '<div class="csv-warn">No usable rows with that mapping.</div>';
+                return;
+            }
+
+            preview.innerHTML = '<div class="csv-preview-title">First few, as they will be created</div>' +
+                rows.map(c =>
+                    '<div class="csv-preview-row"><strong>' + rankEscape(c.clientName) + '</strong>' +
+                    (c.contact1Name && c.contact1Name !== c.clientName
+                        ? ' &middot; ' + rankEscape(c.contact1Name) : '') +
+                    (c.contact1Birthday ? ' &middot; born ' + rankEscape(c.contact1Birthday) : '') +
+                    (c.assetsUnderManagement ? ' &middot; $' + c.assetsUnderManagement.toLocaleString() : '') +
+                    '</div>').join('');
+        }
+
+        function runCsvImport() {
+            const map = currentCsvMapping();
+            if (map.clientName === undefined && map.firstName === undefined && map.lastName === undefined) {
+                showNotification('Map a column to the contact name first', 'error');
+                return;
+            }
+
+            const order = document.getElementById('csvDateOrder').value;
+            const replace = document.getElementById('csvReplace').checked;
+            const skipDupes = document.getElementById('csvSkipDupes').checked;
+
+            const built = [];
+            let skipped = 0;
+            csvRows.forEach(r => {
+                const c = buildContactFromRow(r, map, order);
+                if (c) built.push(c); else skipped++;
+            });
+
+            if (!built.length) {
+                showNotification('No rows could be imported with that mapping', 'error');
+                return;
+            }
+
+            if (replace && clientData.length > 0 &&
+                !confirm('This will remove your existing ' + clientData.length +
+                         ' contact(s) and replace them with ' + built.length +
+                         ' from the file.\n\nContinue?')) {
+                return;
+            }
+
+            let added = 0, duplicates = 0;
+            if (replace) {
+                clientData = built;
+                added = built.length;
+            } else {
+                const existing = {};
+                clientData.forEach(c => { existing[(c.clientName || '').toLowerCase()] = true; });
+                built.forEach(c => {
+                    if (skipDupes && existing[(c.clientName || '').toLowerCase()]) { duplicates++; return; }
+                    clientData.push(c);
+                    existing[(c.clientName || '').toLowerCase()] = true;
+                    added++;
+                });
+            }
+
+            saveClientData();
+            renderClientList();
+            populateClientNameFilter();
+            closeCsvImport();
+
+            let msg = added + (added === 1 ? ' contact imported' : ' contacts imported');
+            if (duplicates) msg += ', ' + duplicates + ' already present';
+            if (skipped) msg += ', ' + skipped + ' skipped with no name';
+            showNotification(msg, 'success');
+        }
+
+        // ==============================================
+        // REPORTS - v2.18
+        // These are built to be read into something else: a timesheet,
+        // a CRM, a client file note. So every level carries its own
+        // tally, in hours and minutes and in decimal hours, because
+        // that is what the receiving system usually wants.
+        // ==============================================
+
+        function formatMinutes(mins) {
+            if (!mins) return '0m';
+            const h = Math.floor(mins / 60);
+            const m = mins % 60;
+            const clock = h > 0 ? (m > 0 ? h + 'h ' + m + 'm' : h + 'h') : m + 'm';
+            const decimal = (mins / 60).toFixed(2);
+            return clock + ' (' + decimal + 'h)';
+        }
+
+        function reportDateRange(mode, fromValue, toValue) {
+            const today = quickListToday();
+            const start = new Date(today), end = new Date(today);
+            if (mode === 'yesterday') { start.setDate(start.getDate() - 1); end.setDate(end.getDate() - 1); }
+            else if (mode === 'week') { start.setDate(start.getDate() - 6); }
+            else if (mode === 'month') { start.setDate(start.getDate() - 29); }
+            else if (mode === 'custom') {
+                const f = parseQuickListDate(fromValue), t = parseQuickListDate(toValue);
+                if (f) start.setTime(f.getTime());
+                if (t) end.setTime(t.getTime());
+            }
+            end.setHours(23, 59, 59, 999);
+            return { start: start, end: end };
+        }
+
+        function inRange(stamp, range) {
+            const d = new Date(stamp);
+            return !isNaN(d.getTime()) && d >= range.start && d <= range.end;
+        }
+
+        function niceDate(d) {
+            return d.toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
+        }
+
+        // Everything recorded in a window, gathered once and grouped later
+        function gatherWorkInRange(range) {
+            const items = [];
+
+            (activityLog || []).forEach(a => {
+                const stamp = a.date ? a.date + 'T12:00:00' : a.loggedAt;
+                if (!inRange(stamp, range)) return;
+                // Prefer the task's current name. The title stored on the activity
+                // is a snapshot from when it was logged, so a renamed task would
+                // otherwise make old reports disagree with the app.
+                const liveEl = a.taskId ? document.getElementById(a.taskId) : null;
+                const liveTitle = liveEl ? (liveEl.querySelector('.task-title') || {}).textContent : '';
+                items.push({
+                    date: a.date || (a.loggedAt || '').slice(0, 10),
+                    stamp: stamp,
+                    kind: 'time',
+                    workspace: a.workspace,
+                    taskId: a.taskId || '',
+                    taskTitle: liveTitle || a.taskTitle || '',
+                    description: a.description || '',
+                    text: (a.notes || '').trim(),
+                    minutes: getDurationMinutes(a.duration) || 0,
+                    type: a.type || ''
+                });
+            });
+
+            const details = loadTaskDetails();
+            Object.keys(details).forEach(taskId => {
+                (details[taskId].log || []).forEach(entry => {
+                    if (!inRange(entry.ts, range)) return;
+                    const el = document.getElementById(taskId);
+                    items.push({
+                        date: (entry.ts || '').slice(0, 10),
+                        stamp: entry.ts,
+                        kind: 'note',
+                        workspace: el ? (el.closest('[id^="workspace-"]') || {}).id?.replace('workspace-', '') || '' : '',
+                        taskId: taskId,
+                        taskTitle: el ? (el.querySelector('.task-title') || {}).textContent : '',
+                        description: '',
+                        text: entry.text,
+                        minutes: 0,
+                        type: ''
+                    });
+                });
+            });
+
+            items.sort((a, b) => new Date(a.stamp) - new Date(b.stamp));
+            return items;
+        }
+
+        // Group work by contact, then by task. Anything unattributed keeps its own bucket.
+        function groupWorkByContact(items) {
+            const groups = {};
+            const unattached = { key: '__none__', name: 'Not linked to a contact', tasks: {}, minutes: 0 };
+
+            items.forEach(item => {
+                const contactIds = item.taskId ? taskContactIds(item.taskId) : [];
+                const targets = contactIds.length ? contactIds : ['__none__'];
+
+                targets.forEach(cid => {
+                    const group = cid === '__none__'
+                        ? unattached
+                        : (groups[cid] = groups[cid] || { key: cid, name: contactDisplayName(cid), tasks: {}, minutes: 0 });
+
+                    const tKey = item.taskId || '__general__';
+                    const task = group.tasks[tKey] = group.tasks[tKey] || {
+                        id: item.taskId,
+                        title: item.taskTitle || item.description || 'General work',
+                        entries: [],
+                        minutes: 0
+                    };
+                    task.entries.push(item);
+                    // Time is only counted once even when two contacts share a task
+                    if (targets.length === 1 || cid === targets[0]) {
+                        task.minutes += item.minutes;
+                        group.minutes += item.minutes;
+                    }
+                });
+            });
+
+            const list = Object.keys(groups).map(k => groups[k])
+                .sort((a, b) => a.name.localeCompare(b.name));
+            if (Object.keys(unattached.tasks).length) list.push(unattached);
+            return list;
+        }
+
+        // ----- shared shell -----
+
+        function reportShell(title, subtitle, body, stem) {
+            return '<!DOCTYPE html>\n<html><head><meta charset="UTF-8">\n' +
+                '<title>' + rankEscape(title) + '</title>\n' +
+                '<!-- ' + stem + ' -->\n' +
+                '<style>\n' +
+                'body { font-family: Arial, Helvetica, sans-serif; margin: 32px; color: #2c3e50; }\n' +
+                'h1 { font-size: 22px; border-bottom: 3px solid #16a085; padding-bottom: 8px; margin-bottom: 4px; }\n' +
+                '.sub { color: #7f8c8d; font-size: 13px; margin-bottom: 22px; }\n' +
+                'h2 { font-size: 16px; margin: 26px 0 10px; padding: 8px 12px; background: #ecf0f1; border-radius: 4px; }\n' +
+                'h3 { font-size: 14px; margin: 16px 0 6px; color: #16a085; }\n' +
+                '.contact-block { border: 1px solid #ddd; border-radius: 6px; padding: 14px 16px; margin-bottom: 16px; page-break-inside: avoid; }\n' +
+                '.task-block { border-left: 3px solid #16a085; padding: 8px 0 8px 12px; margin: 10px 0; page-break-inside: avoid; }\n' +
+                '.entry { font-size: 12px; padding: 5px 0; border-bottom: 1px dotted #eee; line-height: 1.5; }\n' +
+                '.entry-date { color: #95a5a6; font-size: 11px; margin-right: 8px; }\n' +
+                '.tally { font-weight: bold; color: #16a085; }\n' +
+                '.tally-row { background: #eafaf1; padding: 7px 12px; border-radius: 4px; margin-top: 8px; font-size: 13px; }\n' +
+                '.grand { background: #16a085; color: white; padding: 12px 16px; border-radius: 5px; font-size: 15px; font-weight: bold; margin-top: 24px; }\n' +
+                'table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 8px; }\n' +
+                'th { text-align: left; background: #f4f6f7; padding: 7px 9px; border-bottom: 2px solid #ddd; font-size: 11px; }\n' +
+                'td { padding: 6px 9px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }\n' +
+                '.meta { font-size: 11px; color: #7f8c8d; }\n' +
+                '.chip { display: inline-block; font-size: 10px; font-weight: bold; padding: 2px 7px; border-radius: 3px; background: #ecf0f1; color: #7f8c8d; margin-right: 5px; }\n' +
+                '.chip-late { background: #e74c3c; color: white; }\n' +
+                '.empty { color: #95a5a6; font-style: italic; font-size: 12px; }\n' +
+                '.foot { margin-top: 30px; padding-top: 12px; border-top: 1px solid #ddd; font-size: 10px; color: #95a5a6; }\n' +
+                '@media print { body { margin: 12mm; } .contact-block, .task-block { page-break-inside: avoid; } }\n' +
+                '</style></head><body>\n' +
+                '<h1>' + rankEscape(title) + '</h1>\n' +
+                '<div class="sub">' + subtitle + '</div>\n' +
+                body +
+                '<div class="foot">' + stem + ' &middot; generated ' +
+                new Date().toLocaleString('en-AU') + ' &middot; MyLifeCanvas v' + APP_VERSION.number +
+                '<br>This is a report, not a backup. It cannot be restored into MyLifeCanvas.</div>\n' +
+                '</body></html>';
+        }
+
+        function reportOptions() {
+            const on = id => { const el = document.getElementById(id); return el ? el.checked : false; };
+            return {
+                details: on('optContactDetails'),
+                tasks: on('optTasks'),
+                timeline: on('optTimeline'),
+                times: on('optTimes'),
+                scheduled: on('optScheduled'),
+                quicklist: on('optQuickList'),
+                victories: on('optVictories')
+            };
+        }
+
+        // ----- report bodies -----
+
+        function buildDayReport(range, opt) {
+            const items = gatherWorkInRange(range);
+            const groups = groupWorkByContact(items);
+            let body = '';
+            let grand = 0;
+
+            if (groups.length === 0) {
+                body += '<p class="empty">Nothing recorded in this period.</p>';
+            }
+
+            groups.forEach(group => {
+                grand += group.minutes;
+                body += '<div class="contact-block">';
+                body += '<h3>' + rankEscape(group.name) + '</h3>';
+
+                Object.keys(group.tasks).forEach(tk => {
+                    const task = group.tasks[tk];
+                    body += '<div class="task-block">';
+                    body += '<div><strong>' + rankEscape(task.title) + '</strong>';
+                    if (opt.times && task.minutes) {
+                        body += ' <span class="tally">' + formatMinutes(task.minutes) + '</span>';
+                    }
+                    body += '</div>';
+
+                    if (opt.timeline) {
+                        task.entries.forEach(e => {
+                            const d = new Date(e.stamp);
+                            const label = isNaN(d.getTime()) ? '' :
+                                d.toLocaleDateString('en-AU', { day: 'numeric', month: 'short' });
+                            body += '<div class="entry"><span class="entry-date">' + label + '</span>' +
+                                    (e.kind === 'time' && opt.times
+                                        ? '<span class="chip">' + formatMinutes(e.minutes) + '</span>' : '') +
+                                    rankEscape(e.text || e.description || '') + '</div>';
+                        });
+                    }
+                    body += '</div>';
+                });
+
+                if (opt.times) {
+                    body += '<div class="tally-row">Total for ' + rankEscape(group.name) +
+                            ': <span class="tally">' + formatMinutes(group.minutes) + '</span></div>';
+                }
+                body += '</div>';
+            });
+
+            if (opt.victories) {
+                let vics = '';
+                RANK_WORKSPACES.forEach(ws => {
+                    const list = JSON.parse(localStorage.getItem('victories_' + ws) || '[]')
+                        .filter(v => inRange(v.timestamp || v.date, range));
+                    list.forEach(v => {
+                        vics += '<div class="entry"><span class="entry-date">' +
+                                rankEscape(workspaceNames[ws] || ws) + '</span>' + rankEscape(v.title) + '</div>';
+                    });
+                });
+                if (vics) body += '<h2>&#127942; Completed</h2>' + vics;
+            }
+
+            if (opt.times) {
+                body += '<div class="grand">Total time recorded: ' + formatMinutes(grand) + '</div>';
+            }
+            return body;
+        }
+
+        function contactDetailBlock(client) {
+            const profile = (typeof profileConfigs !== 'undefined' && profileConfigs[clientTrackerProfile]) || null;
+            let rows = '';
+            const add = (k, v) => { if (v) rows += '<tr><td class="meta">' + k + '</td><td>' + rankEscape(String(v)) + '</td></tr>'; };
+
+            add('Primary contact', client.contact1Name);
+            add('Birthday', client.contact1Birthday ? formatBirthday(client.contact1Birthday) : '');
+            add('Second contact', client.contact2Name);
+            add('Birthday', client.contact2Birthday ? formatBirthday(client.contact2Birthday) : '');
+
+            if (profile && profile.showFinancialFields) {
+                if (client.assetsUnderManagement) add('Assets', '$' + client.assetsUnderManagement.toLocaleString());
+                if (client.feeType) add('Fee basis', client.feeType === 'percentage'
+                    ? client.feePercentage + '%' : client.feeType === 'fixed' ? 'Fixed' : 'Hybrid');
+                const fee = calculateClientFee(client);
+                if (fee) add('Annual fee', '$' + fee.toLocaleString('en-AU', { maximumFractionDigits: 0 }));
+            }
+
+            (client.customFields || []).forEach(f => { if (f && f.value) add(f.label, f.value); });
+            if (client.notes) add('Notes', client.notes);
+
+            return rows ? '<table>' + rows + '</table>' : '<p class="empty">No further details recorded.</p>';
+        }
+
+        function contactTasksBlock(client, opt) {
+            const rows = tasksForContact(client.id);
+            if (rows.length === 0) return opt.tasks ? '<p class="empty">No tasks linked to this contact.</p>' : '';
+
+            let body = '';
+            let total = 0;
+
+            rows.forEach(r => {
+                total += r.minutes;
+                body += '<div class="task-block">';
+                body += '<div><strong>' + rankEscape(r.title) + '</strong>';
+                if (opt.times && r.minutes) body += ' <span class="tally">' + formatMinutes(r.minutes) + '</span>';
+                body += '</div>';
+                body += '<div class="meta">' + rankEscape(r.workspaceName) +
+                        (r.status ? ' &middot; ' + rankEscape(r.status) : '') + '</div>';
+                if (r.nextStep) body += '<div class="meta"><strong>Next:</strong> ' + rankEscape(r.nextStep) + '</div>';
+                if (r.waitingOn) body += '<div class="meta"><strong>Waiting on:</strong> ' + rankEscape(r.waitingOn) + '</div>';
+                if (r.followUpDate) {
+                    const late = quickListDueClass(r.followUpDate) === 'due-overdue';
+                    body += '<div class="meta">Follow up: <span class="chip' + (late ? ' chip-late' : '') + '">' +
+                            rankEscape(formatQuickListDate(r.followUpDate)) + '</span></div>';
+                }
+
+                if (opt.timeline) {
+                    taskTimeline(r.id).reverse().forEach(e => {
+                        const d = new Date(e.ts);
+                        const label = isNaN(d.getTime()) ? '' :
+                            d.toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' });
+                        body += '<div class="entry"><span class="entry-date">' + label + '</span>' +
+                                (e.kind === 'activity' && opt.times
+                                    ? '<span class="chip">' + rankEscape(getDurationLabel(e.duration)) + '</span>' : '') +
+                                rankEscape(e.text) + '</div>';
+                    });
+                }
+                body += '</div>';
+            });
+
+            if (opt.times) {
+                body += '<div class="tally-row">Total time for ' + rankEscape(client.clientName) +
+                        ': <span class="tally">' + formatMinutes(total) + '</span></div>';
+            }
+            return body;
+        }
+
+        function contactScheduledBlock(client) {
+            const items = (client.scheduledItems || []).filter(i => i.status === 'pending');
+            if (!items.length) return '';
+            return '<h3>Scheduled</h3><table><tr><th>Type</th><th>Date</th></tr>' +
+                items.map(i => '<tr><td>' + rankEscape(i.taskType) + '</td><td>' +
+                    rankEscape(formatDate(i.date)) + '</td></tr>').join('') + '</table>';
+        }
+
+        function buildContactReport(clientIds, opt) {
+            let body = '';
+            let grand = 0;
+
+            clientIds.forEach(id => {
+                const client = contactById(id);
+                if (!client) return;
+                body += '<div class="contact-block">';
+                body += '<h2 style="margin-top:0;">' + rankEscape(client.clientName) + '</h2>';
+                if (opt.details) body += contactDetailBlock(client);
+                if (opt.scheduled) body += contactScheduledBlock(client);
+                if (opt.tasks) {
+                    body += contactTasksBlock(client, opt);
+                    grand += tasksForContact(id).reduce((s, r) => s + r.minutes, 0);
+                }
+                body += '</div>';
+            });
+
+            if (!body) body = '<p class="empty">No contacts selected.</p>';
+            if (opt.times && clientIds.length > 1 && grand) {
+                body += '<div class="grand">Total time across ' + clientIds.length +
+                        ' contacts: ' + formatMinutes(grand) + '</div>';
+            }
+            return body;
+        }
+
+        function buildWorkspaceReport(workspace, opt) {
+            let body = '';
+            const tasks = [];
+            document.querySelectorAll('#workspace-' + workspace + ' .workspace-canvas .task-item').forEach(el => {
+                const d = getTaskDetail(el.id);
+                tasks.push({
+                    id: el.id,
+                    title: (el.querySelector('.task-title') || {}).textContent || '',
+                    desc: (el.querySelector('.task-description') || {}).textContent || '',
+                    status: (el.querySelector('.task-status') || {}).textContent || '',
+                    nextStep: d.nextStep, waitingOn: d.waitingOn, followUpDate: d.followUpDate,
+                    minutes: taskLoggedMinutes(el.id),
+                    contacts: taskContactIds(el.id).map(contactDisplayName).join(', ')
+                });
+            });
+
+            const order = getRankOrder(workspace);
+            tasks.sort((a, b) => {
+                const ai = order.indexOf(a.id), bi = order.indexOf(b.id);
+                return (ai === -1 ? 9999 : ai) - (bi === -1 ? 9999 : bi);
+            });
+
+            body += '<h2>&#128203; Where tasks sit (' + tasks.length + ')</h2>';
+            if (tasks.length === 0) body += '<p class="empty">No active tasks.</p>';
+            else {
+                body += '<table><tr><th>#</th><th>Task</th><th>Status</th><th>Contact</th>' +
+                        '<th>Next step / waiting on</th><th>Follow up</th>' +
+                        (opt.times ? '<th>Time</th>' : '') + '</tr>';
+                tasks.forEach((t, i) => {
+                    const late = quickListDueClass(t.followUpDate) === 'due-overdue';
+                    body += '<tr><td>' + (i + 1) + '</td>' +
+                        '<td><strong>' + rankEscape(t.title) + '</strong>' +
+                            (t.desc ? '<div class="meta">' + rankEscape(t.desc) + '</div>' : '') + '</td>' +
+                        '<td>' + rankEscape(t.status) + '</td>' +
+                        '<td>' + rankEscape(t.contacts) + '</td>' +
+                        '<td>' + rankEscape(t.nextStep || '') +
+                            (t.waitingOn ? '<div class="meta">Waiting on ' + rankEscape(t.waitingOn) + '</div>' : '') + '</td>' +
+                        '<td>' + (t.followUpDate ? '<span class="chip' + (late ? ' chip-late' : '') + '">' +
+                            rankEscape(formatQuickListDate(t.followUpDate)) + '</span>' : '') + '</td>' +
+                        (opt.times ? '<td>' + (t.minutes ? formatMinutes(t.minutes) : '') + '</td>' : '') +
+                        '</tr>';
+                });
+                body += '</table>';
+            }
+
+            if (opt.quicklist) {
+                const items = sortedQuickList(workspace);
+                body += '<h2>&#128204; Quick List (' + items.length + ')</h2>';
+                if (!items.length) body += '<p class="empty">Nothing listed.</p>';
+                else {
+                    body += '<table><tr><th>Item</th><th>Due</th><th>Note</th></tr>';
+                    items.forEach(i => {
+                        const late = quickListDueClass(i.date) === 'due-overdue';
+                        body += '<tr><td>' + rankEscape(i.title) + '</td><td>' +
+                            (i.date ? '<span class="chip' + (late ? ' chip-late' : '') + '">' +
+                                rankEscape(formatQuickListDate(i.date)) + '</span>' : '') + '</td><td>' +
+                            rankEscape(i.note || '') + '</td></tr>';
+                    });
+                    body += '</table>';
+                }
+            }
+
+            if (opt.times) {
+                const total = tasks.reduce((s, t) => s + t.minutes, 0);
+                if (total) body += '<div class="grand">Total time logged against these tasks: ' +
+                                   formatMinutes(total) + '</div>';
+            }
+            return body;
+        }
+
+        // ----- the Reports modal -----
+
+        function openReports(presetType) {
+            const modal = document.getElementById('reportsModal');
+
+            const contactSelect = document.getElementById('reportContact');
+            contactSelect.innerHTML = '<option value="__all__">All contacts</option>';
+            allContacts()
+                .slice()
+                .sort((a, b) => (a.clientName || '').localeCompare(b.clientName || ''))
+                .forEach(c => {
+                    const opt = document.createElement('option');
+                    opt.value = c.id;
+                    opt.textContent = c.clientName;
+                    contactSelect.appendChild(opt);
+                });
+
+            const wsSelect = document.getElementById('reportWorkspace');
+            wsSelect.innerHTML = '';
+            RANK_WORKSPACES.forEach(ws => {
+                const opt = document.createElement('option');
+                opt.value = ws;
+                opt.textContent = workspaceNames[ws] || ws;
+                if (ws === currentWorkspace) opt.selected = true;
+                wsSelect.appendChild(opt);
+            });
+
+            if (presetType) document.getElementById('reportType').value = presetType;
+            onReportTypeChanged();
+            modal.style.display = 'block';
+        }
+
+        function closeReports() {
+            document.getElementById('reportsModal').style.display = 'none';
+        }
+
+        function onReportTypeChanged() {
+            const type = document.getElementById('reportType').value;
+            const show = (id, on) => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = on ? '' : 'none';
+            };
+            show('reportRangeRow', type === 'day');
+            show('reportContactRow', type === 'contact');
+            show('reportWorkspaceRow', type === 'workspace');
+            show('optScheduledWrap', type === 'contact');
+            show('optQuickListWrap', type === 'workspace');
+            show('optVictoriesWrap', type === 'day');
+            show('optContactDetailsWrap', type === 'contact');
+            onReportRangeChanged();
+        }
+
+        function onReportRangeChanged() {
+            const mode = document.getElementById('reportRange').value;
+            document.getElementById('reportCustomRange').style.display = mode === 'custom' ? '' : 'none';
+        }
+
+        function applyReportPreset(name) {
+            const set = (id, on) => { const el = document.getElementById(id); if (el) el.checked = on; };
+            if (name === 'endofday') {
+                document.getElementById('reportType').value = 'day';
+                document.getElementById('reportRange').value = 'today';
+                set('optContactDetails', false); set('optTasks', true); set('optTimeline', true);
+                set('optTimes', true); set('optScheduled', false); set('optQuickList', false);
+                set('optVictories', true);
+            } else if (name === 'clientfile') {
+                document.getElementById('reportType').value = 'contact';
+                set('optContactDetails', true); set('optTasks', true); set('optTimeline', true);
+                set('optTimes', true); set('optScheduled', true); set('optQuickList', false);
+                set('optVictories', false);
+            } else if (name === 'timeonly') {
+                document.getElementById('reportType').value = 'day';
+                document.getElementById('reportRange').value = 'today';
+                set('optContactDetails', false); set('optTasks', true); set('optTimeline', false);
+                set('optTimes', true); set('optScheduled', false); set('optQuickList', false);
+                set('optVictories', false);
+            } else if (name === 'wherethingssit') {
+                document.getElementById('reportType').value = 'workspace';
+                set('optContactDetails', false); set('optTasks', true); set('optTimeline', false);
+                set('optTimes', true); set('optScheduled', false); set('optQuickList', true);
+                set('optVictories', false);
+            }
+            onReportTypeChanged();
+        }
+
+        function composeReport() {
+            const type = document.getElementById('reportType').value;
+            const opt = reportOptions();
+            let title, subtitle, body, label;
+
+            if (type === 'day') {
+                const mode = document.getElementById('reportRange').value;
+                const range = reportDateRange(mode,
+                    document.getElementById('reportFrom').value,
+                    document.getElementById('reportTo').value);
+                title = 'Work Report';
+                subtitle = niceDate(range.start) +
+                    (range.start.toDateString() === range.end.toDateString() ? '' : ' to ' + niceDate(range.end));
+                body = buildDayReport(range, opt);
+                label = 'Work Report';
+            } else if (type === 'contact') {
+                const choice = document.getElementById('reportContact').value;
+                const ids = choice === '__all__' ? allContacts().map(c => c.id) : [choice];
+                title = choice === '__all__' ? 'Contact List' : contactDisplayName(choice);
+                subtitle = choice === '__all__'
+                    ? ids.length + ' contacts'
+                    : 'Contact file';
+                body = buildContactReport(ids, opt);
+                label = choice === '__all__' ? 'Contact List' : contactDisplayName(choice) + ' File';
+            } else {
+                const ws = document.getElementById('reportWorkspace').value;
+                title = (workspaceNames[ws] || ws) + ' Snapshot';
+                subtitle = 'As at ' + niceDate(new Date());
+                body = buildWorkspaceReport(ws, opt);
+                label = (workspaceNames[ws] || ws) + ' Snapshot';
+            }
+
+            const name = buildExportName(label, 'html');
+            return { html: reportShell(title, subtitle, body, name.stem), name: name };
+        }
+
+        function printReport() {
+            const report = composeReport();
+            const win = window.open('', '_blank');
+            if (!win) {
+                showNotification('Your browser blocked the print window. Allow pop-ups, or use Save instead.', 'error');
+                return;
+            }
+            win.document.write(report.html);
+            win.document.close();
+            win.focus();
+            setTimeout(() => { try { win.print(); } catch (e) {} }, 400);
+            closeReports();
+        }
+
+        function saveReport() {
+            const report = composeReport();
+            downloadAsFile(report.name.filename, report.html, 'text/html');
+            showNotification('Report saved as ' + report.name.filename, 'success');
+            closeReports();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const type = document.getElementById('reportType');
+            if (type) type.addEventListener('change', onReportTypeChanged);
+            const range = document.getElementById('reportRange');
+            if (range) range.addEventListener('change', onReportRangeChanged);
+            window.addEventListener('click', function(e) {
+                if (e.target && e.target.id === 'reportsModal') closeReports();
+            });
+        });
 
         // ==============================================
         // TASK <-> CONTACT LINKING - v2.16
@@ -7310,7 +8668,7 @@
                 const workspaces = ['main', 'ideas', 'philosophy', 'family', 'child1', 'child2'];
                 
                 const allData = {
-                    exportVersion: '2.16',
+                    exportVersion: APP_VERSION.number,
                     exportDate: new Date().toISOString(),
                     exportType: 'MyLifeCanvas_Full_Backup',
                     
@@ -8200,11 +9558,26 @@
         function importClientData(event) {
             const file = event.target.files[0];
             if (!file) return;
-            
+
             const reader = new FileReader();
             reader.onload = function(e) {
+                const raw = e.target.result;
+                const looksLikeJson = /^\s*[\{\[]/.test(raw);
+
+                // A spreadsheet export goes to the column mapper instead
+                if (!looksLikeJson) {
+                    try {
+                        startContactCsvImport(raw);
+                    } catch (err) {
+                        console.error('CSV import error:', err);
+                        showNotification('That file could not be read as a spreadsheet', 'error');
+                    }
+                    event.target.value = '';
+                    return;
+                }
+
                 try {
-                    const importedData = JSON.parse(e.target.result);
+                    const importedData = JSON.parse(raw);
                     
                     // Validate the imported data structure
                     if (!importedData.clients || !Array.isArray(importedData.clients)) {
