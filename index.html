@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 20260903 MyLifeCanvas v 02.19-a -->
+<!-- 20260903 MyLifeCanvas v 02.21-a -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -2728,6 +2728,219 @@
             line-height: 1.5;
         }
 
+
+        /* ==============================================
+           SEPARATE LISTS + RANK POLISH - v2.20
+           ============================================== */
+
+        .priority-rank {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 20px;
+            height: 20px;
+            padding: 0 5px;
+            border-radius: 10px;
+            background: #e74c3c;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+
+        .priority-item-text {
+            cursor: pointer;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .priority-item-text:hover {
+            text-decoration: underline;
+        }
+
+        .rank-group-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            padding: 9px 12px;
+            margin-top: 14px;
+            margin-bottom: 2px;
+            background: #f8f9fa;
+            border-left: 4px solid #7f8c8d;
+            border-radius: 4px;
+        }
+
+        .rank-group-count {
+            font-size: 11px;
+            font-weight: 600;
+            color: #95a5a6;
+        }
+
+        .rank-stream-select {
+            font-size: 11px;
+            padding: 4px 6px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-family: inherit;
+            color: #2c3e50;
+            max-width: 120px;
+            flex-shrink: 0;
+        }
+
+        .rank-manage-btn {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 7px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+
+        .rank-manage-btn:hover { background: #1a252f; }
+
+        .rank-arrange-btn {
+            background: #e67e22 !important;
+            color: white !important;
+            font-weight: 700 !important;
+            padding: 11px 18px !important;
+            font-size: 13px !important;
+            box-shadow: 0 2px 6px rgba(230, 126, 34, 0.35);
+        }
+
+        .rank-arrange-btn:hover {
+            background: #ca6f1e !important;
+        }
+
+        .rank-lists-btn {
+            background: #dfe6e9 !important;
+        }
+
+        .rank-footer-hint {
+            font-size: 11px;
+            color: #95a5a6;
+            margin-left: auto;
+            max-width: 220px;
+            line-height: 1.4;
+        }
+
+        .stream-row {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            padding: 9px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .stream-swatch {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .stream-name-input {
+            flex: 1;
+            padding: 7px 9px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 13px;
+            font-family: inherit;
+            color: #2c3e50;
+        }
+
+        .stream-name-input:focus { outline: none; border-color: #3498db; }
+
+        .stream-count {
+            font-size: 11px;
+            color: #95a5a6;
+            white-space: nowrap;
+        }
+
+        .stream-btn {
+            background: #ecf0f1;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 9px;
+            cursor: pointer;
+            font-size: 12px;
+            font-family: inherit;
+        }
+
+        .stream-btn:hover { background: #d6dbdd; }
+        .stream-btn-del:hover { background: #fdecea; color: #c0392b; }
+
+        .stream-add-btn {
+            width: 100%;
+            margin-top: 14px;
+            background: #f4f6f7;
+            color: #2c3e50;
+            border: 1px dashed #bdc3c7;
+            border-radius: 6px;
+            padding: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .stream-add-btn:hover { background: #e8ecee; }
+
+        .stream-empty {
+            font-size: 12px;
+            color: #95a5a6;
+            line-height: 1.6;
+            padding: 16px 4px;
+        }
+
+        .task-chip-stream {
+            color: white;
+        }
+
+
+        /* ==============================================
+           CROSS-WORKSPACE REPORTS - v2.21
+           ============================================== */
+
+        .report-ws-list {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 14px;
+            padding: 10px 12px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .report-ws-count {
+            margin-left: 6px;
+            font-size: 10px;
+            font-weight: 700;
+            color: #95a5a6;
+            background: #e8ecee;
+            padding: 1px 6px;
+            border-radius: 8px;
+        }
+
+        .report-ws-quick {
+            font-weight: 400;
+            font-size: 11px;
+            margin-top: 3px;
+        }
+
+        .report-ws-quick a {
+            color: #16a085;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
     </style>
 </head>
 <body>
@@ -3378,6 +3591,13 @@
                     &#9650;&#9660; to nudge and &#8657; to send to the top. This order is kept separately from the canvas
                     layout &mdash; moving cards around the canvas will not change it. New tasks join at the bottom.
                 </div>
+                <div class="rank-toolbar" id="rankStreamRow" style="display: none;">
+                    <label style="font-size: 12px; font-weight: 700; color: #2c3e50;">Showing</label>
+                    <select id="rankStreamSelect" onchange="onRankStreamChanged()"
+                            style="flex: 1; min-width: 180px;"></select>
+                    <button type="button" class="rank-manage-btn" onclick="openStreamManager()">Manage lists</button>
+                </div>
+
                 <div class="rank-toolbar">
                     <input type="text" id="rankFilterInput" placeholder="Filter by word...">
                     <select id="rankSourceSelect">
@@ -3395,9 +3615,13 @@
                 </div>
             </div>
             <div class="rank-footer">
+                <button class="rank-footer-btn rank-arrange-btn" onclick="arrangeCanvasByRank()">
+                    &#8595; Arrange canvas in this order
+                </button>
                 <button class="rank-footer-btn" onclick="sortRankActiveFirst()">Active tasks first</button>
                 <button class="rank-footer-btn" onclick="sortRankAlphabetically()">Sort A&ndash;Z</button>
-                <button class="rank-footer-btn" onclick="arrangeCanvasByRank()">&#8595; Arrange canvas in this order</button>
+                <button class="rank-footer-btn rank-lists-btn" onclick="openStreamManager()">&#9776; Separate lists</button>
+                <span class="rank-footer-hint">Re-arrange as often as you like &mdash; new tasks included each time.</span>
             </div>
         </div>
     </div>
@@ -3502,6 +3726,12 @@
                         <label class="detail-label">Waiting on <span class="detail-hint">who or what is holding it up</span></label>
                         <input type="text" id="detailWaitingOn" class="detail-input" placeholder="e.g. Kerry, client signature, fund transfer">
                     </div>
+                    <div class="detail-field detail-field-wide" id="detailStreamRow" style="display: none;">
+                        <label class="detail-label">Which list
+                            <span class="detail-hint">these are ranked separately from each other</span></label>
+                        <select id="detailStream" class="detail-input"></select>
+                    </div>
+
                     <div class="detail-field detail-field-wide">
                         <label class="detail-label">Relates to
                             <span class="detail-hint">optional &mdash; link this task to people in your Contacts</span></label>
@@ -3578,6 +3808,7 @@
                     <button type="button" class="report-preset" onclick="applyReportPreset('clientfile')">Client file</button>
                     <button type="button" class="report-preset" onclick="applyReportPreset('timeonly')">Time only</button>
                     <button type="button" class="report-preset" onclick="applyReportPreset('wherethingssit')">Where things sit</button>
+                    <button type="button" class="report-preset" onclick="applyReportPreset('whatscoming')">What's coming</button>
                 </div>
 
                 <div class="report-row">
@@ -3585,7 +3816,8 @@
                     <select id="reportType" class="report-input">
                         <option value="day">Work done &mdash; grouped by contact, with time</option>
                         <option value="contact">Contact file &mdash; details, tasks and history</option>
-                        <option value="workspace">Where things sit &mdash; a workspace snapshot</option>
+                        <option value="workspace">Where things sit &mdash; priorities across workspaces</option>
+                        <option value="calendar">What's coming &mdash; everything with a date</option>
                     </select>
                 </div>
 
@@ -3613,9 +3845,25 @@
                     <select id="reportContact" class="report-input"></select>
                 </div>
 
-                <div class="report-row" id="reportWorkspaceRow" style="display: none;">
-                    <label class="report-label">Workspace</label>
-                    <select id="reportWorkspace" class="report-input"></select>
+                <div class="report-row" id="reportWorkspaceRow" style="display: none; align-items: flex-start;">
+                    <label class="report-label">Workspaces
+                        <div class="report-ws-quick">
+                            <a onclick="setAllReportWorkspaces(true)">all</a> &middot;
+                            <a onclick="setAllReportWorkspaces(false)">none</a>
+                        </div>
+                    </label>
+                    <div id="reportWorkspaceList" class="report-ws-list"></div>
+                </div>
+
+                <div class="report-row" id="reportAheadRow" style="display: none;">
+                    <label class="report-label">Looking ahead</label>
+                    <select id="reportAhead" class="report-input" onchange="onReportAheadChanged()">
+                        <option value="7">Next 7 days</option>
+                        <option value="30" selected>Next 30 days</option>
+                        <option value="90">Next 3 months</option>
+                        <option value="365">Next 12 months</option>
+                        <option value="custom">Custom range</option>
+                    </select>
                 </div>
 
                 <div class="report-options">
@@ -3626,10 +3874,10 @@
                     <label class="report-check">
                         <input type="checkbox" id="optTasks" checked> Tasks
                     </label>
-                    <label class="report-check">
+                    <label class="report-check" id="optTimelineWrap">
                         <input type="checkbox" id="optTimeline" checked> Timeline entries
                     </label>
-                    <label class="report-check">
+                    <label class="report-check" id="optTimesWrap">
                         <input type="checkbox" id="optTimes" checked> <strong>Time tallies</strong>
                     </label>
                     <label class="report-check" id="optScheduledWrap">
@@ -3640,6 +3888,9 @@
                     </label>
                     <label class="report-check" id="optVictoriesWrap">
                         <input type="checkbox" id="optVictories" checked> Completed items
+                    </label>
+                    <label class="report-check" id="optBirthdaysWrap">
+                        <input type="checkbox" id="optBirthdays" checked> Birthdays &amp; anniversaries
                     </label>
                 </div>
 
@@ -3700,6 +3951,26 @@
             <div class="report-footer">
                 <button class="report-save" onclick="runCsvImport()">Import contacts</button>
                 <button class="report-cancel" onclick="closeCsvImport()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Separate Lists Manager - v2.20 -->
+    <div id="streamManagerModal" class="modal">
+        <div class="modal-content" style="max-width: 560px;">
+            <div class="modal-header" style="background: #2c3e50;">
+                <h2 class="modal-title">&#9776; Separate lists</h2>
+                <button class="modal-close" onclick="closeStreamManager()">Done</button>
+            </div>
+            <div class="modal-body">
+                <p style="margin: 0 0 14px 0; font-size: 13px; color: #7f8c8d; line-height: 1.6;">
+                    Lists for <strong id="streamManagerWorkspace"></strong>. Each keeps its own ranking,
+                    so work that should not be compared directly is not forced into one queue.
+                    A task can sit in one list or none.
+                </p>
+                <div id="streamManagerList"></div>
+                <button type="button" class="stream-add-btn" onclick="addStream()">+ Add a list</button>
             </div>
         </div>
     </div>
@@ -3972,7 +4243,40 @@
                             </p>
                         </div>
 
-                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">What's New in Version 2.19</h4>
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">What's New in Version 2.21</h4>
+                        <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
+                            <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
+                                <strong>One view across every workspace</strong>
+                            </p>
+                            <p style="line-height: 1.8; margin: 0; color: #555; font-size: 12px;">
+                                &#8226; <strong>Pick your workspaces</strong> &mdash; Tick any combination, or all of them, for a single report<br>
+                                &#8226; <strong>Priorities across workspaces</strong> &mdash; Each workspace with its separate lists, in ranked order<br>
+                                &#8226; <strong>&#128197; What's coming</strong> &mdash; Everything with a date, in date order, across the lot<br>
+                                &#8226; <strong>Four sources in one place</strong> &mdash; Task follow-ups, Quick List dates, scheduled client events and birthdays<br>
+                                &#8226; <strong>Birthdays recur properly</strong> &mdash; Next occurrence worked out, with the age being turned<br>
+                                &#8226; <strong>Look ahead as far as you like</strong> &mdash; A week, a month, three months, a year, or a custom range<br>
+                                &#8226; <strong>Grouped by month and day</strong> &mdash; With how far off each day is
+                            </p>
+                        </div>
+
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Previously, in Version 2.20</h4>
+                        <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
+                            <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
+                                <strong>Separate lists, and a clearer Priority Radar</strong>
+                            </p>
+                            <p style="line-height: 1.8; margin: 0; color: #555; font-size: 12px;">
+                                &#8226; <strong>Separate ranked lists</strong> &mdash; Name your own, so client work and business admin are not forced into one queue<br>
+                                &#8226; <strong>Each list ranks itself</strong> &mdash; Its own numbering, its own order, its own colour<br>
+                                &#8226; <strong>Assign in one click</strong> &mdash; A list dropdown on every row while ranking<br>
+                                &#8226; <strong>Arrange lays out columns</strong> &mdash; One column per list on the canvas<br>
+                                &#8226; <strong>Numbers in the Priority Radar</strong> &mdash; Matching the rank badge on the card<br>
+                                &#8226; <strong>Click a radar entry to open it</strong> &mdash; Straight to the task panel, no hunting on the canvas<br>
+                                &#8226; <strong>Arrange button made obvious</strong> &mdash; It is meant to be used again every time you add tasks<br>
+                                &#8226; <strong>Define none and nothing changes</strong> &mdash; One list, exactly as before
+                            </p>
+                        </div>
+
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Previously, in Version 2.19</h4>
                         <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
                             <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
                                 <strong>Contacts can be imported from a spreadsheet</strong>
@@ -4331,6 +4635,8 @@
 
                         <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Version History</h4>
                         <p style="line-height: 1.6; color: #555; font-size: 12px;">
+                            <strong>v2.21</strong> &mdash; Cross-workspace priority reports and a What's Coming calendar including birthdays<br>
+                            <strong>v2.20</strong> &mdash; Separate ranked lists per workspace, numbered and clickable Priority Radar entries<br>
                             <strong>v2.19</strong> &mdash; Contact import from CSV spreadsheets with column mapping<br>
                             <strong>v2.18</strong> &mdash; Report suite with time tallies per task, per contact and in total<br>
                             <strong>v2.17</strong> &mdash; Version badge in the header, single source of truth for the version number<br>
@@ -4803,8 +5109,8 @@
         // no longer a set of version numbers that can drift apart.
         // ==============================================
         const APP_VERSION = {
-            number: '2.19',
-            file: '20260903 MyLifeCanvas v 02.19-a',
+            number: '2.21',
+            file: '20260903 MyLifeCanvas v 02.21-a',
             released: 'September 2026'
         };
 
@@ -5083,8 +5389,11 @@
                 const priorityElements = document.querySelectorAll(`[data-workspace="${workspace}"] .priority-item`);
                 
                 priorityElements.forEach(itemEl => {
+                    const textEl = itemEl.querySelector('.priority-item-text');
                     items.push({
-                        title: itemEl.textContent.replace('×', '').trim(),
+                        title: textEl
+                            ? textEl.textContent.trim()
+                            : itemEl.textContent.replace('×', '').trim(),
                         linkedTaskId: itemEl.dataset.linkedTaskId || null
                     });
                 });
@@ -5232,7 +5541,9 @@
             priorityItem.className = 'priority-item';
             priorityItem.dataset.linkedTaskId = linkedTaskId || '';
             priorityItem.innerHTML = `
-                ${title}
+                <span class="priority-rank"></span>
+                <span class="priority-item-text" onclick="openPriorityItem(this)"
+                      title="Open this task">${title}</span>
                 <span class="remove-priority" onclick="removePriorityItem(this)">×</span>
             `;
             
@@ -5384,7 +5695,9 @@
             priorityItem.className = 'priority-item';
             priorityItem.dataset.linkedTaskId = taskId;
             priorityItem.innerHTML = `
-                ${title}
+                <span class="priority-rank"></span>
+                <span class="priority-item-text" onclick="openPriorityItem(this)"
+                      title="Open this task">${title}</span>
                 <span class="remove-priority" onclick="removePriorityItem(this)">×</span>
             `;
             
@@ -6246,6 +6559,228 @@
         }
 
         // ==============================================
+        // TASK LISTS (STREAMS) - v2.20
+        // A single ranking forces every task into one queue, which
+        // quietly claims that client work and business work are the
+        // same kind of thing. They compete for the same hours but they
+        // are not interchangeable, so they get their own ordered lists.
+        //
+        // Define none and nothing changes: one list, exactly as before.
+        // ==============================================
+
+        const STREAM_KEY = 'taskStreams';
+        const STREAM_COLOURS = ['#2980b9', '#8e44ad', '#16a085', '#d35400', '#c0392b', '#7f8c8d'];
+
+        let rankStream = 'all';
+
+        function loadStreams() {
+            try { return JSON.parse(localStorage.getItem(STREAM_KEY) || '{}'); }
+            catch (e) { return {}; }
+        }
+
+        function streamsFor(workspace) {
+            const all = loadStreams();
+            return Array.isArray(all[workspace]) ? all[workspace] : [];
+        }
+
+        function saveStreams(workspace, list) {
+            const all = loadStreams();
+            all[workspace] = list;
+            localStorage.setItem(STREAM_KEY, JSON.stringify(all));
+        }
+
+        function streamById(workspace, id) {
+            return streamsFor(workspace).find(s => s.id === id) || null;
+        }
+
+        function streamName(workspace, id) {
+            const s = streamById(workspace, id);
+            return s ? s.name : 'Unassigned';
+        }
+
+        function streamColour(workspace, id) {
+            const s = streamById(workspace, id);
+            return s ? s.colour : '#7f8c8d';
+        }
+
+        function taskStreamId(taskId) {
+            const d = getTaskDetail(taskId);
+            return d.streamId || '';
+        }
+
+        function setTaskStream(taskId, streamId, workspace) {
+            const d = getTaskDetail(taskId);
+            d.streamId = streamId || '';
+            setTaskDetail(taskId, d);
+            refreshTaskMomentum(workspace);
+        }
+
+        // Position of a task within its own list, 1-based
+        function rankWithinStream(workspace, taskId) {
+            const order = getRankOrder(workspace);
+            const mine = taskStreamId(taskId);
+            let n = 0;
+            for (let i = 0; i < order.length; i++) {
+                if (taskStreamId(order[i]) === mine) {
+                    n++;
+                    if (order[i] === taskId) return n;
+                }
+            }
+            return -1;
+        }
+
+        // ----- managing the lists -----
+
+        function openStreamManager() {
+            renderStreamManager();
+            document.getElementById('streamManagerModal').style.display = 'block';
+        }
+
+        function closeStreamManager() {
+            document.getElementById('streamManagerModal').style.display = 'none';
+            if (rankWorkspace) {
+                buildStreamSelector();
+                renderRankList();
+            }
+        }
+
+        function renderStreamManager() {
+            const ws = rankWorkspace || currentWorkspace;
+            document.getElementById('streamManagerWorkspace').textContent = workspaceNames[ws] || ws;
+            const container = document.getElementById('streamManagerList');
+            const list = streamsFor(ws);
+            container.innerHTML = '';
+
+            if (list.length === 0) {
+                container.innerHTML = '<div class="stream-empty">No separate lists yet. ' +
+                    'Everything sits in one ranking, which is fine for most workspaces.<br><br>' +
+                    'Add a list when two kinds of work should not be compared directly &mdash; ' +
+                    'client work against business admin, for instance.</div>';
+            }
+
+            list.forEach((s, i) => {
+                const count = countTasksInStream(ws, s.id);
+                const row = document.createElement('div');
+                row.className = 'stream-row';
+                row.innerHTML =
+                    '<span class="stream-swatch" style="background: ' + s.colour + ';"></span>' +
+                    '<input type="text" class="stream-name-input" value="' + rankEscape(s.name) + '" ' +
+                        'data-stream-id="' + s.id + '">' +
+                    '<span class="stream-count">' + count + (count === 1 ? ' task' : ' tasks') + '</span>' +
+                    '<button class="stream-btn" onclick="cycleStreamColour(\'' + s.id + '\')" title="Change colour">&#127912;</button>' +
+                    '<button class="stream-btn stream-btn-del" onclick="deleteStream(\'' + s.id + '\')" title="Remove this list">&#215;</button>';
+                container.appendChild(row);
+            });
+
+            container.querySelectorAll('.stream-name-input').forEach(input => {
+                input.addEventListener('change', function() {
+                    renameStream(this.dataset.streamId, this.value);
+                });
+            });
+        }
+
+        function countTasksInStream(workspace, streamId) {
+            let n = 0;
+            document.querySelectorAll('#workspace-' + workspace + ' .workspace-canvas .task-item')
+                .forEach(el => { if (taskStreamId(el.id) === streamId) n++; });
+            (workspaceMasterTasks[workspace] || []).forEach(g =>
+                (g.tasks || []).forEach(t => { if (taskStreamId(t.id) === streamId) n++; }));
+            return n;
+        }
+
+        function addStream() {
+            const ws = rankWorkspace || currentWorkspace;
+            const list = streamsFor(ws);
+            if (list.length >= 6) {
+                showNotification('Six lists is plenty &mdash; more starts to defeat the purpose', 'error');
+                return;
+            }
+            list.push({
+                id: 'stream-' + Date.now() + '-' + Math.random().toString(36).substr(2, 5),
+                name: 'New list',
+                colour: STREAM_COLOURS[list.length % STREAM_COLOURS.length]
+            });
+            saveStreams(ws, list);
+            renderStreamManager();
+        }
+
+        function renameStream(id, name) {
+            const ws = rankWorkspace || currentWorkspace;
+            const list = streamsFor(ws);
+            const s = list.find(x => x.id === id);
+            if (!s) return;
+            s.name = (name || '').trim() || 'Unnamed list';
+            saveStreams(ws, list);
+            refreshTaskMomentum(ws);
+        }
+
+        function cycleStreamColour(id) {
+            const ws = rankWorkspace || currentWorkspace;
+            const list = streamsFor(ws);
+            const s = list.find(x => x.id === id);
+            if (!s) return;
+            const i = STREAM_COLOURS.indexOf(s.colour);
+            s.colour = STREAM_COLOURS[(i + 1) % STREAM_COLOURS.length];
+            saveStreams(ws, list);
+            renderStreamManager();
+            refreshTaskMomentum(ws);
+        }
+
+        function deleteStream(id) {
+            const ws = rankWorkspace || currentWorkspace;
+            const count = countTasksInStream(ws, id);
+            if (count > 0 && !confirm('Remove "' + streamName(ws, id) + '"?\n\n' + count +
+                ' task(s) will move back to the main ranking. No tasks are deleted.')) return;
+
+            saveStreams(ws, streamsFor(ws).filter(s => s.id !== id));
+
+            const all = loadTaskDetails();
+            Object.keys(all).forEach(tid => {
+                if (all[tid] && all[tid].streamId === id) all[tid].streamId = '';
+            });
+            saveTaskDetails(all);
+
+            if (rankStream === id) rankStream = 'all';
+            renderStreamManager();
+            refreshTaskMomentum(ws);
+        }
+
+        // ----- selector above the ranking list -----
+
+        function buildStreamSelector() {
+            const wrap = document.getElementById('rankStreamRow');
+            const select = document.getElementById('rankStreamSelect');
+            if (!wrap || !select) return;
+
+            const list = streamsFor(rankWorkspace);
+            wrap.style.display = list.length ? '' : 'none';
+            if (!list.length) { rankStream = 'all'; return; }
+
+            select.innerHTML = '<option value="all">All lists (kept separate)</option>' +
+                list.map(s => '<option value="' + s.id + '">' + rankEscape(s.name) + '</option>').join('') +
+                '<option value="">Unassigned</option>';
+            select.value = rankStream;
+        }
+
+        function onRankStreamChanged() {
+            rankStream = document.getElementById('rankStreamSelect').value;
+            renderRankList();
+        }
+
+        function itemMatchesStream(item, streamId) {
+            return taskStreamId(item.id) === streamId;
+        }
+
+        // Reordering happens inside a list, then folds back into the master
+        // order without disturbing where the other lists' items sit.
+        function reorderWithinStream(streamId, reordered) {
+            const slots = [];
+            rankItems.forEach((it, i) => { if (itemMatchesStream(it, streamId)) slots.push(i); });
+            slots.forEach((pos, k) => { rankItems[pos] = reordered[k]; });
+            persistCurrentRankOrder();
+        }
+
+        // ==============================================
         // CONTACT IMPORT FROM CSV - v2.19
         // Most people's lists already live in a spreadsheet or come out
         // of another address book, and every one of them names its
@@ -6714,6 +7249,7 @@
                 timeline: on('optTimeline'),
                 times: on('optTimes'),
                 scheduled: on('optScheduled'),
+                birthdays: on('optBirthdays'),
                 quicklist: on('optQuickList'),
                 victories: on('optVictories')
             };
@@ -6887,72 +7423,300 @@
             return body;
         }
 
-        function buildWorkspaceReport(workspace, opt) {
-            let body = '';
-            const tasks = [];
-            document.querySelectorAll('#workspace-' + workspace + ' .workspace-canvas .task-item').forEach(el => {
-                const d = getTaskDetail(el.id);
-                tasks.push({
-                    id: el.id,
-                    title: (el.querySelector('.task-title') || {}).textContent || '',
-                    desc: (el.querySelector('.task-description') || {}).textContent || '',
-                    status: (el.querySelector('.task-status') || {}).textContent || '',
-                    nextStep: d.nextStep, waitingOn: d.waitingOn, followUpDate: d.followUpDate,
-                    minutes: taskLoggedMinutes(el.id),
-                    contacts: taskContactIds(el.id).map(contactDisplayName).join(', ')
+        // ==============================================
+        // ACROSS THE WORKSPACES - v2.21
+        // Everything dated in this app has been sitting in its own
+        // corner: follow-ups in one workspace, Quick List dates in
+        // another, client events and birthdays in a third. A person
+        // juggling six workspaces has no single view of what is coming.
+        // These two reports give one.
+        // ==============================================
+
+        function selectedReportWorkspaces() {
+            const picked = [];
+            document.querySelectorAll('#reportWorkspaceList input[type="checkbox"]:checked')
+                .forEach(cb => picked.push(cb.value));
+            return picked;
+        }
+
+        function buildWorkspacePicker() {
+            const container = document.getElementById('reportWorkspaceList');
+            if (!container) return;
+            const previously = selectedReportWorkspaces();
+            container.innerHTML = '';
+
+            RANK_WORKSPACES.forEach(ws => {
+                const count = document.querySelectorAll(
+                    '#workspace-' + ws + ' .workspace-canvas .task-item').length;
+                const label = document.createElement('label');
+                label.className = 'report-check';
+                const checked = previously.length ? previously.indexOf(ws) !== -1 : ws === currentWorkspace;
+                label.innerHTML = '<input type="checkbox" value="' + ws + '"' + (checked ? ' checked' : '') + '> ' +
+                    rankEscape(workspaceNames[ws] || ws) +
+                    '<span class="report-ws-count">' + count + '</span>';
+                container.appendChild(label);
+            });
+        }
+
+        function setAllReportWorkspaces(on) {
+            document.querySelectorAll('#reportWorkspaceList input[type="checkbox"]')
+                .forEach(cb => { cb.checked = on; });
+        }
+
+        // ----- birthdays as recurring dates -----
+
+        function nextAnniversary(dateString, from) {
+            const born = parseQuickListDate(dateString) ||
+                         (dateString ? new Date(dateString) : null);
+            if (!born || isNaN(born.getTime())) return null;
+            const start = from || quickListToday();
+            let next = new Date(start.getFullYear(), born.getMonth(), born.getDate());
+            next.setHours(0, 0, 0, 0);
+            if (next < start) next = new Date(start.getFullYear() + 1, born.getMonth(), born.getDate());
+            return { date: next, born: born };
+        }
+
+        function gatherBirthdays(range) {
+            const out = [];
+            allContacts().forEach(c => {
+                [['contact1Name', 'contact1Birthday'], ['contact2Name', 'contact2Birthday']].forEach(pair => {
+                    const who = c[pair[0]], when = c[pair[1]];
+                    if (!who || !when) return;
+                    const next = nextAnniversary(when, range.start);
+                    if (!next || next.date > range.end) return;
+                    const turning = next.date.getFullYear() - next.born.getFullYear();
+                    out.push({
+                        date: next.date,
+                        kind: 'birthday',
+                        source: c.clientName,
+                        title: who + "'s birthday" +
+                               (turning > 0 && turning < 120 ? ' \u2014 turning ' + turning : '')
+                    });
                 });
             });
+            return out;
+        }
 
-            const order = getRankOrder(workspace);
-            tasks.sort((a, b) => {
-                const ai = order.indexOf(a.id), bi = order.indexOf(b.id);
-                return (ai === -1 ? 9999 : ai) - (bi === -1 ? 9999 : bi);
+        function gatherDatedItems(workspaces, range, opt) {
+            const out = [];
+
+            workspaces.forEach(ws => {
+                const label = workspaceNames[ws] || ws;
+
+                document.querySelectorAll('#workspace-' + ws + ' .workspace-canvas .task-item').forEach(el => {
+                    const d = getTaskDetail(el.id);
+                    if (!d.followUpDate) return;
+                    const when = parseQuickListDate(d.followUpDate);
+                    if (!when || when < range.start || when > range.end) return;
+                    out.push({
+                        date: when,
+                        kind: 'task',
+                        source: label,
+                        stream: taskStreamId(el.id) ? streamName(ws, taskStreamId(el.id)) : '',
+                        title: (el.querySelector('.task-title') || {}).textContent || 'Untitled',
+                        detail: d.nextStep || '',
+                        waiting: d.waitingOn || '',
+                        contacts: taskContactIds(el.id).map(contactDisplayName).join(', ')
+                    });
+                });
+
+                if (opt.quicklist !== false) {
+                    getQuickList(ws).forEach(item => {
+                        const when = parseQuickListDate(item.date);
+                        if (!when || when < range.start || when > range.end) return;
+                        out.push({
+                            date: when, kind: 'quicklist', source: label,
+                            title: item.title, detail: item.note || ''
+                        });
+                    });
+                }
             });
 
-            body += '<h2>&#128203; Where tasks sit (' + tasks.length + ')</h2>';
-            if (tasks.length === 0) body += '<p class="empty">No active tasks.</p>';
-            else {
-                body += '<table><tr><th>#</th><th>Task</th><th>Status</th><th>Contact</th>' +
-                        '<th>Next step / waiting on</th><th>Follow up</th>' +
-                        (opt.times ? '<th>Time</th>' : '') + '</tr>';
-                tasks.forEach((t, i) => {
-                    const late = quickListDueClass(t.followUpDate) === 'due-overdue';
-                    body += '<tr><td>' + (i + 1) + '</td>' +
-                        '<td><strong>' + rankEscape(t.title) + '</strong>' +
-                            (t.desc ? '<div class="meta">' + rankEscape(t.desc) + '</div>' : '') + '</td>' +
-                        '<td>' + rankEscape(t.status) + '</td>' +
-                        '<td>' + rankEscape(t.contacts) + '</td>' +
-                        '<td>' + rankEscape(t.nextStep || '') +
-                            (t.waitingOn ? '<div class="meta">Waiting on ' + rankEscape(t.waitingOn) + '</div>' : '') + '</td>' +
-                        '<td>' + (t.followUpDate ? '<span class="chip' + (late ? ' chip-late' : '') + '">' +
-                            rankEscape(formatQuickListDate(t.followUpDate)) + '</span>' : '') + '</td>' +
-                        (opt.times ? '<td>' + (t.minutes ? formatMinutes(t.minutes) : '') + '</td>' : '') +
-                        '</tr>';
+            if (opt.scheduled !== false) {
+                allContacts().forEach(c => {
+                    (c.scheduledItems || []).forEach(item => {
+                        if (item.status !== 'pending') return;
+                        const when = parseQuickListDate(item.date) ||
+                                     (item.date ? new Date(item.date) : null);
+                        if (!when || isNaN(when.getTime()) || when < range.start || when > range.end) return;
+                        out.push({
+                            date: when, kind: 'scheduled', source: c.clientName,
+                            title: item.taskType, detail: ''
+                        });
+                    });
                 });
-                body += '</table>';
             }
 
-            if (opt.quicklist) {
-                const items = sortedQuickList(workspace);
-                body += '<h2>&#128204; Quick List (' + items.length + ')</h2>';
-                if (!items.length) body += '<p class="empty">Nothing listed.</p>';
-                else {
-                    body += '<table><tr><th>Item</th><th>Due</th><th>Note</th></tr>';
-                    items.forEach(i => {
-                        const late = quickListDueClass(i.date) === 'due-overdue';
-                        body += '<tr><td>' + rankEscape(i.title) + '</td><td>' +
-                            (i.date ? '<span class="chip' + (late ? ' chip-late' : '') + '">' +
-                                rankEscape(formatQuickListDate(i.date)) + '</span>' : '') + '</td><td>' +
-                            rankEscape(i.note || '') + '</td></tr>';
+            if (opt.birthdays) out.push.apply(out, gatherBirthdays(range));
+
+            out.sort((a, b) => a.date - b.date);
+            return out;
+        }
+
+        function forwardRange(mode, fromValue, toValue) {
+            const start = quickListToday();
+            const end = new Date(start);
+            if (mode === 'custom') {
+                const f = parseQuickListDate(fromValue), t = parseQuickListDate(toValue);
+                if (f) start.setTime(f.getTime());
+                if (t) end.setTime(t.getTime());
+                else end.setDate(start.getDate() + 30);
+            } else {
+                end.setDate(end.getDate() + (parseInt(mode, 10) || 30));
+            }
+            end.setHours(23, 59, 59, 999);
+            return { start: start, end: end };
+        }
+
+        const KIND_LABELS = {
+            task: 'Follow up', quicklist: 'Quick List',
+            scheduled: 'Scheduled', birthday: 'Birthday'
+        };
+        const KIND_COLOURS = {
+            task: '#e67e22', quicklist: '#8e44ad',
+            scheduled: '#16a085', birthday: '#c0392b'
+        };
+
+        function buildCalendarReport(workspaces, range, opt) {
+            const items = gatherDatedItems(workspaces, range, opt);
+            if (!items.length) {
+                return '<p class="empty">Nothing dated in this period.</p>';
+            }
+
+            let body = '';
+            let currentMonth = '';
+            let currentDay = '';
+
+            items.forEach(item => {
+                const month = item.date.toLocaleDateString('en-AU', { month: 'long', year: 'numeric' });
+                if (month !== currentMonth) {
+                    currentMonth = month;
+                    currentDay = '';
+                    body += '<h2>' + rankEscape(month) + '</h2>';
+                }
+
+                const day = item.date.toDateString();
+                if (day !== currentDay) {
+                    currentDay = day;
+                    const days = Math.round((item.date - quickListToday()) / 86400000);
+                    const when = days === 0 ? 'today' : days === 1 ? 'tomorrow'
+                        : days < 0 ? Math.abs(days) + ' days ago' : 'in ' + days + ' days';
+                    body += '<h3 style="margin-top:14px;">' +
+                        rankEscape(item.date.toLocaleDateString('en-AU',
+                            { weekday: 'long', day: 'numeric', month: 'short' })) +
+                        ' <span class="meta">&middot; ' + when + '</span></h3>';
+                }
+
+                body += '<div class="entry">' +
+                    '<span class="chip" style="background: ' + KIND_COLOURS[item.kind] +
+                        '; color: white;">' + KIND_LABELS[item.kind] + '</span>' +
+                    '<strong>' + rankEscape(item.title) + '</strong>' +
+                    (item.source ? ' <span class="meta">&middot; ' + rankEscape(item.source) + '</span>' : '') +
+                    (item.stream ? ' <span class="meta">&middot; ' + rankEscape(item.stream) + '</span>' : '') +
+                    (item.contacts ? ' <span class="meta">&middot; ' + rankEscape(item.contacts) + '</span>' : '') +
+                    (item.detail ? '<div class="meta">' + rankEscape(item.detail) + '</div>' : '') +
+                    (item.waiting ? '<div class="meta">Waiting on ' + rankEscape(item.waiting) + '</div>' : '') +
+                    '</div>';
+            });
+
+            const counts = {};
+            items.forEach(i => { counts[i.kind] = (counts[i.kind] || 0) + 1; });
+            body += '<div class="grand">' + items.length + ' dated items &middot; ' +
+                Object.keys(counts).map(k => counts[k] + ' ' + KIND_LABELS[k].toLowerCase()).join(', ') +
+                '</div>';
+
+            return body;
+        }
+
+        function buildPrioritiesReport(workspaces, opt) {
+            let body = '';
+            let grandTasks = 0;
+
+            workspaces.forEach(ws => {
+                const streams = streamsFor(ws);
+                const order = getRankOrder(ws);
+
+                const collect = streamId => {
+                    const rows = [];
+                    order.forEach(id => {
+                        const el = document.getElementById(id);
+                        if (!el || !el.closest('#workspace-' + ws)) return;
+                        if (taskStreamId(id) !== streamId) return;
+                        const d = getTaskDetail(id);
+                        rows.push({
+                            id: id,
+                            title: (el.querySelector('.task-title') || {}).textContent || '',
+                            status: (el.querySelector('.task-status') || {}).textContent || '',
+                            nextStep: d.nextStep, waitingOn: d.waitingOn,
+                            followUpDate: d.followUpDate,
+                            minutes: taskLoggedMinutes(id),
+                            contacts: taskContactIds(id).map(contactDisplayName).join(', ')
+                        });
+                    });
+                    return rows;
+                };
+
+                const groups = [];
+                if (streams.length) {
+                    streams.forEach(s => groups.push({ name: s.name, colour: s.colour, rows: collect(s.id) }));
+                    const loose = collect('');
+                    if (loose.length) groups.push({ name: 'Unassigned', colour: '#7f8c8d', rows: loose });
+                } else {
+                    groups.push({ name: null, colour: '#7f8c8d', rows: collect('') });
+                }
+
+                const total = groups.reduce((s, g) => s + g.rows.length, 0);
+                grandTasks += total;
+                body += '<h2>' + rankEscape(workspaceNames[ws] || ws) +
+                        ' <span class="meta">&middot; ' + total + (total === 1 ? ' task' : ' tasks') +
+                        '</span></h2>';
+
+                if (!total) { body += '<p class="empty">No active tasks.</p>'; return; }
+
+                groups.forEach(g => {
+                    if (!g.rows.length) return;
+                    if (g.name) {
+                        body += '<h3 style="color:' + g.colour + ';">' + rankEscape(g.name) +
+                                ' <span class="meta">&middot; ' + g.rows.length + '</span></h3>';
+                    }
+                    body += '<table><tr><th>#</th><th>Task</th><th>Status</th><th>Contact</th>' +
+                            '<th>Next step</th><th>Follow up</th>' + (opt.times ? '<th>Time</th>' : '') + '</tr>';
+                    g.rows.forEach((r, i) => {
+                        const late = quickListDueClass(r.followUpDate) === 'due-overdue';
+                        body += '<tr><td>' + (i + 1) + '</td>' +
+                            '<td><strong>' + rankEscape(r.title) + '</strong></td>' +
+                            '<td>' + rankEscape(r.status) + '</td>' +
+                            '<td>' + rankEscape(r.contacts) + '</td>' +
+                            '<td>' + rankEscape(r.nextStep || '') +
+                                (r.waitingOn ? '<div class="meta">Waiting on ' + rankEscape(r.waitingOn) + '</div>' : '') +
+                            '</td>' +
+                            '<td>' + (r.followUpDate ? '<span class="chip' + (late ? ' chip-late' : '') + '">' +
+                                rankEscape(formatQuickListDate(r.followUpDate)) + '</span>' : '') + '</td>' +
+                            (opt.times ? '<td>' + (r.minutes ? formatMinutes(r.minutes) : '') + '</td>' : '') +
+                            '</tr>';
                     });
                     body += '</table>';
-                }
-            }
+                });
 
-            if (opt.times) {
-                const total = tasks.reduce((s, t) => s + t.minutes, 0);
-                if (total) body += '<div class="grand">Total time logged against these tasks: ' +
-                                   formatMinutes(total) + '</div>';
+                if (opt.quicklist) {
+                    const items = sortedQuickList(ws);
+                    if (items.length) {
+                        body += '<h3>&#128204; Quick List <span class="meta">&middot; ' + items.length + '</span></h3>';
+                        body += '<table><tr><th>Item</th><th>Due</th><th>Note</th></tr>' +
+                            items.map(i => {
+                                const late = quickListDueClass(i.date) === 'due-overdue';
+                                return '<tr><td>' + rankEscape(i.title) + '</td><td>' +
+                                    (i.date ? '<span class="chip' + (late ? ' chip-late' : '') + '">' +
+                                        rankEscape(formatQuickListDate(i.date)) + '</span>' : '') +
+                                    '</td><td>' + rankEscape(i.note || '') + '</td></tr>';
+                            }).join('') + '</table>';
+                    }
+                }
+            });
+
+            if (workspaces.length > 1) {
+                body += '<div class="grand">' + grandTasks + ' active tasks across ' +
+                        workspaces.length + ' workspaces</div>';
             }
             return body;
         }
@@ -6974,15 +7738,7 @@
                     contactSelect.appendChild(opt);
                 });
 
-            const wsSelect = document.getElementById('reportWorkspace');
-            wsSelect.innerHTML = '';
-            RANK_WORKSPACES.forEach(ws => {
-                const opt = document.createElement('option');
-                opt.value = ws;
-                opt.textContent = workspaceNames[ws] || ws;
-                if (ws === currentWorkspace) opt.selected = true;
-                wsSelect.appendChild(opt);
-            });
+            buildWorkspacePicker();
 
             if (presetType) document.getElementById('reportType').value = presetType;
             onReportTypeChanged();
@@ -7001,17 +7757,29 @@
             };
             show('reportRangeRow', type === 'day');
             show('reportContactRow', type === 'contact');
-            show('reportWorkspaceRow', type === 'workspace');
-            show('optScheduledWrap', type === 'contact');
-            show('optQuickListWrap', type === 'workspace');
+            show('reportWorkspaceRow', type === 'workspace' || type === 'calendar');
+            show('reportAheadRow', type === 'calendar');
+            show('optScheduledWrap', type === 'contact' || type === 'calendar');
+            show('optQuickListWrap', type === 'workspace' || type === 'calendar');
             show('optVictoriesWrap', type === 'day');
             show('optContactDetailsWrap', type === 'contact');
+            show('optBirthdaysWrap', type === 'calendar');
+            show('optTimelineWrap', type !== 'calendar');
+            show('optTimesWrap', type !== 'calendar');
             onReportRangeChanged();
+            onReportAheadChanged();
         }
 
         function onReportRangeChanged() {
-            const mode = document.getElementById('reportRange').value;
+            const type = document.getElementById('reportType').value;
+            const mode = type === 'calendar'
+                ? document.getElementById('reportAhead').value
+                : document.getElementById('reportRange').value;
             document.getElementById('reportCustomRange').style.display = mode === 'custom' ? '' : 'none';
+        }
+
+        function onReportAheadChanged() {
+            onReportRangeChanged();
         }
 
         function applyReportPreset(name) {
@@ -7037,7 +7805,14 @@
                 document.getElementById('reportType').value = 'workspace';
                 set('optContactDetails', false); set('optTasks', true); set('optTimeline', false);
                 set('optTimes', true); set('optScheduled', false); set('optQuickList', true);
-                set('optVictories', false);
+                set('optVictories', false); set('optBirthdays', false);
+            } else if (name === 'whatscoming') {
+                document.getElementById('reportType').value = 'calendar';
+                document.getElementById('reportAhead').value = '30';
+                set('optContactDetails', false); set('optTasks', true); set('optTimeline', false);
+                set('optTimes', false); set('optScheduled', true); set('optQuickList', true);
+                set('optVictories', false); set('optBirthdays', true);
+                setAllReportWorkspaces(true);
             }
             onReportTypeChanged();
         }
@@ -7066,12 +7841,34 @@
                     : 'Contact file';
                 body = buildContactReport(ids, opt);
                 label = choice === '__all__' ? 'Contact List' : contactDisplayName(choice) + ' File';
+            } else if (type === 'calendar') {
+                const workspaces = selectedReportWorkspaces();
+                const range = forwardRange(document.getElementById('reportAhead').value,
+                    document.getElementById('reportFrom').value,
+                    document.getElementById('reportTo').value);
+                title = "What's Coming";
+                subtitle = niceDate(range.start) + ' to ' + niceDate(range.end) +
+                    (workspaces.length ? ' &middot; ' +
+                        workspaces.map(w => rankEscape(workspaceNames[w] || w)).join(', ') : '');
+                body = buildCalendarReport(workspaces, range, opt);
+                label = 'Whats Coming';
             } else {
-                const ws = document.getElementById('reportWorkspace').value;
-                title = (workspaceNames[ws] || ws) + ' Snapshot';
-                subtitle = 'As at ' + niceDate(new Date());
-                body = buildWorkspaceReport(ws, opt);
-                label = (workspaceNames[ws] || ws) + ' Snapshot';
+                const workspaces = selectedReportWorkspaces();
+                if (!workspaces.length) {
+                    title = 'Priorities';
+                    subtitle = 'No workspaces selected';
+                    body = '<p class="empty">Tick at least one workspace.</p>';
+                    label = 'Priorities';
+                } else {
+                    title = workspaces.length === 1
+                        ? (workspaceNames[workspaces[0]] || workspaces[0]) + ' Snapshot'
+                        : 'Priorities across ' + workspaces.length + ' workspaces';
+                    subtitle = 'As at ' + niceDate(new Date());
+                    body = buildPrioritiesReport(workspaces, opt);
+                    label = workspaces.length === 1
+                        ? (workspaceNames[workspaces[0]] || workspaces[0]) + ' Snapshot'
+                        : 'Priorities Across Workspaces';
+                }
             }
 
             const name = buildExportName(label, 'html');
@@ -7428,6 +8225,7 @@
                 followUpDate: d.followUpDate || '',
                 log: Array.isArray(d.log) ? d.log : [],
                 contactIds: Array.isArray(d.contactIds) ? d.contactIds : [],
+                streamId: d.streamId || '',
                 lastTouched: d.lastTouched || '',
                 firstSeen: d.firstSeen || ''
             };
@@ -7489,6 +8287,12 @@
                         bits.push('<span class="task-chip task-chip-log" title="' + entryCount +
                                   ' timeline entries">&#128221; ' + entryCount + '</span>');
                     }
+                    const streamId = taskStreamId(el.id);
+                    if (streamId) {
+                        bits.push('<span class="task-chip task-chip-stream" style="background: ' +
+                                  streamColour(ws, streamId) + ';">' +
+                                  rankEscape(streamName(ws, streamId)) + '</span>');
+                    }
                     taskContactIds(el.id).forEach(function (cid) {
                         bits.push('<span class="task-chip task-chip-contact">&#128100; ' +
                                   rankEscape(contactDisplayName(cid)) + '</span>');
@@ -7520,6 +8324,7 @@
 
             if (dirty) saveTaskDetails(all);
             applyParkedStyling(workspace);
+            try { refreshRadarNumbers(workspace); } catch (e) {}
         }
 
         // Capacity filtering sets inline opacity, so parked fading has to
@@ -7570,6 +8375,14 @@
                 if (statusLabels[detailWorkspace][key].label === currentLabel) opt.selected = true;
                 statusSelect.appendChild(opt);
             });
+
+            const streams = streamsFor(detailWorkspace);
+            const streamRow = document.getElementById('detailStreamRow');
+            const streamSelect = document.getElementById('detailStream');
+            streamRow.style.display = streams.length ? '' : 'none';
+            streamSelect.innerHTML = '<option value="">Unassigned</option>' +
+                streams.map(s => '<option value="' + s.id + '">' + rankEscape(s.name) + '</option>').join('');
+            streamSelect.value = taskStreamId(detailTaskId);
 
             const d = getTaskDetail(detailTaskId);
             detailContactIds = taskContactIds(detailTaskId);
@@ -7698,6 +8511,7 @@
             d.waitingOn = document.getElementById('detailWaitingOn').value.trim();
             d.followUpDate = document.getElementById('detailFollowUp').value || '';
             d.contactIds = detailContactIds.slice();
+            d.streamId = document.getElementById('detailStream').value || '';
             setTaskDetail(detailTaskId, d);
             try { if (typeof renderClientList === 'function') renderClientList(); } catch (e) {}
 
@@ -7918,6 +8732,8 @@
             // down the file, so anything reading it has to wait for the current
             // batch of handlers to finish.
             setTimeout(function() {
+                try { ensureRankOrders(); } catch (e) {}
+                try { refreshRankBadges(); } catch (e) {}
                 try { refreshTaskMomentum(); refreshFocusButtons(); } catch (e) {}
                 // Contact cards total up time logged against each person, so they
                 // have to be drawn after the activity log is in memory too.
@@ -8679,6 +9495,7 @@
                     priorityRanking: JSON.parse(localStorage.getItem('priorityRanking') || '{}'),
                     exportSequences: JSON.parse(localStorage.getItem('exportSequences') || '{}'),
                     quickList: JSON.parse(localStorage.getItem('quickList') || '{}'),
+                    taskStreams: JSON.parse(localStorage.getItem('taskStreams') || '{}'),
                     taskDetails: JSON.parse(localStorage.getItem('taskDetails') || '{}'),
                     quickListSort: JSON.parse(localStorage.getItem('quickListSort') || '{}'),
                     lastFullBackup: localStorage.getItem('lastFullBackup') || null,
@@ -8768,6 +9585,7 @@
                     if (data.priorityRanking) localStorage.setItem('priorityRanking', JSON.stringify(data.priorityRanking));
                     if (data.exportSequences) localStorage.setItem('exportSequences', JSON.stringify(data.exportSequences));
                     if (data.quickList) localStorage.setItem('quickList', JSON.stringify(data.quickList));
+                    if (data.taskStreams) localStorage.setItem('taskStreams', JSON.stringify(data.taskStreams));
                     if (data.taskDetails) localStorage.setItem('taskDetails', JSON.stringify(data.taskDetails));
                     if (data.quickListSort) localStorage.setItem('quickListSort', JSON.stringify(data.quickListSort));
                     if (data.lastFullBackup) localStorage.setItem('lastFullBackup', data.lastFullBackup);
@@ -10883,6 +11701,7 @@
             if (!rankWorkspace) return;
             saveRankOrder(rankWorkspace, rankItems.map(i => i.id));
             refreshRankBadges(rankWorkspace);
+            try { refreshRadarNumbers(rankWorkspace); } catch (e) {}
         }
 
         function refreshRankFromSources() {
@@ -10909,6 +11728,8 @@
             document.getElementById('rankFilterInput').value = '';
             document.getElementById('rankSourceSelect').value = 'all';
             document.getElementById('rankBadgeToggle').checked = rankBadgesEnabled();
+            rankStream = 'all';
+            buildStreamSelector();
 
             refreshRankFromSources();
             modal.style.display = 'block';
@@ -10920,6 +11741,48 @@
             rankItems = [];
         }
 
+        function rankRowHtml(item, number, workspace) {
+            const streams = streamsFor(workspace);
+            const sid = taskStreamId(item.id);
+
+            const actions = item.source === 'active'
+                ? '<button class="rank-btn rank-btn-radar" onclick="rankAddToRadar(\'' + item.id + '\')" title="Add to Priority Radar">&#9733;</button>' +
+                  '<button class="rank-btn rank-btn-done" onclick="rankCompleteTask(\'' + item.id + '\')" title="Mark done">&#10003;</button>'
+                : '<button class="rank-btn rank-btn-promote" onclick="rankPromote(\'' + item.id + '\')" title="Promote onto the canvas">&#8593; Activate</button>';
+
+            const streamPicker = streams.length
+                ? '<select class="rank-stream-select" title="Which list this belongs to" ' +
+                      'onchange="setTaskStream(\'' + item.id + '\', this.value, \'' + workspace + '\'); refreshRankFromSources();">' +
+                      '<option value=""' + (sid === '' ? ' selected' : '') + '>Unassigned</option>' +
+                      streams.map(s => '<option value="' + s.id + '"' + (s.id === sid ? ' selected' : '') + '>' +
+                          rankEscape(s.name) + '</option>').join('') +
+                  '</select>'
+                : '';
+
+            return '<div class="rank-grip" title="Drag to reorder">&#10303;</div>' +
+                '<div class="rank-number" style="' +
+                    (sid ? 'background: ' + streamColour(workspace, sid) + '; color: white;' : '') + '">' +
+                    number + '</div>' +
+                '<div class="rank-body">' +
+                    '<div class="rank-title">' + rankEscape(item.title) + '</div>' +
+                    (item.desc ? '<div class="rank-desc">' + rankEscape(item.desc) + '</div>' : '') +
+                '</div>' +
+                streamPicker +
+                (item.status
+                    ? '<span class="rank-status" style="background: ' + rankSafeColour(item.statusColour) + ';">' +
+                          rankEscape(item.status) + '</span>'
+                    : '') +
+                '<span class="rank-source ' + (item.source === 'active' ? 'src-active' : 'src-master') + '">' +
+                    (item.source === 'active' ? 'ACTIVE' : 'MASTER') +
+                '</span>' +
+                '<div class="rank-actions">' +
+                    '<button class="rank-btn" onclick="moveRankItem(\'' + item.id + '\', -1)" title="Move up">&#9650;</button>' +
+                    '<button class="rank-btn" onclick="moveRankItem(\'' + item.id + '\', 1)" title="Move down">&#9660;</button>' +
+                    '<button class="rank-btn" onclick="moveRankItemTop(\'' + item.id + '\')" title="Send to top">&#8657;</button>' +
+                    actions +
+                '</div>';
+        }
+
         function renderRankList() {
             const container = document.getElementById('rankList');
             if (!container) return;
@@ -10927,53 +11790,56 @@
 
             const filtering = rankFilterText.trim() !== '' || rankSourceFilter !== 'all';
             const needle = rankFilterText.trim().toLowerCase();
+            const streams = streamsFor(rankWorkspace);
             let shown = 0;
 
-            rankItems.forEach((item, index) => {
-                if (rankSourceFilter !== 'all' && item.source !== rankSourceFilter) return;
-                if (needle && (item.title + ' ' + item.desc).toLowerCase().indexOf(needle) === -1) return;
-                shown++;
+            const visible = item => {
+                if (rankSourceFilter !== 'all' && item.source !== rankSourceFilter) return false;
+                if (needle && (item.title + ' ' + item.desc).toLowerCase().indexOf(needle) === -1) return false;
+                return true;
+            };
 
-                const row = document.createElement('div');
-                row.className = 'rank-row ' + (item.source === 'active' ? 'is-active' : 'is-master');
-                row.dataset.rankId = item.id;
-                row.draggable = !filtering;
+            const renderGroup = (streamId, label, colour) => {
+                const members = rankItems.filter(i => itemMatchesStream(i, streamId));
+                if (!members.length) return;
 
-                const actions = item.source === 'active'
-                    ? '<button class="rank-btn rank-btn-radar" onclick="rankAddToRadar(\'' + item.id + '\')" title="Add to Priority Radar">&#9733;</button>' +
-                      '<button class="rank-btn rank-btn-done" onclick="rankCompleteTask(\'' + item.id + '\')" title="Mark done">&#10003;</button>'
-                    : '<button class="rank-btn rank-btn-promote" onclick="rankPromote(\'' + item.id + '\')" title="Promote onto the canvas">&#8593; Activate</button>';
+                if (label !== null) {
+                    const head = document.createElement('div');
+                    head.className = 'rank-group-head';
+                    head.style.borderLeftColor = colour;
+                    head.innerHTML = '<span style="color:' + colour + ';">' + rankEscape(label) + '</span>' +
+                        '<span class="rank-group-count">' + members.length +
+                        (members.length === 1 ? ' task' : ' tasks') + '</span>';
+                    container.appendChild(head);
+                }
 
-                row.innerHTML =
-                    '<div class="rank-grip" title="' + (filtering ? 'Clear the filter to drag' : 'Drag to reorder') + '">&#10303;</div>' +
-                    '<div class="rank-number">' + (index + 1) + '</div>' +
-                    '<div class="rank-body">' +
-                        '<div class="rank-title">' + rankEscape(item.title) + '</div>' +
-                        (item.desc ? '<div class="rank-desc">' + rankEscape(item.desc) + '</div>' : '') +
-                    '</div>' +
-                    (item.status
-                        ? '<span class="rank-status" style="background: ' + rankSafeColour(item.statusColour) + ';">' +
-                              rankEscape(item.status) + '</span>'
-                        : '') +
-                    '<span class="rank-source ' + (item.source === 'active' ? 'src-active' : 'src-master') + '">' +
-                        (item.source === 'active' ? 'ACTIVE' : 'MASTER') +
-                    '</span>' +
-                    '<div class="rank-actions">' +
-                        '<button class="rank-btn" onclick="moveRankItem(\'' + item.id + '\', -1)" title="Move up">&#9650;</button>' +
-                        '<button class="rank-btn" onclick="moveRankItem(\'' + item.id + '\', 1)" title="Move down">&#9660;</button>' +
-                        '<button class="rank-btn" onclick="moveRankItemTop(\'' + item.id + '\')" title="Send to top">&#8657;</button>' +
-                        actions +
-                    '</div>';
+                members.forEach((item, index) => {
+                    if (!visible(item)) return;
+                    shown++;
+                    const row = document.createElement('div');
+                    row.className = 'rank-row ' + (item.source === 'active' ? 'is-active' : 'is-master');
+                    row.dataset.rankId = item.id;
+                    row.dataset.streamId = streamId;
+                    row.draggable = !filtering;
+                    row.innerHTML = rankRowHtml(item, index + 1, rankWorkspace);
+                    container.appendChild(row);
+                });
+            };
 
-                container.appendChild(row);
-            });
+            if (!streams.length) {
+                renderGroup('', null, '#7f8c8d');
+            } else if (rankStream === 'all') {
+                streams.forEach(s => renderGroup(s.id, s.name, s.colour));
+                renderGroup('', 'Unassigned', '#7f8c8d');
+            } else {
+                renderGroup(rankStream, streamName(rankWorkspace, rankStream), streamColour(rankWorkspace, rankStream));
+            }
 
             if (shown === 0) {
                 container.innerHTML = '<div class="rank-empty">' +
                     (rankItems.length === 0
                         ? 'Nothing to rank yet in this workspace.<br>Add active tasks, or demote tasks into the Master Task Repository.'
-                        : 'No tasks match that filter.') +
-                    '</div>';
+                        : 'Nothing matches that filter.') + '</div>';
             }
 
             const counter = document.getElementById('rankCount');
@@ -10986,37 +11852,200 @@
         }
 
         function moveRankItem(taskId, delta) {
-            const from = rankItems.findIndex(x => x.id === taskId);
-            if (from === -1) return;
+            const sid = taskStreamId(taskId);
+            const members = rankItems.filter(i => itemMatchesStream(i, sid));
+            const from = members.findIndex(x => x.id === taskId);
             const to = from + delta;
-            if (to < 0 || to >= rankItems.length) return;
-            const moved = rankItems.splice(from, 1)[0];
-            rankItems.splice(to, 0, moved);
-            persistCurrentRankOrder();
+            if (from === -1 || to < 0 || to >= members.length) return;
+            const moved = members.splice(from, 1)[0];
+            members.splice(to, 0, moved);
+            reorderWithinStream(sid, members);
             renderRankList();
         }
 
         function moveRankItemTop(taskId) {
-            const from = rankItems.findIndex(x => x.id === taskId);
+            const sid = taskStreamId(taskId);
+            const members = rankItems.filter(i => itemMatchesStream(i, sid));
+            const from = members.findIndex(x => x.id === taskId);
             if (from <= 0) return;
-            const moved = rankItems.splice(from, 1)[0];
-            rankItems.unshift(moved);
-            persistCurrentRankOrder();
+            const moved = members.splice(from, 1)[0];
+            members.unshift(moved);
+            reorderWithinStream(sid, members);
             renderRankList();
         }
 
+        function refreshRankBadges(workspace) {
+            const list = workspace ? [workspace] : RANK_WORKSPACES;
+            const show = rankBadgesEnabled();
+
+            list.forEach(ws => {
+                const order = getRankOrder(ws);
+                document.querySelectorAll('#workspace-' + ws + ' .workspace-canvas .task-item').forEach(el => {
+                    let badge = el.querySelector('.rank-badge');
+                    const pos = order.indexOf(el.id);
+
+                    if (!show || pos === -1) {
+                        if (badge) badge.remove();
+                        return;
+                    }
+                    if (!badge) {
+                        badge = document.createElement('div');
+                        badge.className = 'rank-badge';
+                        el.appendChild(badge);
+                    }
+
+                    const sid = taskStreamId(el.id);
+                    const within = rankWithinStream(ws, el.id);
+                    badge.textContent = within > 0 ? within : pos + 1;
+                    badge.classList.toggle('rank-badge-top', within > 0 && within <= 3);
+                    badge.style.background = sid ? streamColour(ws, sid)
+                        : (within > 0 && within <= 3 ? '' : '');
+                    badge.title = sid ? streamName(ws, sid) + ' \u2014 position ' + within : 'Position ' + within;
+                });
+            });
+        }
+
+        // Every task gets a position without waiting for the ranking panel to
+        // be opened, so the badges and the Priority Radar numbers mean
+        // something from the first load. New tasks join at the end.
+        function ensureRankOrders() {
+            RANK_WORKSPACES.forEach(ws => {
+                const order = getRankOrder(ws);
+                const known = {};
+                order.forEach(id => { known[id] = true; });
+                let changed = false;
+
+                document.querySelectorAll('#workspace-' + ws + ' .workspace-canvas .task-item').forEach(el => {
+                    if (!known[el.id]) { order.push(el.id); known[el.id] = true; changed = true; }
+                });
+                (workspaceMasterTasks[ws] || []).forEach(g => (g.tasks || []).forEach(t => {
+                    if (t.id && !known[t.id]) { order.push(t.id); known[t.id] = true; changed = true; }
+                }));
+
+                if (changed) saveRankOrder(ws, order);
+            });
+        }
+
+        function refreshRadarNumbers(workspace) {
+            const list = workspace ? [workspace] : RANK_WORKSPACES;
+            list.forEach(ws => {
+                document.querySelectorAll('[data-workspace="' + ws + '"] .priority-item').forEach(item => {
+                    const taskId = item.dataset.linkedTaskId;
+                    const numEl = item.querySelector('.priority-rank');
+                    if (!numEl) return;
+                    if (!taskId) { numEl.style.display = 'none'; return; }
+                    const within = rankWithinStream(ws, taskId);
+                    if (within > 0) {
+                        numEl.style.display = '';
+                        numEl.textContent = within;
+                        const sid = taskStreamId(taskId);
+                        numEl.style.background = sid ? streamColour(ws, sid) : '#e74c3c';
+                        numEl.title = sid ? streamName(ws, sid) : 'Position in the ranking';
+                    } else {
+                        numEl.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        function openPriorityItem(span) {
+            const item = span.closest('.priority-item');
+            const taskId = item ? item.dataset.linkedTaskId : null;
+            if (!taskId) {
+                showNotification('This entry is not linked to a task on the canvas', 'error');
+                return;
+            }
+            const el = document.getElementById(taskId);
+            if (!el) {
+                showNotification('That task is no longer on the canvas', 'error');
+                return;
+            }
+            openTaskDetail(el);
+        }
+
+        function arrangeCanvasByRank() {
+            if (!rankWorkspace) return;
+            const canvas = document.querySelector('#workspace-' + rankWorkspace + ' .workspace-canvas');
+            if (!canvas) return;
+
+            const activeItems = rankItems.filter(i => i.source === 'active');
+            if (activeItems.length === 0) {
+                showNotification('No active tasks on this canvas to arrange', 'error');
+                return;
+            }
+
+            const streams = streamsFor(rankWorkspace);
+            const columns = [];
+
+            if (streams.length && rankStream === 'all') {
+                streams.forEach(s => columns.push(activeItems.filter(i => itemMatchesStream(i, s.id))));
+                const loose = activeItems.filter(i => !taskStreamId(i.id));
+                if (loose.length) columns.push(loose);
+            } else if (streams.length && rankStream !== 'all') {
+                columns.push(activeItems.filter(i => itemMatchesStream(i, rankStream)));
+            } else {
+                columns.push(activeItems);
+            }
+
+            const used = columns.filter(c => c.length);
+            if (!used.length) {
+                showNotification('No active tasks in this list to arrange', 'error');
+                return;
+            }
+
+            const message = used.length > 1
+                ? 'This will lay the active task cards out in ' + used.length +
+                  ' columns on the canvas, one per list, each in its ranked order.\n\n' +
+                  'Your ranking is not changed, and you can drag the cards anywhere afterwards.\n\nContinue?'
+                : 'This will move the active task cards on this canvas into a single column in priority order.\n\n' +
+                  'Your ranking is not changed, and you can drag the cards anywhere afterwards.\n\nContinue?';
+            if (!confirm(message)) return;
+
+            used.forEach((column, c) => {
+                let y = 20;
+                column.forEach(item => {
+                    const el = document.getElementById(item.id);
+                    if (!el) return;
+                    el.style.left = (20 + c * 300) + 'px';
+                    el.style.top = y + 'px';
+                    y += (el.offsetHeight || 130) + 15;
+                });
+            });
+
+            saveWorkspaceTasks();
+            showNotification(used.length > 1
+                ? 'Canvas arranged into ' + used.length + ' columns'
+                : 'Canvas arranged in priority order', 'success');
+        }
+
         function sortRankAlphabetically() {
-            rankItems.sort((a, b) => a.title.localeCompare(b.title));
-            persistCurrentRankOrder();
+            const sorted = rankItems.slice().sort((a, b) => a.title.localeCompare(b.title));
+            const streams = streamsFor(rankWorkspace);
+            if (!streams.length) {
+                rankItems = sorted;
+                persistCurrentRankOrder();
+            } else {
+                // Sort inside each list, leaving the lists themselves alone
+                streams.concat([{ id: '' }]).forEach(s => {
+                    reorderWithinStream(s.id, sorted.filter(i => itemMatchesStream(i, s.id)));
+                });
+            }
             renderRankList();
             showNotification('Ranked A\u2013Z', 'success');
         }
 
         function sortRankActiveFirst() {
-            const active = rankItems.filter(i => i.source === 'active');
-            const master = rankItems.filter(i => i.source !== 'active');
-            rankItems = active.concat(master);
-            persistCurrentRankOrder();
+            const reorder = list => list.filter(i => i.source === 'active')
+                                        .concat(list.filter(i => i.source !== 'active'));
+            const streams = streamsFor(rankWorkspace);
+            if (!streams.length) {
+                rankItems = reorder(rankItems);
+                persistCurrentRankOrder();
+            } else {
+                streams.concat([{ id: '' }]).forEach(s => {
+                    reorderWithinStream(s.id, reorder(rankItems.filter(i => itemMatchesStream(i, s.id))));
+                });
+            }
             renderRankList();
             showNotification('Active tasks moved to the top', 'success');
         }
@@ -11063,60 +12092,9 @@
             showNotification('Promoted onto the canvas', 'success');
         }
 
-        function arrangeCanvasByRank() {
-            if (!rankWorkspace) return;
-            const canvas = document.querySelector('#workspace-' + rankWorkspace + ' .workspace-canvas');
-            if (!canvas) return;
-
-            const activeItems = rankItems.filter(i => i.source === 'active');
-            if (activeItems.length === 0) {
-                showNotification('No active tasks on this canvas to arrange', 'error');
-                return;
-            }
-
-            if (!confirm('This will move the active task cards on this canvas into a single column in priority order.\n\nYour ranking is not changed, and you can drag the cards anywhere afterwards.\n\nContinue?')) {
-                return;
-            }
-
-            let y = 20;
-            activeItems.forEach(item => {
-                const el = document.getElementById(item.id);
-                if (!el) return;
-                el.style.left = '20px';
-                el.style.top = y + 'px';
-                y += (el.offsetHeight || 130) + 15;
-            });
-
-            saveWorkspaceTasks();
-            showNotification('Canvas arranged in priority order', 'success');
-        }
 
         // ----- Rank number badges on canvas cards -----
 
-        function refreshRankBadges(workspace) {
-            const list = workspace ? [workspace] : RANK_WORKSPACES;
-            const show = rankBadgesEnabled();
-
-            list.forEach(ws => {
-                const order = getRankOrder(ws);
-                document.querySelectorAll('#workspace-' + ws + ' .workspace-canvas .task-item').forEach(el => {
-                    let badge = el.querySelector('.rank-badge');
-                    const pos = order.indexOf(el.id);
-
-                    if (!show || pos === -1) {
-                        if (badge) badge.remove();
-                        return;
-                    }
-                    if (!badge) {
-                        badge = document.createElement('div');
-                        badge.className = 'rank-badge';
-                        el.appendChild(badge);
-                    }
-                    badge.textContent = pos + 1;
-                    badge.classList.toggle('rank-badge-top', pos < 3);
-                });
-            });
-        }
 
         // ----- Drag to reorder inside the modal -----
 
