@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 20260903 MyLifeCanvas v 02.30-a -->
+<!-- 20260903 MyLifeCanvas v 02.31-a -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -3925,6 +3925,152 @@
 
         .settings-list-btn:hover { background: #d6dbdd; }
 
+
+        /* ==============================================
+           PUT TASKS INTO LISTS - v2.31
+           ============================================== */
+
+        .rank-nudge {
+            background: #fef9e7;
+            border-left: 4px solid #f39c12;
+            border-radius: 5px;
+            padding: 11px 14px;
+            margin-bottom: 12px;
+            font-size: 12px;
+            color: #7d6608;
+            line-height: 1.6;
+        }
+
+        .rank-nudge-btn {
+            background: #f39c12;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 11px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            margin-left: 6px;
+        }
+
+        .rank-nudge-btn:hover { background: #d68910; }
+
+        .stream-assign-btn {
+            width: 100%;
+            margin-top: 8px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .stream-assign-btn:hover { background: #1a252f; }
+
+        .assign-toolbar {
+            display: flex;
+            gap: 9px;
+            align-items: center;
+            padding: 11px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .assign-toolbar input, .assign-toolbar select {
+            padding: 7px 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 12px;
+            font-family: inherit;
+        }
+
+        .assign-toolbar input { flex: 1; min-width: 0; }
+
+        .assign-count {
+            font-size: 11px;
+            color: #7f8c8d;
+            white-space: nowrap;
+        }
+
+        .assign-tickall {
+            display: flex;
+            gap: 7px;
+            margin-bottom: 8px;
+        }
+
+        .assign-tickall button {
+            background: #ecf0f1;
+            color: #2c3e50;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 11px;
+            font-size: 11px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .assign-tickall button:hover { background: #d6dbdd; }
+
+        .assign-list {
+            max-height: 340px;
+            overflow-y: auto;
+            border: 1px solid #ecf0f1;
+            border-radius: 6px;
+        }
+
+        .assign-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            border-bottom: 1px solid #f5f5f5;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .assign-row:hover { background: #f8f9fa; }
+
+        .assign-title {
+            flex: 1;
+            min-width: 0;
+            color: #2c3e50;
+        }
+
+        .assign-status {
+            font-size: 9px;
+            font-weight: 700;
+            color: #7f8c8d;
+            background: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .assign-current {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 3px;
+            white-space: nowrap;
+        }
+
+        .assign-empty {
+            padding: 24px;
+            text-align: center;
+            color: #95a5a6;
+            font-size: 12px;
+        }
+
+        #assignApply:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+
     </style>
 </head>
 <body>
@@ -4579,6 +4725,8 @@
                     &#9650;&#9660; to nudge and &#8657; to send to the top. This order is kept separately from the canvas
                     layout &mdash; moving cards around the canvas will not change it. New tasks join at the bottom.
                 </div>
+                <div class="rank-nudge" id="rankAssignNudge" style="display: none;"></div>
+
                 <div class="rank-toolbar" id="rankStreamRow" style="display: none;">
                     <label style="font-size: 12px; font-weight: 700; color: #2c3e50;">Showing</label>
                     <select id="rankStreamSelect" onchange="onRankStreamChanged()"
@@ -4983,6 +5131,9 @@
                 </p>
                 <div id="streamManagerList"></div>
                 <button type="button" class="stream-add-btn" onclick="addStream()">+ Add a list</button>
+                <button type="button" class="stream-assign-btn" onclick="openTaskAssigner(window.__streamWs)">
+                    &#9776; Put tasks into these lists
+                </button>
             </div>
         </div>
     </div>
@@ -5084,6 +5235,46 @@
                     <span class="skin-io-note">Skins are a short list of colours and typefaces,
                         so one can be shared without carrying anything else along with it.</span>
                 </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Put tasks into lists - v2.31 -->
+    <div id="assignModal" class="modal">
+        <div class="modal-content" style="max-width: 660px;">
+            <div class="modal-header" style="background: #2c3e50;">
+                <h2 class="modal-title">&#9776; Put tasks into lists</h2>
+                <button class="modal-close" onclick="closeTaskAssigner()">Done</button>
+            </div>
+            <div class="modal-body">
+                <p style="margin: 0 0 14px 0; font-size: 13px; color: #7f8c8d; line-height: 1.6;">
+                    Tasks in <strong id="assignWorkspaceName"></strong>. Tick as many as you like and send
+                    them to a list in one go. A task can sit in one list or none.
+                </p>
+
+                <div class="assign-toolbar">
+                    <input type="text" id="assignFilter" placeholder="Filter by word..."
+                           oninput="renderTaskAssigner()">
+                    <select id="assignShow" onchange="renderTaskAssigner()">
+                        <option value="all">All tasks</option>
+                        <option value="unassigned">Not in a list yet</option>
+                    </select>
+                    <span class="assign-count" id="assignCount"></span>
+                </div>
+
+                <div class="assign-tickall">
+                    <button type="button" onclick="tickAllAssign(true)">Tick all shown</button>
+                    <button type="button" onclick="tickAllAssign(false)">Clear ticks</button>
+                </div>
+
+                <div id="assignList" class="assign-list" onchange="updateAssignCount()"></div>
+            </div>
+            <div class="report-footer">
+                <span style="font-size: 12px; font-weight: 600; color: #2c3e50;">Move ticked to</span>
+                <select id="assignTarget" class="report-input" style="flex: 0 1 200px;"></select>
+                <button class="report-save" id="assignApply" onclick="applyAssignment()" disabled>Apply</button>
+                <button class="report-cancel" onclick="closeTaskAssigner()">Done</button>
             </div>
         </div>
     </div>
@@ -5379,7 +5570,21 @@
                             </p>
                         </div>
 
-                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">What's New in Version 2.30</h4>
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">What's New in Version 2.31</h4>
+                        <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
+                            <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
+                                <strong>Getting tasks into your lists</strong>
+                            </p>
+                            <p style="line-height: 1.8; margin: 0; color: #555; font-size: 12px;">
+                                &#8226; <strong>Tick and move</strong> &mdash; Send any number of tasks to a list in one go<br>
+                                &#8226; <strong>Show what is not in a list yet</strong> &mdash; So nothing is left behind<br>
+                                &#8226; <strong>Each task shows where it currently sits</strong> &mdash; In the list's own colour<br>
+                                &#8226; <strong>A word if your lists are empty</strong> &mdash; The ranking panel now says so, rather than looking like no lists at all<br>
+                                &#8226; <strong>Master Tasks included</strong> &mdash; They can be sorted into lists before they are ever promoted
+                            </p>
+                        </div>
+
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Previously, in Version 2.30</h4>
                         <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
                             <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
                                 <strong>Work for someone who has no task</strong>
@@ -5907,6 +6112,7 @@
 
                         <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Version History</h4>
                         <p style="line-height: 1.6; color: #555; font-size: 12px;">
+                            <strong>v2.31</strong> &mdash; Bulk assignment of tasks into lists, and a prompt when lists are empty<br>
                             <strong>v2.30</strong> &mdash; Log Activity can name contacts and create them, so untasked client work has a home<br>
                             <strong>v2.29</strong> &mdash; Settings organised into sections, lists surfaced beside their rates, Export renamed<br>
                             <strong>v2.28</strong> &mdash; Search gathers matching cards into view instead of leaving them scattered<br>
@@ -6412,8 +6618,8 @@
         // no longer a set of version numbers that can drift apart.
         // ==============================================
         const APP_VERSION = {
-            number: '2.30',
-            file: '20260903 MyLifeCanvas v 02.30-a',
+            number: '2.31',
+            file: '20260903 MyLifeCanvas v 02.31-a',
             released: 'September 2026'
         };
 
@@ -8345,7 +8551,7 @@ body {
                     '.detail-label, .detail-log-title, .report-label, .report-options-title, ' +
                     '.activity-form-label, .activity-filter-label, .settings-section-title, ' +
                     '.rank-group-head, .csv-col-name, .export-option-title, .skin-scope, ' +
-                    '.stream-name-input, .rate-ws-name, .rate-label, .master-task-title, .skin-name, .settings-list-ws, ' +
+                    '.stream-name-input, .rate-ws-name, .rate-label, .master-task-title, .skin-name, .settings-list-ws, .assign-title, ' +
                     '.clock-sessions-title, .gs-group-title, .focus-group-title { color: ' +
                     s.panelText + '; }',
                 '.settings-section, .rate-ws, .skin-card, .report-ws-list, .rank-toolbar, ' +
@@ -9501,6 +9707,148 @@ body {
             renderClock();
             clockTicker = setInterval(renderClock, 30000);
         });
+
+        // ==============================================
+        // FILLING THE LISTS - v2.31
+        // Making a list was easy; getting forty tasks into it meant
+        // finding a small dropdown on forty separate rows. So a list
+        // could exist and still look exactly like no list at all.
+        // ==============================================
+
+        let assignWorkspace = null;
+
+        function openTaskAssigner(workspace) {
+            assignWorkspace = workspace || rankWorkspace || currentWorkspace;
+            const streams = streamsFor(assignWorkspace);
+            if (!streams.length) {
+                showNotification('Make a list first, then you can fill it', 'error');
+                return;
+            }
+
+            const target = document.getElementById('assignTarget');
+            target.innerHTML = streams.map(s =>
+                '<option value="' + s.id + '">' + rankEscape(s.name) + '</option>').join('') +
+                '<option value="">Unassigned</option>';
+
+            document.getElementById('assignWorkspaceName').textContent =
+                workspaceNames[assignWorkspace] || assignWorkspace;
+
+            // Start fresh every time. Keeping the last filter can open the
+            // panel showing nothing at all, which reads as "my tasks are gone".
+            document.getElementById('assignFilter').value = '';
+            document.getElementById('assignShow').value = 'all';
+
+            renderTaskAssigner();
+            document.getElementById('assignModal').style.display = 'block';
+        }
+
+        function closeTaskAssigner() {
+            document.getElementById('assignModal').style.display = 'none';
+            assignWorkspace = null;
+            if (rankWorkspace) {
+                buildStreamSelector();
+                refreshRankFromSources();
+            }
+        }
+
+        function assignerRows() {
+            const rows = [];
+            document.querySelectorAll('#workspace-' + assignWorkspace + ' .workspace-canvas .task-item')
+                .forEach(el => rows.push({
+                    id: el.id,
+                    title: (el.querySelector('.task-title') || {}).textContent || 'Untitled',
+                    status: (el.querySelector('.task-status') || {}).textContent || '',
+                    source: 'Active'
+                }));
+            (workspaceMasterTasks[assignWorkspace] || []).forEach(g =>
+                (g.tasks || []).forEach(t => rows.push({
+                    id: t.id, title: t.title || 'Untitled', status: '', source: 'Master'
+                })));
+            return rows;
+        }
+
+        function renderTaskAssigner() {
+            const container = document.getElementById('assignList');
+            const filter = (document.getElementById('assignFilter').value || '').trim().toLowerCase();
+            const showOnly = document.getElementById('assignShow').value;
+            const rows = assignerRows();
+            let shown = 0;
+
+            container.innerHTML = rows.map(r => {
+                const sid = taskStreamId(r.id);
+                if (showOnly === 'unassigned' && sid) return '';
+                if (showOnly !== 'unassigned' && showOnly !== 'all' && sid !== showOnly) return '';
+                if (filter && r.title.toLowerCase().indexOf(filter) === -1) return '';
+                shown++;
+                return '<label class="assign-row">' +
+                    '<input type="checkbox" class="assign-check" value="' + r.id + '">' +
+                    '<span class="assign-title">' + rankEscape(r.title) + '</span>' +
+                    (r.status ? '<span class="assign-status">' + rankEscape(r.status) + '</span>' : '') +
+                    '<span class="assign-current" style="background: ' +
+                        (sid ? streamColour(assignWorkspace, sid) : '#dfe6e9') + '; color: ' +
+                        (sid ? 'white' : '#7f8c8d') + ';">' +
+                        (sid ? rankEscape(streamName(assignWorkspace, sid)) : 'unassigned') + '</span>' +
+                    '</label>';
+            }).join('');
+
+            if (!shown) {
+                container.innerHTML = '<div class="assign-empty">Nothing matches that.</div>';
+            }
+            updateAssignCount();
+        }
+
+        function updateAssignCount() {
+            const ticked = document.querySelectorAll('#assignList .assign-check:checked').length;
+            const total = document.querySelectorAll('#assignList .assign-check').length;
+            const el = document.getElementById('assignCount');
+            if (el) el.textContent = ticked ? ticked + ' of ' + total + ' ticked' : total + ' shown';
+            const btn = document.getElementById('assignApply');
+            if (btn) btn.disabled = ticked === 0;
+        }
+
+        function tickAllAssign(on) {
+            document.querySelectorAll('#assignList .assign-check').forEach(cb => { cb.checked = on; });
+            updateAssignCount();
+        }
+
+        function applyAssignment() {
+            const ids = Array.from(document.querySelectorAll('#assignList .assign-check:checked'))
+                .map(cb => cb.value);
+            if (!ids.length) return;
+
+            const target = document.getElementById('assignTarget').value;
+            ids.forEach(id => {
+                const d = getTaskDetail(id);
+                d.streamId = target || '';
+                setTaskDetail(id, d);
+            });
+
+            refreshTaskMomentum(assignWorkspace);
+            renderTaskAssigner();
+            try { renderStreamManager(); } catch (e) {}
+            showNotification(ids.length + (ids.length === 1 ? ' task moved to ' : ' tasks moved to ') +
+                (target ? streamName(assignWorkspace, target) : 'Unassigned'), 'success');
+        }
+
+        // If lists exist but nothing is in them, say so rather than let the
+        // ranking panel look identical to having no lists at all.
+        function renderAssignNudge() {
+            const nudge = document.getElementById('rankAssignNudge');
+            if (!nudge || !rankWorkspace) return;
+
+            const streams = streamsFor(rankWorkspace);
+            if (!streams.length) { nudge.style.display = 'none'; return; }
+
+            const anyAssigned = rankItems.some(i => taskStreamId(i.id));
+            nudge.style.display = anyAssigned ? 'none' : '';
+            if (!anyAssigned) {
+                nudge.innerHTML = 'You have ' + streams.length + ' list' + (streams.length === 1 ? '' : 's') +
+                    ' here, but nothing is in ' + (streams.length === 1 ? 'it' : 'them') + ' yet, ' +
+                    'so everything still ranks as one. ' +
+                    '<button type="button" class="rank-nudge-btn" onclick="openTaskAssigner(rankWorkspace)">' +
+                    'Put tasks into lists</button>';
+            }
+        }
 
         // ==============================================
         // TASK LISTS (STREAMS) - v2.20
@@ -15207,6 +15555,8 @@ body {
                         ? 'Nothing to rank yet in this workspace.<br>Add active tasks, or demote tasks into the Master Task Repository.'
                         : 'Nothing matches that filter.') + '</div>';
             }
+
+            try { renderAssignNudge(); } catch (e) {}
 
             const counter = document.getElementById('rankCount');
             if (counter) {
