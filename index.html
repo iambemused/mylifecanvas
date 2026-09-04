@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 20260903 MyLifeCanvas v 02.23-a -->
+<!-- 20260903 MyLifeCanvas v 02.25-a -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -3572,6 +3572,190 @@
 
         .stream-rate-input:focus { outline: none; border-color: #16a085; }
 
+
+        /* ==============================================
+           SKINS - v2.24
+           ============================================== */
+
+        .skin-badge {
+            display: inline-block;
+            margin-left: 12px;
+            padding: 3px 11px;
+            border-radius: 11px;
+            background: rgba(255, 255, 255, 0.12);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            cursor: pointer;
+            vertical-align: middle;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .skin-badge:hover {
+            background: rgba(255, 255, 255, 0.24);
+            color: white;
+        }
+
+        .skin-scope {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #2c3e50;
+            cursor: pointer;
+        }
+
+        .skin-scope-note {
+            font-size: 11px;
+            color: #95a5a6;
+            margin: 4px 0 16px 26px;
+        }
+
+        .skin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 12px;
+        }
+
+        .skin-card {
+            border: 2px solid #e8e8e8;
+            border-radius: 8px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            background: white;
+        }
+
+        .skin-card:hover {
+            border-color: #bdc3c7;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .skin-card-active {
+            border-color: #27ae60;
+            box-shadow: 0 0 0 3px rgba(39,174,96,0.15);
+        }
+
+        .skin-swatch {
+            height: 52px;
+            border-radius: 5px;
+            border: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 9px;
+        }
+
+        .skin-chip {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .skin-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .skin-own {
+            font-size: 9px;
+            font-weight: 700;
+            background: #f4ecf7;
+            color: #8e44ad;
+            padding: 1px 6px;
+            border-radius: 3px;
+            vertical-align: middle;
+        }
+
+        .skin-blurb {
+            font-size: 11px;
+            color: #95a5a6;
+            line-height: 1.45;
+            margin-top: 3px;
+        }
+
+        .skin-remove {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: rgba(255,255,255,0.9);
+            border: 1px solid #e0e0e0;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            color: #95a5a6;
+            font-size: 13px;
+            line-height: 1;
+        }
+
+        .skin-remove:hover { color: #e74c3c; border-color: #e74c3c; }
+
+        .skin-ws-list {
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px solid #ecf0f1;
+        }
+
+        .skin-ws-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 6px 0;
+            font-size: 12px;
+            color: #34495e;
+        }
+
+        .skin-ws-row select {
+            padding: 5px 8px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 12px;
+            font-family: inherit;
+            min-width: 180px;
+        }
+
+        .skin-io {
+            margin-top: 18px;
+            padding-top: 14px;
+            border-top: 1px solid #ecf0f1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .skin-io-btn {
+            background: #ecf0f1;
+            color: #2c3e50;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .skin-io-btn:hover { background: #d6dbdd; }
+
+        .skin-io-note {
+            font-size: 11px;
+            color: #95a5a6;
+            flex: 1;
+            min-width: 200px;
+            line-height: 1.5;
+        }
+
     </style>
 </head>
 <body>
@@ -3580,6 +3764,8 @@
             <img src="data:image/jpeg;base64,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" alt="MoMo Creative">
             <span id="systemHeader"><span class="my-style">My</span>LifeCanvas by MoMo Creative</span>
         </a>
+        <span class="skin-badge" id="skinBadge" onclick="openSkinPicker()"
+              role="button" tabindex="0">&#127912; Skin</span>
         <span class="clock-badge" id="clockBadge" onclick="openTimeClock()"
               role="button" tabindex="0">Clock on</span>
         <span class="version-badge" id="versionBadge" onclick="openAbout()"
@@ -4683,6 +4869,41 @@
         </div>
     </div>
 
+
+    <!-- Skins - v2.24 -->
+    <input type="file" id="skinImportInput" accept=".json" style="display: none;" onchange="importSkin(event)">
+    <div id="skinModal" class="modal">
+        <div class="modal-content" style="max-width: 720px;">
+            <div class="modal-header" style="background: #2c3e50;">
+                <h2 class="modal-title">&#127912; Skins</h2>
+                <button class="modal-close" onclick="closeSkinPicker()">Close</button>
+            </div>
+            <div class="modal-body">
+                <p style="margin: 0 0 14px 0; font-size: 13px; color: #7f8c8d; line-height: 1.6;">
+                    None of this changes a single task. It changes how the place feels to sit in,
+                    which after a few hundred visits turns out to matter.
+                </p>
+
+                <label class="skin-scope">
+                    <input type="checkbox" id="skinPerWorkspace">
+                    A different skin for each workspace
+                </label>
+                <div class="skin-scope-note" id="skinScopeNote"></div>
+
+                <div id="skinGrid" class="skin-grid"></div>
+
+                <div id="skinWorkspaceList" class="skin-ws-list" style="display: none;"></div>
+
+                <div class="skin-io">
+                    <button type="button" class="skin-io-btn" onclick="triggerSkinImport()">Bring in a skin</button>
+                    <button type="button" class="skin-io-btn" onclick="exportCurrentSkin()">Save this one to a file</button>
+                    <span class="skin-io-note">Skins are a short list of colours and typefaces,
+                        so one can be shared without carrying anything else along with it.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Settings Modal -->
     <div id="settingsModal" class="modal">
         <div class="modal-content">
@@ -4967,7 +5188,38 @@
                             </p>
                         </div>
 
-                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">What's New in Version 2.23</h4>
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">What's New in Version 2.25</h4>
+                        <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
+                            <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
+                                <strong>Steampunk Extreme</strong>
+                            </p>
+                            <p style="line-height: 1.8; margin: 0; color: #555; font-size: 12px;">
+                                &#8226; <strong>Rivets everywhere</strong> &mdash; Along the plates, at the corner of every card, down the tab rack<br>
+                                &#8226; <strong>Pipework</strong> &mdash; Running down the left of every sidebar panel<br>
+                                &#8226; <strong>Riveted girder</strong> &mdash; The workspace tabs, with glowing lamplight on the active one<br>
+                                &#8226; <strong>Pressure gauge</strong> &mdash; The capacity bar under curved glass in a brass bezel<br>
+                                &#8226; <strong>Tooled leather</strong> &mdash; Task cards on stitched hide with brass at the corners<br>
+                                &#8226; <strong>Steam</strong> &mdash; A wisp from the clock while you are on, and none at all if your system asks for less motion<br>
+                                &#8226; <strong>Drawn, not downloaded</strong> &mdash; Every rivet is CSS, so nothing is fetched and nothing slows down
+                            </p>
+                        </div>
+
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Previously, in Version 2.24</h4>
+                        <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
+                            <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
+                                <strong>Skins &mdash; make it look like somewhere you want to be</strong>
+                            </p>
+                            <p style="line-height: 1.8; margin: 0; color: #555; font-size: 12px;">
+                                &#8226; <strong>Six to begin with</strong> &mdash; Canvas, Steampunk, Industrial, Botanical, Nocturne and Paper<br>
+                                &#8226; <strong>A skin per workspace</strong> &mdash; So work can look like work and home can look like home<br>
+                                &#8226; <strong>Bring your own</strong> &mdash; Import a skin file, or save the current one to share<br>
+                                &#8226; <strong>Colours and type only</strong> &mdash; An imported skin cannot carry anything else with it<br>
+                                &#8226; <strong>Nothing else changes</strong> &mdash; Not a single task, date or figure is touched<br>
+                                &#8226; <strong>Travels with your backup</strong> &mdash; Your skins and choices come along
+                            </p>
+                        </div>
+
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Previously, in Version 2.23</h4>
                         <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
                             <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
                                 <strong>Hourly rates, costed work, and a brass time clock</strong>
@@ -5392,6 +5644,8 @@
 
                         <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Version History</h4>
                         <p style="line-height: 1.6; color: #555; font-size: 12px;">
+                            <strong>v2.25</strong> &mdash; Steampunk Extreme skin, with rivets, pipework, gauges and steam<br>
+                            <strong>v2.24</strong> &mdash; Skins, per-workspace themes, and skin import and export<br>
                             <strong>v2.23</strong> &mdash; Hourly rates per list, per-task overrides, time and value reporting, steampunk time clock<br>
                             <strong>v2.22</strong> &mdash; Task search per workspace and across all of them, clock on / clock off with daily effectiveness<br>
                             <strong>v2.21</strong> &mdash; Cross-workspace priority reports and a What's Coming calendar including birthdays<br>
@@ -5868,8 +6122,8 @@
         // no longer a set of version numbers that can drift apart.
         // ==============================================
         const APP_VERSION = {
-            number: '2.23',
-            file: '20260903 MyLifeCanvas v 02.23-a',
+            number: '2.25',
+            file: '20260903 MyLifeCanvas v 02.25-a',
             released: 'September 2026'
         };
 
@@ -7317,6 +7571,598 @@
                 masterTasks: data.masterTasks
             };
         }
+
+        // ==============================================
+        // SKINS - v2.24
+        // People are not machines, and a tool you look at every day
+        // either stays yours or starts feeling like someone else's.
+        //
+        // A skin is a small set of tokens, not a slab of CSS. That keeps
+        // an imported skin from doing anything except changing colours
+        // and type, and it means every skin is guaranteed to cover the
+        // whole app rather than half of it.
+        // ==============================================
+
+        const SKIN_KEY = 'skinChoice';
+        const CUSTOM_SKIN_KEY = 'customSkins';
+
+        const SKIN_TOKENS = ['appBg', 'panelBg', 'panelText', 'muted', 'border', 'chromeBg',
+                             'chromeText', 'accent', 'accentText', 'cardBg', 'cardText',
+                             'fontBody', 'fontDisplay', 'radius'];
+
+        const BUILT_IN_SKINS = {
+            canvas: {
+                name: 'Canvas', blurb: 'The original. Clean and out of the way.',
+                appBg: '#f5f5f5', panelBg: '#ffffff', panelText: '#2c3e50', muted: '#7f8c8d',
+                border: '#e0e0e0', chromeBg: '#1a1a2e', chromeText: '#ffffff',
+                accent: '#3498db', accentText: '#ffffff', cardBg: '#ffffff', cardText: '#2c3e50',
+                fontBody: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+                fontDisplay: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif", radius: '8px'
+            },
+            steampunk: {
+                name: 'Steampunk', blurb: 'Brass, oil and lamplight.',
+                appBg: '#2b241d', panelBg: '#3a3229', panelText: '#e8dcc0', muted: '#a89878',
+                border: '#6b5636', chromeBg: '#1c1712', chromeText: '#f0e2bd',
+                accent: '#c9a227', accentText: '#2b241d', cardBg: '#443a2e', cardText: '#f0e2bd',
+                fontBody: "Georgia, 'Times New Roman', serif",
+                fontDisplay: "Georgia, 'Times New Roman', serif", radius: '4px'
+            },
+            steampunkextreme: {
+                name: 'Steampunk Extreme', blurb: 'Rivets, pipework, gauges and rather too much brass.',
+                appBg: '#241d16', panelBg: '#332a20', panelText: '#f0e2bd', muted: '#b09a70',
+                border: '#8a6d3b', chromeBg: '#151009', chromeText: '#f5d97e',
+                accent: '#c9a227', accentText: '#241d16', cardBg: '#463a2b', cardText: '#f5ead0',
+                fontBody: "'Iowan Old Style', Georgia, 'Times New Roman', serif",
+                fontDisplay: "'Copperplate', 'Baskerville', Georgia, serif", radius: '3px',
+                extraCss: `
+/* ---- the shop floor: riveted steel plate ---- */
+body {
+  background:
+    radial-gradient(ellipse at 18% -10%, rgba(201,162,39,0.13), transparent 55%),
+    radial-gradient(ellipse at 92% 110%, rgba(180,90,40,0.10), transparent 50%),
+    repeating-linear-gradient(90deg, rgba(0,0,0,0.20) 0 2px, transparent 2px 7px),
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.018) 0 1px, transparent 1px 5px),
+    linear-gradient(160deg, #2a231c, #16110c) !important;
+}
+
+/* ---- the maker's plate across the top ---- */
+.system-header {
+  background:
+    linear-gradient(180deg, #7a6136 0%, #5a4726 45%, #3d3018 100%) !important;
+  border-bottom: 4px solid #241a0c;
+  box-shadow: inset 0 2px 6px rgba(255,224,150,0.25), 0 4px 12px rgba(0,0,0,0.6);
+  position: relative;
+}
+.system-header::before, .system-header::after {
+  content: ''; position: absolute; left: 0; right: 0; height: 11px;
+  background-image: radial-gradient(circle at 7px 5px,
+    #ffeeb8 0 1.4px, #c9a227 1.5px 2.6px, #7a6136 2.7px 3.6px, #2b2110 3.7px 4.4px, transparent 4.5px);
+  background-size: 22px 11px; background-repeat: repeat-x;
+  pointer-events: none;
+}
+.system-header::before { top: 1px; }
+.system-header::after { bottom: 1px; }
+
+/* ---- the tab rack, built like a girder ---- */
+.workspace-nav {
+  background:
+    linear-gradient(180deg, #2e2519 0%, #1a1409 55%, #2e2519 100%) !important;
+  border-top: 3px solid #6b5636;
+  border-bottom: 5px solid #120d06;
+  box-shadow: inset 0 6px 12px rgba(0,0,0,0.7);
+}
+.workspace-tab {
+  border-right: 2px solid #120d06 !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+  position: relative;
+}
+.workspace-tab::after {
+  content: ''; position: absolute; left: 5px; top: 50%; width: 5px; height: 5px;
+  margin-top: -2.5px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffeeb8, #8a6d3b 65%, #241a0c);
+}
+.workspace-tab.active {
+  background: linear-gradient(180deg, #6b5636, #4a3c26) !important;
+  color: #ffeeb8 !important;
+  box-shadow: inset 0 3px 8px rgba(255,224,150,0.22), 0 0 14px rgba(201,162,39,0.35);
+}
+
+/* ---- workspace name plate, screwed on at the corners ---- */
+.header {
+  background:
+    linear-gradient(180deg, #5f4c2b, #3a2e18) !important;
+  border-bottom: 4px solid #1d1509;
+  box-shadow: inset 0 2px 5px rgba(255,224,150,0.2);
+  position: relative;
+}
+.header::before, .header::after {
+  content: ''; position: absolute; top: 8px; width: 10px; height: 10px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffeeb8, #a8842f 60%, #2b2110);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.8);
+}
+.header::before { left: 8px; }
+.header::after { right: 8px; }
+.workspace-title {
+  letter-spacing: 2px; text-transform: uppercase;
+  text-shadow: 0 2px 3px rgba(0,0,0,0.8), 0 0 10px rgba(201,162,39,0.3);
+}
+
+/* ---- the pressure gauge formerly known as the capacity bar ---- */
+.capacity-section {
+  background:
+    repeating-linear-gradient(45deg, rgba(0,0,0,0.12) 0 6px, transparent 6px 12px),
+    linear-gradient(180deg, #3f3425, #2a2218) !important;
+  border: 3px solid #8a6d3b !important;
+  box-shadow: inset 0 3px 10px rgba(0,0,0,0.7), 0 3px 0 #1d1509;
+  position: relative;
+}
+.capacity-section::before, .capacity-section::after {
+  content: ''; position: absolute; bottom: 7px; width: 9px; height: 9px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffeeb8, #a8842f 60%, #2b2110);
+}
+.capacity-section::before { left: 7px; }
+.capacity-section::after { right: 7px; }
+.capacity-slider, .capacity-bar, .capacity-track {
+  border: 2px solid #6b5636 !important;
+  box-shadow: inset 0 3px 9px rgba(0,0,0,0.75),
+              inset 0 -14px 18px rgba(255,255,255,0.10) !important;
+}
+
+/* ---- job cards on tooled leather, corner-riveted ---- */
+.task-item {
+  background-color: #463a2b !important;
+  background-image:
+    radial-gradient(circle at 9px 9px, #ffeeb8 0 1.3px, #a8842f 1.4px 2.6px, #2b2110 2.7px 3.5px, transparent 3.6px),
+    radial-gradient(circle at calc(100% - 9px) 9px, #ffeeb8 0 1.3px, #a8842f 1.4px 2.6px, #2b2110 2.7px 3.5px, transparent 3.6px),
+    radial-gradient(circle at 9px calc(100% - 9px), #ffeeb8 0 1.3px, #a8842f 1.4px 2.6px, #2b2110 2.7px 3.5px, transparent 3.6px),
+    radial-gradient(circle at calc(100% - 9px) calc(100% - 9px), #ffeeb8 0 1.3px, #a8842f 1.4px 2.6px, #2b2110 2.7px 3.5px, transparent 3.6px),
+    repeating-linear-gradient(115deg, rgba(0,0,0,0.05) 0 3px, transparent 3px 7px),
+    linear-gradient(165deg, #4e4132, #3a3024) !important;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat, repeat !important;
+  border: 2px solid #6b5636 !important;
+  box-shadow: inset 0 0 0 1px rgba(255,224,150,0.10),
+              inset 0 1px 0 rgba(255,224,150,0.18),
+              0 4px 10px rgba(0,0,0,0.55) !important;
+}
+.task-item::after {
+  content: ''; position: absolute; inset: 5px; pointer-events: none;
+  border: 1px dashed rgba(201,162,39,0.35); border-radius: 2px;
+}
+.task-item:hover {
+  box-shadow: inset 0 0 0 1px rgba(255,224,150,0.18),
+              0 7px 18px rgba(0,0,0,0.7), 0 0 22px rgba(201,162,39,0.22) !important;
+}
+
+/* ---- pipework down the side of every panel ---- */
+.priority-radar, .victory-log, .quicklist-section, .notes-section {
+  background:
+    linear-gradient(90deg, #7a6136 0 5px, #c9a227 5px 8px, #5a4726 8px 13px, transparent 13px),
+    repeating-linear-gradient(0deg, rgba(0,0,0,0.10) 0 4px, transparent 4px 9px),
+    linear-gradient(165deg, #3a3024, #2a2218) !important;
+  border: 2px solid #6b5636 !important;
+  border-left: none !important;
+  padding-left: 22px !important;
+  box-shadow: inset 0 1px 0 rgba(255,224,150,0.12), 0 3px 10px rgba(0,0,0,0.5);
+  position: relative;
+}
+.priority-radar::before, .victory-log::before,
+.quicklist-section::before, .notes-section::before {
+  content: ''; position: absolute; left: 0; top: 14px; bottom: 14px; width: 13px;
+  background-image: radial-gradient(circle at 6.5px 5px,
+    rgba(255,238,184,0.85) 0 1px, rgba(120,95,45,0.9) 1.1px 2.2px, transparent 2.3px);
+  background-size: 13px 26px; background-repeat: repeat-y;
+  pointer-events: none;
+}
+
+/* ---- the canvas nameplate ---- */
+.canvas-header {
+  background:
+    linear-gradient(180deg, #6b5636, #43371f) !important;
+  border: 2px solid #8a6d3b; border-bottom: 4px solid #1d1509;
+  text-transform: uppercase; letter-spacing: 2px;
+  text-shadow: 0 2px 3px rgba(0,0,0,0.8);
+}
+.workspace-canvas {
+  background:
+    repeating-linear-gradient(90deg, rgba(0,0,0,0.16) 0 2px, transparent 2px 9px),
+    linear-gradient(180deg, #2a2218, #201a12) !important;
+  border: 2px solid #6b5636; border-top: none;
+}
+
+/* ---- brass buttons ---- */
+.header-btn, .rank-open-btn, .quicklist-add-toggle, .report-preset {
+  background: linear-gradient(180deg, #a8842f, #6b5636) !important;
+  border: 1px solid #2b2110 !important;
+  color: #fff6dc !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+  box-shadow: inset 0 1px 0 rgba(255,238,184,0.4), 0 2px 0 #241a0c;
+}
+.header-btn:hover, .rank-open-btn:hover {
+  background: linear-gradient(180deg, #c9a227, #8a6d3b) !important;
+}
+
+/* ---- modals arrive in a strapped brass case ---- */
+.modal-content {
+  border: 4px solid #8a6d3b !important;
+  box-shadow: 0 0 0 3px #3d3018, 0 24px 60px rgba(0,0,0,0.8) !important;
+  background:
+    repeating-linear-gradient(0deg, rgba(0,0,0,0.06) 0 3px, transparent 3px 8px),
+    linear-gradient(165deg, #3a3024, #2a2218) !important;
+}
+.modal-header {
+  border-bottom: 4px solid #241a0c !important;
+  position: relative;
+  text-transform: uppercase; letter-spacing: 2px;
+}
+.modal-header::before, .modal-header::after {
+  content: ''; position: absolute; top: 50%; width: 11px; height: 11px; margin-top: -5.5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffeeb8, #a8842f 60%, #2b2110);
+}
+.modal-header::before { left: 10px; }
+.modal-header::after { right: 116px; }
+
+/* ---- the steam ---- */
+.clock-badge.clocked-on { position: relative; }
+.clock-badge.clocked-on::after {
+  content: ''; position: absolute; left: 50%; top: -6px;
+  width: 14px; height: 14px; margin-left: -7px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.55), transparent 70%);
+  filter: blur(2px); opacity: 0; pointer-events: none;
+  animation: mlcSteam 3.4s ease-out infinite;
+}
+@keyframes mlcSteam {
+  0%   { opacity: 0;   transform: translateY(0) scale(0.5); }
+  25%  { opacity: 0.7; }
+  100% { opacity: 0;   transform: translateY(-22px) scale(1.7); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .clock-badge.clocked-on::after { animation: none; opacity: 0; }
+}
+
+/* ---- the big round button on the floating adder ---- */
+.add-task-btn {
+  background: radial-gradient(circle at 35% 28%, #f5d97e, #a8842f 55%, #5a4726) !important;
+  border: 3px solid #2b2110 !important;
+  box-shadow: inset 0 2px 5px rgba(255,238,184,0.5), 0 5px 0 #241a0c, 0 8px 20px rgba(0,0,0,0.6) !important;
+  color: #2b2110 !important;
+}
+`
+            },
+            industrial: {
+                name: 'Industrial', blurb: 'Concrete, steel and high visibility.',
+                appBg: '#e6e7e8', panelBg: '#f7f7f8', panelText: '#22252a', muted: '#6b7076',
+                border: '#c3c7cb', chromeBg: '#22252a', chromeText: '#f2c200',
+                accent: '#f2c200', accentText: '#22252a', cardBg: '#ffffff', cardText: '#22252a',
+                fontBody: "'Arial Narrow', Arial, Helvetica, sans-serif",
+                fontDisplay: "'Arial Black', Arial, sans-serif", radius: '0px'
+            },
+            botanical: {
+                name: 'Botanical', blurb: 'Soft greens and a slow morning.',
+                appBg: '#f4f7f0', panelBg: '#ffffff', panelText: '#33443a', muted: '#8aa090',
+                border: '#dfe8dc', chromeBg: '#3f5c48', chromeText: '#f4f7f0',
+                accent: '#7aa87f', accentText: '#ffffff', cardBg: '#fdfdf9', cardText: '#33443a',
+                fontBody: "Georgia, 'Palatino Linotype', serif",
+                fontDisplay: "Georgia, 'Palatino Linotype', serif", radius: '14px'
+            },
+            nocturne: {
+                name: 'Nocturne', blurb: 'For late work and tired eyes.',
+                appBg: '#14161a', panelBg: '#1e2127', panelText: '#dfe3e8', muted: '#8b929c',
+                border: '#2e333b', chromeBg: '#0d0f12', chromeText: '#dfe3e8',
+                accent: '#5b9dd9', accentText: '#0d0f12', cardBg: '#252932', cardText: '#dfe3e8',
+                fontBody: "'Segoe UI', Tahoma, sans-serif",
+                fontDisplay: "'Segoe UI', Tahoma, sans-serif", radius: '6px'
+            },
+            paper: {
+                name: 'Paper', blurb: 'Warm, quiet and typographic.',
+                appBg: '#f3efe6', panelBg: '#fbf8f2', panelText: '#3a352c', muted: '#8c8477',
+                border: '#e2dbcd', chromeBg: '#3a352c', chromeText: '#f3efe6',
+                accent: '#a6603c', accentText: '#fbf8f2', cardBg: '#ffffff', cardText: '#3a352c',
+                fontBody: "'Iowan Old Style', Georgia, serif",
+                fontDisplay: "'Iowan Old Style', Georgia, serif", radius: '3px'
+            }
+        };
+
+        function loadCustomSkins() {
+            try {
+                const list = JSON.parse(localStorage.getItem(CUSTOM_SKIN_KEY) || '[]');
+                return Array.isArray(list) ? list : [];
+            } catch (e) { return []; }
+        }
+
+        function allSkins() {
+            const out = {};
+            Object.keys(BUILT_IN_SKINS).forEach(k => { out[k] = BUILT_IN_SKINS[k]; });
+            loadCustomSkins().forEach(s => { if (s && s.id) out[s.id] = s; });
+            return out;
+        }
+
+        function loadSkinChoice() {
+            try {
+                const c = JSON.parse(localStorage.getItem(SKIN_KEY) || '{}');
+                return {
+                    global: c.global || 'canvas',
+                    perWorkspace: c.perWorkspace || {},
+                    mode: c.mode === 'per' ? 'per' : 'global'
+                };
+            } catch (e) {
+                return { global: 'canvas', perWorkspace: {}, mode: 'global' };
+            }
+        }
+
+        function saveSkinChoice(choice) {
+            localStorage.setItem(SKIN_KEY, JSON.stringify(choice));
+        }
+
+        function activeSkinId(workspace) {
+            const choice = loadSkinChoice();
+            const ws = workspace || currentWorkspace;
+            if (choice.mode === 'per' && choice.perWorkspace[ws]) return choice.perWorkspace[ws];
+            return choice.global;
+        }
+
+        function skinById(id) {
+            const skins = allSkins();
+            return skins[id] || BUILT_IN_SKINS.canvas;
+        }
+
+        // Only colour-ish and font-ish strings get through, so an imported
+        // skin cannot smuggle anything else into the page.
+        function safeToken(key, value) {
+            if (typeof value !== 'string') return null;
+            const v = value.trim();
+            if (!v || v.length > 120) return null;
+            if (/[{}<>;@]/.test(v)) return null;
+            if (/url\s*\(|expression|javascript:|import/i.test(v)) return null;
+            return v;
+        }
+
+        function sanitiseSkin(raw) {
+            if (!raw || typeof raw !== 'object') return null;
+            const base = BUILT_IN_SKINS.canvas;
+            const out = {
+                id: 'skin-' + Date.now() + '-' + Math.random().toString(36).substr(2, 5),
+                name: (typeof raw.name === 'string' ? raw.name : 'Imported skin').slice(0, 40),
+                blurb: (typeof raw.blurb === 'string' ? raw.blurb : 'An imported skin.').slice(0, 90),
+                custom: true
+            };
+            SKIN_TOKENS.forEach(t => {
+                out[t] = safeToken(t, raw[t]) || base[t];
+            });
+            // Deliberately not copied: an imported skin never carries CSS
+            delete out.extraCss;
+            return out;
+        }
+
+        function buildSkinCss(skin) {
+            const s = skin;
+            return [
+                'body { background: ' + s.appBg + '; font-family: ' + s.fontBody + '; }',
+                '.system-header { background: ' + s.chromeBg + '; color: ' + s.chromeText + '; }',
+                '.workspace-nav { background: ' + s.chromeBg + '; }',
+                '.workspace-tab { color: ' + s.chromeText + '; }',
+                '.workspace-tab.active { background: ' + s.panelBg + '; color: ' + s.panelText + '; }',
+                '.capacity-section, .priority-radar, .victory-log, .quicklist-section, ' +
+                    '.notes-section, .canvas-container { background: ' + s.panelBg +
+                    '; color: ' + s.panelText + '; border-radius: ' + s.radius + '; }',
+                '.workspace-canvas { background: ' + s.panelBg + '; }',
+                '.task-item { background: ' + s.cardBg + '; color: ' + s.cardText +
+                    '; border-color: ' + s.border + '; border-radius: ' + s.radius + '; }',
+                '.task-title { color: ' + s.cardText + '; }',
+                '.task-description, .rank-desc, .quicklist-note, .task-nextstep { color: ' + s.muted + '; }',
+                '.canvas-header { border-radius: ' + s.radius + ' ' + s.radius + ' 0 0; }',
+                '.notes-textarea, .quicklist-form input, .detail-input, .report-input { background: ' +
+                    s.cardBg + '; color: ' + s.cardText + '; border-color: ' + s.border + '; }',
+                '.modal-content { background: ' + s.panelBg + '; color: ' + s.panelText +
+                    '; border-radius: ' + s.radius + '; }',
+                '.modal-body { background: ' + s.panelBg + '; color: ' + s.panelText + '; }',
+                '.modal-title, .workspace-title, .canvas-header, .priority-header, ' +
+                    '.victory-header, .quicklist-header, .notes-header { font-family: ' + s.fontDisplay + '; }',
+                '.rank-row, .gs-row, .focus-row, .clock-stat { background: ' + s.cardBg +
+                    '; color: ' + s.cardText + '; }',
+                '.rank-title, .focus-row-title, .gs-row-title { color: ' + s.cardText + '; }',
+                // Headings and labels carry fixed dark colours of their own, which
+                // disappear entirely on a dark skin. These are named explicitly
+                // rather than swept up with a wildcard, so the deliberately
+                // coloured things (status chips, victories, overdue dates) survive.
+                '.capacity-title, .quicklist-title, .notes-header, .canvas-header-title, ' +
+                    '.detail-label, .detail-log-title, .report-label, .report-options-title, ' +
+                    '.activity-form-label, .activity-filter-label, .settings-section-title, ' +
+                    '.rank-group-head, .csv-col-name, .export-option-title, .skin-scope, ' +
+                    '.stream-name-input, .rate-ws-name, .rate-label, .master-task-title, .skin-name, ' +
+                    '.clock-sessions-title, .gs-group-title, .focus-group-title { color: ' +
+                    s.panelText + '; }',
+                '.settings-section, .rate-ws, .skin-card, .report-ws-list, .rank-toolbar, ' +
+                    '.report-options, .csv-settings, .quicklist-item, .detail-log-entry, ' +
+                    '.activity-item, .master-task-item { background: ' + s.cardBg +
+                    '; color: ' + s.cardText + '; border-color: ' + s.border + '; }',
+                '.detail-hint, .report-note, .skin-blurb, .rank-desc, .gs-row-meta, ' +
+                    '.focus-row-meta, .csv-col-sample, .quicklist-empty, .rank-empty { color: ' +
+                    s.muted + '; }',
+                '.modal-body select, .modal-body textarea, .modal-body input[type="text"], ' +
+                    '.modal-body input[type="number"], .modal-body input[type="date"] { background: ' +
+                    s.cardBg + '; color: ' + s.cardText + '; border-color: ' + s.border + '; }',
+                '.add-task-btn { background: ' + s.accent + '; color: ' + s.accentText + '; }',
+                '.rank-open-btn, .report-preset, .detail-save-btn, .clock-badge.clocked-on { background: ' +
+                    s.accent + '; color: ' + s.accentText + '; }'
+            ].join('\n');
+        }
+
+        function applySkin(workspace) {
+            const skin = skinById(activeSkinId(workspace));
+            let tag = document.getElementById('skinStyles');
+            if (!tag) {
+                tag = document.createElement('style');
+                tag.id = 'skinStyles';
+                document.head.appendChild(tag);
+            }
+            const id = activeSkinId(workspace);
+            let css = id === 'canvas' ? '' : buildSkinCss(skin);
+
+            // Only built-in skins may carry decoration beyond the tokens.
+            // An imported skin is tokens and nothing else, by construction.
+            if (BUILT_IN_SKINS[id] && BUILT_IN_SKINS[id].extraCss) {
+                css += '\n' + BUILT_IN_SKINS[id].extraCss;
+            }
+            tag.textContent = css;
+
+            const badge = document.getElementById('skinBadge');
+            if (badge) badge.title = 'Skin: ' + skin.name;
+        }
+
+        // ----- the picker -----
+
+        function openSkinPicker() {
+            renderSkinPicker();
+            document.getElementById('skinModal').style.display = 'block';
+        }
+
+        function closeSkinPicker() {
+            document.getElementById('skinModal').style.display = 'none';
+        }
+
+        function renderSkinPicker() {
+            const choice = loadSkinChoice();
+            const skins = allSkins();
+            const active = activeSkinId();
+
+            document.getElementById('skinPerWorkspace').checked = choice.mode === 'per';
+            const scope = document.getElementById('skinScopeNote');
+            scope.textContent = choice.mode === 'per'
+                ? 'Choosing a skin now applies to ' + (workspaceNames[currentWorkspace] || currentWorkspace) + ' only.'
+                : 'Choosing a skin now applies everywhere.';
+
+            const grid = document.getElementById('skinGrid');
+            grid.innerHTML = Object.keys(skins).map(id => {
+                const s = skins[id];
+                return '<div class="skin-card' + (id === active ? ' skin-card-active' : '') +
+                        '" onclick="chooseSkin(\'' + id + '\')">' +
+                    '<div class="skin-swatch" style="background: ' + s.appBg + '; border-color: ' + s.border + ';">' +
+                        '<span class="skin-chip" style="background: ' + s.chromeBg + ';"></span>' +
+                        '<span class="skin-chip" style="background: ' + s.accent + ';"></span>' +
+                        '<span class="skin-chip" style="background: ' + s.cardBg + '; border: 1px solid ' + s.border + ';"></span>' +
+                    '</div>' +
+                    '<div class="skin-name" style="font-family: ' + s.fontDisplay + ';">' +
+                        rankEscape(s.name) + (s.custom ? ' <span class="skin-own">yours</span>' : '') + '</div>' +
+                    '<div class="skin-blurb">' + rankEscape(s.blurb || '') + '</div>' +
+                    (s.custom ? '<button class="skin-remove" onclick="event.stopPropagation(); removeCustomSkin(\'' +
+                        id + '\')" title="Remove this skin">&#215;</button>' : '') +
+                '</div>';
+            }).join('');
+
+            const list = document.getElementById('skinWorkspaceList');
+            list.style.display = choice.mode === 'per' ? '' : 'none';
+            if (choice.mode === 'per') {
+                list.innerHTML = RANK_WORKSPACES.concat(['clients']).map(ws =>
+                    '<div class="skin-ws-row"><span>' + rankEscape(workspaceNames[ws] || ws) + '</span>' +
+                    '<select onchange="setWorkspaceSkin(\'' + ws + '\', this.value)">' +
+                        '<option value="">use the overall skin</option>' +
+                        Object.keys(skins).map(id => '<option value="' + id + '"' +
+                            (choice.perWorkspace[ws] === id ? ' selected' : '') + '>' +
+                            rankEscape(skins[id].name) + '</option>').join('') +
+                    '</select></div>').join('');
+            }
+        }
+
+        function chooseSkin(id) {
+            const choice = loadSkinChoice();
+            if (choice.mode === 'per') choice.perWorkspace[currentWorkspace] = id;
+            else choice.global = id;
+            saveSkinChoice(choice);
+            applySkin();
+            renderSkinPicker();
+            showNotification(skinById(id).name + ' applied', 'success');
+        }
+
+        function setWorkspaceSkin(ws, id) {
+            const choice = loadSkinChoice();
+            if (id) choice.perWorkspace[ws] = id;
+            else delete choice.perWorkspace[ws];
+            saveSkinChoice(choice);
+            applySkin();
+            renderSkinPicker();
+        }
+
+        function toggleSkinPerWorkspace() {
+            const choice = loadSkinChoice();
+            choice.mode = document.getElementById('skinPerWorkspace').checked ? 'per' : 'global';
+            saveSkinChoice(choice);
+            applySkin();
+            renderSkinPicker();
+        }
+
+        // ----- bringing your own -----
+
+        function exportCurrentSkin() {
+            const skin = skinById(activeSkinId());
+            const out = { name: skin.name, blurb: skin.blurb };
+            // Ornamentation belongs to the built-in skin, so what leaves here
+            // is the palette. Say so rather than let someone wonder.
+            SKIN_TOKENS.forEach(t => { out[t] = skin[t]; });
+            const name = buildExportName(skin.name + ' Skin', 'json');
+            downloadAsFile(name.filename, JSON.stringify(out, null, 2), 'application/json');
+            showNotification('Skin saved as ' + name.filename, 'success');
+        }
+
+        function triggerSkinImport() {
+            document.getElementById('skinImportInput').click();
+        }
+
+        function importSkin(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const skin = sanitiseSkin(JSON.parse(e.target.result));
+                    if (!skin) throw new Error('not a skin');
+                    const list = loadCustomSkins();
+                    list.push(skin);
+                    localStorage.setItem(CUSTOM_SKIN_KEY, JSON.stringify(list));
+                    renderSkinPicker();
+                    showNotification('"' + skin.name + '" added to your skins', 'success');
+                } catch (err) {
+                    console.error('Skin import failed:', err);
+                    showNotification('That file is not a skin MyLifeCanvas can read', 'error');
+                }
+                event.target.value = '';
+            };
+            reader.readAsText(file);
+        }
+
+        function removeCustomSkin(id) {
+            if (!confirm('Remove this skin? Nothing else is affected.')) return;
+            localStorage.setItem(CUSTOM_SKIN_KEY,
+                JSON.stringify(loadCustomSkins().filter(s => s.id !== id)));
+            const choice = loadSkinChoice();
+            if (choice.global === id) choice.global = 'canvas';
+            Object.keys(choice.perWorkspace).forEach(ws => {
+                if (choice.perWorkspace[ws] === id) delete choice.perWorkspace[ws];
+            });
+            saveSkinChoice(choice);
+            applySkin();
+            renderSkinPicker();
+        }
+
+        (function wrapForSkins() {
+            if (typeof switchWorkspace === 'function') {
+                const original = switchWorkspace;
+                switchWorkspace = function(ws) {
+                    const r = original.apply(this, arguments);
+                    try { applySkin(ws); } catch (e) {}
+                    return r;
+                };
+            }
+        })();
+
+        document.addEventListener('DOMContentLoaded', function() {
+            applySkin();
+            const toggle = document.getElementById('skinPerWorkspace');
+            if (toggle) toggle.addEventListener('change', toggleSkinPerWorkspace);
+            window.addEventListener('click', function(e) {
+                if (e.target && e.target.id === 'skinModal') closeSkinPicker();
+            });
+        });
 
         // ==============================================
         // RATES AND COSTINGS - v2.23
@@ -11042,6 +11888,8 @@
                     taskStreams: JSON.parse(localStorage.getItem('taskStreams') || '{}'),
                     timeClock: JSON.parse(localStorage.getItem('timeClock') || '{}'),
                     listRates: JSON.parse(localStorage.getItem('listRates') || '{}'),
+                    skinChoice: JSON.parse(localStorage.getItem('skinChoice') || '{}'),
+                    customSkins: JSON.parse(localStorage.getItem('customSkins') || '[]'),
                     rateCurrency: localStorage.getItem('rateCurrency') || '$',
                     taskDetails: JSON.parse(localStorage.getItem('taskDetails') || '{}'),
                     quickListSort: JSON.parse(localStorage.getItem('quickListSort') || '{}'),
@@ -11135,6 +11983,8 @@
                     if (data.taskStreams) localStorage.setItem('taskStreams', JSON.stringify(data.taskStreams));
                     if (data.timeClock) localStorage.setItem('timeClock', JSON.stringify(data.timeClock));
                     if (data.listRates) localStorage.setItem('listRates', JSON.stringify(data.listRates));
+                    if (data.skinChoice) localStorage.setItem('skinChoice', JSON.stringify(data.skinChoice));
+                    if (data.customSkins) localStorage.setItem('customSkins', JSON.stringify(data.customSkins));
                     if (data.rateCurrency) localStorage.setItem('rateCurrency', data.rateCurrency);
                     if (data.taskDetails) localStorage.setItem('taskDetails', JSON.stringify(data.taskDetails));
                     if (data.quickListSort) localStorage.setItem('quickListSort', JSON.stringify(data.quickListSort));
