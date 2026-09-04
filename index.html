@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 20260903 MyLifeCanvas v 02.25-a -->
+<!-- 20260903 MyLifeCanvas v 02.29-a -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -3071,6 +3071,7 @@
         .gs-tag-master { background: #95a5a6; }
         .gs-tag-quicklist { background: #8e44ad; }
         .gs-tag-contact { background: #16a085; }
+        .gs-tag-completed { background: #1e8449; }
 
         .gs-row-title { font-size: 13px; font-weight: 600; color: #2c3e50; }
         .gs-row-meta { font-size: 11px; color: #95a5a6; margin-top: 2px; }
@@ -3756,6 +3757,174 @@
             line-height: 1.5;
         }
 
+
+        /* ==============================================
+           ADD A CONTACT WITHOUT LEAVING - v2.26
+           ============================================== */
+
+        .detail-contact-add {
+            margin-top: 8px;
+            background: #f4ecf7;
+            color: #8e44ad;
+            border: 1px dashed #d7bde2;
+            border-radius: 5px;
+            padding: 7px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .detail-contact-add:hover { background: #ebdef0; }
+
+        .detail-new-contact {
+            margin-top: 10px;
+            padding: 12px;
+            background: #faf7fd;
+            border: 1px solid #e6d9ef;
+            border-radius: 6px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+
+        #detailNewContactName {
+            flex: 1;
+            min-width: 180px;
+            padding: 8px 10px;
+            border: 1px solid #d7bde2;
+            border-radius: 5px;
+            font-size: 13px;
+            font-family: inherit;
+            color: #2c3e50;
+        }
+
+        #detailNewContactName:focus { outline: none; border-color: #8e44ad; }
+
+        .detail-new-save {
+            background: #8e44ad;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+
+        .detail-new-save:hover { background: #7d3c98; }
+
+        .detail-new-cancel {
+            background: #ecf0f1;
+            color: #7f8c8d;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .detail-new-note {
+            flex-basis: 100%;
+            font-size: 11px;
+            color: #95a5a6;
+            line-height: 1.5;
+        }
+
+
+        /* ==============================================
+           SETTINGS NAVIGATION - v2.29
+           ============================================== */
+
+        .settings-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding-bottom: 14px;
+            margin-bottom: 18px;
+            border-bottom: 2px solid #ecf0f1;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 2;
+        }
+
+        .settings-nav-btn {
+            background: #ecf0f1;
+            color: #7f8c8d;
+            border: none;
+            border-radius: 6px;
+            padding: 9px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+
+        .settings-nav-btn:hover { background: #d6dbdd; color: #2c3e50; }
+
+        .settings-nav-btn.active {
+            background: #34495e;
+            color: white;
+        }
+
+        .settings-list-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 9px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .settings-list-ws {
+            width: 150px;
+            flex-shrink: 0;
+            font-size: 12px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .settings-list-names {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            min-width: 0;
+        }
+
+        .settings-list-chip {
+            font-size: 10px;
+            font-weight: 700;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+        }
+
+        .settings-list-none {
+            font-size: 11px;
+            color: #b2bec3;
+        }
+
+        .settings-list-btn {
+            background: #ecf0f1;
+            color: #2c3e50;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+
+        .settings-list-btn:hover { background: #d6dbdd; }
+
     </style>
 </head>
 <body>
@@ -3820,7 +3989,7 @@
                         <span>Personal Hidden</span>
                     </button>
                     <button class="header-btn" onclick="openMasterTasks('main')">&#128203; Master Tasks</button>
-                    <button class="header-btn" onclick="openExportChooser('main')">&#128202; Export</button>
+                    <button class="header-btn" onclick="openExportChooser('main')">&#128424; Print &amp; Export</button>
                     <button class="header-btn" onclick="openSettings()">&#9881; Settings</button>
                     <button class="header-btn" onclick="openActivityLog()">&#128221; Log Activity</button>
                     <button class="header-btn" onclick="openActivityHistory()">&#128200; What Have I Done?</button>
@@ -3905,7 +4074,7 @@
                 </div>
                 <div class="header-controls">
                     <button class="header-btn" onclick="openMasterTasks('ideas')">&#128203; Master Tasks</button>
-                    <button class="header-btn" onclick="openExportChooser('ideas')">&#128202; Export</button>
+                    <button class="header-btn" onclick="openExportChooser('ideas')">&#128424; Print &amp; Export</button>
                 </div>
             </div>
 
@@ -3985,7 +4154,7 @@
                 </div>
                 <div class="header-controls">
                     <button class="header-btn" onclick="openMasterTasks('philosophy')">&#128203; Master Tasks</button>
-                    <button class="header-btn" onclick="openExportChooser('philosophy')">&#128202; Export</button>
+                    <button class="header-btn" onclick="openExportChooser('philosophy')">&#128424; Print &amp; Export</button>
                 </div>
             </div>
 
@@ -4065,7 +4234,7 @@
                 </div>
                 <div class="header-controls">
                     <button class="header-btn" onclick="openMasterTasks('family')">&#128203; Master Tasks</button>
-                    <button class="header-btn" onclick="openExportChooser('family')">&#128202; Export</button>
+                    <button class="header-btn" onclick="openExportChooser('family')">&#128424; Print &amp; Export</button>
                 </div>
             </div>
 
@@ -4145,7 +4314,7 @@
                 </div>
                 <div class="header-controls">
                     <button class="header-btn" onclick="openMasterTasks('child1')">&#128203; Master Tasks</button>
-                    <button class="header-btn" onclick="openExportChooser('child1')">&#128202; Export</button>
+                    <button class="header-btn" onclick="openExportChooser('child1')">&#128424; Print &amp; Export</button>
                 </div>
             </div>
 
@@ -4225,7 +4394,7 @@
                 </div>
                 <div class="header-controls">
                     <button class="header-btn" onclick="openMasterTasks('child2')">&#128203; Master Tasks</button>
-                    <button class="header-btn" onclick="openExportChooser('child2')">&#128202; Export</button>
+                    <button class="header-btn" onclick="openExportChooser('child2')">&#128424; Print &amp; Export</button>
                 </div>
             </div>
 
@@ -4308,7 +4477,7 @@
                     <button class="header-btn" onclick="toggleClientView()">&#128197; Timeline View</button>
                     <button class="header-btn" onclick="printClientList()">&#128424; Print</button>
                     <button class="header-btn" onclick="openReports('contact')">&#128424; Reports</button>
-                    <button class="header-btn" onclick="openExportChooser('clients')">&#128228; Export</button>
+                    <button class="header-btn" onclick="openExportChooser('clients')">&#128424; Print &amp; Export</button>
                     <button class="header-btn" onclick="triggerImportClientData()"
                             title="Import contacts from a MyLifeCanvas backup or a spreadsheet (CSV)">&#128293; Import</button>
                     <button class="header-btn" onclick="openSettings()">&#9881; Settings</button>
@@ -4450,13 +4619,22 @@
     <div id="exportChooserModal" class="modal">
         <div class="modal-content" style="max-width: 640px;">
             <div class="modal-header" style="background: #2c3e50;">
-                <h2 class="modal-title">&#128202; Export</h2>
+                <h2 class="modal-title">&#128424; Print &amp; Export</h2>
                 <button class="modal-close" onclick="closeExportChooser()">Close</button>
             </div>
             <div class="modal-body">
                 <p style="margin: 0 0 15px 0; color: #7f8c8d; font-size: 13px; line-height: 1.6;">
-                    These two files are not the same thing. Only one of them can bring your work back.
+                    Three quite different things live here. Only one of them is a backup.
                 </p>
+
+                <div class="export-option" onclick="closeExportChooser(); openReports();">
+                    <div class="export-option-title">&#128424; Reports &mdash; print or save</div>
+                    <div class="export-option-desc">
+                        Work done grouped by contact with time tallies, a client file, a snapshot of where
+                        tasks sit, what is coming up, or hours costed by list. Built for reading into a
+                        timesheet or another system.
+                    </div>
+                </div>
 
                 <div class="export-option" onclick="runPartialExport()">
                     <div class="export-option-title" id="exportPartialTitle">Readable report</div>
@@ -4472,14 +4650,6 @@
                         Every workspace, with tasks, Master Task lists, Priority Radar, Priority Order rankings,
                         victories, notes, contacts and settings. <strong>This is the file to keep.</strong>
                         Restore it any time from Settings &rarr; Backup &amp; Restore.
-                    </div>
-                </div>
-
-                <div class="export-option" onclick="closeExportChooser(); openReports();">
-                    <div class="export-option-title">&#128424; Reports &mdash; print or save</div>
-                    <div class="export-option-desc">
-                        Work done grouped by contact with time tallies, a full contact file, or a snapshot
-                        of where tasks sit. Built for reading into a timesheet or another system.
                     </div>
                 </div>
 
@@ -4564,6 +4734,20 @@
                         <div id="detailContactChips" class="detail-contact-chips"></div>
                         <select id="detailContactPicker" class="detail-input"
                                 onchange="addDetailContact(this.value)"></select>
+                        <button type="button" id="detailContactAdd" class="detail-contact-add"
+                                onclick="showNewContactForm()">+ Add someone new</button>
+                        <div id="detailNewContact" class="detail-new-contact" style="display: none;">
+                            <input type="text" id="detailNewContactName"
+                                   placeholder="Their name, as you would file it"
+                                   onkeydown="if(event.key==='Enter'){event.preventDefault();createContactFromTask();}
+                                              if(event.key==='Escape'){event.preventDefault();hideNewContactForm();}">
+                            <button type="button" class="detail-new-save" onclick="createContactFromTask()">Add &amp; link</button>
+                            <button type="button" class="detail-new-cancel" onclick="hideNewContactForm()">Cancel</button>
+                            <div class="detail-new-note">
+                                Creates a contact with just their name and links it here.
+                                Birthdays and the rest can go in later from the Contacts workspace.
+                            </div>
+                        </div>
                     </div>
 
                     <div class="detail-field detail-field-wide">
@@ -4936,7 +5120,14 @@
 
                 <!-- SECTION 2: Backup & Restore -->
                 <div class="settings-section">
-                    <div class="settings-section-title">&#128176; Hourly rates</div>
+                    <div class="settings-section-title">&#9776; Lists &amp; hourly rates</div>
+                    <div style="font-size: 12px; color: #7f8c8d; line-height: 1.6; margin-bottom: 12px;">
+                        Each workspace can be split into separate ranked lists &mdash; client work apart from
+                        business work, for instance. Lists are created from the Rank panel in a workspace,
+                        and the button beside each one below takes you straight there.
+                    </div>
+                    <div id="settingsListsSummary" style="margin-bottom: 20px;"></div>
+                    <div class="settings-section-title" style="margin-top: 6px;">&#128176; Hourly rates</div>
                     <div style="font-size: 12px; color: #7f8c8d; line-height: 1.6; margin-bottom: 14px;">
                         Set a rate against each of your lists and the time you log turns into a value.
                         Leave them blank and nothing about money appears anywhere.
@@ -5188,7 +5379,64 @@
                             </p>
                         </div>
 
-                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">What's New in Version 2.25</h4>
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">What's New in Version 2.29</h4>
+                        <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
+                            <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
+                                <strong>Settings you can navigate, and a button that says what it does</strong>
+                            </p>
+                            <p style="line-height: 1.8; margin: 0; color: #555; font-size: 12px;">
+                                &#8226; <strong>Four sections</strong> &mdash; Lists &amp; rates, Contacts, Backup, Make it mine<br>
+                                &#8226; <strong>Lists shown where the rates are</strong> &mdash; Every workspace and how it is split, with a Manage button that takes you to it<br>
+                                &#8226; <strong>Opens on Lists &amp; rates</strong> &mdash; The thing most likely to be looked for<br>
+                                &#8226; <strong>Export is now Print &amp; Export</strong> &mdash; Because it has not just been an export for some time<br>
+                                &#8226; <strong>Reports come first in it</strong> &mdash; They are what the button is mostly used for now
+                            </p>
+                        </div>
+
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Previously, in Version 2.28</h4>
+                        <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
+                            <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
+                                <strong>Search now shows you what it found</strong>
+                            </p>
+                            <p style="line-height: 1.8; margin: 0; color: #555; font-size: 12px;">
+                                &#8226; <strong>Matches are gathered to the top</strong> &mdash; No more hunting for a card that was below the fold<br>
+                                &#8226; <strong>Your layout is put back exactly</strong> &mdash; Clear the box and every card returns to where you had it<br>
+                                &#8226; <strong>Nothing is saved while searching</strong> &mdash; The gathered view is never written to your data<br>
+                                &#8226; <strong>Move one while searching and it stays moved</strong> &mdash; A deliberate drag is respected<br>
+                                &#8226; <strong>The canvas scrolls back to the top</strong> &mdash; So the first match is where you are looking
+                            </p>
+                        </div>
+
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Previously, in Version 2.27</h4>
+                        <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
+                            <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
+                                <strong>Finished work stays on the record</strong>
+                            </p>
+                            <p style="line-height: 1.8; margin: 0; color: #555; font-size: 12px;">
+                                &#8226; <strong>Completed section on every contact</strong> &mdash; What has been done for them, and when<br>
+                                &#8226; <strong>The history comes with it</strong> &mdash; Progress notes, logged time and links all survive completion<br>
+                                &#8226; <strong>Reopen</strong> &mdash; Put a finished task back on the canvas with everything intact<br>
+                                &#8226; <strong>In the contact file report</strong> &mdash; Open and completed work, each with its own tally<br>
+                                &#8226; <strong>Findable in search</strong> &mdash; Completed work turns up in Search Everywhere<br>
+                                &#8226; <strong>Older completions recovered</strong> &mdash; Tasks finished before this version are still shown where enough was kept
+                            </p>
+                        </div>
+
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Previously, in Version 2.26</h4>
+                        <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
+                            <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
+                                <strong>Add a contact without leaving the task</strong>
+                            </p>
+                            <p style="line-height: 1.8; margin: 0; color: #555; font-size: 12px;">
+                                &#8226; <strong>Add someone new</strong> &mdash; Right there in the task panel, under Relates to<br>
+                                &#8226; <strong>Created and linked in one go</strong> &mdash; Type the name, press Enter, carry on<br>
+                                &#8226; <strong>It is a real contact</strong> &mdash; It appears in the Contacts workspace like any other<br>
+                                &#8226; <strong>Names you already have are recognised</strong> &mdash; It links the existing one rather than making a second<br>
+                                &#8226; <strong>Just the name</strong> &mdash; Birthdays, fees and notes can go in later, when you are not mid-thought
+                            </p>
+                        </div>
+
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Previously, in Version 2.25</h4>
                         <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
                             <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
                                 <strong>Steampunk Extreme</strong>
@@ -5644,6 +5892,10 @@
 
                         <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Version History</h4>
                         <p style="line-height: 1.6; color: #555; font-size: 12px;">
+                            <strong>v2.29</strong> &mdash; Settings organised into sections, lists surfaced beside their rates, Export renamed<br>
+                            <strong>v2.28</strong> &mdash; Search gathers matching cards into view instead of leaving them scattered<br>
+                            <strong>v2.27</strong> &mdash; Completed tasks kept on the contact record, with reopen and full history<br>
+                            <strong>v2.26</strong> &mdash; Create and link a contact from inside the task panel<br>
                             <strong>v2.25</strong> &mdash; Steampunk Extreme skin, with rivets, pipework, gauges and steam<br>
                             <strong>v2.24</strong> &mdash; Skins, per-workspace themes, and skin import and export<br>
                             <strong>v2.23</strong> &mdash; Hourly rates per list, per-task overrides, time and value reporting, steampunk time clock<br>
@@ -6122,8 +6374,8 @@
         // no longer a set of version numbers that can drift apart.
         // ==============================================
         const APP_VERSION = {
-            number: '2.25',
-            file: '20260903 MyLifeCanvas v 02.25-a',
+            number: '2.29',
+            file: '20260903 MyLifeCanvas v 02.29-a',
             released: 'September 2026'
         };
 
@@ -6826,6 +7078,9 @@
                 removeFromPriorityRadar(taskId, currentWorkspace);
             }
             
+            // Keep a marker so the work is still findable once the card has gone
+            try { archiveTaskOnCompletion(task, currentWorkspace); } catch (e) {}
+
             // Log victory
             logVictory(title, currentWorkspace, true);
             
@@ -6849,6 +7104,7 @@
                 // Update victory counter after task is removed
                 updateVictoryCounter(currentWorkspace);
                 saveWorkspaceTasks(); // CRITICAL: Save after completing task
+                try { if (typeof renderClientList === 'function') renderClientList(); } catch (e) {}
             }, 300);
         }
 
@@ -7287,6 +7543,11 @@
 
         function openSettings() {
             try { renderRateSettings(); } catch (e) {}
+            try {
+                buildSettingsNav();
+                const open = document.querySelector('.settings-nav-btn.active');
+                showSettingsTab(open ? open.dataset.tab : 'lists');
+            } catch (e) { console.warn('Settings navigation failed', e); }
             const modal = document.getElementById('settingsModal');
             modal.style.display = 'block';
             
@@ -7570,6 +7831,83 @@
                 notes: data.notes,
                 masterTasks: data.masterTasks
             };
+        }
+
+        // ==============================================
+        // FINDING THINGS IN SETTINGS - v2.29
+        // Settings grew a section at a time until it was a single long
+        // scroll, which is how an hourly rate ends up existing and being
+        // undiscoverable at the same time. It now has a spine.
+        // ==============================================
+
+        const SETTINGS_TABS = [
+            { id: 'lists',    label: '\u2630 Lists & rates' },
+            { id: 'contacts', label: '\u{1F465} Contacts' },
+            { id: 'backup',   label: '\u{1F4BE} Backup' },
+            { id: 'personal', label: '\u2728 Make it mine' }
+        ];
+
+        function buildSettingsNav() {
+            const body = document.querySelector('#settingsModal .modal-body');
+            if (!body || document.getElementById('settingsNav')) return;
+
+            const sections = Array.from(body.querySelectorAll('.settings-section'));
+            // Order matters here: it is the order the sections appear in the markup
+            const map = ['contacts', 'lists', 'backup', 'personal', 'personal'];
+            sections.forEach((s, i) => {
+                s.dataset.settingsTab = map[i] || 'personal';
+            });
+
+            const nav = document.createElement('div');
+            nav.id = 'settingsNav';
+            nav.className = 'settings-nav';
+            nav.innerHTML = SETTINGS_TABS.map(t =>
+                '<button type="button" class="settings-nav-btn" data-tab="' + t.id + '" ' +
+                'onclick="showSettingsTab(\'' + t.id + '\')">' + t.label + '</button>').join('');
+            body.insertBefore(nav, body.firstChild);
+        }
+
+        function showSettingsTab(tab) {
+            document.querySelectorAll('#settingsModal .settings-section').forEach(s => {
+                s.style.display = s.dataset.settingsTab === tab ? '' : 'none';
+            });
+            document.querySelectorAll('.settings-nav-btn').forEach(b => {
+                b.classList.toggle('active', b.dataset.tab === tab);
+            });
+            const body = document.querySelector('#settingsModal .modal-body');
+            if (body) body.scrollTop = 0;
+            if (tab === 'lists') renderSettingsLists();
+        }
+
+        // The lists themselves are managed from the ranking panel, which is the
+        // right place to do it. Settings should still show they exist and get
+        // you there, rather than leaving the rates looking parentless.
+        function renderSettingsLists() {
+            const container = document.getElementById('settingsListsSummary');
+            if (!container) return;
+
+            container.innerHTML = RANK_WORKSPACES.map(ws => {
+                const streams = streamsFor(ws);
+                const name = workspaceNames[ws] || ws;
+                return '<div class="settings-list-row">' +
+                    '<div class="settings-list-ws">' + rankEscape(name) + '</div>' +
+                    '<div class="settings-list-names">' +
+                        (streams.length
+                            ? streams.map(s => '<span class="settings-list-chip" style="background: ' +
+                                s.colour + ';">' + rankEscape(s.name) + '</span>').join('')
+                            : '<span class="settings-list-none">one list &mdash; nothing separated out</span>') +
+                    '</div>' +
+                    '<button type="button" class="settings-list-btn" ' +
+                        'onclick="manageListsFor(\'' + ws + '\')">Manage</button>' +
+                '</div>';
+            }).join('');
+        }
+
+        function manageListsFor(workspace) {
+            closeSettings();
+            if (workspace !== currentWorkspace) switchWorkspace(workspace);
+            openRanking(workspace);
+            openStreamManager();
         }
 
         // ==============================================
@@ -7969,18 +8307,21 @@ body {
                     '.detail-label, .detail-log-title, .report-label, .report-options-title, ' +
                     '.activity-form-label, .activity-filter-label, .settings-section-title, ' +
                     '.rank-group-head, .csv-col-name, .export-option-title, .skin-scope, ' +
-                    '.stream-name-input, .rate-ws-name, .rate-label, .master-task-title, .skin-name, ' +
+                    '.stream-name-input, .rate-ws-name, .rate-label, .master-task-title, .skin-name, .settings-list-ws, ' +
                     '.clock-sessions-title, .gs-group-title, .focus-group-title { color: ' +
                     s.panelText + '; }',
                 '.settings-section, .rate-ws, .skin-card, .report-ws-list, .rank-toolbar, ' +
                     '.report-options, .csv-settings, .quicklist-item, .detail-log-entry, ' +
                     '.activity-item, .master-task-item { background: ' + s.cardBg +
                     '; color: ' + s.cardText + '; border-color: ' + s.border + '; }',
-                '.detail-hint, .report-note, .skin-blurb, .rank-desc, .gs-row-meta, ' +
+                '.detail-new-note, .detail-contact-none, .detail-hint, .report-note, .skin-blurb, .rank-desc, .gs-row-meta, ' +
                     '.focus-row-meta, .csv-col-sample, .quicklist-empty, .rank-empty { color: ' +
                     s.muted + '; }',
+                // #detailNewContactName carries an id-level colour of its own, which
+                // outranks an element selector, so it is named here directly
                 '.modal-body select, .modal-body textarea, .modal-body input[type="text"], ' +
-                    '.modal-body input[type="number"], .modal-body input[type="date"] { background: ' +
+                    '.modal-body input[type="number"], .modal-body input[type="date"], ' +
+                    '#detailNewContactName { background: ' +
                     s.cardBg + '; color: ' + s.cardText + '; border-color: ' + s.border + '; }',
                 '.add-task-btn { background: ' + s.accent + '; color: ' + s.accentText + '; }',
                 '.rank-open-btn, .report-preset, .detail-save-btn, .clock-badge.clocked-on { background: ' +
@@ -8163,6 +8504,152 @@ body {
                 if (e.target && e.target.id === 'skinModal') closeSkinPicker();
             });
         });
+
+        // ==============================================
+        // COMPLETED WORK - v2.27
+        // Finishing a task removed its card and, with it, any way of
+        // seeing it again. The underlying record was never deleted, so
+        // the history was there the whole time with nothing to show it.
+        //
+        // Completion now leaves a marker on the record, and a contact
+        // shows what has been done for them as well as what is open.
+        // ==============================================
+
+        function archiveTaskOnCompletion(taskElement, workspace) {
+            if (!taskElement || !taskElement.id) return;
+            const d = getTaskDetail(taskElement.id);
+            d.archived = {
+                title: (taskElement.querySelector('.task-title') || {}).textContent || 'Untitled',
+                description: (taskElement.querySelector('.task-description') || {}).textContent || '',
+                status: (taskElement.querySelector('.task-status') || {}).textContent || '',
+                workspace: workspace || currentWorkspace,
+                completedAt: new Date().toISOString()
+            };
+            setTaskDetail(taskElement.id, d);
+        }
+
+        // Tasks finished before v2.27 have no marker. Their record survived,
+        // so recover what can be recovered rather than pretend they never were.
+        function recoveredTitleFor(taskId) {
+            const fromActivity = (activityLog || []).find(a => a.taskId === taskId && a.taskTitle);
+            return fromActivity ? fromActivity.taskTitle : null;
+        }
+
+        function completedTasksForContact(contactId) {
+            const all = loadTaskDetails();
+            const rows = [];
+
+            Object.keys(all).forEach(taskId => {
+                const d = all[taskId] || {};
+                if (!Array.isArray(d.contactIds) || d.contactIds.indexOf(contactId) === -1) return;
+                if (document.getElementById(taskId)) return;   // still open somewhere
+
+                const archived = d.archived || null;
+                const title = archived ? archived.title : recoveredTitleFor(taskId);
+                if (!title) return;   // nothing left to show it by
+
+                const ws = archived ? archived.workspace : '';
+                rows.push({
+                    id: taskId,
+                    title: title,
+                    description: archived ? archived.description : '',
+                    workspace: ws,
+                    workspaceName: ws ? (workspaceNames[ws] || ws) : '',
+                    completedAt: archived ? archived.completedAt : '',
+                    recovered: !archived,
+                    minutes: taskLoggedMinutes(taskId),
+                    entries: (d.log || []).length + activitiesForTask(taskId).length
+                });
+            });
+
+            rows.sort((a, b) => (b.completedAt || '').localeCompare(a.completedAt || ''));
+            return rows;
+        }
+
+        function contactTotalMinutes(contactId) {
+            const open = tasksForContact(contactId).reduce((s, r) => s + r.minutes, 0);
+            const done = completedTasksForContact(contactId).reduce((s, r) => s + r.minutes, 0);
+            return open + done;
+        }
+
+        function completedPanel(contactId) {
+            const rows = completedTasksForContact(contactId);
+            if (rows.length === 0) return '';
+
+            const minutes = rows.reduce((s, r) => s + r.minutes, 0);
+            const timeLabel = minutes > 0
+                ? (minutes >= 60 ? (minutes / 60).toFixed(1) + ' hours' : minutes + ' mins')
+                : '';
+
+            return '<div style="padding: 10px 15px; border-top: 1px solid #f0f0f0; background: #f7fbf8;">' +
+                '<div style="font-size: 11px; font-weight: 600; color: #1e8449; margin-bottom: 8px;">' +
+                    'COMPLETED (' + rows.length + ')' + (timeLabel ? ' &middot; ' + timeLabel + ' logged' : '') +
+                '</div>' +
+                rows.map(r => {
+                    const when = r.completedAt
+                        ? new Date(r.completedAt).toLocaleDateString('en-AU',
+                            { day: 'numeric', month: 'short', year: 'numeric' })
+                        : 'date not recorded';
+                    return '<div style="display: flex; justify-content: space-between; align-items: flex-start; ' +
+                        'gap: 10px; padding: 6px 0; border-bottom: 1px solid #eef4ef;">' +
+                        '<div style="min-width: 0;">' +
+                            '<div style="color: #2c3e50; font-size: 12px; font-weight: 600;">' +
+                                '&#10003; ' + rankEscape(r.title) + '</div>' +
+                            '<div style="font-size: 11px; color: #95a5a6; margin-top: 2px;">' +
+                                rankEscape(when) +
+                                (r.workspaceName ? ' &middot; ' + rankEscape(r.workspaceName) : '') +
+                                (r.entries ? ' &middot; ' + r.entries + ' entries' : '') +
+                                (r.minutes ? ' &middot; ' + formatMinutes(r.minutes) : '') +
+                                (r.recovered ? ' &middot; <em>completed before this was recorded</em>' : '') +
+                            '</div>' +
+                        '</div>' +
+                        '<button onclick="reopenArchivedTask(\'' + r.id + '\')" ' +
+                        'style="background: #ecf0f1; color: #2c3e50; border: none; padding: 4px 9px; ' +
+                        'border-radius: 3px; cursor: pointer; font-size: 10px; white-space: nowrap;">Reopen</button>' +
+                        '</div>';
+                }).join('') +
+                '</div>';
+        }
+
+        function reopenArchivedTask(taskId) {
+            const d = getTaskDetail(taskId);
+            const archived = d.archived;
+            const title = archived ? archived.title : recoveredTitleFor(taskId);
+            if (!title) {
+                showNotification('Not enough was kept to reopen this one', 'error');
+                return;
+            }
+
+            const ws = (archived && archived.workspace) || currentWorkspace;
+            if (!confirm('Put "' + title + '" back on the ' + (workspaceNames[ws] || ws) +
+                         ' canvas?\n\nIts history, time and links come back with it.')) return;
+
+            const previous = currentWorkspace;
+            if (ws !== currentWorkspace) switchWorkspace(ws);
+
+            createTaskElement(title, archived ? archived.description : '', 'normal', taskId);
+
+            // Put the recorded status back, which createTaskElement cannot know
+            if (archived && archived.status) {
+                const el = document.getElementById(taskId);
+                const statusEl = el ? el.querySelector('.task-status') : null;
+                const config = Object.keys(statusLabels[ws] || {})
+                    .map(k => statusLabels[ws][k])
+                    .find(c => c.label === archived.status);
+                if (statusEl && config) {
+                    statusEl.textContent = config.label;
+                    statusEl.style.background = config.color;
+                }
+            }
+
+            delete d.archived;
+            setTaskDetail(taskId, d);
+            saveWorkspaceTasks();
+            refreshTaskMomentum(ws);
+            try { renderClientList(); } catch (e) {}
+            if (ws !== previous) { /* stay where the task is */ }
+            showNotification('"' + title + '" is back on the canvas', 'success');
+        }
 
         // ==============================================
         // RATES AND COSTINGS - v2.23
@@ -8423,6 +8910,55 @@ body {
             return parts.join(' ').toLowerCase();
         }
 
+        // Hiding cards on a free-form canvas is not enough: the ones that
+        // match stay wherever they happened to sit, which can be well below
+        // the fold. A search that finds something must also show it.
+        // Positions are remembered and put back exactly when the search clears.
+        const searchLayout = {};
+
+        function captureSearchPositions(workspace) {
+            if (searchLayout[workspace]) return;
+            const map = {};
+            document.querySelectorAll('#workspace-' + workspace + ' .workspace-canvas .task-item')
+                .forEach(el => { map[el.id] = { left: el.style.left, top: el.style.top }; });
+            searchLayout[workspace] = map;
+        }
+
+        function putPositionsBack(workspace) {
+            const originals = searchLayout[workspace];
+            if (!originals) return;
+            Object.keys(originals).forEach(id => {
+                const el = document.getElementById(id);
+                if (el) { el.style.left = originals[id].left; el.style.top = originals[id].top; }
+            });
+        }
+
+        function endSearchLayout(workspace) {
+            putPositionsBack(workspace);
+            delete searchLayout[workspace];
+        }
+
+        function layoutSearchMatches(workspace) {
+            const canvas = document.querySelector('#workspace-' + workspace + ' .workspace-canvas');
+            if (!canvas) return;
+            const colWidth = 300;
+            const cols = Math.max(1, Math.floor(((canvas.clientWidth || 900) - 20) / colWidth));
+            const colY = new Array(cols).fill(20);
+
+            document.querySelectorAll('#workspace-' + workspace + ' .workspace-canvas .task-item')
+                .forEach(el => {
+                    if (el.classList.contains('search-hidden')) return;
+                    let c = 0;
+                    for (let i = 1; i < cols; i++) if (colY[i] < colY[c]) c = i;
+                    el.style.left = (20 + c * colWidth) + 'px';
+                    el.style.top = colY[c] + 'px';
+                    colY[c] += (el.offsetHeight || 130) + 15;
+                });
+
+            canvas.scrollTop = 0;
+            canvas.scrollLeft = 0;
+        }
+
         function applyTaskSearch(workspace) {
             const box = document.querySelector('#workspace-' + workspace + ' .task-search-input');
             if (!box) return;
@@ -8437,12 +8973,22 @@ body {
                 if (hit) shown++;
             });
 
+            if (needle) {
+                captureSearchPositions(workspace);
+                layoutSearchMatches(workspace);
+            } else {
+                endSearchLayout(workspace);
+            }
+
             const counter = document.querySelector('#workspace-' + workspace + ' .task-search-count');
             if (counter) {
                 counter.textContent = needle
                     ? shown + ' of ' + cards.length
                     : '';
                 counter.classList.toggle('no-hits', needle && shown === 0);
+                counter.title = needle
+                    ? 'Matches are gathered at the top while you search. Clearing the box puts every card back where you had it.'
+                    : '';
             }
             const clear = document.querySelector('#workspace-' + workspace + ' .task-search-clear');
             if (clear) clear.style.display = needle ? '' : 'none';
@@ -8552,6 +9098,32 @@ body {
 
                 if (rows.length) groups.push({ name: workspaceNames[ws] || ws, rows: rows });
             });
+
+            const archivedRows = [];
+            const seenArchive = loadTaskDetails();
+            Object.keys(seenArchive).forEach(taskId => {
+                const d = seenArchive[taskId] || {};
+                if (document.getElementById(taskId)) return;
+                const title = d.archived ? d.archived.title : null;
+                if (!title) return;
+                const hay = [title, d.archived.description, d.nextStep,
+                             (d.log || []).map(e => e.text).join(' '),
+                             (d.contactIds || []).map(contactDisplayName).join(' ')]
+                            .filter(Boolean).join(' ').toLowerCase();
+                if (hay.indexOf(needle) === -1) return;
+                const when = d.archived.completedAt
+                    ? new Date(d.archived.completedAt).toLocaleDateString('en-AU',
+                        { day: 'numeric', month: 'short', year: 'numeric' })
+                    : '';
+                archivedRows.push({
+                    title: title,
+                    meta: ['completed ' + when,
+                           (d.contactIds || []).map(contactDisplayName).join(', ')]
+                          .filter(Boolean).join(' \u00b7 '),
+                    action: '', tag: 'Completed'
+                });
+            });
+            if (archivedRows.length) groups.push({ name: 'Completed work', rows: archivedRows });
 
             const contactRows = [];
             allContacts().forEach(c => {
@@ -9746,6 +10318,45 @@ body {
             return body;
         }
 
+        function contactCompletedBlock(client, opt) {
+            const rows = completedTasksForContact(client.id);
+            if (!rows.length) return '';
+
+            const total = rows.reduce((s, r) => s + r.minutes, 0);
+            let body = '<h3>Completed (' + rows.length + ')</h3>';
+
+            rows.forEach(r => {
+                const when = r.completedAt
+                    ? new Date(r.completedAt).toLocaleDateString('en-AU',
+                        { day: 'numeric', month: 'short', year: 'numeric' })
+                    : 'date not recorded';
+                body += '<div class="task-block">';
+                body += '<div><strong>' + r.title + '</strong>';
+                if (opt.times && r.minutes) body += ' <span class="tally">' + formatMinutes(r.minutes) + '</span>';
+                body += '</div>';
+                body += '<div class="meta">Completed ' + when +
+                        (r.workspaceName ? ' &middot; ' + r.workspaceName : '') + '</div>';
+                if (opt.timeline) {
+                    taskTimeline(r.id).reverse().forEach(e => {
+                        const d = new Date(e.ts);
+                        const label = isNaN(d.getTime()) ? '' :
+                            d.toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' });
+                        body += '<div class="entry"><span class="entry-date">' + label + '</span>' +
+                                (e.kind === 'activity' && opt.times
+                                    ? '<span class="chip">' + getDurationLabel(e.duration) + '</span>' : '') +
+                                e.text + '</div>';
+                    });
+                }
+                body += '</div>';
+            });
+
+            if (opt.times && total) {
+                body += '<div class="tally-row">Completed work for ' + client.clientName +
+                        ': <span class="tally">' + formatMinutes(total) + '</span></div>';
+            }
+            return body;
+        }
+
         function contactScheduledBlock(client) {
             const items = (client.scheduledItems || []).filter(i => i.status === 'pending');
             if (!items.length) return '';
@@ -9767,7 +10378,8 @@ body {
                 if (opt.scheduled) body += contactScheduledBlock(client);
                 if (opt.tasks) {
                     body += contactTasksBlock(client, opt);
-                    grand += tasksForContact(id).reduce((s, r) => s + r.minutes, 0);
+                    body += contactCompletedBlock(client, opt);
+                    grand += contactTotalMinutes(id);
                 }
                 body += '</div>';
             });
@@ -10345,10 +10957,14 @@ body {
             if (!chips || !picker) return;
 
             const contacts = allContacts();
+            const addBtn = document.getElementById('detailContactAdd');
+
+            // Adding someone should not mean leaving the task you are writing up
+            if (addBtn) addBtn.style.display = '';
 
             if (contacts.length === 0) {
-                chips.innerHTML = '<span class="detail-contact-none">No contacts yet. ' +
-                    'Add people in the Contacts workspace and they will appear here.</span>';
+                chips.innerHTML = '<span class="detail-contact-none">No contacts yet &mdash; ' +
+                    'add one here and it joins your Contacts list too.</span>';
                 picker.style.display = 'none';
                 return;
             }
@@ -10375,6 +10991,71 @@ body {
             picker.value = '';
         }
 
+        function showNewContactForm() {
+            document.getElementById('detailNewContact').style.display = '';
+            document.getElementById('detailContactAdd').style.display = 'none';
+            const box = document.getElementById('detailNewContactName');
+            box.value = '';
+            box.focus();
+        }
+
+        function hideNewContactForm() {
+            document.getElementById('detailNewContact').style.display = 'none';
+            document.getElementById('detailContactAdd').style.display = '';
+        }
+
+        // A contact created here is deliberately bare: a name and nothing else.
+        // The point is to capture the person without breaking your train of
+        // thought. Birthdays, fees and the rest can be filled in later.
+        function createContactFromTask() {
+            const box = document.getElementById('detailNewContactName');
+            const name = box.value.trim();
+            if (!name) {
+                showNotification('Give the contact a name first', 'error');
+                box.focus();
+                return;
+            }
+
+            const existing = allContacts().find(c =>
+                (c.clientName || '').toLowerCase() === name.toLowerCase());
+            if (existing) {
+                addDetailContact(existing.id);
+                hideNewContactForm();
+                showNotification('"' + existing.clientName + '" was already in your contacts, so it is linked', 'success');
+                return;
+            }
+
+            const record = {
+                id: generateClientId(),
+                clientName: name,
+                contact1Name: name,
+                contact1Birthday: null,
+                contact2Name: null,
+                contact2Birthday: null,
+                feeType: 'percentage',
+                feePercentage: null,
+                feeFixed: null,
+                assetsUnderManagement: null,
+                customFields: [1, 2, 3, 4].map(n => ({
+                    label: clientCustomFieldLabels[n - 1] || ('Custom Field ' + n),
+                    value: ''
+                })),
+                notes: '',
+                scheduledItems: [],
+                created: new Date().toISOString(),
+                modified: new Date().toISOString()
+            };
+
+            clientData.push(record);
+            saveClientData();
+            try { renderClientList(); } catch (e) {}
+            try { populateClientNameFilter(); } catch (e) {}
+
+            addDetailContact(record.id);
+            hideNewContactForm();
+            showNotification('"' + name + '" added to Contacts and linked to this task', 'success');
+        }
+
         function addDetailContact(id) {
             if (!id || detailContactIds.indexOf(id) !== -1) return;
             detailContactIds.push(id);
@@ -10393,6 +11074,8 @@ body {
             if (rows.length === 0) return '';
 
             const totalMinutes = rows.reduce((s, r) => s + r.minutes, 0);
+            // Note: this heading counts open work only. Completed work is
+            // totalled in its own panel, and both together in the report.
             const timeLabel = totalMinutes > 0
                 ? (totalMinutes >= 60 ? (totalMinutes / 60).toFixed(1) + ' hours' : totalMinutes + ' mins')
                 : '';
@@ -10604,6 +11287,10 @@ body {
                 contactIds: Array.isArray(d.contactIds) ? d.contactIds : [],
                 streamId: d.streamId || '',
                 rateOverride: typeof d.rateOverride === 'number' ? d.rateOverride : null,
+                // Any new field MUST be listed here. This function rebuilds a
+                // fixed shape, so anything omitted is silently dropped on read
+                // even though it is sitting in storage.
+                archived: d.archived || null,
                 lastTouched: d.lastTouched || '',
                 firstSeen: d.firstSeen || ''
             };
@@ -10774,6 +11461,7 @@ body {
 
             const d = getTaskDetail(detailTaskId);
             detailContactIds = taskContactIds(detailTaskId);
+            hideNewContactForm();
             renderDetailContacts();
             document.getElementById('detailNextStep').value = d.nextStep;
             document.getElementById('detailWaitingOn').value = d.waitingOn;
@@ -11086,6 +11774,33 @@ body {
         }
 
         // Keep indicators honest without editing the original functions
+        // A search only rearranges what you see. Whatever else asks for a save
+        // while a search is running gets the real positions, not the gathered ones.
+        (function wrapSaveForSearch() {
+            if (typeof saveWorkspaceTasks !== 'function') return;
+            const originalSave = saveWorkspaceTasks;
+            saveWorkspaceTasks = function() {
+                const searching = Object.keys(searchLayout);
+                searching.forEach(putPositionsBack);
+                const result = originalSave.apply(this, arguments);
+                searching.forEach(layoutSearchMatches);
+                return result;
+            };
+        })();
+
+        // If a card is dragged while a search is on, that is where the person
+        // wants it, so it becomes the position to restore to.
+        document.addEventListener('dragend', function(e) {
+            const el = e.target;
+            if (!el || !el.classList || !el.classList.contains('task-item')) return;
+            const content = el.closest('[id^="workspace-"]');
+            if (!content) return;
+            const ws = content.id.replace('workspace-', '');
+            if (searchLayout[ws] && searchLayout[ws][el.id]) {
+                searchLayout[ws][el.id] = { left: el.style.left, top: el.style.top };
+            }
+        });
+
         (function wrapForMomentum() {
             if (typeof saveWorkspaceTasks === 'function') {
                 const original = saveWorkspaceTasks;
@@ -13075,6 +13790,7 @@ body {
                         </div>
                         ${detailsRow}
                         ${contactWorkPanel(client.id)}
+                        ${completedPanel(client.id)}
                         ${displayItems.length > 0 ? `
                             <div style="padding: 10px 15px; border-top: 1px solid #f0f0f0;">
                                 <div style="font-size: 11px; font-weight: 600; color: #7f8c8d; margin-bottom: 8px;">SCHEDULED ITEMS</div>
@@ -14365,6 +15081,14 @@ body {
 
         function arrangeCanvasByRank() {
             if (!rankWorkspace) return;
+            // A gathered search view would otherwise be arranged instead of the canvas
+            try {
+                const box = document.querySelector('#workspace-' + rankWorkspace + ' .task-search-input');
+                if (box && box.value.trim()) {
+                    box.value = '';
+                    applyTaskSearch(rankWorkspace);
+                }
+            } catch (e) {}
             const canvas = document.querySelector('#workspace-' + rankWorkspace + ' .workspace-canvas');
             if (!canvas) return;
 
