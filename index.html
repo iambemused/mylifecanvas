@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 20260903 MyLifeCanvas v 02.29-a -->
+<!-- 20260903 MyLifeCanvas v 02.30-a -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -5379,7 +5379,22 @@
                             </p>
                         </div>
 
-                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">What's New in Version 2.29</h4>
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">What's New in Version 2.30</h4>
+                        <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
+                            <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
+                                <strong>Work for someone who has no task</strong>
+                            </p>
+                            <p style="line-height: 1.8; margin: 0; color: #555; font-size: 12px;">
+                                &#8226; <strong>Log Activity can name people</strong> &mdash; A note, a call, a quote sent, with no task required<br>
+                                &#8226; <strong>Add a contact from there</strong> &mdash; Same as in the task panel, without leaving what you are recording<br>
+                                &#8226; <strong>It lands on their record</strong> &mdash; Shown on the contact card as other work logged<br>
+                                &#8226; <strong>Counted in their total</strong> &mdash; Time for a person adds up whether or not a task was involved<br>
+                                &#8226; <strong>Grouped properly in reports</strong> &mdash; The day's work sits under the client it was for<br>
+                                &#8226; <strong>Choosing a task suggests its people</strong> &mdash; So the common case needs no extra typing
+                            </p>
+                        </div>
+
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Previously, in Version 2.29</h4>
                         <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
                             <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
                                 <strong>Settings you can navigate, and a button that says what it does</strong>
@@ -5892,6 +5907,7 @@
 
                         <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Version History</h4>
                         <p style="line-height: 1.6; color: #555; font-size: 12px;">
+                            <strong>v2.30</strong> &mdash; Log Activity can name contacts and create them, so untasked client work has a home<br>
                             <strong>v2.29</strong> &mdash; Settings organised into sections, lists surfaced beside their rates, Export renamed<br>
                             <strong>v2.28</strong> &mdash; Search gathers matching cards into view instead of leaving them scattered<br>
                             <strong>v2.27</strong> &mdash; Completed tasks kept on the contact record, with reopen and full history<br>
@@ -6168,6 +6184,28 @@
                 </div>
                 
                 <div class="activity-form-group">
+                    <label class="activity-form-label">Who was this for?
+                        <span style="font-weight: 400; color: #95a5a6;">optional &mdash; no task needed</span></label>
+                    <div id="activityContactChips" class="detail-contact-chips"></div>
+                    <select id="activityContactPicker" class="activity-form-select"
+                            onchange="addActivityContact(this.value)"></select>
+                    <button type="button" id="activityContactAdd" class="detail-contact-add"
+                            onclick="showActivityNewContact()">+ Add someone new</button>
+                    <div id="activityNewContact" class="detail-new-contact" style="display: none;">
+                        <input type="text" id="activityNewContactName"
+                               placeholder="Their name, as you would file it"
+                               onkeydown="if(event.key==='Enter'){event.preventDefault();createContactFromActivity();}
+                                          if(event.key==='Escape'){event.preventDefault();hideActivityNewContact();}">
+                        <button type="button" class="detail-new-save" onclick="createContactFromActivity()">Add &amp; name</button>
+                        <button type="button" class="detail-new-cancel" onclick="hideActivityNewContact()">Cancel</button>
+                        <div class="detail-new-note">
+                            Work for someone with no task still belongs to them. Naming them here puts it
+                            on their contact record and into the reports.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activity-form-group">
                     <div class="activity-checkbox-group">
                         <input type="checkbox" id="activityIsTask">
                         <label for="activityIsTask">This was a pre-existing task from a workspace</label>
@@ -6374,8 +6412,8 @@
         // no longer a set of version numbers that can drift apart.
         // ==============================================
         const APP_VERSION = {
-            number: '2.29',
-            file: '20260903 MyLifeCanvas v 02.29-a',
+            number: '2.30',
+            file: '20260903 MyLifeCanvas v 02.30-a',
             released: 'September 2026'
         };
 
@@ -8569,7 +8607,7 @@ body {
         function contactTotalMinutes(contactId) {
             const open = tasksForContact(contactId).reduce((s, r) => s + r.minutes, 0);
             const done = completedTasksForContact(contactId).reduce((s, r) => s + r.minutes, 0);
-            return open + done;
+            return open + done + directMinutesForContact(contactId);
         }
 
         function completedPanel(contactId) {
@@ -10052,6 +10090,7 @@ body {
                     kind: 'time',
                     workspace: a.workspace,
                     taskId: a.taskId || '',
+                    contactIds: Array.isArray(a.contactIds) ? a.contactIds : [],
                     taskTitle: liveTitle || a.taskTitle || '',
                     description: a.description || '',
                     text: (a.notes || '').trim(),
@@ -10090,7 +10129,14 @@ body {
             const unattached = { key: '__none__', name: 'Not linked to a contact', tasks: {}, minutes: 0 };
 
             items.forEach(item => {
-                const contactIds = item.taskId ? taskContactIds(item.taskId) : [];
+                // Named on the entry itself, or inherited from its task
+                let contactIds = Array.isArray(item.contactIds) ? item.contactIds.slice() : [];
+                if (item.taskId) {
+                    taskContactIds(item.taskId).forEach(id => {
+                        if (contactIds.indexOf(id) === -1) contactIds.push(id);
+                    });
+                }
+                contactIds = contactIds.filter(id => !!contactById(id));
                 const targets = contactIds.length ? contactIds : ['__none__'];
 
                 targets.forEach(cid => {
@@ -10357,6 +10403,28 @@ body {
             return body;
         }
 
+        function contactDirectBlock(client, opt) {
+            const rows = directActivitiesForContact(client.id);
+            if (!rows.length) return '';
+
+            const minutes = directMinutesForContact(client.id);
+            let body = '<h3>Other work logged (' + rows.length + ')</h3>';
+            body += '<table><tr><th>Date</th><th>What</th>' + (opt.times ? '<th>Time</th>' : '') + '</tr>';
+            rows.slice().reverse().forEach(a => {
+                body += '<tr><td>' + (a.date ? formatDate(a.date) : '') + '</td>' +
+                    '<td><strong>' + (a.description || 'Work') + '</strong>' +
+                    (a.notes ? '<div class="meta">' + a.notes + '</div>' : '') + '</td>' +
+                    (opt.times ? '<td>' + formatMinutes(getDurationMinutes(a.duration) || 0) + '</td>' : '') +
+                    '</tr>';
+            });
+            body += '</table>';
+            if (opt.times && minutes) {
+                body += '<div class="tally-row">Other work for ' + client.clientName +
+                        ': <span class="tally">' + formatMinutes(minutes) + '</span></div>';
+            }
+            return body;
+        }
+
         function contactScheduledBlock(client) {
             const items = (client.scheduledItems || []).filter(i => i.status === 'pending');
             if (!items.length) return '';
@@ -10379,6 +10447,7 @@ body {
                 if (opt.tasks) {
                     body += contactTasksBlock(client, opt);
                     body += contactCompletedBlock(client, opt);
+                    body += contactDirectBlock(client, opt);
                     grand += contactTotalMinutes(id);
                 }
                 body += '</div>';
@@ -11117,6 +11186,176 @@ body {
         }
 
         // ==============================================
+        // WORK FOR SOMEONE WITH NO TASK - v2.30
+        // A note to a client, a phone call, a quote sent: real work for a
+        // real person, with no task behind it. Log Activity could name a
+        // task but not a person, so that work had nowhere to go.
+        //
+        // An activity can now name the people it was for, whether or not
+        // a task is involved, and a contact can be created from here.
+        // ==============================================
+
+        let activityContactIds = [];
+
+        function renderActivityContacts() {
+            const chips = document.getElementById('activityContactChips');
+            const picker = document.getElementById('activityContactPicker');
+            if (!chips || !picker) return;
+
+            const contacts = allContacts();
+
+            chips.innerHTML = activityContactIds.length === 0
+                ? '<span class="detail-contact-none">' +
+                  (contacts.length ? 'Nobody named. That is fine for general work.'
+                                   : 'No contacts yet &mdash; add one here and it joins your list.') +
+                  '</span>'
+                : activityContactIds.map(id =>
+                    '<span class="detail-contact-chip">&#128100; ' + rankEscape(contactDisplayName(id)) +
+                    '<button type="button" onclick="removeActivityContact(\'' + id + '\')" ' +
+                    'title="Unlink">&#215;</button></span>').join('');
+
+            picker.style.display = contacts.length ? '' : 'none';
+            picker.innerHTML = '<option value="">+ Link a contact...</option>';
+            contacts
+                .filter(c => activityContactIds.indexOf(c.id) === -1)
+                .sort((a, b) => (a.clientName || '').localeCompare(b.clientName || ''))
+                .forEach(c => {
+                    const opt = document.createElement('option');
+                    opt.value = c.id;
+                    opt.textContent = c.clientName;
+                    picker.appendChild(opt);
+                });
+            picker.value = '';
+        }
+
+        function addActivityContact(id) {
+            if (!id || activityContactIds.indexOf(id) !== -1) return;
+            activityContactIds.push(id);
+            renderActivityContacts();
+            const desc = document.getElementById('activityDescription');
+            if (desc && !desc.value.trim()) desc.value = contactDisplayName(id);
+        }
+
+        function removeActivityContact(id) {
+            activityContactIds = activityContactIds.filter(x => x !== id);
+            renderActivityContacts();
+        }
+
+        function showActivityNewContact() {
+            document.getElementById('activityNewContact').style.display = '';
+            document.getElementById('activityContactAdd').style.display = 'none';
+            const box = document.getElementById('activityNewContactName');
+            box.value = '';
+            box.focus();
+        }
+
+        function hideActivityNewContact() {
+            const form = document.getElementById('activityNewContact');
+            if (form) form.style.display = 'none';
+            const btn = document.getElementById('activityContactAdd');
+            if (btn) btn.style.display = '';
+        }
+
+        function createContactFromActivity() {
+            const box = document.getElementById('activityNewContactName');
+            const name = box.value.trim();
+            if (!name) {
+                showNotification('Give the contact a name first', 'error');
+                box.focus();
+                return;
+            }
+
+            const existing = allContacts().find(c =>
+                (c.clientName || '').toLowerCase() === name.toLowerCase());
+            if (existing) {
+                addActivityContact(existing.id);
+                hideActivityNewContact();
+                showNotification('"' + existing.clientName + '" was already there, so it is linked', 'success');
+                return;
+            }
+
+            const record = {
+                id: generateClientId(),
+                clientName: name,
+                contact1Name: name,
+                contact1Birthday: null,
+                contact2Name: null,
+                contact2Birthday: null,
+                feeType: 'percentage',
+                feePercentage: null,
+                feeFixed: null,
+                assetsUnderManagement: null,
+                customFields: [1, 2, 3, 4].map(n => ({
+                    label: clientCustomFieldLabels[n - 1] || ('Custom Field ' + n),
+                    value: ''
+                })),
+                notes: '',
+                scheduledItems: [],
+                created: new Date().toISOString(),
+                modified: new Date().toISOString()
+            };
+
+            clientData.push(record);
+            saveClientData();
+            try { renderClientList(); } catch (e) {}
+            try { populateClientNameFilter(); } catch (e) {}
+
+            addActivityContact(record.id);
+            hideActivityNewContact();
+            showNotification('"' + name + '" added to Contacts and named on this entry', 'success');
+        }
+
+        // Choosing a task should suggest the people that task is already about
+        function inheritContactsFromTask(taskId) {
+            if (!taskId) return;
+            taskContactIds(taskId).forEach(id => {
+                if (activityContactIds.indexOf(id) === -1) activityContactIds.push(id);
+            });
+            renderActivityContacts();
+        }
+
+        // ----- work logged straight against a person -----
+
+        function directActivitiesForContact(contactId) {
+            return (activityLog || []).filter(a =>
+                Array.isArray(a.contactIds) && a.contactIds.indexOf(contactId) !== -1 && !a.taskId);
+        }
+
+        function directMinutesForContact(contactId) {
+            return directActivitiesForContact(contactId)
+                .reduce((s, a) => s + (getDurationMinutes(a.duration) || 0), 0);
+        }
+
+        function directWorkPanel(contactId) {
+            const rows = directActivitiesForContact(contactId);
+            if (!rows.length) return '';
+
+            const minutes = directMinutesForContact(contactId);
+            const timeLabel = minutes > 0
+                ? (minutes >= 60 ? (minutes / 60).toFixed(1) + ' hours' : minutes + ' mins')
+                : '';
+
+            return '<div style="padding: 10px 15px; border-top: 1px solid #f0f0f0; background: #f6fbfd;">' +
+                '<div style="font-size: 11px; font-weight: 600; color: #21618c; margin-bottom: 8px;">' +
+                    'OTHER WORK LOGGED (' + rows.length + ')' +
+                    (timeLabel ? ' &middot; ' + timeLabel : '') +
+                '</div>' +
+                rows.slice().reverse().slice(0, 12).map(a => {
+                    const when = a.date ? formatDate(a.date) : '';
+                    return '<div style="padding: 5px 0; border-bottom: 1px solid #eef4f8;">' +
+                        '<div style="color: #2c3e50; font-size: 12px; font-weight: 600;">' +
+                            rankEscape(a.description || 'Work') + '</div>' +
+                        '<div style="font-size: 11px; color: #95a5a6; margin-top: 2px;">' +
+                            rankEscape(when) + ' &middot; ' + rankEscape(getDurationLabel(a.duration)) +
+                            (a.notes ? ' &middot; ' + rankEscape(a.notes) : '') + '</div>' +
+                        '</div>';
+                }).join('') +
+                (rows.length > 12 ? '<div style="font-size: 11px; color: #95a5a6; padding-top: 6px;">' +
+                    'and ' + (rows.length - 12) + ' more &mdash; all of it is in the reports</div>' : '') +
+                '</div>';
+        }
+
+        // ==============================================
         // ACTIVITY <-> TASK LINKING - v2.15
         // The Activity Log records work along a time axis. The progress
         // log records it along a task axis. The content is the same
@@ -11185,6 +11424,7 @@ body {
             if (picker.value && desc && !desc.value.trim()) {
                 desc.value = activityTaskTitle(picker.value);
             }
+            inheritContactsFromTask(picker.value);
             syncActivityTaskRow();
         }
 
@@ -11196,6 +11436,7 @@ body {
             document.getElementById('activityIsTask').checked = true;
             populateActivityTaskPicker(workspace || currentWorkspace, taskId);
             document.getElementById('activityDescription').value = activityTaskTitle(taskId);
+            inheritContactsFromTask(taskId);
             document.getElementById('activityNotes').focus();
         }
 
@@ -13791,6 +14032,7 @@ body {
                         ${detailsRow}
                         ${contactWorkPanel(client.id)}
                         ${completedPanel(client.id)}
+                        ${directWorkPanel(client.id)}
                         ${displayItems.length > 0 ? `
                             <div style="padding: 10px 15px; border-top: 1px solid #f0f0f0;">
                                 <div style="font-size: 11px; font-weight: 600; color: #7f8c8d; margin-bottom: 8px;">SCHEDULED ITEMS</div>
@@ -14148,6 +14390,9 @@ body {
             document.getElementById('activityType').value = 'planned';
             document.getElementById('activityIsTask').checked = false;
             document.getElementById('activityNotes').value = '';
+            activityContactIds = [];
+            hideActivityNewContact();
+            renderActivityContacts();
             populateActivityTaskPicker(currentWorkspace || 'main', '');
         }
         
@@ -14193,6 +14438,7 @@ body {
                 duration: duration,
                 type: type,
                 isTask: isTask,
+                contactIds: activityContactIds.slice(),
                 taskId: linkedTaskId,
                 taskTitle: linkedTaskId ? activityTaskTitle(linkedTaskId) : '',
                 notes: notes
@@ -14207,6 +14453,10 @@ body {
                 setTaskDetail(linkedTaskId, d);
                 try { refreshTaskMomentum(); refreshFocusButtons(); } catch (e) {}
             }
+
+            // Contact cards total up the work done for each person, so they have
+            // to be redrawn whenever any activity is saved, not only linked ones
+            try { if (typeof renderClientList === 'function') renderClientList(); } catch (e) {}
 
             showNotification(linkedTaskId
                 ? 'Activity logged against "' + activityTaskTitle(linkedTaskId) + '"'
