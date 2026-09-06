@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 20260903 MyLifeCanvas v 02.31-a -->
+<!-- 20260903 MyLifeCanvas v 02.32-a -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -3477,6 +3477,24 @@
         }
 
         .clock-sound { color: #c9b998 !important; }
+
+        #timeClockModal .clock-ws-title { color: #c9a227 !important; }
+
+        #timeClockModal .clock-ws-btn {
+            background: rgba(0,0,0,0.3) !important;
+            color: #e8dcc0 !important;
+            border-color: #6b5636 !important;
+        }
+
+        #timeClockModal .clock-ws-btn.active {
+            background: linear-gradient(180deg, #5faa63, #3d7a42) !important;
+            color: white !important;
+        }
+
+        #timeClockModal .clock-session-ws {
+            background: rgba(201,162,39,0.2) !important;
+            color: #f0c14b !important;
+        }
         .clock-note { color: #8a7c60 !important; }
 
         #timeClockModal .modal-close {
@@ -4069,6 +4087,85 @@
         #assignApply:disabled {
             opacity: 0.45;
             cursor: not-allowed;
+        }
+
+
+        /* ==============================================
+           CLOCKING ON TO SOMEWHERE - v2.32
+           ============================================== */
+
+        .clock-move {
+            width: 100%;
+            margin-top: 10px;
+            background: linear-gradient(180deg, #3d8fd4, #2b6ca3);
+            color: white;
+            border: 2px solid #1c4a70;
+            border-radius: 6px;
+            padding: 11px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            letter-spacing: 0.5px;
+        }
+
+        .clock-move:hover { background: linear-gradient(180deg, #4d9fe4, #3b7cb3); }
+
+        .clock-ws-title {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: #7f8c8d;
+            margin: 18px 0 8px;
+        }
+
+        .clock-ws-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .clock-ws-btn {
+            background: #ecf0f1;
+            color: #2c3e50;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            padding: 7px 11px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .clock-ws-btn:hover { background: #d6dbdd; }
+
+        .clock-ws-btn.active {
+            background: #27ae60;
+            color: white;
+            border-color: #1e8449;
+        }
+
+        .clock-ws-mins {
+            font-size: 10px;
+            font-weight: 700;
+            opacity: 0.75;
+        }
+
+        .clock-session-ws {
+            font-size: 10px;
+            font-weight: 700;
+            background: rgba(22, 160, 133, 0.18);
+            color: #16a085;
+            padding: 2px 7px;
+            border-radius: 3px;
+            white-space: nowrap;
+            max-width: 130px;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
     </style>
@@ -5170,6 +5267,11 @@
                     <span class="clock-big-sub">start the day</span>
                 </button>
 
+                <button type="button" id="clockMoveButton" class="clock-move" style="display: none;"></button>
+
+                <div class="clock-ws-title">Clock on to</div>
+                <div id="clockWorkspaceRow" class="clock-ws-row"></div>
+
                 <div class="clock-stats">
                     <div class="clock-stat">
                         <div class="clock-stat-value" id="clockTodayTotal">0m</div>
@@ -5188,6 +5290,8 @@
                 <div class="clock-sessions-title">Today</div>
                 <div id="clockSessions"></div>
 
+                <div id="clockBreakdown"></div>
+
                 <div id="clockHistory"></div>
 
                 <label class="clock-sound">
@@ -5196,8 +5300,9 @@
                 </label>
 
                 <p class="clock-note">
-                    Clock on and off as many times as you like &mdash; each stretch is recorded separately,
-                    so a break for lunch or an evening session is counted properly.
+                    Clock on and off as many times as you like, and to whichever workspace you are actually
+                    in &mdash; each stretch is recorded separately, so a break for lunch, an evening session,
+                    or an hour spent on something else entirely is counted where it belongs.
                     Nothing here is sent anywhere; it stays in this browser like everything else.
                 </p>
             </div>
@@ -5570,7 +5675,23 @@
                             </p>
                         </div>
 
-                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">What's New in Version 2.31</h4>
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">What's New in Version 2.32</h4>
+                        <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
+                            <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
+                                <strong>Clock on to a workspace, not just to the day</strong>
+                            </p>
+                            <p style="line-height: 1.8; margin: 0; color: #555; font-size: 12px;">
+                                &#8226; <strong>Each stretch is labelled</strong> &mdash; The clock records which workspace you were in<br>
+                                &#8226; <strong>Move without clocking off</strong> &mdash; One button when you shift to something else<br>
+                                &#8226; <strong>One stretch at a time</strong> &mdash; You cannot be in two places, so moving closes the last one<br>
+                                &#8226; <strong>Where the day went</strong> &mdash; Hours per workspace, with the booked share for each<br>
+                                &#8226; <strong>The badge says where</strong> &mdash; Not just that you are on<br>
+                                &#8226; <strong>Reports name the stretches</strong> &mdash; So a printed day shows what the hours were spent on<br>
+                                &#8226; <strong>Earlier records still count</strong> &mdash; Stretches from before this are shown as unlabelled
+                            </p>
+                        </div>
+
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Previously, in Version 2.31</h4>
                         <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
                             <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
                                 <strong>Getting tasks into your lists</strong>
@@ -6112,6 +6233,7 @@
 
                         <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Version History</h4>
                         <p style="line-height: 1.6; color: #555; font-size: 12px;">
+                            <strong>v2.32</strong> &mdash; The time clock records which workspace each stretch belonged to<br>
                             <strong>v2.31</strong> &mdash; Bulk assignment of tasks into lists, and a prompt when lists are empty<br>
                             <strong>v2.30</strong> &mdash; Log Activity can name contacts and create them, so untasked client work has a home<br>
                             <strong>v2.29</strong> &mdash; Settings organised into sections, lists surfaced beside their rates, Export renamed<br>
@@ -6618,8 +6740,8 @@
         // no longer a set of version numbers that can drift apart.
         // ==============================================
         const APP_VERSION = {
-            number: '2.31',
-            file: '20260903 MyLifeCanvas v 02.31-a',
+            number: '2.32',
+            file: '20260903 MyLifeCanvas v 02.32-a',
             released: 'September 2026'
         };
 
@@ -9423,6 +9545,130 @@ body {
         }
 
         // ==============================================
+        // CLOCKING ON TO SOMEWHERE - v2.32
+        // One clock for the whole day answers "was I working". Naming
+        // the workspace answers "what was I working on", which turns a
+        // day into labelled blocks and makes the booked share mean
+        // something: hours clocked to a workspace against hours logged
+        // against that workspace's tasks.
+        //
+        // One stretch at a time. You cannot be in two places at once,
+        // so moving somewhere else closes the stretch you were in.
+        // ==============================================
+
+        function sessionWorkspace(session) {
+            return (session && session.workspace) || '';
+        }
+
+        function sessionWorkspaceName(session) {
+            const ws = sessionWorkspace(session);
+            return ws ? (workspaceNames[ws] || ws) : 'unlabelled';
+        }
+
+        function clockedMinutesFor(dayKey, workspace) {
+            return clockSessions(dayKey)
+                .filter(s => workspace === undefined || sessionWorkspace(s) === workspace)
+                .reduce((sum, s) => sum + sessionMinutes(s), 0);
+        }
+
+        function loggedMinutesFor(dayKey, workspace) {
+            return (activityLog || [])
+                .filter(a => (a.date || (a.loggedAt || '').slice(0, 10)) === dayKey)
+                .filter(a => workspace === undefined || a.workspace === workspace)
+                .reduce((s, a) => s + (getDurationMinutes(a.duration) || 0), 0);
+        }
+
+        // Which workspaces had time clocked to them today
+        function clockedWorkspacesToday() {
+            const key = clockDayKey();
+            const seen = {};
+            clockSessions(key).forEach(s => {
+                const ws = sessionWorkspace(s);
+                seen[ws] = (seen[ws] || 0) + sessionMinutes(s);
+            });
+            return Object.keys(seen)
+                .map(ws => ({ workspace: ws, minutes: seen[ws] }))
+                .sort((a, b) => b.minutes - a.minutes);
+        }
+
+        function clockOnTo(workspace) {
+            const ws = workspace || currentWorkspace;
+            const open = openSession();
+
+            if (open && sessionWorkspace(open) === ws) return;   // already there
+
+            if (open) {
+                const from = sessionWorkspaceName(open);
+                if (!confirm('You are clocked on to ' + from + '.\n\nMove to ' +
+                             (workspaceNames[ws] || ws) + '? That stretch will be closed and a new one started.')) {
+                    return;
+                }
+                closeOpenSession();
+            }
+
+            const all = loadClock();
+            const key = clockDayKey();
+            all[key] = clockSessions(key);
+            all[key].push({ in: new Date().toISOString(), out: null, workspace: ws });
+            saveClock(all);
+            clockSound('on');
+            renderClock();
+            showNotification((open ? 'Moved to ' : 'Clocked on to ') + (workspaceNames[ws] || ws) +
+                ' at ' + new Date().toLocaleTimeString('en-AU', { hour: 'numeric', minute: '2-digit' }),
+                'success');
+        }
+
+        function closeOpenSession() {
+            const session = openSession();
+            if (!session) return;
+            const all = loadClock();
+            const key = clockDayKey();
+            const live = (all[key] || []).find(s => s.in === session.in && !s.out);
+            if (live) live.out = new Date().toISOString();
+            saveClock(all);
+        }
+
+        function renderClockWorkspaceRow() {
+            const row = document.getElementById('clockWorkspaceRow');
+            if (!row) return;
+            const open = openSession();
+            const here = sessionWorkspace(open);
+
+            row.innerHTML = RANK_WORKSPACES.map(ws => {
+                const mins = clockedMinutesFor(clockDayKey(), ws);
+                const active = open && here === ws;
+                return '<button type="button" class="clock-ws-btn' + (active ? ' active' : '') + '" ' +
+                    'onclick="clockOnTo(\'' + ws + '\')">' +
+                    rankEscape(workspaceNames[ws] || ws) +
+                    (mins ? '<span class="clock-ws-mins">' + formatClock(mins) + '</span>' : '') +
+                    '</button>';
+            }).join('');
+        }
+
+        function renderClockBreakdown() {
+            const box = document.getElementById('clockBreakdown');
+            if (!box) return;
+            const rows = clockedWorkspacesToday();
+            const key = clockDayKey();
+
+            if (!rows.length) { box.innerHTML = ''; return; }
+
+            box.innerHTML = '<div class="clock-sessions-title">Where the day went</div>' +
+                '<table class="clock-table"><tr><th>Workspace</th><th>At work</th>' +
+                '<th>Logged</th><th>Booked</th></tr>' +
+                rows.map(r => {
+                    const logged = r.workspace ? loggedMinutesFor(key, r.workspace) : 0;
+                    const ratio = r.minutes > 0 ? Math.round((logged / r.minutes) * 100) : 0;
+                    return '<tr><td>' + rankEscape(r.workspace
+                            ? (workspaceNames[r.workspace] || r.workspace) : 'unlabelled') + '</td>' +
+                        '<td>' + formatClock(r.minutes) + '</td>' +
+                        '<td>' + (r.workspace ? formatClock(logged) : '&mdash;') + '</td>' +
+                        '<td class="' + (ratio >= 70 ? 'good' : ratio >= 40 ? 'fair' : 'low') + '">' +
+                            (r.workspace && r.minutes ? ratio + '%' : '&mdash;') + '</td></tr>';
+                }).join('') + '</table>';
+        }
+
+        // ==============================================
         // THE TIME CLOCK - v2.22
         // A day needs a beginning and an end. Clocking on and off is
         // partly about the record and partly about the drawbridge:
@@ -9528,17 +9774,8 @@ body {
             return localStorage.getItem(CLOCK_SOUND_KEY) !== 'off';
         }
 
-        function clockOn() {
-            if (isClockedOn()) return;
-            const all = loadClock();
-            const key = clockDayKey();
-            all[key] = clockSessions(key);
-            all[key].push({ in: new Date().toISOString(), out: null });
-            saveClock(all);
-            clockSound('on');
-            renderClock();
-            showNotification('Clocked on at ' +
-                new Date().toLocaleTimeString('en-AU', { hour: 'numeric', minute: '2-digit' }), 'success');
+        function clockOn(workspace) {
+            clockOnTo(workspace || currentWorkspace);
         }
 
         function clockOff() {
@@ -9587,11 +9824,14 @@ body {
             const badge = document.getElementById('clockBadge');
             if (badge) {
                 badge.classList.toggle('clocked-on', on);
+                const session = openSession();
+                const label = session ? sessionWorkspaceName(session) : '';
+                const short = label.length > 16 ? label.slice(0, 15) + '\u2026' : label;
                 badge.innerHTML = on
-                    ? '<span class="clock-dot"></span>On &middot; ' + formatClock(mins)
+                    ? '<span class="clock-dot"></span>' + rankEscape(short) + ' &middot; ' + formatClock(mins)
                     : (mins > 0 ? 'Off &middot; ' + formatClock(mins) : 'Clock on');
                 badge.title = on
-                    ? 'Clocked on. Click to open the time clock.'
+                    ? 'Clocked on to ' + label + '. Click to open the time clock.'
                     : 'Not clocked on. Click to open the time clock.';
             }
 
@@ -9599,12 +9839,32 @@ body {
             if (!modal || modal.style.display !== 'block') return;
 
             const button = document.getElementById('clockBigButton');
+            const session = openSession();
+            const here = sessionWorkspace(session);
+            const hereName = workspaceNames[currentWorkspace] || currentWorkspace;
+
             button.className = 'clock-big ' + (on ? 'clock-big-off' : 'clock-big-on');
             button.innerHTML = on
                 ? '<span class="clock-big-label">Clock off</span>' +
-                  '<span class="clock-big-sub">on since ' + formatClockTime(openSession().in) + '</span>'
+                  '<span class="clock-big-sub">on ' + rankEscape(sessionWorkspaceName(session)) +
+                      ' since ' + formatClockTime(session.in) + '</span>'
                 : '<span class="clock-big-label">Clock on</span>' +
-                  '<span class="clock-big-sub">' + (mins > 0 ? 'back for more' : 'start the day') + '</span>';
+                  '<span class="clock-big-sub">to ' + rankEscape(hereName) + '</span>';
+
+            // If you are clocked on somewhere else, offer to move rather than
+            // making you clock off and on again
+            const move = document.getElementById('clockMoveButton');
+            if (move) {
+                const elsewhere = on && here !== currentWorkspace;
+                move.style.display = elsewhere ? '' : 'none';
+                if (elsewhere) {
+                    move.innerHTML = '&#8631; Move to ' + rankEscape(hereName);
+                    move.onclick = function() { clockOnTo(currentWorkspace); };
+                }
+            }
+
+            renderClockWorkspaceRow();
+            renderClockBreakdown();
 
             const logged = loggedMinutesOnDay(key);
             const ratio = mins > 0 ? Math.round((logged / mins) * 100) : 0;
@@ -9621,6 +9881,7 @@ body {
                 ? '<div class="clock-empty">Nothing recorded today yet.</div>'
                 : sessions.map((s, i) =>
                     '<div class="clock-session">' +
+                        '<span class="clock-session-ws">' + rankEscape(sessionWorkspaceName(s)) + '</span>' +
                         '<span class="clock-session-times">' + formatClockTime(s.in) + ' &rarr; ' +
                             (s.out ? formatClockTime(s.out) : '<em>still on</em>') + '</span>' +
                         '<span class="clock-session-mins">' + formatClock(sessionMinutes(s)) + '</span>' +
@@ -10637,7 +10898,8 @@ body {
                     body += '<div class="tally-row">Clocked on for ' + formatMinutes(atWork) +
                             ' &middot; ' + share + '% of the day booked against tasks' +
                             '<div class="meta">' + clockSessions(dayKey).map(s =>
-                                formatClockTime(s.in) + ' to ' + (s.out ? formatClockTime(s.out) : 'still on')
+                                formatClockTime(s.in) + ' to ' + (s.out ? formatClockTime(s.out) : 'still on') +
+                                (sessionWorkspace(s) ? ' (' + sessionWorkspaceName(s) + ')' : '')
                             ).join(' &middot; ') + '</div></div>';
                 }
             }
