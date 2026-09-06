@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 20260903 MyLifeCanvas v 02.33-a -->
+<!-- 20260903 MyLifeCanvas v 02.34-a -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -4278,6 +4278,83 @@
             padding: 10px 4px;
         }
 
+
+        /* ==============================================
+           BY PERSON - v2.34
+           ============================================== */
+
+        .person-view-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: white;
+            border: 1px solid #e8e8e8;
+            border-radius: 6px;
+            padding: 11px 14px;
+            margin-bottom: 6px;
+        }
+
+        .person-view-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+
+        .person-view-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .person-view-note {
+            font-size: 11px;
+            font-weight: 400;
+            color: #95a5a6;
+        }
+
+        .person-view-meta {
+            font-size: 11px;
+            color: #95a5a6;
+            margin-top: 2px;
+        }
+
+        .person-view-date {
+            font-size: 12px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .person-view-when {
+            font-size: 11px;
+            font-weight: 700;
+            margin-top: 2px;
+        }
+
+        .person-view-edit {
+            background: #ecf0f1;
+            color: #2c3e50;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 11px;
+            font-size: 11px;
+            cursor: pointer;
+            font-family: inherit;
+            flex-shrink: 0;
+        }
+
+        .person-view-edit:hover { background: #d6dbdd; }
+
+        .people-sort-btn {
+            background: #ecf0f1;
+            color: #7f8c8d;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 10px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .people-sort-btn.active { background: #34495e; color: white; }
+        .people-sort-btn:hover { background: #d6dbdd; }
+
     </style>
 </head>
 <body>
@@ -4827,7 +4904,7 @@
                 </div>
                 <div class="header-controls">
                     <button class="header-btn" onclick="openClientModal()">&#10133; Add Contact</button>
-                    <button class="header-btn" onclick="toggleClientView()">&#128197; Timeline View</button>
+                    <button class="header-btn" id="clientViewToggle" onclick="toggleClientView()">&#128100; By Person</button>
                     <button class="header-btn" onclick="printClientList()">&#128424; Print</button>
                     <button class="header-btn" onclick="openReports('contact')">&#128424; Reports</button>
                     <button class="header-btn" onclick="openExportChooser('clients')">&#128424; Print &amp; Export</button>
@@ -5793,7 +5870,23 @@
                             </p>
                         </div>
 
-                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">What's New in Version 2.33</h4>
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">What's New in Version 2.34</h4>
+                        <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
+                            <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
+                                <strong>Birthdays by person, not by household</strong>
+                            </p>
+                            <p style="line-height: 1.8; margin: 0; color: #555; font-size: 12px;">
+                                &#8226; <strong>&#128100; By Person view</strong> &mdash; Every individual on their own line, soonest birthday first<br>
+                                &#8226; <strong>Household and role shown</strong> &mdash; So you know who they are as well as when<br>
+                                &#8226; <strong>Colour by nearness</strong> &mdash; Red within a week, amber within a month<br>
+                                &#8226; <strong>The card now names whose</strong> &mdash; "Ruben, in 12 days" rather than just a number<br>
+                                &#8226; <strong>Fixed: children were invisible</strong> &mdash; Birthday sorting only ever looked at the first two people in a household<br>
+                                &#8226; <strong>Prints as a list</strong> &mdash; A proper birthday list for the year<br>
+                                &#8226; <strong>Households still there</strong> &mdash; The view button cycles household, person, timeline
+                            </p>
+                        </div>
+
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Previously, in Version 2.33</h4>
                         <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
                             <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
                                 <strong>Contacts for a whole life, not just a client book</strong>
@@ -6367,6 +6460,7 @@
 
                         <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Version History</h4>
                         <p style="line-height: 1.6; color: #555; font-size: 12px;">
+                            <strong>v2.34</strong> &mdash; By Person view for birthdays, and a fix so everyone in a household is counted<br>
                             <strong>v2.33</strong> &mdash; Contacts hold any number of people and carry categories; birthdays filter work from personal<br>
                             <strong>v2.32</strong> &mdash; The time clock records which workspace each stretch belonged to<br>
                             <strong>v2.31</strong> &mdash; Bulk assignment of tasks into lists, and a prompt when lists are empty<br>
@@ -6872,8 +6966,8 @@
         // no longer a set of version numbers that can drift apart.
         // ==============================================
         const APP_VERSION = {
-            number: '2.33',
-            file: '20260903 MyLifeCanvas v 02.33-a',
+            number: '2.34',
+            file: '20260903 MyLifeCanvas v 02.34-a',
             released: 'September 2026'
         };
 
@@ -8805,7 +8899,7 @@ body {
                     '.detail-label, .detail-log-title, .report-label, .report-options-title, ' +
                     '.activity-form-label, .activity-filter-label, .settings-section-title, ' +
                     '.rank-group-head, .csv-col-name, .export-option-title, .skin-scope, ' +
-                    '.stream-name-input, .rate-ws-name, .rate-label, .master-task-title, .skin-name, .settings-list-ws, .assign-title, .cat-pick, ' +
+                    '.stream-name-input, .rate-ws-name, .rate-label, .master-task-title, .skin-name, .settings-list-ws, .assign-title, .cat-pick, .person-view-name, ' +
                     '.clock-sessions-title, .gs-group-title, .focus-group-title { color: ' +
                     s.panelText + '; }',
                 '.settings-section, .rate-ws, .skin-card, .report-ws-list, .rank-toolbar, ' +
@@ -14034,7 +14128,111 @@ body {
 
         // Client data storage
         let clientData = [];
-        let clientViewMode = 'list'; // 'list' or 'timeline'
+        let clientViewMode = 'list'; // 'list', 'people' or 'timeline'
+
+        // ==============================================
+        // EVERY PERSON, NOT EVERY HOUSEHOLD - v2.34
+        // Sorting households by birthday tells you a household has one
+        // coming up, not whose it is. This flattens the records into
+        // people so the answer is a name and a date.
+        // ==============================================
+
+        let peopleSort = 'birthday';
+
+        function setPeopleSort(mode) {
+            peopleSort = mode;
+            renderClientList();
+        }
+
+        function allPeopleRows() {
+            const rows = [];
+            allContacts().forEach(client => {
+                if (!contactMatchesCategoryFilter(client)) return;
+                contactPeople(client).forEach(person => {
+                    if (!person.name) return;
+                    const next = person.birthday ? nextAnniversary(person.birthday, quickListToday()) : null;
+                    const days = next ? Math.round((next.date - quickListToday()) / 86400000) : null;
+                    rows.push({
+                        name: person.name,
+                        note: person.note || '',
+                        birthday: person.birthday || null,
+                        days: days,
+                        date: next ? next.date : null,
+                        turning: next ? next.date.getFullYear() - next.born.getFullYear() : null,
+                        household: client.clientName,
+                        clientId: client.id,
+                        categories: contactCategories(client)
+                    });
+                });
+            });
+            return rows;
+        }
+
+        function renderPeopleView(container, nameFilter) {
+            let rows = allPeopleRows();
+            if (nameFilter && nameFilter !== 'all') {
+                rows = rows.filter(r => r.clientId === nameFilter);
+            }
+
+            // This view has its own order. Inheriting the household sort meant
+            // opening a birthday list sorted alphabetically, which is useless.
+            if (peopleSort === 'name') {
+                rows.sort((a, b) => a.name.localeCompare(b.name));
+            } else {
+                // Soonest birthday first; anyone without one goes to the end
+                rows.sort((a, b) => {
+                    if (a.days === null && b.days === null) return a.name.localeCompare(b.name);
+                    if (a.days === null) return 1;
+                    if (b.days === null) return -1;
+                    return a.days - b.days;
+                });
+            }
+
+            if (!rows.length) {
+                container.innerHTML = '<div style="padding: 40px; text-align: center; color: #95a5a6;">' +
+                    'Nobody matches these filters.</div>';
+                return;
+            }
+
+            const withBirthdays = rows.filter(r => r.days !== null).length;
+
+            container.innerHTML =
+                '<div style="padding: 12px 15px; background: #f8f9fa; border-radius: 6px; margin-bottom: 12px; ' +
+                'font-size: 12px; color: #7f8c8d; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">' +
+                '<span>' + rows.length + ' people' +
+                (withBirthdays ? ', ' + withBirthdays + ' with a birthday recorded' : '') + '</span>' +
+                '<span style="margin-left: auto;">Sort:</span>' +
+                '<button type="button" class="people-sort-btn' + (peopleSort === 'birthday' ? ' active' : '') +
+                    '" onclick="setPeopleSort(\'birthday\')">soonest birthday</button>' +
+                '<button type="button" class="people-sort-btn' + (peopleSort === 'name' ? ' active' : '') +
+                    '" onclick="setPeopleSort(\'name\')">name</button>' +
+                '</div>' +
+                rows.map(r => {
+                    const when = r.days === null ? ''
+                        : r.days === 0 ? 'today' : r.days === 1 ? 'tomorrow' : 'in ' + r.days + ' days';
+                    const colour = r.days === null ? '#b2bec3'
+                        : r.days <= 7 ? '#e74c3c' : r.days <= 30 ? '#f39c12' : '#7f8c8d';
+                    return '<div class="person-view-row">' +
+                        '<div style="min-width: 0; flex: 1;">' +
+                            '<div class="person-view-name">' + rankEscape(r.name) +
+                                (r.note ? ' <span class="person-view-note">' + rankEscape(r.note) + '</span>' : '') +
+                            '</div>' +
+                            '<div class="person-view-meta">' + rankEscape(r.household) +
+                                (r.categories.length ? ' &middot; ' + r.categories
+                                    .map(id => (categoryById(id) || {}).label).filter(Boolean).join(', ') : '') +
+                            '</div>' +
+                        '</div>' +
+                        '<div style="text-align: right; flex-shrink: 0;">' +
+                            (r.birthday
+                                ? '<div class="person-view-date">' + rankEscape(formatBirthday(r.birthday)) +
+                                  (r.turning > 0 && r.turning < 120 ? ' &middot; ' + r.turning : '') + '</div>' +
+                                  '<div class="person-view-when" style="color: ' + colour + ';">' + when + '</div>'
+                                : '<div class="person-view-when" style="color: #b2bec3;">no birthday recorded</div>') +
+                        '</div>' +
+                        '<button class="person-view-edit" onclick="openClientModal(\'' + r.clientId + '\')">Edit</button>' +
+                        '</div>';
+                }).join('');
+        }
         let clientTrackerProfile = 'personal'; // 'financial', 'contractor', 'personal'
 
         // Profile configurations for different use cases
@@ -14194,9 +14392,10 @@ body {
         function getDaysUntilBirthday(client) {
             const today = new Date();
             today.setHours(0, 0, 0, 0);
-            
+
             let nextBirthday = null;
             let minDays = Infinity;
+            let whose = null;
             
             // Check contact1 birthday
             if (client.contact1Birthday) {
@@ -14226,7 +14425,21 @@ body {
                 }
             }
             
-            return { days: minDays, date: nextBirthday };
+            // Everyone in the record, not just the first two. A household with
+            // children at home had their birthdays invisible to this entirely.
+            contactPeople(client).forEach(person => {
+                if (!person.birthday) return;
+                const next = nextAnniversary(person.birthday, today);
+                if (!next) return;
+                const days = Math.round((next.date - today) / 86400000);
+                if (days < minDays) {
+                    minDays = days;
+                    nextBirthday = next.date;
+                    whose = person;
+                }
+            });
+
+            return { days: minDays, date: nextBirthday, person: whose };
         }
 
         // Open client modal for add/edit
@@ -14430,10 +14643,13 @@ body {
 
         // Toggle between list and timeline view
         function toggleClientView() {
-            clientViewMode = clientViewMode === 'list' ? 'timeline' : 'list';
+            clientViewMode = clientViewMode === 'list' ? 'people'
+                           : clientViewMode === 'people' ? 'timeline' : 'list';
             const btn = document.querySelector('[onclick="toggleClientView()"]');
             if (btn) {
-                btn.innerHTML = clientViewMode === 'list' ? '&#128197; Timeline View' : '&#128101; List View';
+                btn.innerHTML = clientViewMode === 'list' ? '&#128100; By Person'
+                              : clientViewMode === 'people' ? '&#128197; Timeline View'
+                              : '&#128101; By Household';
             }
             renderClientList();
         }
@@ -14545,7 +14761,31 @@ body {
     </div>
             `;
             
-            if (clientViewMode === 'timeline') {
+            if (clientViewMode === 'people') {
+                printContent += '<h2>People &mdash; by birthday</h2>';
+                let rows = allPeopleRows();
+                if (nameFilter !== 'all') rows = rows.filter(r => r.clientId === nameFilter);
+                rows.sort((a, b) => {
+                    if (a.days === null && b.days === null) return a.name.localeCompare(b.name);
+                    if (a.days === null) return 1;
+                    if (b.days === null) return -1;
+                    return a.days - b.days;
+                });
+                printContent += '<table style="width:100%; border-collapse: collapse; font-size: 12px;">' +
+                    '<tr><th style="text-align:left; border-bottom: 2px solid #ddd; padding: 6px;">Name</th>' +
+                    '<th style="text-align:left; border-bottom: 2px solid #ddd; padding: 6px;">Household</th>' +
+                    '<th style="text-align:left; border-bottom: 2px solid #ddd; padding: 6px;">Birthday</th>' +
+                    '<th style="text-align:left; border-bottom: 2px solid #ddd; padding: 6px;">When</th></tr>' +
+                    rows.map(r => '<tr>' +
+                        '<td style="padding: 5px 6px; border-bottom: 1px solid #eee;"><strong>' + r.name + '</strong>' +
+                            (r.note ? ' (' + r.note + ')' : '') + '</td>' +
+                        '<td style="padding: 5px 6px; border-bottom: 1px solid #eee;">' + r.household + '</td>' +
+                        '<td style="padding: 5px 6px; border-bottom: 1px solid #eee;">' +
+                            (r.birthday ? formatBirthday(r.birthday) : '') + '</td>' +
+                        '<td style="padding: 5px 6px; border-bottom: 1px solid #eee;">' +
+                            (r.days === null ? '' : r.days === 0 ? 'today' : 'in ' + r.days + ' days') + '</td>' +
+                        '</tr>').join('') + '</table>';
+            } else if (clientViewMode === 'timeline') {
                 // Timeline view print
                 printContent += '<h2>Timeline View - Scheduled Items</h2>';
                 
@@ -14856,6 +15096,16 @@ body {
         // Render the client list
         function renderClientList() {
             try { buildCategoryFilter(); } catch (e) {}
+            // The toggle names the view you will get next, so it has to be set
+            // on every draw and not only when it happens to be clicked
+            try {
+                const vb = document.getElementById('clientViewToggle');
+                if (vb) {
+                    vb.innerHTML = clientViewMode === 'list' ? '&#128100; By Person'
+                                 : clientViewMode === 'people' ? '&#128197; Timeline View'
+                                 : '&#128101; By Household';
+                }
+            } catch (e) {}
             const container = document.getElementById('clientListContainer');
             if (!container) return;
 
@@ -14877,6 +15127,8 @@ body {
 
             if (clientViewMode === 'timeline') {
                 renderTimelineView(container, dateFilter, taskFilter, nameFilter);
+            } else if (clientViewMode === 'people') {
+                renderPeopleView(container, nameFilter);
             } else {
                 renderListView(container, dateFilter, taskFilter, nameFilter);
             }
@@ -14974,8 +15226,8 @@ body {
                 
                 // Get birthday info for display
                 const birthdayInfo = getDaysUntilBirthday(client);
-                const birthdayDisplay = birthdayInfo.days !== Infinity 
-                    ? `${birthdayInfo.days === 0 ? 'Today!' : birthdayInfo.days + ' days'}`
+                const birthdayDisplay = birthdayInfo.days !== Infinity
+                    ? `${birthdayInfo.person ? birthdayInfo.person.name + ', ' : ''}${birthdayInfo.days === 0 ? 'today!' : birthdayInfo.days === 1 ? 'tomorrow' : birthdayInfo.days + ' days'}`
                     : 'Not set';
                 
                 // Filter scheduled items by task type if filter is active
