@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 20260903 MyLifeCanvas v 02.32-a -->
+<!-- 20260903 MyLifeCanvas v 02.33-a -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -4168,6 +4168,116 @@
             text-overflow: ellipsis;
         }
 
+
+        /* ==============================================
+           PEOPLE AND CATEGORIES - v2.33
+           ============================================== */
+
+        .cat-picks {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .cat-pick {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #2c3e50;
+            padding: 7px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 20px;
+            cursor: pointer;
+            background: white;
+        }
+
+        .cat-pick:hover { background: #f8f9fa; }
+
+        .cat-chip {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            color: white;
+            padding: 3px 9px;
+            border-radius: 10px;
+            margin-right: 5px;
+        }
+
+        .people-list {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .person-row {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .person-index {
+            width: 20px;
+            flex-shrink: 0;
+            font-size: 11px;
+            font-weight: 700;
+            color: #b2bec3;
+            text-align: center;
+        }
+
+        .person-name, .person-bday, .person-note {
+            padding: 8px 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 13px;
+            font-family: inherit;
+            color: #2c3e50;
+        }
+
+        .person-name { flex: 2; min-width: 0; }
+        .person-bday { flex: 0 0 150px; }
+        .person-note { flex: 1; min-width: 0; }
+
+        .person-name:focus, .person-bday:focus, .person-note:focus {
+            outline: none;
+            border-color: #16a085;
+        }
+
+        .person-del {
+            background: transparent;
+            border: none;
+            color: #bdc3c7;
+            cursor: pointer;
+            font-size: 17px;
+            line-height: 1;
+            padding: 0 5px;
+        }
+
+        .person-del:hover { color: #e74c3c; }
+
+        .person-add {
+            width: 100%;
+            margin-top: 10px;
+            background: #f4f6f7;
+            color: #2c3e50;
+            border: 1px dashed #bdc3c7;
+            border-radius: 6px;
+            padding: 9px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .person-add:hover { background: #e8ecee; }
+
+        .people-empty {
+            font-size: 12px;
+            color: #b2bec3;
+            padding: 10px 4px;
+        }
+
     </style>
 </head>
 <body>
@@ -4755,6 +4865,8 @@
                             </select>
                         </div>
                         <div style="flex: 1;">
+                            <label style="font-size: 12px; font-weight: 600; color: #7f8c8d;">Kind:</label>
+                            <select id="clientCategoryFilter" onchange="renderClientList()" style="padding: 6px 10px; border-radius: 4px; border: 1px solid #ddd; font-size: 12px;"></select>
                             <label style="font-size: 12px; font-weight: 600; color: #7f8c8d;">Contact:</label>
                             <select id="clientNameFilter" onchange="filterClientsByName()" style="padding: 6px 10px; border-radius: 4px; border: 1px solid #ddd; font-size: 12px;">
                                 <option value="all">All contacts</option>
@@ -5148,6 +5260,12 @@
                     </label>
                     <label class="report-check" id="optBirthdaysWrap">
                         <input type="checkbox" id="optBirthdays" checked> Birthdays &amp; anniversaries
+                        <select id="reportBirthdaySide" style="margin-left: 6px; padding: 3px 6px;
+                                border: 1px solid #e0e0e0; border-radius: 4px; font-size: 11px; font-family: inherit;">
+                            <option value="all">everyone</option>
+                            <option value="work">work only</option>
+                            <option value="personal">personal only</option>
+                        </select>
                     </label>
                 </div>
 
@@ -5675,7 +5793,23 @@
                             </p>
                         </div>
 
-                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">What's New in Version 2.32</h4>
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">What's New in Version 2.33</h4>
+                        <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
+                            <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
+                                <strong>Contacts for a whole life, not just a client book</strong>
+                            </p>
+                            <p style="line-height: 1.8; margin: 0; color: #555; font-size: 12px;">
+                                &#8226; <strong>As many people as the household has</strong> &mdash; No longer two slots; children at home get their own line<br>
+                                &#8226; <strong>Each with their own birthday</strong> &mdash; And a note saying who they are<br>
+                                &#8226; <strong>Client, family, friend, colleague</strong> &mdash; Tick as many as apply, because people are often more than one<br>
+                                &#8226; <strong>Filter the list by kind</strong> &mdash; Work, personal, or one category at a time<br>
+                                &#8226; <strong>Birthdays split work from personal</strong> &mdash; In the What's Coming report<br>
+                                &#8226; <strong>Households still group and print</strong> &mdash; The record is still the household; the people inside it are now individuals<br>
+                                &#8226; <strong>Nothing lost</strong> &mdash; Existing records are brought across on first load and marked as clients
+                            </p>
+                        </div>
+
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Previously, in Version 2.32</h4>
                         <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
                             <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
                                 <strong>Clock on to a workspace, not just to the day</strong>
@@ -6233,6 +6367,7 @@
 
                         <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Version History</h4>
                         <p style="line-height: 1.6; color: #555; font-size: 12px;">
+                            <strong>v2.33</strong> &mdash; Contacts hold any number of people and carry categories; birthdays filter work from personal<br>
                             <strong>v2.32</strong> &mdash; The time clock records which workspace each stretch belonged to<br>
                             <strong>v2.31</strong> &mdash; Bulk assignment of tasks into lists, and a prompt when lists are empty<br>
                             <strong>v2.30</strong> &mdash; Log Activity can name contacts and create them, so untasked client work has a home<br>
@@ -6294,27 +6429,24 @@
                     </div>
                 </div>
 
-                <!-- Contacts -->
+                <!-- What kind of contact -->
                 <div class="settings-section">
-                    <div class="settings-section-title">Contact Details</div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                        <div class="setting-item">
-                            <label class="setting-label">Contact 1 Name *</label>
-                            <input type="text" class="setting-input" id="contact1Name" placeholder="First contact name">
-                        </div>
-                        <div class="setting-item">
-                            <label class="setting-label">Contact 1 Birthday</label>
-                            <input type="date" class="setting-input" id="contact1Birthday">
-                        </div>
-                        <div class="setting-item">
-                            <label class="setting-label">Contact 2 Name</label>
-                            <input type="text" class="setting-input" id="contact2Name" placeholder="Second contact (optional)">
-                        </div>
-                        <div class="setting-item">
-                            <label class="setting-label">Contact 2 Birthday</label>
-                            <input type="date" class="setting-input" id="contact2Birthday">
-                        </div>
+                    <div class="settings-section-title">What is this to you?</div>
+                    <div style="font-size: 12px; color: #7f8c8d; margin-bottom: 10px; line-height: 1.5;">
+                        Tick as many as apply. A person can be a client and a friend, or family and a colleague.
                     </div>
+                    <div id="clientCategories" class="cat-picks"></div>
+                </div>
+
+                <!-- People -->
+                <div class="settings-section">
+                    <div class="settings-section-title">People</div>
+                    <div style="font-size: 12px; color: #7f8c8d; margin-bottom: 10px; line-height: 1.5;">
+                        Everyone in this record &mdash; a couple, a whole household with children at home,
+                        or a single person. Each can have their own birthday.
+                    </div>
+                    <div id="clientPeopleList" class="people-list"></div>
+                    <button type="button" class="person-add" onclick="addFormPerson()">+ Add a person</button>
                 </div>
 
                 <!-- Fee Structure -->
@@ -6740,8 +6872,8 @@
         // no longer a set of version numbers that can drift apart.
         // ==============================================
         const APP_VERSION = {
-            number: '2.32',
-            file: '20260903 MyLifeCanvas v 02.32-a',
+            number: '2.33',
+            file: '20260903 MyLifeCanvas v 02.33-a',
             released: 'September 2026'
         };
 
@@ -8673,7 +8805,7 @@ body {
                     '.detail-label, .detail-log-title, .report-label, .report-options-title, ' +
                     '.activity-form-label, .activity-filter-label, .settings-section-title, ' +
                     '.rank-group-head, .csv-col-name, .export-option-title, .skin-scope, ' +
-                    '.stream-name-input, .rate-ws-name, .rate-label, .master-task-title, .skin-name, .settings-list-ws, .assign-title, ' +
+                    '.stream-name-input, .rate-ws-name, .rate-label, .master-task-title, .skin-name, .settings-list-ws, .assign-title, .cat-pick, ' +
                     '.clock-sessions-title, .gs-group-title, .focus-group-title { color: ' +
                     s.panelText + '; }',
                 '.settings-section, .rate-ws, .skin-card, .report-ws-list, .rank-toolbar, ' +
@@ -10822,6 +10954,7 @@ body {
                 times: on('optTimes'),
                 scheduled: on('optScheduled'),
                 birthdays: on('optBirthdays'),
+                birthdaySide: (document.getElementById('reportBirthdaySide') || {}).value || 'all',
                 quicklist: on('optQuickList'),
                 victories: on('optVictories')
             };
@@ -10911,10 +11044,16 @@ body {
             let rows = '';
             const add = (k, v) => { if (v) rows += '<tr><td class="meta">' + k + '</td><td>' + rankEscape(String(v)) + '</td></tr>'; };
 
-            add('Primary contact', client.contact1Name);
-            add('Birthday', client.contact1Birthday ? formatBirthday(client.contact1Birthday) : '');
-            add('Second contact', client.contact2Name);
-            add('Birthday', client.contact2Birthday ? formatBirthday(client.contact2Birthday) : '');
+            const cats = contactCategories(client)
+                .map(id => (categoryById(id) || {}).label)
+                .filter(Boolean);
+            if (cats.length) add('Kind', cats.join(', '));
+
+            contactPeople(client).forEach((person, i) => {
+                add(i === 0 ? 'People' : '', person.name +
+                    (person.note ? ' (' + person.note + ')' : '') +
+                    (person.birthday ? ' \u2014 ' + formatBirthday(person.birthday) : ''));
+            });
 
             if (profile && profile.showFinancialFields) {
                 if (client.assetsUnderManagement) add('Assets', '$' + client.assetsUnderManagement.toLocaleString());
@@ -11124,20 +11263,23 @@ body {
             return { date: next, born: born };
         }
 
-        function gatherBirthdays(range) {
+        function gatherBirthdays(range, opt) {
             const out = [];
+            const side = opt && opt.birthdaySide ? opt.birthdaySide : 'all';
+
             allContacts().forEach(c => {
-                [['contact1Name', 'contact1Birthday'], ['contact2Name', 'contact2Birthday']].forEach(pair => {
-                    const who = c[pair[0]], when = c[pair[1]];
-                    if (!who || !when) return;
-                    const next = nextAnniversary(when, range.start);
+                if (side !== 'all' && !contactHasSide(c, side)) return;
+                contactPeople(c).forEach(person => {
+                    if (!person.name || !person.birthday) return;
+                    const next = nextAnniversary(person.birthday, range.start);
                     if (!next || next.date > range.end) return;
                     const turning = next.date.getFullYear() - next.born.getFullYear();
                     out.push({
                         date: next.date,
                         kind: 'birthday',
                         source: c.clientName,
-                        title: who + "'s birthday" +
+                        title: person.name + "'s birthday" +
+                               (person.note ? ' (' + person.note + ')' : '') +
                                (turning > 0 && turning < 120 ? ' \u2014 turning ' + turning : '')
                     });
                 });
@@ -11195,7 +11337,7 @@ body {
                 });
             }
 
-            if (opt.birthdays) out.push.apply(out, gatherBirthdays(range));
+            if (opt.birthdays) out.push.apply(out, gatherBirthdays(range, opt));
 
             out.sort((a, b) => a.date - b.date);
             return out;
@@ -11748,6 +11890,26 @@ body {
 
         // ----- contact card: the work attached to a person -----
 
+        function peopleAndCategoriesPanel(client) {
+            const people = contactPeople(client);
+            const chips = categoryChips(client);
+            if (!chips && people.length < 2) return '';
+
+            return '<div style="padding: 8px 15px; border-top: 1px solid #f0f0f0;">' +
+                (chips ? '<div style="margin-bottom: ' + (people.length > 1 ? '8px' : '0') + ';">' +
+                    chips + '</div>' : '') +
+                (people.length > 1
+                    ? '<div style="display: flex; flex-wrap: wrap; gap: 10px;">' +
+                      people.map(p => '<span style="font-size: 11px; color: #7f8c8d;">' +
+                          '<strong style="color: #2c3e50;">' + rankEscape(p.name) + '</strong>' +
+                          (p.note ? ' (' + rankEscape(p.note) + ')' : '') +
+                          (p.birthday ? ' &middot; ' + rankEscape(formatBirthday(p.birthday)) : '') +
+                          '</span>').join('') +
+                      '</div>'
+                    : '') +
+                '</div>';
+        }
+
         function contactWorkPanel(contactId) {
             const rows = tasksForContact(contactId);
             if (rows.length === 0) return '';
@@ -11793,6 +11955,221 @@ body {
             if (workspace && workspace !== currentWorkspace) switchWorkspace(workspace);
             const el = document.getElementById(taskId);
             if (el) openTaskDetail(el);
+        }
+
+        // ==============================================
+        // PEOPLE AND CATEGORIES - v2.33
+        // The contact record was shaped as a financial planning household:
+        // one name, two adults, a fee. Real life is a household of any
+        // size, and the people in it are clients, family, friends,
+        // colleagues, sometimes several at once.
+        //
+        // Each record now holds a list of people rather than two slots,
+        // and a set of categories. The old two-contact fields are kept
+        // in step underneath so nothing that reads them breaks.
+        // ==============================================
+
+        const CONTACT_CATEGORIES = [
+            { id: 'client',    label: 'Client',    colour: '#16a085', side: 'work' },
+            { id: 'colleague', label: 'Colleague', colour: '#2980b9', side: 'work' },
+            { id: 'supplier',  label: 'Supplier',  colour: '#7f8c8d', side: 'work' },
+            { id: 'family',    label: 'Family',    colour: '#c0392b', side: 'personal' },
+            { id: 'friend',    label: 'Friend',    colour: '#e67e22', side: 'personal' },
+            { id: 'group',     label: 'Club or group', colour: '#8e44ad', side: 'personal' }
+        ];
+
+        function categoryById(id) {
+            return CONTACT_CATEGORIES.find(c => c.id === id) || null;
+        }
+
+        function newPersonId() {
+            return 'person-' + Date.now() + '-' + Math.random().toString(36).substr(2, 5);
+        }
+
+        // Bring an older record up to shape without discarding anything
+        function normaliseContact(client) {
+            if (!client) return client;
+            let changed = false;
+
+            if (!Array.isArray(client.people)) {
+                client.people = [];
+                if (client.contact1Name) {
+                    client.people.push({ id: newPersonId(), name: client.contact1Name,
+                                         birthday: client.contact1Birthday || null, note: '' });
+                }
+                if (client.contact2Name) {
+                    client.people.push({ id: newPersonId(), name: client.contact2Name,
+                                         birthday: client.contact2Birthday || null, note: '' });
+                }
+                changed = true;
+            }
+            if (!Array.isArray(client.categories)) {
+                // Anything that predates categories was, by definition, a client
+                client.categories = ['client'];
+                changed = true;
+            }
+            return changed;
+        }
+
+        // Contacts are loaded in their own handler, which may run after the
+        // deferred start-up pass. Hooking the load itself is the only way to be
+        // certain the migration sees the real records and persists the result.
+        (function wrapContactLoad() {
+            if (typeof loadClientData !== 'function') return;
+            const original = loadClientData;
+            loadClientData = function() {
+                const r = original.apply(this, arguments);
+                try { normaliseAllContacts(); } catch (e) { console.warn('Contact migration failed', e); }
+                return r;
+            };
+        })();
+
+        function normaliseAllContacts() {
+            if (typeof clientData === 'undefined' || !Array.isArray(clientData)) return;
+            clientData.forEach(normaliseContact);
+            // Always write back. Rendering can normalise a record in memory
+            // before this runs, which would otherwise leave the stored copy in
+            // the old shape for ever while everything on screen looked right.
+            try { saveClientData(); } catch (e) {}
+        }
+
+        // Keep the original two fields in step, so every older code path,
+        // export and report carries on working untouched
+        function syncLegacyContactFields(client) {
+            const people = Array.isArray(client.people) ? client.people : [];
+            client.contact1Name = people[0] ? people[0].name : null;
+            client.contact1Birthday = people[0] ? (people[0].birthday || null) : null;
+            client.contact2Name = people[1] ? people[1].name : null;
+            client.contact2Birthday = people[1] ? (people[1].birthday || null) : null;
+        }
+
+        function contactPeople(client) {
+            if (!client) return [];
+            if (!Array.isArray(client.people)) normaliseContact(client);
+            return client.people;
+        }
+
+        function contactCategories(client) {
+            if (!client) return [];
+            if (!Array.isArray(client.categories)) normaliseContact(client);
+            return client.categories;
+        }
+
+        function contactHasSide(client, side) {
+            return contactCategories(client).some(id => {
+                const c = categoryById(id);
+                return c && c.side === side;
+            });
+        }
+
+        function categoryChips(client) {
+            const cats = contactCategories(client);
+            if (!cats.length) return '';
+            return cats.map(id => {
+                const c = categoryById(id);
+                if (!c) return '';
+                return '<span class="cat-chip" style="background: ' + c.colour + ';">' +
+                    rankEscape(c.label) + '</span>';
+            }).join('');
+        }
+
+        // ----- the people editor in the contact form -----
+
+        let formPeople = [];
+
+        function renderFormPeople() {
+            const container = document.getElementById('clientPeopleList');
+            if (!container) return;
+
+            if (!formPeople.length) {
+                container.innerHTML = '<div class="people-empty">Nobody added yet. ' +
+                    'A record needs at least one person.</div>';
+                return;
+            }
+
+            container.innerHTML = formPeople.map((p, i) =>
+                '<div class="person-row">' +
+                    '<span class="person-index">' + (i + 1) + '</span>' +
+                    '<input type="text" class="person-name" placeholder="Name" ' +
+                        'value="' + rankEscape(p.name || '') + '" data-i="' + i + '" data-f="name">' +
+                    '<input type="date" class="person-bday" title="Birthday" ' +
+                        'value="' + (p.birthday || '') + '" data-i="' + i + '" data-f="birthday">' +
+                    '<input type="text" class="person-note" placeholder="e.g. son, partner" ' +
+                        'value="' + rankEscape(p.note || '') + '" data-i="' + i + '" data-f="note">' +
+                    '<button type="button" class="person-del" onclick="removeFormPerson(' + i + ')" ' +
+                        'title="Remove">&#215;</button>' +
+                '</div>').join('');
+
+            container.querySelectorAll('input').forEach(input => {
+                input.addEventListener('input', function() {
+                    const i = parseInt(this.dataset.i, 10);
+                    if (formPeople[i]) formPeople[i][this.dataset.f] = this.value;
+                });
+            });
+        }
+
+        function addFormPerson() {
+            formPeople.push({ id: newPersonId(), name: '', birthday: null, note: '' });
+            renderFormPeople();
+            const inputs = document.querySelectorAll('#clientPeopleList .person-name');
+            if (inputs.length) inputs[inputs.length - 1].focus();
+        }
+
+        function removeFormPerson(i) {
+            formPeople.splice(i, 1);
+            renderFormPeople();
+        }
+
+        function renderFormCategories(selected) {
+            const container = document.getElementById('clientCategories');
+            if (!container) return;
+            const chosen = Array.isArray(selected) ? selected : [];
+            container.innerHTML = CONTACT_CATEGORIES.map(c =>
+                '<label class="cat-pick" style="border-color: ' + c.colour + ';">' +
+                    '<input type="checkbox" value="' + c.id + '"' +
+                        (chosen.indexOf(c.id) !== -1 ? ' checked' : '') + '> ' +
+                    rankEscape(c.label) +
+                '</label>').join('');
+        }
+
+        function selectedFormCategories() {
+            return Array.from(document.querySelectorAll('#clientCategories input:checked'))
+                .map(cb => cb.value);
+        }
+
+        function cleanFormPeople() {
+            return formPeople
+                .filter(p => (p.name || '').trim())
+                .map(p => ({
+                    id: p.id || newPersonId(),
+                    name: p.name.trim(),
+                    birthday: p.birthday || null,
+                    note: (p.note || '').trim()
+                }));
+        }
+
+        // ----- filtering the contact list -----
+
+        function contactMatchesCategoryFilter(client) {
+            const select = document.getElementById('clientCategoryFilter');
+            const value = select ? select.value : 'all';
+            if (!value || value === 'all') return true;
+            if (value === 'work' || value === 'personal') return contactHasSide(client, value);
+            if (value === 'none') return contactCategories(client).length === 0;
+            return contactCategories(client).indexOf(value) !== -1;
+        }
+
+        function buildCategoryFilter() {
+            const select = document.getElementById('clientCategoryFilter');
+            if (!select || select.dataset.built) return;
+            select.dataset.built = 'yes';
+            select.innerHTML =
+                '<option value="all">Everyone</option>' +
+                '<option value="work">Work &mdash; clients, colleagues, suppliers</option>' +
+                '<option value="personal">Personal &mdash; family, friends, groups</option>' +
+                CONTACT_CATEGORIES.map(c =>
+                    '<option value="' + c.id + '">' + rankEscape(c.label) + '</option>').join('') +
+                '<option value="none">Not categorised</option>';
         }
 
         // ==============================================
@@ -12688,6 +13065,7 @@ body {
             // down the file, so anything reading it has to wait for the current
             // batch of handlers to finish.
             setTimeout(function() {
+                try { normaliseAllContacts(); } catch (e) {}
                 try { ensureRankOrders(); } catch (e) {}
                 try { refreshRankBadges(); } catch (e) {}
                 try { refreshTaskMomentum(); refreshFocusButtons(); } catch (e) {}
@@ -13892,10 +14270,11 @@ body {
                 titleEl.innerHTML = '&#9999; Edit Contact';
                 document.getElementById('clientEditId').value = clientId;
                 document.getElementById('clientName').value = client.clientName || '';
-                document.getElementById('contact1Name').value = client.contact1Name || '';
-                document.getElementById('contact1Birthday').value = client.contact1Birthday || '';
-                document.getElementById('contact2Name').value = client.contact2Name || '';
-                document.getElementById('contact2Birthday').value = client.contact2Birthday || '';
+                normaliseContact(client);
+                formPeople = contactPeople(client).map(p => ({ id: p.id, name: p.name,
+                    birthday: p.birthday || null, note: p.note || '' }));
+                renderFormPeople();
+                renderFormCategories(contactCategories(client));
                 document.getElementById('feeType').value = client.feeType || 'percentage';
                 document.getElementById('feePercentage').value = client.feePercentage || '';
                 document.getElementById('feeFixed').value = client.feeFixed || '';
@@ -13910,10 +14289,9 @@ body {
                 titleEl.innerHTML = '&#10133; Add New Contact';
                 document.getElementById('clientEditId').value = '';
                 document.getElementById('clientName').value = '';
-                document.getElementById('contact1Name').value = '';
-                document.getElementById('contact1Birthday').value = '';
-                document.getElementById('contact2Name').value = '';
-                document.getElementById('contact2Birthday').value = '';
+                formPeople = [{ id: newPersonId(), name: '', birthday: null, note: '' }];
+                renderFormPeople();
+                renderFormCategories([]);
                 document.getElementById('feeType').value = 'percentage';
                 document.getElementById('feePercentage').value = '';
                 document.getElementById('feeFixed').value = '';
@@ -13976,14 +14354,14 @@ body {
         // Save client from modal
         function saveClient() {
             const clientName = document.getElementById('clientName').value.trim();
-            const contact1Name = document.getElementById('contact1Name').value.trim();
-            
+            const people = cleanFormPeople();
+
             if (!clientName) {
-                showNotification('Client name is required', 'error');
+                showNotification('A name for this record is required', 'error');
                 return;
             }
-            if (!contact1Name) {
-                showNotification('Contact 1 name is required', 'error');
+            if (!people.length) {
+                showNotification('Add at least one person', 'error');
                 return;
             }
             
@@ -13993,10 +14371,8 @@ body {
             const clientRecord = {
                 id: clientId,
                 clientName: clientName,
-                contact1Name: contact1Name,
-                contact1Birthday: document.getElementById('contact1Birthday').value || null,
-                contact2Name: document.getElementById('contact2Name').value.trim() || null,
-                contact2Birthday: document.getElementById('contact2Birthday').value || null,
+                people: people,
+                categories: selectedFormCategories(),
                 feeType: document.getElementById('feeType').value,
                 feePercentage: parseFloat(document.getElementById('feePercentage').value) || null,
                 feeFixed: parseFloat(document.getElementById('feeFixed').value) || null,
@@ -14013,6 +14389,9 @@ body {
                 modified: new Date().toISOString()
             };
             
+            // Keep the original two fields in step for everything that reads them
+            syncLegacyContactFields(clientRecord);
+
             if (isEdit) {
                 // Preserve existing scheduled items
                 const existing = clientData.find(c => c.id === clientId);
@@ -14176,6 +14555,7 @@ body {
                 
                 clientData.forEach(client => {
                     if (nameFilter !== 'all' && client.id !== nameFilter) return;
+                    if (!contactMatchesCategoryFilter(client)) return;
                     
                     (client.scheduledItems || []).forEach(item => {
                         if (item.status !== 'pending') return;
@@ -14229,7 +14609,7 @@ body {
                 
             } else {
                 // List view print
-                let filteredClients = [...clientData];
+                let filteredClients = [...clientData].filter(contactMatchesCategoryFilter);
                 const profile = profileConfigs[clientTrackerProfile];
                 
                 if (nameFilter !== 'all') {
@@ -14475,6 +14855,7 @@ body {
 
         // Render the client list
         function renderClientList() {
+            try { buildCategoryFilter(); } catch (e) {}
             const container = document.getElementById('clientListContainer');
             if (!container) return;
 
@@ -14518,7 +14899,7 @@ body {
 
         // Render list view (grouped by client)
         function renderListView(container, dateFilter, taskFilter, nameFilter) {
-            let filteredClients = [...clientData];
+            let filteredClients = [...clientData].filter(contactMatchesCategoryFilter);
             
             // Apply name filter
             if (nameFilter !== 'all') {
@@ -14640,6 +15021,7 @@ body {
                             </div>
                         </div>
                         ${detailsRow}
+                        ${peopleAndCategoriesPanel(client)}
                         ${contactWorkPanel(client.id)}
                         ${completedPanel(client.id)}
                         ${directWorkPanel(client.id)}
@@ -14670,10 +15052,12 @@ body {
 
         // Render timeline view (all items by date)
         function renderTimelineView(container, dateFilter, taskFilter, nameFilter) {
+            const categoryOk = contactMatchesCategoryFilter;
             // Collect all scheduled items across all clients
             let allItems = [];
             
             clientData.forEach(client => {
+                if (!contactMatchesCategoryFilter(client)) return;
                 if (nameFilter !== 'all' && client.id !== nameFilter) return;
                 
                 (client.scheduledItems || []).forEach(item => {
