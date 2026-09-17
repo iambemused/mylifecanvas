@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 20260903 MyLifeCanvas v 02.34-a -->
+<!-- 20260903 MyLifeCanvas v 02.35-a -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -3491,6 +3491,24 @@
             color: white !important;
         }
 
+        #timeClockModal .clock-day-label,
+        #timeClockModal .clock-day-nav,
+        #timeClockModal .clock-add-session {
+            background: rgba(0,0,0,0.25) !important;
+            color: #e8dcc0 !important;
+            border-color: #6b5636 !important;
+        }
+
+        #timeClockModal .clock-day-label { background: transparent !important; color: #c9a227 !important; }
+
+        #timeClockModal .clock-time-input,
+        #timeClockModal .clock-session-ws-select,
+        #timeClockModal .clock-day-picker {
+            background: rgba(0,0,0,0.35) !important;
+            color: #f0c14b !important;
+            border-color: #6b5636 !important;
+        }
+
         #timeClockModal .clock-session-ws {
             background: rgba(201,162,39,0.2) !important;
             color: #f0c14b !important;
@@ -4354,6 +4372,127 @@
 
         .people-sort-btn.active { background: #34495e; color: white; }
         .people-sort-btn:hover { background: #d6dbdd; }
+
+
+        /* ==============================================
+           PUTTING THE CLOCK RIGHT - v2.35
+           ============================================== */
+
+        .clock-day-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 18px 0 10px;
+        }
+
+        .clock-day-nav {
+            background: #ecf0f1;
+            color: #2c3e50;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 11px;
+            font-size: 13px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .clock-day-nav:hover { background: #d6dbdd; }
+        .clock-day-nav:disabled { opacity: 0.35; cursor: not-allowed; }
+
+        .clock-day-label {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: #7f8c8d;
+            flex: 1;
+        }
+
+        .clock-day-picker {
+            padding: 5px 8px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 12px;
+            font-family: inherit;
+        }
+
+        .clock-time-input {
+            width: 92px;
+            padding: 5px 7px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 12px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .clock-session-ws-select {
+            padding: 5px 7px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 11px;
+            font-family: inherit;
+            max-width: 135px;
+            flex-shrink: 0;
+        }
+
+        .clock-arrow { color: #95a5a6; }
+
+        .clock-adjusted {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+            background: #fdebd0;
+            color: #a6603c;
+            padding: 2px 7px;
+            border-radius: 3px;
+            white-space: nowrap;
+        }
+
+        .clock-session-stale {
+            border-left-color: #e74c3c !important;
+            background: #fdecea !important;
+        }
+
+        .clock-stale-warning {
+            background: #fdecea;
+            border-left: 4px solid #e74c3c;
+            border-radius: 5px;
+            padding: 11px 14px;
+            margin-top: 16px;
+            font-size: 12px;
+            color: #922b21;
+            line-height: 1.6;
+        }
+
+        .clock-fix-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 10px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            margin-left: 4px;
+        }
+
+        .clock-add-session {
+            width: 100%;
+            margin-top: 9px;
+            background: #f4f6f7;
+            color: #2c3e50;
+            border: 1px dashed #bdc3c7;
+            border-radius: 6px;
+            padding: 9px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .clock-add-session:hover { background: #e8ecee; }
 
     </style>
 </head>
@@ -5482,8 +5621,20 @@
                     </div>
                 </div>
 
-                <div class="clock-sessions-title">Today</div>
+                <div id="clockStaleWarning" class="clock-stale-warning" style="display: none;"></div>
+
+                <div class="clock-day-bar">
+                    <button type="button" class="clock-day-nav" onclick="shiftClockDay(-1)" title="Previous day">&#8592;</button>
+                    <span class="clock-day-label" id="clockDayLabel">Today</span>
+                    <input type="date" id="clockDayPicker" class="clock-day-picker"
+                           onchange="jumpToClockDay(this.value)">
+                    <button type="button" class="clock-day-nav" id="clockDayNext" onclick="shiftClockDay(1)" title="Next day">&#8594;</button>
+                </div>
+
                 <div id="clockSessions"></div>
+                <button type="button" class="clock-add-session" onclick="addManualSession()">
+                    + Add a stretch you forgot to clock
+                </button>
 
                 <div id="clockBreakdown"></div>
 
@@ -5498,6 +5649,8 @@
                     Clock on and off as many times as you like, and to whichever workspace you are actually
                     in &mdash; each stretch is recorded separately, so a break for lunch, an evening session,
                     or an hour spent on something else entirely is counted where it belongs.
+                    Anything corrected afterwards is marked as such, here and in every report, so a figure
+                    recorded at the time is never confused with one worked out later.
                     Nothing here is sent anywhere; it stays in this browser like everything else.
                 </p>
             </div>
@@ -5870,7 +6023,23 @@
                             </p>
                         </div>
 
-                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">What's New in Version 2.34</h4>
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">What's New in Version 2.35</h4>
+                        <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
+                            <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
+                                <strong>Putting the clock right afterwards</strong>
+                            </p>
+                            <p style="line-height: 1.8; margin: 0; color: #555; font-size: 12px;">
+                                &#8226; <strong>Go back to any day</strong> &mdash; Arrows or a date picker, and edit what is there<br>
+                                &#8226; <strong>Correct the times</strong> &mdash; Start, finish and workspace, all editable<br>
+                                &#8226; <strong>Add a stretch you forgot</strong> &mdash; For a day you worked and never clocked on<br>
+                                &#8226; <strong>Marked, always</strong> &mdash; Anything entered or corrected later is labelled, on screen and in reports<br>
+                                &#8226; <strong>The original is kept</strong> &mdash; An edit never destroys what was first recorded<br>
+                                &#8226; <strong>Fixed: a forgotten clock-off ran for days</strong> &mdash; An open stretch from an earlier day no longer counts until you say when it ended<br>
+                                &#8226; <strong>And it tells you</strong> &mdash; Any day left unclocked is flagged when you open the app
+                            </p>
+                        </div>
+
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Previously, in Version 2.34</h4>
                         <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
                             <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
                                 <strong>Birthdays by person, not by household</strong>
@@ -6460,6 +6629,7 @@
 
                         <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Version History</h4>
                         <p style="line-height: 1.6; color: #555; font-size: 12px;">
+                            <strong>v2.35</strong> &mdash; Editable clock records with adjustments marked in reports, and a fix for runaway open stretches<br>
                             <strong>v2.34</strong> &mdash; By Person view for birthdays, and a fix so everyone in a household is counted<br>
                             <strong>v2.33</strong> &mdash; Contacts hold any number of people and carry categories; birthdays filter work from personal<br>
                             <strong>v2.32</strong> &mdash; The time clock records which workspace each stretch belonged to<br>
@@ -6966,8 +7136,8 @@
         // no longer a set of version numbers that can drift apart.
         // ==============================================
         const APP_VERSION = {
-            number: '2.34',
-            file: '20260903 MyLifeCanvas v 02.34-a',
+            number: '2.35',
+            file: '20260903 MyLifeCanvas v 02.35-a',
             released: 'September 2026'
         };
 
@@ -9771,6 +9941,226 @@ body {
         }
 
         // ==============================================
+        // PUTTING THE CLOCK RIGHT - v2.35
+        // Nobody remembers to clock on and off every time. A record that
+        // can only be written as it happens is a record that quietly
+        // becomes wrong, and a wrong one is worse than an edited one.
+        //
+        // So stretches can be corrected afterwards. Every correction is
+        // marked, the original kept, and reports say plainly which
+        // hours were recorded at the time and which were put in later.
+        // ==============================================
+
+        let clockViewDay = null;   // null means today
+
+        function shownClockDay() {
+            return clockViewDay || clockDayKey();
+        }
+
+        function isAdjusted(session) {
+            return !!(session && (session.edited || session.addedLater));
+        }
+
+        function adjustmentLabel(session) {
+            if (!session) return '';
+            if (session.addedLater) return 'added later';
+            if (session.edited) return 'adjusted';
+            return '';
+        }
+
+        function dayHasAdjustments(dayKey) {
+            return clockSessions(dayKey).some(isAdjusted);
+        }
+
+        // A stretch left open on an earlier day is not still running. Counting
+        // it to now is where the absurd totals came from.
+        function sessionIsStale(session) {
+            if (!session || !session.in || session.out) return false;
+            return (session.in || '').slice(0, 10) !== clockDayKey();
+        }
+
+        function staleOpenSessions() {
+            const all = loadClock();
+            const out = [];
+            Object.keys(all).forEach(day => {
+                (all[day] || []).forEach((s, i) => {
+                    if (sessionIsStale(s)) out.push({ day: day, index: i, session: s });
+                });
+            });
+            return out;
+        }
+
+        function timeOfDayValue(stamp) {
+            if (!stamp) return '';
+            const d = new Date(stamp);
+            if (isNaN(d.getTime())) return '';
+            return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+        }
+
+        function stampFromDayAndTime(dayKey, hhmm) {
+            const date = parseQuickListDate(dayKey);
+            if (!date || !/^\d{2}:\d{2}$/.test(hhmm)) return null;
+            const [h, m] = hhmm.split(':').map(Number);
+            const d = new Date(date.getFullYear(), date.getMonth(), date.getDate(), h, m, 0, 0);
+            return d.toISOString();
+        }
+
+        function updateSessionTime(dayKey, index, field, value) {
+            const all = loadClock();
+            const list = all[dayKey] || [];
+            const session = list[index];
+            if (!session) return;
+
+            if (!value) {
+                if (field === 'out') {
+                    if (session.originalOut === undefined) session.originalOut = session.out;
+                    session.out = null;
+                    session.edited = true;
+                }
+            } else {
+                const stamp = stampFromDayAndTime(dayKey, value);
+                if (!stamp) return;
+                if (field === 'in') {
+                    if (session.originalIn === undefined) session.originalIn = session.in;
+                    session.in = stamp;
+                } else {
+                    if (session.originalOut === undefined) session.originalOut = session.out || null;
+                    session.out = stamp;
+                }
+                session.edited = true;
+            }
+
+            if (session.in && session.out && new Date(session.out) < new Date(session.in)) {
+                showNotification('The finish is before the start &mdash; check that one', 'error');
+            }
+
+            session.editedAt = new Date().toISOString();
+            saveClock(all);
+            renderClock();
+        }
+
+        function updateSessionWorkspace(dayKey, index, workspace) {
+            const all = loadClock();
+            const session = (all[dayKey] || [])[index];
+            if (!session) return;
+            session.workspace = workspace || '';
+            session.edited = true;
+            session.editedAt = new Date().toISOString();
+            saveClock(all);
+            renderClock();
+        }
+
+        function addManualSession() {
+            const dayKey = shownClockDay();
+            const all = loadClock();
+            all[dayKey] = clockSessions(dayKey);
+            all[dayKey].push({
+                in: stampFromDayAndTime(dayKey, '09:00'),
+                out: stampFromDayAndTime(dayKey, '17:00'),
+                workspace: currentWorkspace,
+                addedLater: true,
+                editedAt: new Date().toISOString()
+            });
+            saveClock(all);
+            renderClock();
+            showNotification('Stretch added &mdash; set the hours, it is marked as added later', 'success');
+        }
+
+        function shiftClockDay(days) {
+            const base = parseQuickListDate(shownClockDay()) || quickListToday();
+            const next = new Date(base.getTime() + days * 86400000);
+            const key = next.getFullYear() + '-' +
+                String(next.getMonth() + 1).padStart(2, '0') + '-' +
+                String(next.getDate()).padStart(2, '0');
+            if (next > quickListToday()) return;   // no point editing the future
+            clockViewDay = (key === clockDayKey()) ? null : key;
+            renderClock();
+        }
+
+        function jumpToClockDay(value) {
+            if (!value) return;
+            clockViewDay = (value === clockDayKey()) ? null : value;
+            renderClock();
+        }
+
+        // ----- the editable day -----
+
+        function renderClockDayEditor() {
+            const dayKey = shownClockDay();
+            const sessions = clockSessions(dayKey);
+            const label = document.getElementById('clockDayLabel');
+            const picker = document.getElementById('clockDayPicker');
+            const list = document.getElementById('clockSessions');
+            if (!list) return;
+
+            const d = parseQuickListDate(dayKey);
+            if (label) {
+                label.textContent = dayKey === clockDayKey()
+                    ? 'Today'
+                    : (d ? d.toLocaleDateString('en-AU',
+                        { weekday: 'long', day: 'numeric', month: 'long' }) : dayKey);
+            }
+            if (picker) picker.value = dayKey;
+
+            const next = document.getElementById('clockDayNext');
+            if (next) next.disabled = dayKey === clockDayKey();
+
+            if (!sessions.length) {
+                list.innerHTML = '<div class="clock-empty">Nothing recorded for this day. ' +
+                    'If you worked and forgot to clock on, add it below.</div>';
+                return;
+            }
+
+            list.innerHTML = sessions.map((s, i) => {
+                const mark = adjustmentLabel(s);
+                const stale = sessionIsStale(s);
+                return '<div class="clock-session' + (stale ? ' clock-session-stale' : '') + '">' +
+                    '<select class="clock-session-ws-select" ' +
+                        'onchange="updateSessionWorkspace(\'' + dayKey + '\', ' + i + ', this.value)">' +
+                        '<option value=""' + (!s.workspace ? ' selected' : '') + '>unlabelled</option>' +
+                        RANK_WORKSPACES.map(ws => '<option value="' + ws + '"' +
+                            (s.workspace === ws ? ' selected' : '') + '>' +
+                            rankEscape(workspaceNames[ws] || ws) + '</option>').join('') +
+                    '</select>' +
+                    '<input type="time" class="clock-time-input" value="' + timeOfDayValue(s.in) + '" ' +
+                        'onchange="updateSessionTime(\'' + dayKey + '\', ' + i + ', \'in\', this.value)">' +
+                    '<span class="clock-arrow">&rarr;</span>' +
+                    '<input type="time" class="clock-time-input" value="' + timeOfDayValue(s.out) + '" ' +
+                        'onchange="updateSessionTime(\'' + dayKey + '\', ' + i + ', \'out\', this.value)">' +
+                    '<span class="clock-session-mins">' +
+                        (stale ? 'left open' : formatClock(sessionMinutes(s))) + '</span>' +
+                    (mark ? '<span class="clock-adjusted" title="Not recorded as it happened">' +
+                        mark + '</span>' : '') +
+                    '<button class="clock-session-del" onclick="deleteClockSession(\'' + dayKey + '\', ' + i + ')" ' +
+                        'title="Remove">&#215;</button>' +
+                '</div>';
+            }).join('');
+        }
+
+        // ----- a stretch left open on an earlier day ----
+
+        function renderStaleWarning() {
+            const box = document.getElementById('clockStaleWarning');
+            if (!box) return;
+            const stale = staleOpenSessions();
+
+            if (!stale.length) { box.style.display = 'none'; return; }
+
+            box.style.display = '';
+            box.innerHTML = stale.map(s => {
+                const d = parseQuickListDate(s.day);
+                const when = d ? d.toLocaleDateString('en-AU', { weekday: 'short', day: 'numeric', month: 'short' }) : s.day;
+                return '<div style="margin-bottom: 6px;">' +
+                    '<strong>' + rankEscape(when) + '</strong> was never clocked off &mdash; ' +
+                    'started ' + formatClockTime(s.session.in) + '. ' +
+                    'It is not counted until you say when it finished. ' +
+                    '<button type="button" class="clock-fix-btn" ' +
+                        'onclick="jumpToClockDay(\'' + s.day + '\')">Put it right</button>' +
+                    '</div>';
+            }).join('');
+        }
+
+        // ==============================================
         // CLOCKING ON TO SOMEWHERE - v2.32
         // One clock for the whole day answers "was I working". Naming
         // the workspace answers "what was I working on", which turns a
@@ -9879,7 +10269,9 @@ body {
 
             if (!rows.length) { box.innerHTML = ''; return; }
 
-            box.innerHTML = '<div class="clock-sessions-title">Where the day went</div>' +
+            box.innerHTML = '<div class="clock-sessions-title">Where the day went' +
+                (dayHasAdjustments(clockDayKey())
+                    ? ' <span class="clock-adjusted">includes adjusted hours</span>' : '') + '</div>' +
                 '<table class="clock-table"><tr><th>Workspace</th><th>At work</th>' +
                 '<th>Logged</th><th>Booked</th></tr>' +
                 rows.map(r => {
@@ -9941,6 +10333,9 @@ body {
 
         function sessionMinutes(session) {
             if (!session || !session.in) return 0;
+            // A stretch left open on an earlier day is not still running.
+            // Counting it to now is what produced days-long totals.
+            if (sessionIsStale(session)) return 0;
             const start = new Date(session.in);
             const end = session.out ? new Date(session.out) : new Date();
             if (isNaN(start.getTime()) || isNaN(end.getTime())) return 0;
@@ -10101,9 +10496,12 @@ body {
             ratioEl.className = 'clock-stat-value ' +
                 (mins === 0 ? '' : ratio >= 70 ? 'good' : ratio >= 40 ? 'fair' : 'low');
 
+            renderClockDayEditor();
+            renderStaleWarning();
+
             const sessions = clockSessions(key);
-            const list = document.getElementById('clockSessions');
-            list.innerHTML = sessions.length === 0
+            const list = null && document.getElementById('clockSessions');
+            if (list) list.innerHTML = sessions.length === 0
                 ? '<div class="clock-empty">Nothing recorded today yet.</div>'
                 : sessions.map((s, i) =>
                     '<div class="clock-session">' +
@@ -10193,6 +10591,20 @@ body {
 
             renderClock();
             clockTicker = setInterval(renderClock, 30000);
+
+            // A stretch left open on an earlier day is the commonest way the
+            // record goes wrong, so say so rather than wait to be asked
+            setTimeout(function() {
+                try {
+                    const stale = staleOpenSessions();
+                    if (stale.length) {
+                        showNotification(stale.length === 1
+                            ? 'A day was never clocked off \u2014 open the clock to put it right'
+                            : stale.length + ' days were never clocked off \u2014 open the clock to put them right',
+                            'error');
+                    }
+                } catch (e) {}
+            }, 2500);
         });
 
         // ==============================================
@@ -11126,8 +11538,15 @@ body {
                             ' &middot; ' + share + '% of the day booked against tasks' +
                             '<div class="meta">' + clockSessions(dayKey).map(s =>
                                 formatClockTime(s.in) + ' to ' + (s.out ? formatClockTime(s.out) : 'still on') +
-                                (sessionWorkspace(s) ? ' (' + sessionWorkspaceName(s) + ')' : '')
-                            ).join(' &middot; ') + '</div></div>';
+                                (sessionWorkspace(s) ? ' (' + sessionWorkspaceName(s) + ')' : '') +
+                                (isAdjusted(s) ? ' [' + adjustmentLabel(s) + ']' : '')
+                            ).join(' &middot; ') + '</div>' +
+                            (dayHasAdjustments(dayKey)
+                                ? '<div class="meta" style="margin-top:6px; color:#a6603c;"><strong>Note:</strong> ' +
+                                  'some hours for this day were entered or corrected after the event ' +
+                                  'rather than clocked at the time.</div>'
+                                : '') +
+                            '</div>';
                 }
             }
             return body;
