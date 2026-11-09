@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 20260903 MyLifeCanvas v 02.35-a -->
+<!-- 20260903 MyLifeCanvas v 02.36-a -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -4378,6 +4378,20 @@
            PUTTING THE CLOCK RIGHT - v2.35
            ============================================== */
 
+        .clock-col-heads {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 2px 5px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+            color: #95a5a6;
+        }
+
+        #timeClockModal .clock-col-heads { color: #a89878 !important; }
+
         .clock-day-bar {
             display: flex;
             align-items: center;
@@ -5631,6 +5645,13 @@
                     <button type="button" class="clock-day-nav" id="clockDayNext" onclick="shiftClockDay(1)" title="Next day">&#8594;</button>
                 </div>
 
+                <div class="clock-col-heads">
+                    <span style="flex: 0 0 135px;">Workspace</span>
+                    <span style="flex: 0 0 92px;">Started</span>
+                    <span style="flex: 0 0 18px;"></span>
+                    <span style="flex: 0 0 92px;">Finished</span>
+                    <span style="flex: 1;">Hours</span>
+                </div>
                 <div id="clockSessions"></div>
                 <button type="button" class="clock-add-session" onclick="addManualSession()">
                     + Add a stretch you forgot to clock
@@ -6023,7 +6044,22 @@
                             </p>
                         </div>
 
-                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">What's New in Version 2.35</h4>
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">What's New in Version 2.36</h4>
+                        <div style="background: #fdecea; padding: 15px; margin: 15px 0; border-left: 4px solid #e74c3c; border-radius: 4px;">
+                            <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
+                                <strong>Fixed: early starts were being thrown away</strong>
+                            </p>
+                            <p style="line-height: 1.8; margin: 0; color: #555; font-size: 12px;">
+                                &#8226; <strong>The fault</strong> &mdash; Times are stored in UTC. Anywhere ahead of Greenwich, a start before 8am belongs to the previous UTC day, and the clock read that as a stretch left open overnight<br>
+                                &#8226; <strong>What you saw</strong> &mdash; Correcting today's start to 7am produced zero hours and a "put it right" warning about a day that was perfectly in order<br>
+                                &#8226; <strong>The fix</strong> &mdash; Every day comparison now uses your local day rather than the UTC text<br>
+                                &#8226; <strong>Today is never called stale</strong> &mdash; A day still in progress cannot be a day you forgot to finish<br>
+                                &#8226; <strong>Clearer editing</strong> &mdash; The correction rows now have Workspace, Started, Finished and Hours headings instead of bare boxes<br>
+                                &#8226; <strong>Also corrected</strong> &mdash; The same fault affected which day logged work counted towards, so early-morning entries could land on the wrong day in reports
+                            </p>
+                        </div>
+
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Previously, in Version 2.35</h4>
                         <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
                             <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
                                 <strong>Putting the clock right afterwards</strong>
@@ -6629,6 +6665,7 @@
 
                         <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Version History</h4>
                         <p style="line-height: 1.6; color: #555; font-size: 12px;">
+                            <strong>v2.36</strong> &mdash; Fixed a timezone fault that discarded early starts and mis-dated logged work<br>
                             <strong>v2.35</strong> &mdash; Editable clock records with adjustments marked in reports, and a fix for runaway open stretches<br>
                             <strong>v2.34</strong> &mdash; By Person view for birthdays, and a fix so everyone in a household is counted<br>
                             <strong>v2.33</strong> &mdash; Contacts hold any number of people and carry categories; birthdays filter work from personal<br>
@@ -7136,8 +7173,8 @@
         // no longer a set of version numbers that can drift apart.
         // ==============================================
         const APP_VERSION = {
-            number: '2.35',
-            file: '20260903 MyLifeCanvas v 02.35-a',
+            number: '2.36',
+            file: '20260903 MyLifeCanvas v 02.36-a',
             released: 'September 2026'
         };
 
@@ -9976,13 +10013,15 @@ body {
         // it to now is where the absurd totals came from.
         function sessionIsStale(session) {
             if (!session || !session.in || session.out) return false;
-            return (session.in || '').slice(0, 10) !== clockDayKey();
+            return localDayKeyOf(session.in) !== clockDayKey();
         }
 
         function staleOpenSessions() {
             const all = loadClock();
             const out = [];
+            const today = clockDayKey();
             Object.keys(all).forEach(day => {
+                if (day === today) return;   // today is still in progress, not stale
                 (all[day] || []).forEach((s, i) => {
                     if (sessionIsStale(s)) out.push({ day: day, index: i, session: s });
                 });
@@ -10189,7 +10228,7 @@ body {
 
         function loggedMinutesFor(dayKey, workspace) {
             return (activityLog || [])
-                .filter(a => (a.date || (a.loggedAt || '').slice(0, 10)) === dayKey)
+                .filter(a => (a.date || localDayKeyOf(a.loggedAt)) === dayKey)
                 .filter(a => workspace === undefined || a.workspace === workspace)
                 .reduce((s, a) => s + (getDurationMinutes(a.duration) || 0), 0);
         }
@@ -10310,6 +10349,20 @@ body {
             localStorage.setItem(CLOCK_KEY, JSON.stringify(data));
         }
 
+        // Timestamps are stored in UTC. Taking the first ten characters of one
+        // and calling it the day is wrong anywhere east or west of Greenwich:
+        // in Perth a 7am start is stored as the previous day in UTC, so an
+        // ordinary early morning looked like a session left open overnight.
+        // Every day comparison goes through here instead.
+        function localDayKeyOf(stamp) {
+            if (!stamp) return '';
+            const d = new Date(stamp);
+            if (isNaN(d.getTime())) return '';
+            return d.getFullYear() + '-' +
+                String(d.getMonth() + 1).padStart(2, '0') + '-' +
+                String(d.getDate()).padStart(2, '0');
+        }
+
         function clockDayKey(date) {
             const d = date || new Date();
             return d.getFullYear() + '-' +
@@ -10349,7 +10402,7 @@ body {
         // Minutes booked against tasks on a given day, for comparison
         function loggedMinutesOnDay(dayKey) {
             return (activityLog || [])
-                .filter(a => (a.date || (a.loggedAt || '').slice(0, 10)) === dayKey)
+                .filter(a => (a.date || localDayKeyOf(a.loggedAt)) === dayKey)
                 .reduce((s, a) => s + (getDurationMinutes(a.duration) || 0), 0);
         }
 
@@ -11332,7 +11385,7 @@ body {
                 const liveEl = a.taskId ? document.getElementById(a.taskId) : null;
                 const liveTitle = liveEl ? (liveEl.querySelector('.task-title') || {}).textContent : '';
                 items.push({
-                    date: a.date || (a.loggedAt || '').slice(0, 10),
+                    date: a.date || localDayKeyOf(a.loggedAt),
                     stamp: stamp,
                     kind: 'time',
                     workspace: a.workspace,
@@ -11352,7 +11405,7 @@ body {
                     if (!inRange(entry.ts, range)) return;
                     const el = document.getElementById(taskId);
                     items.push({
-                        date: (entry.ts || '').slice(0, 10),
+                        date: localDayKeyOf(entry.ts),
                         stamp: entry.ts,
                         kind: 'note',
                         workspace: el ? (el.closest('[id^="workspace-"]') || {}).id?.replace('workspace-', '') || '' : '',
@@ -12950,7 +13003,7 @@ body {
                     // date given, so same-day entries interleave correctly with
                     // notes. A deliberately backdated entry sits at midday.
                     let ts = a.loggedAt || '';
-                    const loggedDay = ts ? ts.slice(0, 10) : '';
+                    const loggedDay = localDayKeyOf(ts);
                     if (!a.date) ts = a.loggedAt;
                     else if (a.date !== loggedDay) ts = a.date + 'T12:00:00';
                     return {
