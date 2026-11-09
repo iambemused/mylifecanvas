@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 20260903 MyLifeCanvas v 02.36-a -->
+<!-- 20261109 MyLifeCanvas v 02.37-a -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6044,7 +6044,20 @@
                             </p>
                         </div>
 
-                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">What's New in Version 2.36</h4>
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">What's New in Version 2.37</h4>
+                        <div style="background: #e8f6f3; padding: 15px; margin: 15px 0; border-left: 4px solid #16a085; border-radius: 4px;">
+                            <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
+                                <strong>The version information was telling you the wrong date</strong>
+                            </p>
+                            <p style="line-height: 1.8; margin: 0; color: #555; font-size: 12px;">
+                                &#8226; <strong>Released date corrected</strong> &mdash; It had said September 2026 since v2.17 and was never updated through two months of builds<br>
+                                &#8226; <strong>Filename date corrected</strong> &mdash; Every build had carried 20260903, the date the first one was made, rather than its own<br>
+                                &#8226; <strong>From here, both follow the build</strong> &mdash; A file's name and its About panel will say when that version was actually made<br>
+                                &#8226; <strong>Nothing else changed</strong> &mdash; No code, no data, no behaviour; this release is dates and nothing more
+                            </p>
+                        </div>
+
+                        <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Previously, in Version 2.36</h4>
                         <div style="background: #fdecea; padding: 15px; margin: 15px 0; border-left: 4px solid #e74c3c; border-radius: 4px;">
                             <p style="line-height: 1.6; margin: 0 0 10px 0; color: #34495e;">
                                 <strong>Fixed: early starts were being thrown away</strong>
@@ -6665,6 +6678,7 @@
 
                         <h4 style="color: #2c3e50; margin: 20px 0 10px 0;">Version History</h4>
                         <p style="line-height: 1.6; color: #555; font-size: 12px;">
+                            <strong>v2.37</strong> &mdash; Corrected the release date and the date carried in the filename<br>
                             <strong>v2.36</strong> &mdash; Fixed a timezone fault that discarded early starts and mis-dated logged work<br>
                             <strong>v2.35</strong> &mdash; Editable clock records with adjustments marked in reports, and a fix for runaway open stretches<br>
                             <strong>v2.34</strong> &mdash; By Person view for birthdays, and a fix so everyone in a household is counted<br>
@@ -7173,9 +7187,11 @@
         // no longer a set of version numbers that can drift apart.
         // ==============================================
         const APP_VERSION = {
-            number: '2.36',
-            file: '20260903 MyLifeCanvas v 02.36-a',
-            released: 'September 2026'
+            number: '2.37',
+            file: '20261109 MyLifeCanvas v 02.37-a',
+            // This is the date the build was made, not the date the project
+            // started. It was left at September for two months of work.
+            released: '9 November 2026'
         };
 
         function applyVersionStamps() {
